@@ -26,7 +26,8 @@ else
 endif
 
 nmap <C-s> :s<CR>
-vnoremap <C-f> y<ESC>:Ack "<CR>
+vnoremap <C-f> y<ESC>:Ack <C-r>"<CR>
+
 
 nnoremap <F5> :silent !%:p<CR>
 
