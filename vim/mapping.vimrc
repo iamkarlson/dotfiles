@@ -6,6 +6,8 @@ map g/ <Plug>(incsearch-stay)
 nmap <tab> I<tab><esc>
 nmap <s-tab> ^i<bs><esc>
 
+"map autocomplete to ctrl+space
+inoremap <C-Space> <C-n>
 
 map <C-tab> :bn<CR>
 map <C-s-tab> :bN<CR>
@@ -27,11 +29,12 @@ endif
 
 nmap <C-s> :s<CR>
 vnoremap <C-f> y<ESC>:Ack <C-r>"<CR>
+vnoremap <C-A-f> y<ESC>/<c-r>"<CR>   
 
 
 nnoremap <F5> :silent !%:p<CR>
 
-nnoremap <F11> :silent !console.exe -reuse -d .<CR>
+nnoremap <F11> :silent !ConEmu64.exe -single -dir "%:p:h"<CR>
 
 
 if WINDOWS()

@@ -5,6 +5,7 @@ set laststatus=2
 noremap <MiddleMouse> <LeftMouse>
 
 "always show line numbers
+set relativenumber 
 set number 
 highlight LineNr ctermfg=grey
 

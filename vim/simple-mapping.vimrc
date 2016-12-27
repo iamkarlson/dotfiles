@@ -17,8 +17,6 @@ imap jj <Esc>
 noremap ;; :%s///g<Left><Left><Left>
 noremap ;' :%s///cg<Left><Left><Left><Left>
 
-"map autocomplete to ctrl+space
-inoremap <C-Space> <C-n>
 
 
 " make tab in v mode ident code

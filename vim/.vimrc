@@ -10,6 +10,12 @@
     endfunction
 " }
 
+if has('nvim')
+    let s:editor_root=expand("~/.config/nvim")
+else
+    let s:editor_root=expand("~/.vim")
+endif
+
 "add my folders as bundle sources
 if WINDOWS()
     :source ~\.vsvimrc
@@ -60,6 +66,7 @@ Plugin 'Chiel92/vim-autoformat'
 Plugin 'luochen1990/rainbow'
 Plugin 's3rvac/AutoFenc'
 
+Plugin 'tomtom/tcomment_vim'
 
 "fs utils
 Plugin 'scrooloose/nerdtree'
@@ -76,6 +83,7 @@ Plugin 'reedes/vim-pencil'
 "colorthemes
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tomasr/molokai'
+Plugin 'sjl/badwolf'
 
 if WINDOWS()
     Plugin 'vim-scripts/Windows-PowerShell-Syntax-Plugin'
@@ -108,14 +116,13 @@ else
     :source ~/.vim/autocmd.vimrc
 endif
 
-"use solarized theme when started as gui
-if has('gui_running')
-    colorscheme solarized
-    set background=light
-    "let g:molokai_original = 1
-    "colorscheme molokai
-    set guifont=Hack
-endif
+
+set showcmd             " show command in bottom bar
+set cursorline          " highlight current line
+set wildmenu            " visual autocomplete for command menu
+set lazyredraw          " redraw only when we need to.
+set showmatch           " highlight matching [{()}]
+
 
 
 "show spaces,eol and tabs
@@ -150,3 +157,4 @@ if WINDOWS()
 else
     :source ~/.vim/mapping.vimrc
 endif
+
