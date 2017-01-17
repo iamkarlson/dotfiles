@@ -11,6 +11,7 @@ inoremap <C-Space> <C-n>
 
 map <C-tab> :bn<CR>
 map <C-s-tab> :bN<CR>
+nmap zq :bd<CR>
 
 noremap <F3> :Autoformat<CR>
 
@@ -34,7 +35,7 @@ vnoremap <C-A-f> y<ESC>/<c-r>"<CR>
 
 nnoremap <F5> :silent !%:p<CR>
 
-nnoremap <F11> :silent !ConEmu64.exe -single -dir "%:p:h"<CR>
+nnoremap <F11> :!start "c:\Program Files\ConEmu\ConEmu64.exe" -single -dir "%:p:h"<CR>
 
 
 if WINDOWS()
