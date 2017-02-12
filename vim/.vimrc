@@ -55,7 +55,7 @@ Plugin 'godlygeek/tabular'
 "syntax
 Plugin 'plasticboy/vim-markdown'
 Plugin 'iamkarlson/vim-log-syntax'
-    Plugin 'iamkarlson/vim-theme-test'
+Plugin 'iamkarlson/vim-theme-test'
 
 "zen coding
 Plugin 'mattn/emmet-vim'
@@ -68,11 +68,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'sbdchd/neoformat'
 Plugin 'luochen1990/rainbow'
 Plugin 's3rvac/AutoFenc'
-Plugin 'vim-airline/vim-airline'
 
 Plugin 'tomtom/tcomment_vim'
-
-Plugin 'fneu/breezy'
 
 "fs utils
 Plugin 'scrooloose/nerdtree'
@@ -93,6 +90,8 @@ Plugin 'tomasr/molokai'
 Plugin 'sjl/badwolf'
 Plugin 'fneu/breezy'
 Plugin 'broduo/broduo-color-scheme'
+"
+"GUI
 Plugin 'vim-airline/vim-airline'
 
 
