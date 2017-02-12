@@ -83,3 +83,7 @@ au BufEnter * if &diff | :call DiffStart()
 
 au BufLeave * if &diff | :call DiffStop()
 
+
+
+"resizing windows
+let g:winresizer_start_key = '<leader>t'

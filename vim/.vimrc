@@ -61,6 +61,7 @@ Plugin 'mattn/emmet-vim'
 
 Plugin 'tpope/vim-fugitive'
 "Plugin 'airblade/vim-gitgutter'
+Plugin 'simeji/winresizer'
 
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'luochen1990/rainbow'
@@ -75,6 +76,7 @@ Plugin 'fneu/breezy'
 Plugin 'scrooloose/nerdtree'
 Plugin 'haya14busa/incsearch.vim'
 Plugin 'mileszs/ack.vim'
+
 "view last files
 Plugin 'yegappan/mru'
 
