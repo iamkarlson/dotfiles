@@ -68,8 +68,11 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'sbdchd/neoformat'
 Plugin 'luochen1990/rainbow'
 Plugin 's3rvac/AutoFenc'
+Plugin 'vim-airline/vim-airline'
 
 Plugin 'tomtom/tcomment_vim'
+
+Plugin 'fneu/breezy'
 
 "fs utils
 Plugin 'scrooloose/nerdtree'
@@ -106,9 +109,9 @@ filetype plugin indent on
 
 
 "add encoding to status line
-if has("statusline")
-	set statusline=%{fugitive#statusline()}%<%f\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
-endif
+"if has("statusline")
+	"set statusline=%{fugitive#statusline()}%<%f\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
+"endif
 
 
 set spelllang=ru,en
