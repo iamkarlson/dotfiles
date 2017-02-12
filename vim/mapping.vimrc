@@ -13,7 +13,8 @@ map <C-tab> :bn<CR>
 map <C-s-tab> :bN<CR>
 nmap zq :bd<CR>
 
-noremap <F3> :Autoformat<CR>
+nmap <leader>f :set ft=
+map <F3> :Neoformat<CR>
 
 "resizing and navigation windows hotkeys
 
@@ -31,6 +32,9 @@ endif
 nmap <C-s> :s<CR>
 vnoremap <C-f> y<ESC>:Ack <C-r>"<CR>
 vnoremap <C-A-f> y<ESC>/<c-r>"<CR>   
+
+"current file only
+nnoremap <Leader>af :Ack  %<Left><Left>
 
 
 nnoremap <F5> :silent !%:p<CR>

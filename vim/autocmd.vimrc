@@ -12,9 +12,9 @@ autocmd BufEnter App*.config set filetype=xml
 
 au BufEnter *.log setlocal nospell
 
-au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -
+"au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -
 
-au FileType json setlocal equalprg=python\ -m\ json.tool
+"au FileType json setlocal equalprg=python\ -m\ json.tool
 
 
 au BufEnter taulink.cfg set filetype=xml
