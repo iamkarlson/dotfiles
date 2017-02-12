@@ -52,8 +52,10 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'L9'
 Plugin 'godlygeek/tabular'
 
-"obvious
+"syntax
 Plugin 'plasticboy/vim-markdown'
+Plugin 'iamkarlson/vim-log-syntax'
+    Plugin 'iamkarlson/vim-theme-test'
 
 "zen coding
 Plugin 'mattn/emmet-vim'
@@ -62,7 +64,8 @@ Plugin 'mattn/emmet-vim'
 Plugin 'tpope/vim-fugitive'
 "Plugin 'airblade/vim-gitgutter'
 
-Plugin 'Chiel92/vim-autoformat'
+"Plugin 'Chiel92/vim-autoformat'
+Plugin 'sbdchd/neoformat'
 Plugin 'luochen1990/rainbow'
 Plugin 's3rvac/AutoFenc'
 
@@ -72,18 +75,23 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'haya14busa/incsearch.vim'
 Plugin 'mileszs/ack.vim'
+
 "view last files
 Plugin 'yegappan/mru'
 
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'easymotion/vim-easymotion'
-
+Plugin 'KabbAmine/vCoolor.vim'
 Plugin 'reedes/vim-pencil'
 
-"colorthemes
+"color themes
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tomasr/molokai'
 Plugin 'sjl/badwolf'
+Plugin 'fneu/breezy'
+Plugin 'broduo/broduo-color-scheme'
+Plugin 'vim-airline/vim-airline'
+
 
 if WINDOWS()
     Plugin 'vim-scripts/Windows-PowerShell-Syntax-Plugin'
@@ -151,6 +159,9 @@ let g:rainbow_active = 1
 let g:bufExplorerDefaultHelp=1       " Show default help.
 let g:bufExplorerShowNoName=1        " Show No Name buffers.
 let g:bufExplorerShowUnlisted=1      " Show unlisted buffers.
+
+"neoformat settings
+"let g:neoformat_try_formatprg = 1
 
 if WINDOWS()
     :source ~\.vim\mapping.vimrc
