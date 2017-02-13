@@ -167,6 +167,7 @@ let g:bufExplorerShowUnlisted=1      " Show unlisted buffers.
 
 if WINDOWS()
     :source ~\.vim\mapping.vimrc
+    :source ~\.vim\powershellVundleFix.vimrc
 else
     :source ~/.vim/mapping.vimrc
 endif

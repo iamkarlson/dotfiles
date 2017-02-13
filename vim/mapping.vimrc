@@ -39,7 +39,7 @@ nnoremap <Leader>af :Ack  %<Left><Left>
 
 nnoremap <F5> :silent !%:p<CR>
 
-nnoremap <F11> :!start "c:\Program Files\ConEmu\ConEmu64.exe" -single -dir "%:p:h"<CR>
+nnoremap <F11> :silent !start "c:\Program Files\ConEmu\ConEmu64.exe" -single -dir "%:p:h"<CR>
 
 
 if WINDOWS()
@@ -87,3 +87,11 @@ au BufEnter * if &diff | :call DiffStart()
 
 au BufLeave * if &diff | :call DiffStop()
 
+
+
+
+" execute a command and show it's output in a split window
+command! -nargs=* -complete=shellcmd Rsplit execute "new | r! <args>"
+
+" execute a command and show it's output in a new tab
+command! -nargs=* -complete=shellcmd Rtab execute "tabnew | r! <args>"

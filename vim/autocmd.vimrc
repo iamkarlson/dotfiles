@@ -22,3 +22,5 @@ au BufEnter taulink.cfg set filetype=xml
 au BufEnter gitconfig set filetype=config
 
 au BufEnter *.xmllog set ft=xml
+
+au BufEnter *.log set autoread
