@@ -16,12 +16,6 @@ nmap zq :bd<CR>
 nmap <leader>f :set ft=
 map <F3> :Neoformat<CR>
 
-"resizing and navigation windows hotkeys
-
-nnoremap <C-A-up> :exe "resize " . (winheight(0) * 2/3)<CR>
-nnoremap <C-A-down> :exe "resize " . (winheight(0) * 3/2)<CR>
-nnoremap <C-A-left> :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
-nnoremap <C-A-right> :exe "vertical resize " . (winwidth(0) * 2/3)<CR>
 
 if WINDOWS()
     nmap <leader>v :tabedit $HOME\.vim\.vimrc<CR>
@@ -88,10 +82,11 @@ au BufEnter * if &diff | :call DiffStart()
 au BufLeave * if &diff | :call DiffStop()
 
 
-
-
 " execute a command and show it's output in a split window
 command! -nargs=* -complete=shellcmd Rsplit execute "new | r! <args>"
 
 " execute a command and show it's output in a new tab
 command! -nargs=* -complete=shellcmd Rtab execute "tabnew | r! <args>"
+
+"resizing windows
+let g:winresizer_start_key = '<leader>t'

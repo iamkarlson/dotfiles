@@ -63,6 +63,7 @@ Plugin 'mattn/emmet-vim'
 
 Plugin 'tpope/vim-fugitive'
 "Plugin 'airblade/vim-gitgutter'
+Plugin 'simeji/winresizer'
 
 "Plugin 'Chiel92/vim-autoformat'
 Plugin 'sbdchd/neoformat'
