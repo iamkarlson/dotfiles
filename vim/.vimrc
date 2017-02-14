@@ -56,13 +56,14 @@ Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'iamkarlson/vim-log-syntax'
 Plugin 'iamkarlson/vim-theme-test'
+Plugin 'w0rp/ale'
 
 "zen coding
 Plugin 'mattn/emmet-vim'
 "Plugin 'Valloric/YouCompleteMe'
 
 Plugin 'tpope/vim-fugitive'
-"Plugin 'airblade/vim-gitgutter'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'simeji/winresizer'
 
 "Plugin 'Chiel92/vim-autoformat'
