@@ -53,6 +53,7 @@ Plugin 'L9'
 Plugin 'godlygeek/tabular'
 
 "syntax
+Plugin 'w0rp/ale'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'iamkarlson/vim-log-syntax'
 Plugin 'iamkarlson/vim-theme-test'
@@ -69,6 +70,8 @@ Plugin 'simeji/winresizer'
 Plugin 'sbdchd/neoformat'
 Plugin 'luochen1990/rainbow'
 Plugin 's3rvac/AutoFenc'
+
+Plugin 'Valloric/YouCompleteMe'
 
 Plugin 'tomtom/tcomment_vim'
 

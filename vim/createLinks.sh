@@ -1,6 +1,6 @@
 cd ~
 
-ln /home/iamkarlson/dev/prj/dotfiles/vim/.vimrc .vimrc
+ln -s /home/iamkarlson/dev/prj/dotfiles/vim/.vimrc .vimrc
 ln -ds /home/iamkarlson/dev/prj/dotfiles/vim/ .vim
 
 mkdir /home/iamkarlson/.vim/bundle
