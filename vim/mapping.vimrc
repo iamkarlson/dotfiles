@@ -2,6 +2,11 @@
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
+
+" ctrl+c to toggle highlight.
+let hlstate=0
+nnoremap <c-c> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
+
 " make tab in normal mode ident code
 nmap <tab> I<tab><esc>
 nmap <s-tab> ^i<bs><esc>
@@ -24,8 +29,7 @@ else
 endif
 
 nmap <C-s> :s<CR>
-vnoremap <C-f> y<ESC>:Ack <C-r>"<CR>
-vnoremap <C-A-f> y<ESC>/<c-r>"<CR>   
+vnoremap <leader><C-f> y<ESC>:Ack <C-r>"<CR>
 
 "current file only
 nnoremap <Leader>af :Ack  %<Left><Left>
@@ -71,6 +75,7 @@ endfunction
 
 function! Get3WayLayout()
     :exe "normal \<C-W>J"
+
 endfunction
 
 if &diff

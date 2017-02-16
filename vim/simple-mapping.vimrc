@@ -18,6 +18,7 @@ noremap ;; :%s///g<Left><Left><Left>
 noremap ;' :%s///cg<Left><Left><Left><Left>
 
 
+vnoremap <C-f> y<ESC>/<c-r>"<CR>   
 
 " make tab in v mode ident code
 vmap <tab> >gv
