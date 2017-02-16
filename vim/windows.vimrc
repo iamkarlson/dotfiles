@@ -7,7 +7,7 @@
 
 au GUIEnter * simalt ~x
 
-set shell=powershell
-set shellcmdflag=-noprofile\ -command
-set shellquote=\"
-set shellxquote=
+"set shell=powershell
+"set shellcmdflag=-noprofile\ -command
+"set shellquote=\"
+"set shellxquote=

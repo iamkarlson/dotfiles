@@ -53,18 +53,21 @@ Plugin 'L9'
 Plugin 'godlygeek/tabular'
 
 "syntax
-Plugin 'w0rp/ale'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'iamkarlson/vim-log-syntax'
 Plugin 'iamkarlson/vim-theme-test'
+Plugin 'w0rp/ale'
 
 "zen coding
 Plugin 'mattn/emmet-vim'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 
 Plugin 'tpope/vim-fugitive'
 "Plugin 'airblade/vim-gitgutter'
+<<<<<<< HEAD
+=======
 Plugin 'mhinz/vim-signify'
+>>>>>>> 9e9d7443098e6d846554f257d4b85b1c3396eefb
 Plugin 'simeji/winresizer'
 
 "Plugin 'Chiel92/vim-autoformat'
