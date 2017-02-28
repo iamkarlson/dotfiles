@@ -63,14 +63,15 @@ Plugin 'mattn/emmet-vim'
 "Plugin 'Valloric/YouCompleteMe'
 
 Plugin 'tpope/vim-fugitive'
-"Plugin 'airblade/vim-gitgutter'
-Plugin 'mhinz/vim-signify'
+Plugin 'airblade/vim-gitgutter'
+"Plugin 'mhinz/vim-signify'
 Plugin 'simeji/winresizer'
 
 "Plugin 'Chiel92/vim-autoformat'
 Plugin 'sbdchd/neoformat'
 Plugin 'luochen1990/rainbow'
 Plugin 's3rvac/AutoFenc'
+Plugin 'vim-surround'
 
 
 Plugin 'tomtom/tcomment_vim'
@@ -97,6 +98,7 @@ Plugin 'broduo/broduo-color-scheme'
 "
 "GUI
 Plugin 'vim-airline/vim-airline'
+Plugin 'severin-lemaignan/vim-minimap'
 
 
 if WINDOWS()

@@ -21,6 +21,8 @@ nmap zq :bd<CR>
 nmap <leader>f :set ft=
 map <F3> :Neoformat<CR>
 
+nmap <F8> :sort u<CR>
+
 
 if WINDOWS()
     nmap <leader>v :tabedit $HOME\.vim\.vimrc<CR>
@@ -55,8 +57,8 @@ nmap <C-O> :only<CR>
 
 function! DiffStart()
     set cursorline
-    map ] ]c
-    map [ [c
+    map ]] ]c
+    map [[ [c
     map <leader>1 :diffget //2<CR>]:diffupdate<CR>2<C-e>
     map <leader>2 :diffget //3<CR>]:diffupdate<CR>2<C-e>
 
