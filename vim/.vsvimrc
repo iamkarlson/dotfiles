@@ -29,6 +29,8 @@ set shiftwidth=4
 set spelllang=ru,en
 set spell
 
+set scrolloff=5
+
 
 if (has('win32') || has('win64'))
     :source ~\.vim\simple-mapping.vimrc
