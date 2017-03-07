@@ -19,7 +19,7 @@ endif
 "add my folders as bundle sources
 if WINDOWS()
     :source ~\.vsvimrc
-    set rtp+=~\.vim\
+    set rtp+=~\.vim
     set rtp+=~\.vim\bundle\vim-colors-solarized
     set rtp+=~\.vim\bundle\molokai
     set rtp+=~\.vim\bundle\Vundle.vim
@@ -80,6 +80,7 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'haya14busa/incsearch.vim'
 Plugin 'mileszs/ack.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 "view last files
 Plugin 'yegappan/mru'
@@ -113,17 +114,9 @@ syntax on
 filetype plugin indent on
 
 
-"add encoding to status line
-"if has("statusline")
-	"set statusline=%{fugitive#statusline()}%<%f\ %h%m%r%=%{\"[\".(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\").\"]\ \"}%k\ %-14.(%l,%c%V%)\ %P
-"endif
-
-
 set spelllang=ru,en
 set nospell
 set ff=unix
-
-"map russian keys to english equalent 
 
 if WINDOWS()
     :source ~\.vim\windows.vimrc
@@ -148,7 +141,7 @@ set listchars=space:·,tab:▸\ ,eol:↲
 hi SpecialKey ctermfg=7 guifg=gray guibg=NONE
 hi NonText ctermfg=7 guifg=gray guibg=NONE
 
-"open new windows more natral 
+"open new windows more natural 
 "new horizontal window appears at the bottom
 set splitbelow
 "new vertical window appears at the right

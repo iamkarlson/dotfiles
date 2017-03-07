@@ -30,7 +30,6 @@ else
     nmap <leader>v :tabedit $HOME/.vim/.vimrc<CR>
 endif
 
-nmap <C-s> :s<CR>
 vnoremap <leader><C-f> y<ESC>:Ack <C-r>"<CR>
 
 "current file only
@@ -97,3 +96,5 @@ command! -nargs=* -complete=shellcmd Rtab execute "tabnew | r! <args>"
 
 "resizing windows
 let g:winresizer_start_key = '<leader>t'
+
+
