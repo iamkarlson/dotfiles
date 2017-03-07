@@ -6,6 +6,7 @@ Set-Alias vs -Value "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7
 function ex{exit}
 
 Set-Alias g git
+function gd(){ git diff }
 set-Alias less more
 
 function tgit-log(){ TortoiseGitProc /command:log /path:.}
