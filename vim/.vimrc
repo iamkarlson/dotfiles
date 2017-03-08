@@ -133,7 +133,6 @@ set lazyredraw          " redraw only when we need to.
 set showmatch           " highlight matching [{()}]
 
 
-
 "show spaces,eol and tabs
 set list
 "\u00b7 working bad

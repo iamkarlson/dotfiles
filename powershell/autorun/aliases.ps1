@@ -7,6 +7,9 @@ function ex{exit}
 
 Set-Alias g git
 function gd(){ git diff }
+function g-files { git diff --cached --name-only}
+
+function g-stagedFiles { git diff --cached --name-only}
 set-Alias less more
 
 function tgit-log(){ TortoiseGitProc /command:log /path:.}
