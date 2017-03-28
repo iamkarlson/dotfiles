@@ -57,6 +57,7 @@ Plugin 'w0rp/ale'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'iamkarlson/vim-log-syntax'
 Plugin 'iamkarlson/vim-theme-test'
+Plugin 'mustache/vim-mustache-handlebars'
 
 "zen coding
 Plugin 'mattn/emmet-vim'
@@ -150,6 +151,10 @@ set hidden
 
 let NERDTreeShowHidden=1
 
+
+let g:autofenc_enable=1
+let g:autofenc_autodetect_bom=1
+
 "disable auto fold 
 let g:vim_markdown_folding_disabled = 1
 
@@ -167,5 +172,30 @@ if WINDOWS()
     :source ~\.vim\mapping.vimrc
 else
     :source ~/.vim/mapping.vimrc
+endif
+
+
+
+if &diff
+    call DiffStart()
+endif
+
+
+function! MakeDiff()
+    :Gvdiff
+    call DiffStart()
+    call Get3WayLayout()
+endfunction
+
+let g:ctrlp_use_caching = 0
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+    \ }
 endif
 

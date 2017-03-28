@@ -24,3 +24,9 @@ au BufEnter gitconfig set filetype=config
 au BufEnter *.xmllog set ft=xml
 
 au BufEnter *.log set autoread
+au BufEnter *.log set ft=log
+
+
+"au BufEnter * if &diff | :call DiffStart()
+
+au BufLeave * if &diff | :call DiffStop()

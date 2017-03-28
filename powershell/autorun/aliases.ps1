@@ -6,6 +6,9 @@ Set-Alias vs -Value "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7
 function ex{exit}
 
 Set-Alias g git
+
+function gign(){ git ls-files -v | sls "^h" -CaseSensitive }
+
 function gd(){ git diff }
 function g-files { git diff --cached --name-only}
 

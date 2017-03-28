@@ -21,5 +21,5 @@ function Pandoc-OutHtml{
     Write-Host $InputFile 
     Write-Host $Output
 
-    pandoc.exe -s -S --toc -H $cssHeaderTemplateFile $InputFile -o $Output
+    pandoc.exe -s --toc -H $cssHeaderTemplateFile $InputFile -o $Output
 }

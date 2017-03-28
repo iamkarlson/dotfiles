@@ -76,16 +76,9 @@ endfunction
 
 function! Get3WayLayout()
     :exe "normal \<C-W>J"
-
 endfunction
 
-if &diff
-    :call DiffStart()
-endif
 
-au BufEnter * if &diff | :call DiffStart()
-
-au BufLeave * if &diff | :call DiffStop()
 
 
 " execute a command and show it's output in a split window

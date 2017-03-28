@@ -31,7 +31,8 @@ set spell
 
 set scrolloff=5
 
-set timeoutlen=1000 ttimeoutlen=0
+set ttimeout
+set ttimeoutlen=100
 
 if (has('win32') || has('win64'))
     :source ~\.vim\simple-mapping.vimrc
