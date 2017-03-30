@@ -81,6 +81,7 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'haya14busa/incsearch.vim'
 Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 
 "view last files
@@ -149,53 +150,11 @@ set splitright
 
 set hidden
 
-let NERDTreeShowHidden=1
-
-
-let g:autofenc_enable=1
-let g:autofenc_autodetect_bom=1
-
-"disable auto fold 
-let g:vim_markdown_folding_disabled = 1
-
-let g:rainbow_active = 1 
-
-"bufexplorer settings
-let g:bufExplorerDefaultHelp=1       " Show default help.
-let g:bufExplorerShowNoName=1        " Show No Name buffers.
-let g:bufExplorerShowUnlisted=1      " Show unlisted buffers.
-
-"neoformat settings
-"let g:neoformat_try_formatprg = 1
-
 if WINDOWS()
+    :source ~\.vim\plugin-settings.vimrc
     :source ~\.vim\mapping.vimrc
 else
     :source ~/.vim/mapping.vimrc
-endif
-
-
-
-if &diff
-    call DiffStart()
-endif
-
-
-function! MakeDiff()
-    :Gvdiff
-    call DiffStart()
-    call Get3WayLayout()
-endfunction
-
-let g:ctrlp_use_caching = 0
-if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-else
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-    \ }
+    :source ~/.vim/plugin-settings.vimrc
 endif
 
