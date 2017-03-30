@@ -72,7 +72,7 @@ Plugin 'simeji/winresizer'
 Plugin 'sbdchd/neoformat'
 Plugin 'luochen1990/rainbow'
 Plugin 's3rvac/AutoFenc'
-Plugin 'vim-surround'
+Plugin 'tpope/vim-surround'
 
 
 Plugin 'tomtom/tcomment_vim'
@@ -157,4 +157,5 @@ else
     :source ~/.vim/mapping.vimrc
     :source ~/.vim/plugin-settings.vimrc
 endif
+
 
