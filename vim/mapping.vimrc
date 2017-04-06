@@ -3,10 +3,6 @@ map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
-" ctrl+c to toggle highlight.
-let hlstate=0
-nnoremap <c-c> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
-
 " make tab in normal mode ident code
 nmap <tab> I<tab><esc>
 nmap <s-tab> ^i<bs><esc>
@@ -52,33 +48,6 @@ nnoremap <F6> :windo diffthis<CR>
 
 nmap <C-O> :only<CR>
 
-
-
-function! DiffStart()
-    set cursorline
-    map ]] ]c
-    map [[ [c
-    map <leader>1 :diffget //2<CR>]:diffupdate<CR>2<C-e>
-    map <leader>2 :diffget //3<CR>]:diffupdate<CR>2<C-e>
-
-    nmap <Esc><Esc> :qa<CR>
-
-    hi DiffAdd    ctermfg=233 ctermbg=LightGreen guifg=#003300 guibg=#DDFFDD gui=none cterm=none
-    hi DiffText   ctermfg=233  ctermbg=yellow  guifg=#000033 guibg=#DDDDFF gui=none cterm=none
-endfunction
-
-function! DiffStop()
-    silent! unmap ]
-    silent! unmap [
-    silent! unmap <leader>1
-    silent! unmap <leader>2
-
-    silent! nunmap <Esc><Esc> :qa<CR>
-endfunction
-
-function! Get3WayLayout()
-    :exe "normal \<C-W>J"
-endfunction
 
 
 

@@ -82,6 +82,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'haya14busa/incsearch.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
+Plugin 'Chun-Yang/vim-action-ag'
 Plugin 'ctrlpvim/ctrlp.vim'
 
 "view last files
@@ -133,6 +134,8 @@ set cursorline          " highlight current line
 set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to.
 set showmatch           " highlight matching [{()}]
+
+set synmaxcol=256
 
 
 "show spaces,eol and tabs
