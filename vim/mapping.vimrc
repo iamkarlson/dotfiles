@@ -46,7 +46,7 @@ nnoremap <F10> :NERDTree<CR>
 
 nnoremap <F6> :windo diffthis<CR>
 
-nmap <C-O> :only<CR>
+nmap <leader>o :only<CR>
 
 
 
