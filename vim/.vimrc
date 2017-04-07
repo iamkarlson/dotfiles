@@ -123,8 +123,10 @@ set ff=unix
 if WINDOWS()
     :source ~\.vim\windows.vimrc
     :source ~\.vim\autocmd.vimrc
+    :source ~\.vim\ide.vimrc
 else
     :source ~/.vim/autocmd.vimrc
+    :source ~/.vim/ide.vimrc
 endif
 
 

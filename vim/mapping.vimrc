@@ -48,7 +48,7 @@ else
 endif
 nnoremap <F10> :NERDTree<CR>
 
-nnoremap <F6> :windo diffthis<CR>
+nnoremap <leader>d :windo diffthis<CR>
 
 nmap <leader>o :only<CR>
 
