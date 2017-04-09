@@ -80,7 +80,7 @@ Plugin 'tomtom/tcomment_vim'
 "fs utils
 Plugin 'scrooloose/nerdtree'
 Plugin 'haya14busa/incsearch.vim'
-Plugin 'mileszs/ack.vim'
+"Plugin 'mileszs/ack.vim'
 Plugin 'rking/ag.vim'
 Plugin 'Chun-Yang/vim-action-ag'
 Plugin 'ctrlpvim/ctrlp.vim'
