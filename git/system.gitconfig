@@ -1,0 +1,29 @@
+[include]
+    path=~/local.gitconfig
+    path=~/git/aliases.gitconfig
+[diff]
+    renames = copy
+    tool = gvimdiff
+[difftool "gvimdiff"]
+    cmd = "gvim -d" "$LOCAL" "$REMOTE"
+[difftool]
+    prompt = false
+[difftool "vsdiffmerge"]
+    cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$LOCAL\" \"$REMOTE\" //t
+    keepbackup = false
+[merge]
+    tool = fugitive
+[mergetool]
+    prompt = false
+[mergetool "vsdiffmerge"]
+    cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\" //m
+    trustexitcode = true
+[mergetool "vsdiffmerge"]
+    keepbackup = false
+[core]
+    commentchar = ";"
+    editor = gvim
+[mergetool "fugitive"]
+    cmd = gvim -f -c \"call MakeDiff()\" $MERGED
+[credential]
+    helper = manager

@@ -1,0 +1,8 @@
+[alias]
+    d = difftool
+    #glog = log --graph --decorate --oneline --all
+    glog = log --all --graph --pretty=format:'%C(cyan)d%h%Creset -%C(red)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit 
+    s=status
+    dc = diff --cached
+    please = push --force-with-lease
+
