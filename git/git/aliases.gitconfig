@@ -5,4 +5,4 @@
     s=status
     dc = diff --cached
     please = push --force-with-lease
-
+    prune = fetch --prune
