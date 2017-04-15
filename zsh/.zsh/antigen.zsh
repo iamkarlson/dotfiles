@@ -1,4 +1,4 @@
-source /home/iamkarlson/dev/sources/antigen/antigen.zsh
+source ~/dev/sources/antigen/antigen.zsh
 
 antigen bundle git
 antigen bundle zsh-users/zsh-syntax-highlighting

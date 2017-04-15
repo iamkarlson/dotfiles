@@ -5,7 +5,7 @@
     renames = copy
     tool = gvimdiff
 [difftool "gvimdiff"]
-    cmd = "gvim -d" "$LOCAL" "$REMOTE"
+    cmd = "vim -d" "$LOCAL" "$REMOTE"
 [difftool]
     prompt = false
 [difftool "vsdiffmerge"]

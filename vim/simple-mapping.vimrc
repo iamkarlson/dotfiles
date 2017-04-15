@@ -51,7 +51,7 @@ nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 
-nmap <Leader><Leader> V
+"nmap <Leader><Leader> V
 
 
 

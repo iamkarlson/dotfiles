@@ -77,4 +77,4 @@ let g:ctrlp_custom_ignore = {
 let g:ctrlp_use_caching = 0
 set grepprg=ag\ --nogroup\ --nocolor
 
-let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_cmd = 'CtrlPMRU'
