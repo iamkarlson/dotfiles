@@ -1,6 +1,10 @@
 [include]
     path=~/local.gitconfig
     path=~/git/aliases.gitconfig
+[push]
+  followTags = true
+[status]
+  showUntrackedFiles = all
 [diff]
     renames = copy
     tool = gvimdiff

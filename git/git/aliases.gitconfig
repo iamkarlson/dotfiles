@@ -6,4 +6,4 @@
     dc = diff --cached
     please = push --force-with-lease
     co = checkout
-
+    prune = fetch --prune

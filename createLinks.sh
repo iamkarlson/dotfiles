@@ -1,7 +1,8 @@
-   46  ln -s ~/dev/prj/dotfiles/zsh/.zshrc ~/.zshrc
-   75  ln -s ~/dev/prj/dotfiles/vim/.vsvimrc ~/.vsvimrc
-   77  ln -s ~/dev/prj/dotfiles/vim/.vsvimrc ~/.vsvimrc
-   82  ln -s ~/dev/prj/dotfiles/zsh/.shellrc ~/.shellrc
-  639  ln --help
-  640  ln -ds ~/dev/prj/dotfiles/zsh/.zsh .zsh
-  698  history|ag ln
+ln -ds ~/dev/prj/dotfiles/git/git ~/git
+ln -ds ~/dev/prj/dotfiles/zsh/.zsh ~/.zsh
+
+ln -s ~/dev/prj/dotfiles/git/system.gitconfig ~/.gitconfig
+ln -s ~/dev/prj/dotfiles/vim/.vsvimrc ~/.vsvimrc
+ln -s ~/dev/prj/dotfiles/vim/.vimrc ~/.vimrc
+ln -s ~/dev/prj/dotfiles/zsh/.shellrc ~/.shellrc
+ln -s ~/dev/prj/dotfiles/zsh/.zshrc ~/.zshrc

@@ -4,6 +4,7 @@ set laststatus=2
 "don't click middle mouse as left
 noremap <MiddleMouse> <LeftMouse>
 
+set linebreak
 "always show line numbers
 set relativenumber 
 set number 
