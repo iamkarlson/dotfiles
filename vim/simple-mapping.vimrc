@@ -24,10 +24,7 @@ imap <4-MiddleMouse> <Nop>
 noremap ;; :%s///g<Left><Left><Left>
 noremap ;' :%s///cg<Left><Left><Left><Left>
 
-" ctrl+c to toggle highlight.
-let hlstate=0
-nnoremap <c-c> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
-
+nmap <C-c> :set nohls
 
 vnoremap <C-f> y<ESC>/<c-r>"<CR>   
 

@@ -40,6 +40,22 @@ else
     set undodir=~/.vim/undo_files/
 endif
 
+
+set linebreak
+
+"always show line numbers
+set number 
+set relativenumber 
+"enable syntax highlighting
+syntax on
+
+"always show status line
+set laststatus=2
+
+set encoding=utf-8
+
+highlight LineNr ctermfg=grey
+
 "Vundle settings
 
 set nocompatible
@@ -157,10 +173,12 @@ set hidden
 
 if WINDOWS()
     :source ~\.vim\plugin-settings.vimrc
+    :source ~\.vim\simple-mapping.vimrc
     :source ~\.vim\mapping.vimrc
 else
-    :source ~/.vim/mapping.vimrc
     :source ~/.vim/plugin-settings.vimrc
+    :source ~/.vim/simple-mapping.vimrc
+    :source ~/.vim/mapping.vimrc
 endif
 
 
