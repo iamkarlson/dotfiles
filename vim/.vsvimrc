@@ -1,43 +1,30 @@
-"always show status line
-set laststatus=2
-
 "don't click middle mouse as left
 noremap <MiddleMouse> <LeftMouse>
-
-set linebreak
-"always show line numbers
-set relativenumber 
-set number 
-highlight LineNr ctermfg=grey
-
 "ignore case searching
 set ic
-
 "use incremental search like sublime
 set incsearch
+
 set hlsearch
 
-set encoding=utf-8
 
-"enable syntax highlighting
-syntax on
 
 "set indetations`
 set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
 
-set spelllang=ru,en
-set spell
+set tabstop=4
+
+set softtabstop=4
+
+set shiftwidth=4
 
 set scrolloff=5
 
 set ttimeout
+
 set ttimeoutlen=100
+
 
 if (has('win32') || has('win64'))
     :source ~\.vim\simple-mapping.vimrc
-else
-    :source ~/.vim/simple-mapping.vimrc
 endif

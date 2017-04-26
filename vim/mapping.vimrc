@@ -3,6 +3,10 @@ map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 
+" ctrl+c to toggle highlight.
+let hlstate=0
+nnoremap <c-c> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
+
 " make tab in normal mode ident code
 nmap <tab> I<tab><esc>
 nmap <s-tab> ^i<bs><esc>
@@ -22,8 +26,11 @@ nmap <F8> :sort u<CR>
 
 if WINDOWS()
     nmap <leader>v :tabedit $HOME\.vim\.vimrc<CR>
+    nnoremap <C-F10> :silent !explorer .<CR>
+    nnoremap <F11> :silent !start "c:\Program Files\ConEmu\ConEmu64.exe" -single -dir "%:p:h"<CR>
 else
     nmap <leader>v :tabedit $HOME/.vim/.vimrc<CR>
+    nnoremap <C-F10> :silent !nautilus .<CR>
 endif
 
 vnoremap <leader><C-f> y<ESC>:Ack <C-r>"<CR>
@@ -34,14 +41,8 @@ nnoremap <Leader>af :Ack  %<Left><Left>
 
 nnoremap <F5> :silent !%:p<CR>
 
-nnoremap <F11> :silent !start "c:\Program Files\ConEmu\ConEmu64.exe" -single -dir "%:p:h"<CR>
 
 
-if WINDOWS()
-    nnoremap <C-F10> :silent !explorer .<CR>
-else
-    nnoremap <C-F10> :silent !nautilus .<CR>
-endif
 nnoremap <F10> :NERDTree<CR>
 
 nnoremap <leader>d :windo diffthis<CR>
