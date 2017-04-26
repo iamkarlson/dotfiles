@@ -6,3 +6,5 @@ ln -s ~/dev/prj/dotfiles/vim/.vsvimrc ~/.vsvimrc
 ln -s ~/dev/prj/dotfiles/vim/.vimrc ~/.vimrc
 ln -s ~/dev/prj/dotfiles/zsh/.shellrc ~/.shellrc
 ln -s ~/dev/prj/dotfiles/zsh/.zshrc ~/.zshrc
+
+ln -s ~/dev/prj/dotfiles/.tmux.conf ~/.tmux.conf
