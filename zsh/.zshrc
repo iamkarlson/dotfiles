@@ -16,8 +16,8 @@ compinit
 source ~/.zsh/antigen.zsh
 
 zstyle ':completion:*' menu select
-autoload predict-on
-predict-on
+#autoload predict-on
+#predict-on
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
