@@ -7,3 +7,4 @@
     please = push --force-with-lease
     co = checkout
     prune = fetch --prune
+    uptag = push --tags --force

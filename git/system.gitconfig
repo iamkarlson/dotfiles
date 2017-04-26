@@ -1,33 +1,33 @@
 [include]
-    path=~/local.gitconfig
-    path=~/git/aliases.gitconfig
+  path=~/local.gitconfig
+  path=~/git/aliases.gitconfig
 [push]
   followTags = true
 [status]
   showUntrackedFiles = all
 [diff]
-    renames = copy
-    tool = gvimdiff
+  renames = copy
+  tool = gvimdiff
 [difftool "gvimdiff"]
-    cmd = "vim -d" "$LOCAL" "$REMOTE"
+  cmd = "gvim -d" "$LOCAL" "$REMOTE"
 [difftool]
-    prompt = false
+  prompt = false
 [difftool "vsdiffmerge"]
-    cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$LOCAL\" \"$REMOTE\" //t
-    keepbackup = false
+  cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$LOCAL\" \"$REMOTE\" //t
+  keepbackup = false
 [merge]
-    tool = fugitive
+  tool = fugitive
 [mergetool]
-    prompt = false
+  prompt = false
 [mergetool "vsdiffmerge"]
-    cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\" //m
-    trustexitcode = true
+  cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\" //m
+  trustexitcode = true
 [mergetool "vsdiffmerge"]
-    keepbackup = false
+  keepbackup = false
 [core]
-    commentchar = ";"
-    editor = gvim
+  commentchar = ";"
+  editor = gvim
 [mergetool "fugitive"]
-    cmd = gvim -f -c \"call MakeDiff()\" $MERGED
+  cmd = gvim -f -c \"call MakeDiff()\" $MERGED
 [credential]
-    helper = manager
+  helper = manager
