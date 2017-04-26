@@ -8,3 +8,5 @@
     co = checkout
     prune = fetch --prune
     uptag = push --tags --force
+    pl = pull
+    ps = push
