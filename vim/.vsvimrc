@@ -21,8 +21,10 @@ set shiftwidth=4
 set scrolloff=5
 
 set ttimeout
-
 set ttimeoutlen=100
+
+set timeout
+set timeoutlen=200
 
 
 if (has('win32') || has('win64'))
