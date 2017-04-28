@@ -1,1 +1,0 @@
-/home/iamkarlson/dev/prj/dotfiles/zsh/.zsh
