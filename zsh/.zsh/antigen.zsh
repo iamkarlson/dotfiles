@@ -17,6 +17,7 @@ antigen bundle pip
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle Tarrasch/zsh-autoenv
 antigen bundle zsh-users/zsh-completions
+antigen bundle rupa/z
 
 
 POWERLEVEL9K_INSTALLATION_PATH=/home/iamkarlson/.antigen/bundles/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
