@@ -31,6 +31,8 @@ COMPLETION_WAITING_DOTS="true"
 
 HIST_STAMPS="yyyy-mm-dd"
 
+zstyle ':completion:*:paths' accept-exact '[^.]' '^(*/.)'
+
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
