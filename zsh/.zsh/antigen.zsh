@@ -10,9 +10,6 @@ esac
 
 source ~/dev/sources/antigen/antigen.zsh
 
-CASE_SENSITIVE="false"
-HYPHEN_INSENSITIVE="true"
-
 antigen use oh-my-zsh
 
 antigen bundle git
