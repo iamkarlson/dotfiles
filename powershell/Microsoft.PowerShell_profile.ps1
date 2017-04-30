@@ -12,8 +12,9 @@ $ScriptFolder="n:\dropbox\apps\powershell\autorun"
 Get-ChildItem $ScriptFolder -name -include '*.ps1' -Recurse | foreach { Write-Host "loading script: " ("$ScriptFolder\$_") " ...."; %{. ($ScriptFolder+"\"+$_)}};
 
 
-#auto-complete like bash
+#PSReadLine settings
 Set-PSReadlineKeyHandler -Key Tab -Function Complete
+Set-PSReadlineOption -EditMode Emacs
 
 
 ############ import modules ###############################################################
