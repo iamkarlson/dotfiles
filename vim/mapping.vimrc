@@ -63,3 +63,6 @@ command! -nargs=* -complete=shellcmd Rtab execute "tabnew | r! <args>"
 let g:winresizer_start_key = '<leader>t'
 
 
+if has('nvim')
+    map! <S-Insert> <C-R>+
+endif

@@ -1,10 +1,10 @@
 
 case ${TERM} in
     xterm*|rxvt*|Eterm|aterm|kterm|gnome*)
-        ANTIGEN_CACHE=$HOME/.antigen/init-xterm.zsh
+        ANTIGEN_CACHE=~/.antigen/init-xterm.zsh
     ;;
     *)
-        ANTIGEN_CACHE=$HOME/.antigen/init-other.zsh
+        ANTIGEN_CACHE=~/.antigen/init-other.zsh
     ;;
 esac
 
@@ -20,7 +20,7 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle rupa/z
 
 
-POWERLEVEL9K_INSTALLATION_PATH=/home/iamkarlson/.antigen/bundles/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
+POWERLEVEL9K_INSTALLATION_PATH=~/.antigen/bundles/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
 
 antigen theme bhilburn/powerlevel9k powerlevel9k 
 # Tell Antigen that you're done.

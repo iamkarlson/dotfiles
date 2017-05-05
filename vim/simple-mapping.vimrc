@@ -24,9 +24,9 @@ imap <4-MiddleMouse> <Nop>
 noremap ;; :%s///g<Left><Left><Left>
 noremap ;' :%s///cg<Left><Left><Left><Left>
 
-nmap <C-c> :set nohls
+nmap <C-c> :set nohls<CR>
 
-vnoremap <C-f> y<ESC>/<c-r>"<CR>   
+vnoremap <C-f> y<ESC>/<c-r>"<CR>
 
 " make tab in v mode ident code
 vmap <tab> >gv

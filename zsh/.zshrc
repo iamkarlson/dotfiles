@@ -9,6 +9,7 @@ bindkey -v
 export ZSH=/home/iamkarlson/.oh-my-zsh
 
 # Antigen
+ANTIGEN_LOG=/tmp/antigen.log
 source ~/.zsh/antigen.zsh
 
 source ~/.shellrc
