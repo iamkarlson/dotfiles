@@ -10,6 +10,8 @@ export ZSH=/home/iamkarlson/.oh-my-zsh
 
 # Antigen
 ANTIGEN_LOG=/tmp/antigen.log
+POWERLEVEL9K_MODE='awesome-fontconfig'
+
 source ~/.zsh/antigen.zsh
 
 source ~/.shellrc
@@ -47,4 +49,10 @@ alias zshconfig="vim ~/.zshrc"
 alias vimconfig="vim ~/.vimrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
+
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir rbenv virtualenv pyenv vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history time battery)
+
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 
