@@ -5,6 +5,7 @@ function Group-ByDate(){
      [parameter(Mandatory=$True, ValueFromPipeline=$True, Position=0)]
      [String[]]$Folder
     )
+    Write-Output "Arranging files in $folder"
 
     $exist=Test-Path $folder;
 
