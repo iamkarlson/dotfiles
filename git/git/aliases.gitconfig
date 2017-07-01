@@ -11,3 +11,4 @@
     uptag = push --tags --force
     pl = pull
     ps = push
+    f = flow
