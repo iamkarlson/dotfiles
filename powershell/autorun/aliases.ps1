@@ -33,3 +33,4 @@ function gvim-new-tab(){
 Set-Alias gvim gvim-new-tab
 
 
+function pwd-clip {($pwd).Path |clip.exe}
