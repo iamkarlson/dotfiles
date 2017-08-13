@@ -12,3 +12,4 @@
     pl = pull
     ps = push
     f = flow
+    gfs = flow feature start
