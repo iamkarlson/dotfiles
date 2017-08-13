@@ -74,6 +74,7 @@ Plugin 'plasticboy/vim-markdown'
 Plugin 'iamkarlson/vim-log-syntax'
 Plugin 'iamkarlson/vim-theme-test'
 Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'leafgarland/typescript-vim'
 
 "zen coding
 Plugin 'mattn/emmet-vim'

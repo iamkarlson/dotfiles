@@ -31,3 +31,7 @@ let g:airline_symbols.linenr = ''
 
 
 "colorscheme broduo
+
+set guioptions-=m  "menu bar
+set guioptions-=T  "toolbar
+set guioptions-=r  "scrollbar
