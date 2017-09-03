@@ -16,7 +16,7 @@ let g:bufExplorerShowNoName=1        " Show No Name buffers.
 let g:bufExplorerShowUnlisted=1      " Show unlisted buffers.
 
 "neoformat settings
-"let g:neoformat_try_formatprg = 1
+let g:neoformat_try_formatprg = 1
 
 
 function! DiffStart()

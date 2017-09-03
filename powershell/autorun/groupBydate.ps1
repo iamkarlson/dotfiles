@@ -10,7 +10,7 @@ function Group-ByDate(){
     $exist=Test-Path $folder;
 
     if($exist){
-        ls -Path $folder | % {
+        ls -File -Path $folder | % {
             write-output "Perform move operation to "$_.FullName
 #            if($_.LastWriteTime -gt (Get-Date).AddDays(-2)){
 #                return;

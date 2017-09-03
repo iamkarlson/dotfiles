@@ -78,7 +78,7 @@ Plugin 'leafgarland/typescript-vim'
 
 "zen coding
 Plugin 'mattn/emmet-vim'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
@@ -101,6 +101,7 @@ Plugin 'haya14busa/incsearch.vim'
 Plugin 'rking/ag.vim'
 Plugin 'Chun-Yang/vim-action-ag'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'kshenoy/vim-signature'
 
 "view last files
 Plugin 'yegappan/mru'

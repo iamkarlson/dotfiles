@@ -11,3 +11,10 @@ au GUIEnter * simalt ~x
 "set shellcmdflag=-noprofile\ -command
 "set shellquote=\"
 "set shellxquote=
+
+"if has('nvim') && WINDOWS()
+    "set shell=powershell
+    "set shellcmdflag=-noprofile\ -command
+    "set shellquote=
+    "set shellxquote=
+"endif
