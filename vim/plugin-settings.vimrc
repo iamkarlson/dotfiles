@@ -18,6 +18,8 @@ let g:bufExplorerShowUnlisted=1      " Show unlisted buffers.
 "neoformat settings
 let g:neoformat_try_formatprg = 1
 
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
 
 function! DiffStart()
     set cursorline

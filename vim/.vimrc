@@ -78,7 +78,8 @@ Plugin 'leafgarland/typescript-vim'
 
 "zen coding
 Plugin 'mattn/emmet-vim'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'Shougo/deoplete.nvim'
 
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
