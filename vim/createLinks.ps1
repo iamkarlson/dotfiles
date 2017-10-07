@@ -1,6 +1,7 @@
 push-location $HOME
 $repoPath = 's:\sideprojects\dotfiles'
 cmd /c mklink .vimrc $repoPath\vim\.vimrc 
+cmd /c mklink .ideavimrc $repoPath\vim\.ideavimrc 
 cmd /c mklink .gvimrc $repoPath\vim\.gvimrc 
 cmd /c mklink .vsvimrc $repoPath\vim\.vsvimrc 
 cmd /c mklink /d .vim $repoPath\vim\ 
