@@ -8,7 +8,7 @@ case ${TERM} in
     ;;
 esac
 
-source ~/dev/sources/antigen/antigen.zsh
+source ~/antigen/antigen.zsh
 
 antigen use oh-my-zsh
 
