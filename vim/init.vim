@@ -1,7 +1,6 @@
 "neovim config file
 "eventualy it works with clipboard
 
-let $VIMRUNTIME='C:/tools/neovim/Neovim/share/nvim/runtime'
 
 
 let $NVIM_PYTHON_LOG_FILE = 'c:/tools/nvim.log'

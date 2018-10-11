@@ -1,4 +1,6 @@
+export TERM="xterm-256color"
 setopt NO_BEEP
+unsetopt BG_NICE
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
@@ -10,6 +12,8 @@ bindkey -v
 # Path to your oh-my-zsh installation.
 export ZSH=/home/iamkarlson/.oh-my-zsh
 
+source ~/.fonts/*.sh
+
 # Antigen
 ANTIGEN_LOG=/tmp/antigen.log
 POWERLEVEL9K_MODE='awesome-fontconfig'
@@ -17,6 +21,7 @@ POWERLEVEL9K_MODE='awesome-fontconfig'
 source ~/.zsh/antigen.zsh
 
 source ~/.shellrc
+source ~/aliases.zshrc
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="false"

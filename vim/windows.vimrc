@@ -5,6 +5,13 @@
 "    set shellcmdflag=/c\ powershell\ -ExecutionPolicy\ Unrestricted\ -NoProfile\ -NoLogo\ -NonInteractive\ -Command 
 "endif
 
+
+let $VIMRUNTIME='C:/tools/neovim/Neovim/share/nvim/runtime'
+
+let &runtimepath = 'C:/tools/neovim/Neovim/share/nvim/runtime'.&runtimepath
+
+let g:python3_host_prog = 'C:\Program Files (x86)\Python36\python.exe'
+
 au GUIEnter * simalt ~x
 
 "set shell=powershell
