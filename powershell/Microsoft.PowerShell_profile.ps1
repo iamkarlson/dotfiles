@@ -59,3 +59,9 @@ Write-Host ""
 Write-Host "Follow the white rabbit..."
 Write-Host ""
 Write-Host "Knock knock Neo."
+
+# Chocolatey profile
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+  Import-Module "$ChocolateyProfile"
+}

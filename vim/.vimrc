@@ -16,6 +16,7 @@ else
     let s:editor_root=expand("~/.vim")
 endif
 
+
 "add my folders as bundle sources
 if WINDOWS()
     :source ~\.vsvimrc
@@ -42,12 +43,16 @@ endif
 
 
 set linebreak
+set spell
+set spelllang=en_us
 
 "always show line numbers
 set number 
 set relativenumber 
 "enable syntax highlighting
 syntax on
+
+set autoread
 
 "always show status line
 set laststatus=2
@@ -85,13 +90,13 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 "Plugin 'mhinz/vim-signify'
 Plugin 'simeji/winresizer'
+Plugin 'Asheq/close-buffers.vim'
 
 "Plugin 'Chiel92/vim-autoformat'
 Plugin 'sbdchd/neoformat'
 Plugin 'luochen1990/rainbow'
 Plugin 's3rvac/AutoFenc'
 Plugin 'tpope/vim-surround'
-
 
 Plugin 'tomtom/tcomment_vim'
 
@@ -106,6 +111,8 @@ Plugin 'kshenoy/vim-signature'
 
 "view last files
 Plugin 'yegappan/mru'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-session'
 
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'easymotion/vim-easymotion'
@@ -153,7 +160,7 @@ endif
 set showcmd             " show command in bottom bar
 set cursorline          " highlight current line
 set wildmenu            " visual autocomplete for command menu
-set lazyredraw          " redraw only when we need to.
+"set lazyredraw          " redraw only when we need to.
 set showmatch           " highlight matching [{()}]
 
 set synmaxcol=256

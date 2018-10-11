@@ -18,8 +18,13 @@ map <C-tab> :bn<CR>
 map <C-s-tab> :bN<CR>
 nmap zq :bd<CR>
 
+nmap j gj
+nmap k gk
+
+
 nmap <leader>f :set ft=
-map <F3> :Neoformat<CR>
+nmap <F3> :Neoformat<CR>
+"nmap <leader>b :BufExplorer<CR>
 
 nmap <F8> :sort u<CR>
 
@@ -41,16 +46,11 @@ nnoremap <Leader>af :Ack  %<Left><Left>
 
 nnoremap <F5> :silent !%:p<CR>
 
-
-
 nnoremap <F10> :NERDTree<CR>
 
 nnoremap <leader>d :windo diffthis<CR>
 
 nmap <leader>o :only<CR>
-
-
-
 
 
 " execute a command and show it's output in a split window

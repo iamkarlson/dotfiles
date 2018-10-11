@@ -4,7 +4,7 @@ autocmd BufEnter * if expand('%:p') !~ '://' && expand('%:p') !~ '\Temp\'  | lcd
 
 
 " Source the vimrc file after saving it
-autocmd bufwritepost .vimrc source $MYVIMRC 
+"autocmd bufwritepost .vimrc source $MYVIMRC 
 
 autocmd BufEnter *.xaml set filetype=xml
 autocmd BufEnter Web*.config set filetype=xml

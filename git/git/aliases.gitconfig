@@ -3,7 +3,9 @@
     d = difftool
     dc = diff --cached
     f = flow
-    gfs = flow feature start
+    ff = flow feature
+    ffs = flow feature start
+    fff = flow feature finish
     glog = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset) %C(dim white)- %C(bold magenta)<%an %ae>%Creset %n'' %C(white)%s%C(reset)' --all
     pl = pull
     please = push --force-with-lease
@@ -11,4 +13,5 @@
     ps = push
     s=status
     st = stash save --include-untracked
+    sync = !git pull; git push
     uptag = push --tags --force
