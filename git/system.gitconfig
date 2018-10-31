@@ -1,22 +1,24 @@
 [include]
-  path=~/local.gitconfig
-  path=~/git/aliases.gitconfig
+  path=~/dotfiles/git/local.gitconfig
+  path=~/dotfiles/git/git/aliases.gitconfig
 [push]
   followTags = true
 [status]
   showUntrackedFiles = all
 [diff]
   renames = copy
-  tool = gvimdiff
+  tool = vsdiffmerge
 [difftool "gvimdiff"]
   cmd = "gvim -d" "$LOCAL" "$REMOTE"
+[difftool "onidiff"]
+  cmd = "oni -d" "$LOCAL" "$REMOTE"
 [difftool]
   prompt = false
 [difftool "vsdiffmerge"]
   cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\vsdiffmerge.exe\" \"$LOCAL\" \"$REMOTE\" //t
   keepbackup = false
 [merge]
-  tool = fugitive
+  tool = onifugitive
 [mergetool]
   prompt = false
 [mergetool "vsdiffmerge"]
@@ -26,7 +28,9 @@
   keepbackup = false
 [core]
   commentchar = ";"
-  editor = gvim
+#  editor = gvim
+[mergetool "onifugitive"]
+  cmd = oni -f -c \"call MakeDiff()\" $MERGED
 [mergetool "fugitive"]
   cmd = gvim -f -c \"call MakeDiff()\" $MERGED
 [credential]
