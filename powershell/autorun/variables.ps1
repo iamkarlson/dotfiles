@@ -1,7 +1,7 @@
 
 Set-Variable -Name Projects -Value "s:\work\" -Scope Global
 
-Set-Variable -Name Dropbox -Value "n:\dropbox\apps\" -Scope Global
+Set-Variable -Name Dropbox -Value "c:\dropbox\apps\" -Scope Global
 
 Set-Variable -Name ntw -Value "$Projects\NT.Wallet" -Scope Global
 

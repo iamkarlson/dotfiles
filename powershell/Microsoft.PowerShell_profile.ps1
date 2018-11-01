@@ -8,7 +8,7 @@ Get-ChildItem $ScriptFolder -name -include '*.ps1' -Recurse | foreach { Write-Ho
 
 
 ############ Loading scripts from Dropbox ################################################
-$ScriptFolder="n:\dropbox\apps\powershell\autorun"
+$ScriptFolder="c:\dropbox\apps\powershell\autorun"
 Get-ChildItem $ScriptFolder -name -include '*.ps1' -Recurse | foreach { Write-Host "loading script: " ("$ScriptFolder\$_") " ...."; %{. ($ScriptFolder+"\"+$_)}};
 
 
