@@ -30,7 +30,8 @@ nmap <F8> :sort u<CR>
 
 
 if WINDOWS()
-    nmap <leader>v :tabedit $HOME\.vim\.vimrc<CR>
+    nmap <leader>v :tabedit $HOME\.vim\.vimrc<CR>:cd $HOME\.vim\<CR>
+
     nnoremap <C-F10> :silent !explorer .<CR>
     nnoremap <F11> :silent !start-process -FilePath 'c:\Program Files\ConEmu\ConEmu64.exe' -ArgumentList '-single -dir %:p:h'<CR>
 else

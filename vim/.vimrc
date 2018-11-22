@@ -73,6 +73,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'L9'
 Plugin 'godlygeek/tabular'
 
+Plugin 'wakatime/vim-wakatime'
+
 "syntax
 Plugin 'w0rp/ale'
 Plugin 'plasticboy/vim-markdown'
@@ -104,9 +106,11 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'haya14busa/incsearch.vim'
 "Plugin 'mileszs/ack.vim'
-Plugin 'rking/ag.vim'
-Plugin 'Chun-Yang/vim-action-ag'
-Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'rking/ag.vim'
+"Plugin 'Chun-Yang/vim-action-ag'
+Plugin 'Shougo/denite.nvim'
+
+"Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'kshenoy/vim-signature'
 
 "view last files
