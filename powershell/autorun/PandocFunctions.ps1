@@ -2,7 +2,9 @@
 function Pandoc-OutHtml{
     param(
             [string] $InputFile,
-            [string] $Output
+            [string] $Output,
+            [Parameter(Mandatory=$false)]
+            [Switch]$ReplaceTitle
          )
 
     if([string]::IsNullOrWhiteSpace($InputFile)){
@@ -21,5 +23,14 @@ function Pandoc-OutHtml{
     Write-Host $InputFile 
     Write-Host $Output
 
-    pandoc.exe -s --toc -H $cssHeaderTemplateFile $InputFile -o $Output
+    $title = ($InputFile -replace ".md","")
+    if($ReplaceTitle -eq $true) {
+        $command = "pandoc.exe -s --toc -H $cssHeaderTemplateFile $InputFile -o $Output --number-sections --from=markdown_strict --metadata title=$title"
+        Write-Host $command
+        pandoc.exe -s --toc -H $cssHeaderTemplateFile $InputFile -o $Output --number-sections --from=markdown_strict --metadata title=$title
+    } else {
+        $command = "pandoc.exe -s --toc -H $cssHeaderTemplateFile $InputFile -o $Output --number-sections --from=markdown_strict"
+        Write-Host $command
+        pandoc.exe -s --toc -H $cssHeaderTemplateFile $InputFile -o $Output --number-sections --from=markdown_strict
+    }
 }
