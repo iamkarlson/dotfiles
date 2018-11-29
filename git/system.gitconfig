@@ -28,7 +28,8 @@
   keepbackup = false
 [core]
   commentchar = ";"
-#  editor = gvim
+  excludesfile = ~/dotfiles/git/global.gitignore
+# editor = oni --wait
 [mergetool "onifugitive"]
   cmd = oni -f -c \"call MakeDiff()\" $MERGED
 [mergetool "fugitive"]
