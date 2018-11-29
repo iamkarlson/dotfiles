@@ -28,6 +28,11 @@ foreach ($folder in Get-childItem "$PSScriptroot\Modules" -Directory ){
     }
 }
 
+$wakatime = $(where.exe wakatime);
+if($wakatime) {
+$PLUGIN_VERSION = "0.1";
+}
+
 #Clear-Host
 
 ############ Override standart PS line start with git status ##############################
@@ -35,12 +40,46 @@ foreach ($folder in Get-childItem "$PSScriptroot\Modules" -Directory ){
 function global:prompt {
     $realLASTEXITCODE = $LASTEXITCODE
 
-    Write-Host($pwd.ProviderPath) -nonewline
+    $new_pwd = $pwd.ProviderPath.Replace("$home","~");
+
+    Write-Host($new_pwd) -nonewline
 
     Write-VcsStatus
 
+
+
+    if($wakatime) {
+        Get-Job -State Completed|?{$_.Name.Contains("WakaJob")}|Remove-Job
+        $job = Start-Job -Name "WakaJob" -ScriptBlock {
+            $gitFolder = (Get-GitDirectory);
+
+            $command = "";
+            try{
+            $command = (Get-History -Count 1|select -Property CommandLine).CommandLine.Split(" ")[0].Replace("(","")
+            } catch{
+                $command = "error"
+            }
+            
+            if($gitFolder -eq $null){
+                wakatime --write `
+                --plugin "powershell-wakatime-iamkarlson-plugin/$PLUGIN_VERSION" `
+                --entity-type app `
+                --entity "$command" `
+                --language PowerShell;
+            } else {
+                $gitFolder = (get-item ($gitFolder).Replace(".git",""))
+                wakatime --write `
+                --plugin "powershell-wakatime-iamkarlson-plugin/$PLUGIN_VERSION" `
+                --entity-type app `
+                --entity "$command" `
+                --language PowerShell `
+                --project $gitFolder.Name;
+            }
+        }
+    }
+
     $global:LASTEXITCODE = $realLASTEXITCODE
-    return "> "
+    return "=] "
 }
 
 Import-Module posh-git
