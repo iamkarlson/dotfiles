@@ -109,6 +109,7 @@ Plugin 'haya14busa/incsearch.vim'
 "Plugin 'rking/ag.vim'
 "Plugin 'Chun-Yang/vim-action-ag'
 Plugin 'Shougo/denite.nvim'
+Plugin 'Shougo/neomru.vim'
 
 "Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'kshenoy/vim-signature'

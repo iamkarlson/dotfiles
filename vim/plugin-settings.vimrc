@@ -101,13 +101,14 @@ call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'separator', ['--'])
 call denite#custom#var('grep', 'final_opts', [])
 
-noremap <C-p> :<C-u>Denite file_rec<CR>
-nnoremap <leader>s :<C-u>Denite buffer<CR>
-nnoremap <leader><Space>s :<C-u>DeniteBufferDir buffer<CR>
-nnoremap <leader>8 :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
-nnoremap <leader>/ :<C-u>Denite grep:. -mode=normal<CR>
-nnoremap <leader><Space>/ :<C-u>DeniteBufferDir grep:. -mode=normal<CR>
-nnoremap <leader>d :<C-u>DeniteBufferDir file_rec<CR>
-nnoremap <leader>r :<C-u>Denite -resume -cursor-pos=+1<CR>
-nnoremap <leader>lr :<C-u>Denite references -mode=normal<CR>
+noremap   <leader>p         :<C-u>Denite file_rec<CR>
+noremap   <leader>m         :<C-u>Denite file_mru<CR>
+nnoremap  <leader>s         :<C-u>Denite buffer<CR>
+nnoremap  <leader><Space>s  :<C-u>DeniteBufferDir buffer<CR>
+nnoremap  <leader>8         :<C-u>DeniteCursorWord grep:. -mode=normal<CR>
+nnoremap  <leader>/         :<C-u>Denite grep:. -mode=normal<CR>
+nnoremap  <leader><Space>/  :<C-u>DeniteBufferDir grep:. -mode=normal<CR>
+nnoremap  <leader>d         :<C-u>DeniteBufferDir file_rec<CR>
+nnoremap  <leader>r         :<C-u>Denite -resume -cursor-pos=+1<CR>
+nnoremap  <leader>lr        :<C-u>Denite references -mode=normal<CR>
 
