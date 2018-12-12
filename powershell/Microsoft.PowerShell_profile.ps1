@@ -29,13 +29,20 @@ foreach ($folder in Get-childItem "$PSScriptroot\Modules" -Directory ){
 }
 
 $wakatime = $(where.exe wakatime);
-if($wakatime) {
-$PLUGIN_VERSION = "0.1";
-}
 
 #Clear-Host
 
 ############ Override standart PS line start with git status ##############################
+function Write-WakaStatus{
+    Write-Host("{") -nonewline  -ForegroundColor DarkGray
+    Write-Host("W") -nonewline  -ForegroundColor DarkGray
+
+    if( (Get-GitDirectory) -eq $null){
+    } else {
+        Write-Host("P") -nonewline -ForegroundColor Green
+    }
+    Write-Host("}") -nonewline -ForegroundColor DarkGray
+}
 
 function global:prompt {
     $realLASTEXITCODE = $LASTEXITCODE
@@ -44,22 +51,23 @@ function global:prompt {
 
     Write-Host($new_pwd) -nonewline
 
+
     Write-VcsStatus
 
-
-
     if($wakatime) {
+
+        Write-WakaStatus
         Get-Job -State Completed|?{$_.Name.Contains("WakaJob")}|Remove-Job
         $job = Start-Job -Name "WakaJob" -ScriptBlock {
             $gitFolder = (Get-GitDirectory);
 
             $command = "";
             try{
-            $command = (Get-History -Count 1|select -Property CommandLine).CommandLine.Split(" ")[0].Replace("(","")
+                $command = (Get-History -Count 1|select -Property CommandLine).CommandLine.Split(" ")[0].Replace("(","")
             } catch{
                 $command = "error"
             }
-            
+
             if($gitFolder -eq $null){
                 wakatime --write `
                 --plugin "powershell-wakatime-iamkarlson-plugin/$PLUGIN_VERSION" `
@@ -102,5 +110,5 @@ Write-Host "Knock knock Neo."
 # Chocolatey profile
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
-  Import-Module "$ChocolateyProfile"
+    Import-Module "$ChocolateyProfile"
 }
