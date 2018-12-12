@@ -93,9 +93,9 @@ endif
 " NOTE: It also supports windows.
 call denite#custom#var('file/rec', 'command', ['pt', '--follow', '--nocolor', '--nogroup', (has('win32') ? '-g:' : '-g='), ''])
 
-" Pt command on grep source
-call denite#custom#var('grep', 'command', ['pt'])
-call denite#custom#var('grep', 'default_opts', ['--nogroup', '--nocolor', '--smart-case'])
+" Ag command on grep source
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
 call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'separator', ['--'])

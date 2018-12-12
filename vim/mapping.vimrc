@@ -23,7 +23,7 @@ nmap k gk
 
 
 nmap <leader>f :set ft=
-nmap <F3> :Neoformat<CR>
+nmap <leader>3 :Neoformat<CR>
 "nmap <leader>b :BufExplorer<CR>
 
 nmap <F8> :sort u<CR>

@@ -29,7 +29,7 @@
 [core]
   commentchar = ";"
   excludesfile = ~/dotfiles/git/global.gitignore
-# editor = oni --wait
+#  editor = oni
 [mergetool "onifugitive"]
   cmd = oni -f -c \"call MakeDiff()\" $MERGED
 [mergetool "fugitive"]
