@@ -172,7 +172,7 @@ https://api.slack.com/methods/chat.postMessage
 function New-SlackRichNotification
 {
     [CmdletBinding(SupportsShouldProcess=$false,
-                    DefaultParameterSetName=’SeverityOrColour’
+                    DefaultParameterSetName="SeverityOrColour"
                     )]
     [OutputType([System.Collections.Hashtable])]
     Param

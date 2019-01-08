@@ -17,42 +17,37 @@ Set-PSReadlineKeyHandler -Key Tab -Function Complete
 Set-PSReadlineOption -EditMode Emacs
 
 
-############ import modules ###############################################################
-Get-ChildItem "$PSScriptroot\Modules" -File -Filter "*.psm1" |%{Import-Module $_.FullName -Force}
-
-foreach ($folder in Get-childItem "$PSScriptroot\Modules" -Directory ){
-    Write-Host "loading modules from $folder`n"
-    foreach($module in Get-ChildItem $folder.FullName -File -Filter "*.psm1"){
-        Write-Host "Loading module $module";
-        Import-Module $module.FullName -Force
-    }
-}
-
 $wakatime = $(where.exe wakatime);
 
 #Clear-Host
 
 ############ Override standart PS line start with git status ##############################
 function Write-WakaStatus{
-    Write-Host("{") -nonewline  -ForegroundColor DarkGray
-    Write-Host("W") -nonewline  -ForegroundColor DarkGray
+    Write-Host("{") -nonewline  -ForegroundColor Black -BackgroundColor Green
+    Write-Host("W") -nonewline  -ForegroundColor Black -BackgroundColor Green
 
     if( (Get-GitDirectory) -eq $null){
     } else {
-        Write-Host("P") -nonewline -ForegroundColor Green
+        Write-Host("P") -nonewline -ForegroundColor Red -BackgroundColor Green
     }
-    Write-Host("}") -nonewline -ForegroundColor DarkGray
+    Write-Host("}") -nonewline -ForegroundColor Black -BackgroundColor Green
+
 }
+
 
 function global:prompt {
     $realLASTEXITCODE = $LASTEXITCODE
 
+# z plugin requrements
+    Update-NavigationHistory $pwd.Path
+
     $new_pwd = $pwd.ProviderPath.Replace("$home","~");
 
-    Write-Host($new_pwd) -nonewline
+    Write-Host "" -nonewline  -ForegroundColor Black -BackgroundColor Green
 
 
-    Write-VcsStatus
+    Write-Host($new_pwd.ToLower()) -nonewline  -ForegroundColor Black -BackgroundColor Green
+
 
     if($wakatime) {
 
@@ -63,34 +58,63 @@ function global:prompt {
 
             $command = "";
             try{
+                
                 $command = (Get-History -Count 1|select -Property CommandLine).CommandLine.Split(" ")[0].Replace("(","")
             } catch{
-                $command = "error"
+                if($command -eq "") {
+                    $command = "error"
+                }
             }
 
+            $wakaCommand = 'wakatime --write'
+            $wakaCommand =$wakaCommand + ' --plugin "powershell-wakatime-iamkarlson-plugin/$PLUGIN_VERSION"'
+            $wakaCommand =$wakaCommand + ' --entity-type app '
+            $wakaCommand =$wakaCommand + ' --entity "'
+            $wakaCommand =$wakaCommand +  $command
+            $wakaCommand =$wakaCommand + '" '
+            $wakaCommand =$wakaCommand + ' --language PowerShell'
+
             if($gitFolder -eq $null){
-                wakatime --write `
-                --plugin "powershell-wakatime-iamkarlson-plugin/$PLUGIN_VERSION" `
-                --entity-type app `
-                --entity "$command" `
-                --language PowerShell;
             } else {
                 $gitFolder = (get-item ($gitFolder).Replace(".git",""))
-                wakatime --write `
-                --plugin "powershell-wakatime-iamkarlson-plugin/$PLUGIN_VERSION" `
-                --entity-type app `
-                --entity "$command" `
-                --language PowerShell `
-                --project $gitFolder.Name;
+                $wakaCommand =$wakaCommand + ' --project $gitFolder.Name'
             }
+            $env:wakaDebug
+            if($env:wakaDebug){
+                $wakaCommand |out-file ~/.wakapwsh.log
+            }
+            & $wakaCommand
         }
     }
 
     $global:LASTEXITCODE = $realLASTEXITCODE
-    return "=] "
+# This is needed because posh-git has a bug
+    if( (Get-GitDirectory) -eq $null){
+        Write-Host ""  -nonewline -ForegroundColor Green -BackgroundColor Black
+
+    } else {
+        Write-VcsStatus
+        Write-Host ""  -nonewline -ForegroundColor Green -BackgroundColor Black
+    }
+    return " "
+
 }
 
-Import-Module posh-git
+############ import modules ###############################################################
+Get-ChildItem "$PSScriptroot\Modules" -File -Filter "*.psm1" |%{Import-Module $_.FullName -Force}
+
+foreach ($module in Get-childItem "$PSScriptroot\Modules" -File -Filter "*.psm1" -Recurse){
+    if($module.FullName -match "TestModules"){
+        continue;
+    }
+    Write-Host "Loading module $module";
+    Import-Module $module.FullName -Force
+}
+
+
+$GitPromptSettings.BeforeText =" "
+$GitPromptSettings.AfterText ="]"
+
 Start-SshAgent -Quiet
 
 Write-Host "PowerShell Environment Loaded"

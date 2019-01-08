@@ -51,3 +51,5 @@ Set-Alias gvim gvim-new-tab
 
 function pwd-clip {($pwd).Path |clip.exe}
 Set-Alias k kubectl
+
+Set-Alias z Search-NavigationHistory
