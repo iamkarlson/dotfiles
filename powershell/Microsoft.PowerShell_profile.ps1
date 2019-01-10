@@ -1,13 +1,13 @@
 (Get-Host).UI.RawUI.CursorSize = 100
 
-############ Loading scripts from autorun folder #########################################
+############ Loading scripts from autorun folder ###############################
 # directory where my scripts are stored
 $ScriptFolder="$home\dotfiles\powershell\autorun"
 # Source all .ps1 files in PowerShell profile folder
 Get-ChildItem $ScriptFolder -name -include '*.ps1' -Recurse | foreach { Write-Host "loading script: " ("$ScriptFolder\$_") " ...."; %{. ($ScriptFolder+"\"+$_)}};
 
 
-############ Loading scripts from Dropbox ################################################
+############ Loading scripts from Dropbox ######################################
 $ScriptFolder="c:\dropbox\apps\powershell\autorun"
 Get-ChildItem $ScriptFolder -name -include '*.ps1' -Recurse | foreach { Write-Host "loading script: " ("$ScriptFolder\$_") " ...."; %{. ($ScriptFolder+"\"+$_)}};
 
@@ -16,53 +16,31 @@ Get-ChildItem $ScriptFolder -name -include '*.ps1' -Recurse | foreach { Write-Ho
 Set-PSReadlineKeyHandler -Key Tab -Function Complete
 Set-PSReadlineOption -EditMode Emacs
 
+############################# Wakatime #########################################
+function Test-Wakatime{
 
-$wakatime = $(where.exe wakatime);
+    $wakatime = $(where.exe wakatime);
 
-#Clear-Host
-
-############ Override standart PS line start with git status ##############################
-function Write-WakaStatus{
-    Write-Host("{") -nonewline  -ForegroundColor Black -BackgroundColor Green
-    Write-Host("W") -nonewline  -ForegroundColor Black -BackgroundColor Green
-
-    if( (Get-GitDirectory) -eq $null){
+    if($wakatime) {
+        return $True;
     } else {
-        Write-Host("P") -nonewline -ForegroundColor Red -BackgroundColor Green
+        return $False;
     }
-    Write-Host("}") -nonewline -ForegroundColor Black -BackgroundColor Green
-
 }
-$historyPath = Join-Path (split-path $profile) history.csv
-Write-Host "history file $historyPath"
 
 $env:wakaDebug = $True
 
-function global:prompt {
-    $realLASTEXITCODE = $LASTEXITCODE
+function Send-Wakatime(){
+    if(Test-Wakatime) {
 
-# z plugin requrements
-    Update-NavigationHistory $pwd.Path
-
-    $new_pwd = $pwd.ProviderPath.Replace("$home","~");
-
-    Write-Host "" -nonewline  -ForegroundColor Green -BackgroundColor Black
-
-    Write-Host "" -nonewline  -ForegroundColor Black -BackgroundColor Green
-
-    Write-Host($new_pwd.ToLower()) -nonewline  -ForegroundColor Black -BackgroundColor Green
-
-    if($wakatime) {
-
-        Write-WakaStatus
         $command = "";
         try {
+            $historyPath = Join-Path (split-path $profile) history.csv
             $historyItem = (gc $historyPath|select -Last 1 -First 1|ConvertFrom-Csv)
             $commandObj = ($historyItem|select -Property CommandLine).CommandLine
-            $commandText = [regex]::split($commandObj,"[ |;:]")
+            $commandText = ([regex]::split($commandObj,"[ |;:]")[0])
             $command = $commandText.Replace("(","")
         } catch [Exception] {
-            Write-Host $_.Exception.Message
             if($command -eq "") {
                 $command = "error"
             }
@@ -99,47 +77,37 @@ function global:prompt {
             iex $wakaCommand
         } -ArgumentList $command, $gitFolder
     }
-
-    $global:LASTEXITCODE = $realLASTEXITCODE
-# This is needed because posh-git has a bug
-    if( (Get-GitDirectory) -eq $null){
-        Write-Host ""  -nonewline -ForegroundColor Green -BackgroundColor Black
-
-    } else {
-        Write-Host ""  -nonewline -ForegroundColor Green -BackgroundColor Yellow
-        Write-VcsStatus
-        Write-Host ""  -nonewline -ForegroundColor Yellow -BackgroundColor Black
-    }
-    return " "
-
 }
 
-############ import modules ###############################################################
-Get-ChildItem "$PSScriptroot\Modules" -File -Filter "*.psm1" |%{Import-Module $_.FullName -Force}
+############################## import modules ##################################
 
-foreach ($module in Get-childItem "$PSScriptroot\Modules" -File -Filter "*.psm1" -Recurse){
-    if($module.FullName -match "TestModules"){
-        continue;
-    }
-    Write-Host "Loading module $module";
-    Import-Module $module.FullName -Force
+function User-Prompt{
+    Send-Wakatime
+    Update-NavigationHistory $pwd.Path
+}
+Import-Module PersistentHistory
+Import-Module posh-git
+Import-Module oh-my-posh
+
+
+$ThemeSettings.MyThemesLocation= "~\Documents\PowerShell\PoshThemes"
+
+Set-Theme Paradox
+$ThemeSettings.GitSymbols.BranchSymbol = [char]::ConvertFromUtf32(0xE0A0)
+
+$oldPrompt = Get-Content function:\prompt
+
+Import-Module z
+
+# Chocolatey profile
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+    Import-Module "$ChocolateyProfile"
 }
 
-
-$GitPromptSettings.BeforeText =""
-$GitPromptSettings.BeforeForegroundColor = "Black"
-$GitPromptSettings.BeforeBackgroundColor = "Yellow"
-
-$GitPromptSettings.LocalDefaultStatusForegroundColor = "DarkGreen"
-
-Start-SshAgent -Quiet
-
-Write-Host "PowerShell Environment Loaded"
-Write-Host ""
-
+########################### Cool greeting ######################################
 Get-Date |Write-Host
 
-############ Cool greeting ################################################################
 Write-Host "Wake up Neo"
 Write-Host ""
 Write-Host "The Matrix has you..."
@@ -148,8 +116,3 @@ Write-Host "Follow the white rabbit..."
 Write-Host ""
 Write-Host "Knock knock Neo."
 
-# Chocolatey profile
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-    Import-Module "$ChocolateyProfile"
-}

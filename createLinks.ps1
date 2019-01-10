@@ -18,12 +18,14 @@ pop-location
 pop-location
 
 push-location Documents
-mkdir Powershell -ErrorAction Ignore
+mklink /d Powershell c:\src\dotfiles\powershell
+#mkdir Powershell -ErrorAction Ignore
 
-push-location PowerShell
-cmd /c mklink Microsoft.PowerShell_profile.ps1 $repoPath\powershell\Microsoft.PowerShell_profile.ps1
-cmd /c mklink /d modules $repoPath\powershell\Modules
+#push-location PowerShell
+#cmd /c mklink Microsoft.PowerShell_profile.ps1 $repoPath\powershell\Microsoft.PowerShell_profile.ps1
+#cmd /c mklink /d modules $repoPath\powershell\Modules
+
+#pop-location
 
 pop-location
-
 pop-location
