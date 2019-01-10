@@ -67,10 +67,10 @@ function global:prompt {
                 $command = "error"
             }
         }
+        $gitFolder = (Get-GitDirectory);
         Get-Job -State Completed|?{$_.Name.Contains("WakaJob")}|Remove-Job
         $job = Start-Job -Name "WakaJob" -ScriptBlock {
-            param($command)
-            $gitFolder = (Get-GitDirectory);
+            param($command, $gitFolder)
 
             if($command -eq "") {
                 return;
@@ -97,7 +97,7 @@ function global:prompt {
                 $wakaCommand |out-file ~/.wakapwsh.log -Append
             }
             iex $wakaCommand
-        } -ArgumentList $command
+        } -ArgumentList $command, $gitFolder
     }
 
     $global:LASTEXITCODE = $realLASTEXITCODE
