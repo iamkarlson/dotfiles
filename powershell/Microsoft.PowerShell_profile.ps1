@@ -81,7 +81,7 @@ function Send-Wakatime(){
         } -ArgumentList $command, $gitFolder
     }
 }
-$env:wakaDebug = $True
+#$env:wakaDebug = $True
 
 ############################## import modules ##################################
 
@@ -93,22 +93,22 @@ function User-Prompt{
 Import-Module PersistentHistory
 Import-Module posh-git
 Import-Module oh-my-posh
+Import-Module PoShFuck
 
 
 $ThemeSettings.MyThemesLocation= "~\Documents\PowerShell\PoshThemes"
 
-    Set-Theme Paradox
+Set-Theme Paradox
 $ThemeSettings.GitSymbols.BranchSymbol = [char]::ConvertFromUtf32(0xE0A0)
 
-    $oldPrompt = Get-Content function:\prompt
 
-    Import-Module z
+Import-Module z
 
 # Chocolatey profile
-    $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-    if (Test-Path($ChocolateyProfile)) {
-        Import-Module "$ChocolateyProfile"
-    }
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile)) {
+    Import-Module "$ChocolateyProfile"
+}
 
 ########################### Cool greeting ######################################
 Get-Date |Write-Host
