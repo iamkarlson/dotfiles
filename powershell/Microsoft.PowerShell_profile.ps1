@@ -33,7 +33,10 @@ function Write-WakaStatus{
     Write-Host("}") -nonewline -ForegroundColor Black -BackgroundColor Green
 
 }
+$historyPath = Join-Path (split-path $profile) history.csv
+Write-Host "history file $historyPath"
 
+$env:wakaDebug = $True
 
 function global:prompt {
     $realLASTEXITCODE = $LASTEXITCODE
@@ -43,28 +46,36 @@ function global:prompt {
 
     $new_pwd = $pwd.ProviderPath.Replace("$home","~");
 
-    Write-Host "" -nonewline  -ForegroundColor Black -BackgroundColor Green
+    Write-Host "" -nonewline  -ForegroundColor Green -BackgroundColor Black
 
+    Write-Host "" -nonewline  -ForegroundColor Black -BackgroundColor Green
 
     Write-Host($new_pwd.ToLower()) -nonewline  -ForegroundColor Black -BackgroundColor Green
-
 
     if($wakatime) {
 
         Write-WakaStatus
+        $command = "";
+        try {
+            $historyItem = (gc $historyPath|select -Last 1 -First 1|ConvertFrom-Csv)
+            $commandObj = ($historyItem|select -Property CommandLine).CommandLine
+            $commandText = [regex]::split($commandObj,"[ |;:]")
+            $command = $commandText.Replace("(","")
+        } catch [Exception] {
+            Write-Host $_.Exception.Message
+            if($command -eq "") {
+                $command = "error"
+            }
+        }
         Get-Job -State Completed|?{$_.Name.Contains("WakaJob")}|Remove-Job
         $job = Start-Job -Name "WakaJob" -ScriptBlock {
+            param($command)
             $gitFolder = (Get-GitDirectory);
 
-            $command = "";
-            try{
-                
-                $command = (Get-History -Count 1|select -Property CommandLine).CommandLine.Split(" ")[0].Replace("(","")
-            } catch{
-                if($command -eq "") {
-                    $command = "error"
-                }
+            if($command -eq "") {
+                return;
             }
+            Write-Host $command
 
             $wakaCommand = 'wakatime --write'
             $wakaCommand =$wakaCommand + ' --plugin "powershell-wakatime-iamkarlson-plugin/$PLUGIN_VERSION"'
@@ -79,22 +90,25 @@ function global:prompt {
                 $gitFolder = (get-item ($gitFolder).Replace(".git",""))
                 $wakaCommand =$wakaCommand + ' --project $gitFolder.Name'
             }
-            $env:wakaDebug
+            $envwakaDebug=$env:wakaDebug
+            Write-Host "wakaDebug: $envwakaDebug"
+            $wakaCommand
             if($env:wakaDebug){
-                $wakaCommand |out-file ~/.wakapwsh.log
+                $wakaCommand |out-file ~/.wakapwsh.log -Append
             }
-            & $wakaCommand
-        }
+            iex $wakaCommand
+        } -ArgumentList $command
     }
 
     $global:LASTEXITCODE = $realLASTEXITCODE
 # This is needed because posh-git has a bug
     if( (Get-GitDirectory) -eq $null){
-        Write-Host ""  -nonewline -ForegroundColor Green -BackgroundColor Black
+        Write-Host ""  -nonewline -ForegroundColor Green -BackgroundColor Black
 
     } else {
+        Write-Host ""  -nonewline -ForegroundColor Green -BackgroundColor Yellow
         Write-VcsStatus
-        Write-Host ""  -nonewline -ForegroundColor Green -BackgroundColor Black
+        Write-Host ""  -nonewline -ForegroundColor Yellow -BackgroundColor Black
     }
     return " "
 
@@ -112,8 +126,11 @@ foreach ($module in Get-childItem "$PSScriptroot\Modules" -File -Filter "*.psm1"
 }
 
 
-$GitPromptSettings.BeforeText =" "
-$GitPromptSettings.AfterText ="]"
+$GitPromptSettings.BeforeText =""
+$GitPromptSettings.BeforeForegroundColor = "Black"
+$GitPromptSettings.BeforeBackgroundColor = "Yellow"
+
+$GitPromptSettings.LocalDefaultStatusForegroundColor = "DarkGreen"
 
 Start-SshAgent -Quiet
 
