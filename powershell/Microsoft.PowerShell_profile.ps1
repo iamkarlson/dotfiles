@@ -32,11 +32,11 @@ $env:wakaDebug = $True
 
 function Send-Wakatime(){
     if(Test-Wakatime) {
-
         $command = "";
         try {
             $historyPath = Join-Path (split-path $profile) history.csv
-            $historyItem = (gc $historyPath|select -Last 1 -First 1|ConvertFrom-Csv)
+#$historyItem = (gc $historyPath|select -Last 1 -First 1|ConvertFrom-Csv)
+            $historyItem = (Get-History |select -Last 1)
             $commandObj = ($historyItem|select -Property CommandLine).CommandLine
             $commandText = ([regex]::split($commandObj,"[ |;:]")[0])
             $command = $commandText.Replace("(","")
@@ -50,10 +50,11 @@ function Send-Wakatime(){
         $job = Start-Job -Name "WakaJob" -ScriptBlock {
             param($command, $gitFolder)
 
+            Write-Host "Sending wakatime"
+            Write-Host "Waka command: $command"
             if($command -eq "") {
                 return;
             }
-            Write-Host $command
 
             $wakaCommand = 'wakatime --write'
             $wakaCommand =$wakaCommand + ' --plugin "powershell-wakatime-iamkarlson-plugin/$PLUGIN_VERSION"'
@@ -61,29 +62,33 @@ function Send-Wakatime(){
             $wakaCommand =$wakaCommand + ' --entity "'
             $wakaCommand =$wakaCommand +  $command
             $wakaCommand =$wakaCommand + '" '
-            $wakaCommand =$wakaCommand + ' --language PowerShell'
+            $wakaCommand =$wakaCommand + ' --language "PowerShell"'
 
             if($gitFolder -eq $null){
             } else {
                 $gitFolder = (get-item ($gitFolder).Replace(".git",""))
-                $wakaCommand =$wakaCommand + ' --project $gitFolder.Name'
+                $wakaCommand =$wakaCommand + ' --project "'
+                $wakaCommand =$wakaCommand + $gitFolder.Name
+                $wakaCommand =$wakaCommand + '"'
             }
             $envwakaDebug=$env:wakaDebug
             Write-Host "wakaDebug: $envwakaDebug"
             $wakaCommand
-            if($env:wakaDebug){
+            if($envwakaDebug){
                 $wakaCommand |out-file ~/.wakapwsh.log -Append
             }
             iex $wakaCommand
         } -ArgumentList $command, $gitFolder
     }
 }
+$env:wakaDebug = $True
 
 ############################## import modules ##################################
 
 function User-Prompt{
     Send-Wakatime
     Update-NavigationHistory $pwd.Path
+    Save-HistoryIncremental
 }
 Import-Module PersistentHistory
 Import-Module posh-git
@@ -92,18 +97,18 @@ Import-Module oh-my-posh
 
 $ThemeSettings.MyThemesLocation= "~\Documents\PowerShell\PoshThemes"
 
-Set-Theme Paradox
+    Set-Theme Paradox
 $ThemeSettings.GitSymbols.BranchSymbol = [char]::ConvertFromUtf32(0xE0A0)
 
-$oldPrompt = Get-Content function:\prompt
+    $oldPrompt = Get-Content function:\prompt
 
-Import-Module z
+    Import-Module z
 
 # Chocolatey profile
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-    Import-Module "$ChocolateyProfile"
-}
+    $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+    if (Test-Path($ChocolateyProfile)) {
+        Import-Module "$ChocolateyProfile"
+    }
 
 ########################### Cool greeting ######################################
 Get-Date |Write-Host
