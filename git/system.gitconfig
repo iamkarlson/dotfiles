@@ -36,3 +36,6 @@
   cmd = gvim -f -c \"call MakeDiff()\" $MERGED
 [credential]
   helper = manager
+[user]
+	email = iamkarlson@gmail.com
+	name = Georgy Grigoryev

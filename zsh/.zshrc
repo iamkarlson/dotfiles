@@ -12,7 +12,8 @@ bindkey -v
 # Path to your oh-my-zsh installation.
 export ZSH=/home/iamkarlson/.oh-my-zsh
 
-source ~/.fonts/*.sh
+# you have to run it once
+# source ~/.fonts/*.sh
 
 # Antigen
 ANTIGEN_LOG=/tmp/antigen.log
@@ -21,7 +22,7 @@ POWERLEVEL9K_MODE='awesome-fontconfig'
 source ~/.zsh/antigen.zsh
 
 source ~/.shellrc
-source ~/aliases.zshrc
+source ~/.zsh/aliases.zshrc
 
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="false"
