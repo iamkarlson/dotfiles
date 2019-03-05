@@ -90,7 +90,11 @@ function Write-Theme {
     $batteryText += "$battery%"
     $batteryText += "]"
 
-    $prompt += Set-CursorForRightBlockWrite -textLength ($timestamp.Length + 6 + $batteryText.Length)
+    if ($status) {
+        $prompt += Set-CursorForRightBlockWrite -textLength ($timestamp.Length + 6 + $batteryText.Length)
+    } else{
+        $prompt += Set-CursorForRightBlockWrite -textLength ($timestamp.Length + 5 + $batteryText.Length)
+    }
     $prompt += Write-Prompt -Object $($sl.PromptSymbols.SegmentBackwardSymbol) `
                             -BackgroundColor $sl.Colors.GitForegroundColor `
                             -ForegroundColor $sl.Colors.PromptBackgroundColor
