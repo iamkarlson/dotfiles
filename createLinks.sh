@@ -1,3 +1,4 @@
+#!/bin/zsh
 ln -ds ~/dev/prj/dotfiles/git/git ~/git
 ln -ds ~/dev/prj/dotfiles/zsh/.zsh ~/.zsh
 
@@ -8,6 +9,8 @@ ln -s ~/dev/prj/dotfiles/zsh/.shellrc ~/.shellrc
 ln -s ~/dev/prj/dotfiles/zsh/.zshrc ~/.zshrc
 
 ln -s ~/dev/prj/dotfiles/.tmux.conf ~/.tmux.conf
+mkdir ~/.config
+
 ln -s ~/dev/prj/dotfiles/vim/init.vim ~/.config/nvim/init.vim
 mkdir ~/.vim
 ln -s ~/dev/prj/dotfiles/vim/autocmd.vimrc ~/.vim/autocmd.vimrc

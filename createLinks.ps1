@@ -1,5 +1,8 @@
 push-location $HOME
 $repoPath = 'c:\src\dotfiles'
+
+cmd /c mklink /d dotfiles $repoPath 
+
 cmd /c mklink .vimrc $repoPath\vim\.vimrc 
 cmd /c mklink .ideavimrc $repoPath\vim\.ideavimrc 
 cmd /c mklink .gvimrc $repoPath\vim\.gvimrc 
@@ -18,7 +21,7 @@ pop-location
 pop-location
 
 push-location Documents
-mklink /d Powershell c:\src\dotfiles\powershell
+cmd /c mklink /d Powershell c:\src\dotfiles\powershell
 #mkdir Powershell -ErrorAction Ignore
 
 #push-location PowerShell
