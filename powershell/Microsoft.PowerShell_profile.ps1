@@ -28,58 +28,59 @@ function Test-Wakatime{
     }
 }
 
-$env:wakaDebug = $True
+$env:wakaDebug = $False
 
 function Send-Wakatime(){
-    if(Test-Wakatime) {
-        $command = "";
-        try {
-            $historyPath = Join-Path (split-path $profile) history.csv
-#$historyItem = (gc $historyPath|select -Last 1 -First 1|ConvertFrom-Csv)
-            $historyItem = (Get-History |select -Last 1)
-            $commandObj = ($historyItem|select -Property CommandLine).CommandLine
-            $commandText = ([regex]::split($commandObj,"[ |;:]")[0])
-            $command = $commandText.Replace("(","")
-        } catch [Exception] {
-            if($command -eq "") {
-                $command = "error"
-            }
-        }
-        $gitFolder = (Get-GitDirectory);
-        Get-Job -State Completed|?{$_.Name.Contains("WakaJob")}|Remove-Job
-        $job = Start-Job -Name "WakaJob" -ScriptBlock {
-            param($command, $gitFolder)
-
-            Write-Host "Sending wakatime"
-            Write-Host "Waka command: $command"
-            if($command -eq "") {
-                return;
-            }
-
-            $wakaCommand = 'wakatime --write'
-            $wakaCommand =$wakaCommand + ' --plugin "powershell-wakatime-iamkarlson-plugin/$PLUGIN_VERSION"'
-            $wakaCommand =$wakaCommand + ' --entity-type app '
-            $wakaCommand =$wakaCommand + ' --entity "'
-            $wakaCommand =$wakaCommand +  $command
-            $wakaCommand =$wakaCommand + '" '
-            $wakaCommand =$wakaCommand + ' --language "PowerShell"'
-
-            if($gitFolder -eq $null){
-            } else {
-                $gitFolder = (get-item ($gitFolder).Replace(".git",""))
-                $wakaCommand =$wakaCommand + ' --project "'
-                $wakaCommand =$wakaCommand + $gitFolder.Name
-                $wakaCommand =$wakaCommand + '"'
-            }
-            $envwakaDebug=$env:wakaDebug
-            Write-Host "wakaDebug: $envwakaDebug"
-            $wakaCommand
-            if($envwakaDebug){
-                $wakaCommand |out-file ~/.wakapwsh.log -Append
-            }
-            iex $wakaCommand
-        } -ArgumentList $command, $gitFolder
+    if(!(Test-Wakatime)) {
+        return;
     }
+    $command = "";
+    try {
+        $historyItem = (Get-History |select -Last 1)
+        $commandObj = ($historyItem|select -Property CommandLine).CommandLine
+        $commandText = ([regex]::split($commandObj,"[ |;:]")[0])
+        $command = $commandText.Replace("(","")
+    } catch [Exception] {
+        if($command -eq "") {
+            $command = "error"
+        }
+    }
+    $gitFolder = (Get-GitDirectory);
+    Get-Job -State Completed|?{$_.Name.Contains("WakaJob")}|Remove-Job
+    $job = Start-Job -Name "WakaJob" -ScriptBlock {
+        param($command, $gitFolder)
+
+        Write-Host "Sending wakatime"
+        Write-Host "Waka command: $command"
+        if($command -eq "") {
+            return;
+        }
+
+        $PLUGIN_VERSION = "0.2";
+
+        $wakaCommand = 'wakatime --write'
+        $wakaCommand =$wakaCommand + " --plugin `"powershell-wakatime-iamkarlson-plugin/$PLUGIN_VERSION`""
+        $wakaCommand =$wakaCommand + ' --entity-type app '
+        $wakaCommand =$wakaCommand + ' --entity "'
+        $wakaCommand =$wakaCommand +  $command
+        $wakaCommand =$wakaCommand + '" '
+        $wakaCommand =$wakaCommand + ' --language "PowerShell"'
+
+        if($gitFolder -eq $null){
+        } else {
+            $gitFolder = (get-item ($gitFolder).Replace(".git",""))
+            $wakaCommand =$wakaCommand + ' --project "'
+            $wakaCommand =$wakaCommand + $gitFolder.Name
+            $wakaCommand =$wakaCommand + '"'
+        }
+        $envwakaDebug=$env:wakaDebug
+        Write-Host "wakaDebug: $envwakaDebug"
+        $wakaCommand
+        if($envwakaDebug){
+            $wakaCommand |out-file ~/.wakapwsh.log -Append
+        }
+        iex $wakaCommand
+    } -ArgumentList $command, $gitFolder
 }
 #$env:wakaDebug = $True
 

@@ -4,22 +4,15 @@ let mapleader = "\<Space>"
 "Esc match
 imap jj <Esc>
 
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
-nnoremap g* g*zz
-nnoremap g# g#zz
-
 "Remove annoying middle mouse paste
-map <MiddleMouse> <Nop>
-imap <MiddleMouse> <Nop>
-map <2-MiddleMouse> <Nop>
-imap <2-MiddleMouse> <Nop>
-map <3-MiddleMouse> <Nop>
-imap <3-MiddleMouse> <Nop>
-map <4-MiddleMouse> <Nop>
-imap <4-MiddleMouse> <Nop>
+"map <MiddleMouse> <Nop>
+"imap <MiddleMouse> <Nop>
+"map <2-MiddleMouse> <Nop>
+"imap <2-MiddleMouse> <Nop>
+"map <3-MiddleMouse> <Nop>
+"imap <3-MiddleMouse> <Nop>
+"map <4-MiddleMouse> <Nop>
+"imap <4-MiddleMouse> <Nop>
 
 noremap ;; :%s///g<Left><Left><Left>
 noremap ;' :%s///cg<Left><Left><Left><Left>
@@ -27,11 +20,6 @@ noremap ;' :%s///cg<Left><Left><Left><Left>
 nmap <C-c> :set nohls<CR>
 
 vnoremap <C-f> y<ESC>/<c-r>"<CR>
-
-" make tab in v mode ident code
-vmap <tab> >gv
-vmap <s-tab> <gv
-
 
 command! WQ wq
 command! Wq wq
@@ -47,9 +35,6 @@ nmap <Leader>p "+p
 nmap <Leader>P "+P
 vmap <Leader>p "+p
 vmap <Leader>P "+P
-
-"nmap <Leader><Leader> V
-
 
 
 "HARDCORE!

@@ -21,6 +21,13 @@ nmap zq :bd<CR>
 nmap j gj
 nmap k gk
 
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
+
 
 nmap <leader>f :set ft=
 nmap <leader>3 :Neoformat<CR>
@@ -30,12 +37,12 @@ nmap <F8> :sort u<CR>
 
 
 if WINDOWS()
-    nmap <leader>v :tabedit $HOME\.vim\.vimrc<CR>:cd $HOME\.vim\<CR>
+    nmap <leader>e :tabedit $HOME\.vim\.vimrc<CR>:cd $HOME\.vim\<CR>
 
     nnoremap <C-F10> :silent !explorer .<CR>
     nnoremap <F11> :silent !start-process -FilePath 'c:\Program Files\ConEmu\ConEmu64.exe' -ArgumentList '-single -dir %:p:h'<CR>
 else
-    nmap <leader>v :tabedit $HOME/.vim/.vimrc<CR>
+    nmap <leader>e :tabedit $HOME/.vim/.vimrc<CR>
     nnoremap <C-F10> :silent !nautilus .<CR>
 endif
 

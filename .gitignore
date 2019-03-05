@@ -1,5 +1,6 @@
 /vim/bundle
 /vim/swap_files
 /vim/backup_files
+/vim/sessions/
 /powershell/history.csv
 /powershell/Modules

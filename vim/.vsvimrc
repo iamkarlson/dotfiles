@@ -18,7 +18,7 @@ set softtabstop=4
 
 set shiftwidth=4
 
-set scrolloff=5
+"set scrolloff=5
 
 set ttimeout
 set ttimeoutlen=200

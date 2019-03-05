@@ -82,10 +82,28 @@ function Write-Theme {
     $prompt += Write-Prompt -Object $sl.PromptSymbols.SegmentForwardSymbol -ForegroundColor $lastColor
 
     $timeStamp = Get-Date -UFormat %R
-    $timestamp = "[$timeStamp]"
+    $timestamp = " $timeStamp "
+    $battery = (Get-BatteryChargeStatus).Utilization
+    $batteryText = "["
+    $batteryText += (Get-batterySymbol)
+    $batteryText += " "
+    $batteryText += "$battery%"
+    $batteryText += "]"
 
-    $prompt += Set-CursorForRightBlockWrite -textLength ($timestamp.Length + 1)
-    $prompt += Write-Prompt $timeStamp -ForegroundColor $sl.Colors.PromptForegroundColor
+    $prompt += Set-CursorForRightBlockWrite -textLength ($timestamp.Length + 6 + $batteryText.Length)
+    $prompt += Write-Prompt -Object $($sl.PromptSymbols.SegmentBackwardSymbol) `
+                            -BackgroundColor $sl.Colors.GitForegroundColor `
+                            -ForegroundColor $sl.Colors.PromptBackgroundColor
+    $prompt += Write-Prompt $batteryText `
+                            -ForegroundColor $sl.Colors.PromptForegroundColor `
+                            -BackgroundColor $sl.Colors.PromptBackgroundColor
+    $prompt += Write-Prompt $timeStamp `
+                            -ForegroundColor $sl.Colors.PromptForegroundColor `
+                            -BackgroundColor $sl.Colors.PromptBackgroundColor
+    $prompt += Write-Prompt -Object $($sl.PromptSymbols.SegmentBackwardSymbol) `
+                            -BackgroundColor $sl.Colors.PromptBackgroundColor `
+                            -ForegroundColor $sl.Colors.GitForegroundColor
+
 
     $prompt += Set-Newline
 
@@ -100,7 +118,8 @@ function Write-Theme {
 $sl = $global:ThemeSettings #local settings
 $sl.PromptSymbols.StartSymbol = ''
 $sl.PromptSymbols.PromptIndicator = [char]::ConvertFromUtf32(0x276F)
-$sl.PromptSymbols.SegmentForwardSymbol = [char]::ConvertFromUtf32(0xE0B0)
+$sl.PromptSymbols.SegmentForwardSymbol = [char]::ConvertFromUtf32(0xe0c0)
+$sl.PromptSymbols.SegmentBackwardSymbol = [char]::ConvertFromUtf32(0xe0c2)
 $sl.Colors.PromptForegroundColor = [ConsoleColor]::White
 $sl.Colors.PromptSymbolColor = [ConsoleColor]::White
 $sl.Colors.PromptHighlightColor = [ConsoleColor]::DarkBlue

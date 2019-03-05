@@ -2,9 +2,11 @@
     silent function! OSX()
         return has('macunix')
     endfunction
+
     silent function! LINUX()
         return has('unix') && !has('macunix') && !has('win32unix')
     endfunction
+
     silent function! WINDOWS()
         return  (has('win32') || has('win64'))
     endfunction
@@ -25,9 +27,9 @@ if WINDOWS()
     set rtp+=~\.vim\bundle\molokai
     set rtp+=~\.vim\bundle\Vundle.vim
 
-    set backupdir=~\.vim\backup_files
-    set directory=~\.vim\swap_files
-    set undodir=~\.vim\undo_files
+    set backupdir=~\.vim\backup_files\
+    set directory=~\.vim\swap_files\
+    set undodir=~\.vim\undo_files\
 else
     :source ~/.vsvimrc
     set rtp+=~/.vim/bundle/vim-colors-solarized
@@ -36,7 +38,7 @@ else
 
     "swap files directory
     "to create directory mkdir -p ~/.vim/{backup_files,swap_files,undo_files}
-    set backupdir=~/.vim/backup_files/
+    set backupdir=~/.vim/backup_files./
     set directory=~/.vim/swap_files/
     set undodir=~/.vim/undo_files/
 endif
@@ -99,8 +101,9 @@ Plugin 'sbdchd/neoformat'
 Plugin 'luochen1990/rainbow'
 Plugin 's3rvac/AutoFenc'
 Plugin 'tpope/vim-surround'
-
+Plugin 'mogelbrod/vim-jsonpath'
 Plugin 'tomtom/tcomment_vim'
+Plugin 'tpope/vim-rsi'
 
 "fs utils
 Plugin 'scrooloose/nerdtree'
@@ -117,7 +120,9 @@ Plugin 'kshenoy/vim-signature'
 "view last files
 Plugin 'yegappan/mru'
 Plugin 'xolox/vim-misc'
+"Plugin 'tpope/vim-obsession'
 Plugin 'xolox/vim-session'
+Plugin 'Shougo/junkfile.vim'
 
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'easymotion/vim-easymotion'
@@ -130,7 +135,7 @@ Plugin 'tomasr/molokai'
 Plugin 'sjl/badwolf'
 Plugin 'iamkarlson/breezy'
 Plugin 'broduo/broduo-color-scheme'
-"
+
 "GUI
 Plugin 'vim-airline/vim-airline'
 Plugin 'severin-lemaignan/vim-minimap'
@@ -142,6 +147,12 @@ if WINDOWS()
 endif
 
 call vundle#end()
+
+:source ~/.vim/plugins/diff_against_file_on_disk.vim
+:source ~/.vim/plugins/noswapsuck.vim
+:source ~/.vim/plugins/diff_ops.vimrc
+:source ~/.vim/plugins/autosave_buffers.vimrc
+
 
 runtime! ftdetect\*.vim
 syntax on
@@ -195,5 +206,10 @@ else
     :source ~/.vim/simple-mapping.vimrc
     :source ~/.vim/mapping.vimrc
 endif
+
+
+
+
+
 
 
