@@ -54,6 +54,8 @@ set relativenumber
 "enable syntax highlighting
 syntax on
 
+set inccommand=nosplit
+
 set autoread
 
 "always show status line
