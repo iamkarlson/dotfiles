@@ -21,7 +21,7 @@ POWERLEVEL9K_MODE='awesome-fontconfig'
 
 source ~/.zsh/antigen.zsh
 
-source ~/.shellrc
+#source ~/.shellrc
 source ~/.zsh/aliases.zshrc
 
 # Uncomment the following line to use case-sensitive completion.
