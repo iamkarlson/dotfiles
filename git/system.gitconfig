@@ -11,5 +11,5 @@
   commentchar = ";"
   excludesfile = ~/dev/dotfiles/git/global.gitignore
 [user]
-	email = iamkarlson@gmail.com
-	name = Georgy Grigoryev
+  email = iamkarlson@gmail.com
+  name = Georgy Grigoryev
