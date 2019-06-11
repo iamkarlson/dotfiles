@@ -19,6 +19,7 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle Tarrasch/zsh-autoenv
 antigen bundle zsh-users/zsh-completions
 antigen bundle rupa/z
+antigen bundle sobolevn/wakatime-zsh-plugin
 
 
 POWERLEVEL9K_INSTALLATION_PATH=~/.antigen/bundles/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
