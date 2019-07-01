@@ -2,13 +2,13 @@
 
 ############ Loading scripts from autorun folder ###############################
 # directory where my scripts are stored
-$ScriptFolder="$home\dotfiles\powershell\autorun"
+$ScriptFolder="$home\dev\dotfiles\powershell\autorun"
 # Source all .ps1 files in PowerShell profile folder
 Get-ChildItem $ScriptFolder -name -include '*.ps1' -Recurse | foreach { Write-Host "loading script: " ("$ScriptFolder\$_") " ...."; %{. ($ScriptFolder+"\"+$_)}};
 
 
 ############ Loading scripts from Dropbox ######################################
-$ScriptFolder="c:\dropbox\apps\powershell\autorun"
+$ScriptFolder="$dropbox\powershell\autorun"
 Get-ChildItem $ScriptFolder -name -include '*.ps1' -Recurse | foreach { Write-Host "loading script: " ("$ScriptFolder\$_") " ...."; %{. ($ScriptFolder+"\"+$_)}};
 
 
@@ -94,7 +94,8 @@ function User-Prompt{
 Import-Module PersistentHistory
 Import-Module posh-git
 Import-Module oh-my-posh
-Import-Module PoShFuck
+Import-Module Watch
+#Import-Module PoShFuck
 
 
 $ThemeSettings.MyThemesLocation= "~\Documents\PowerShell\PoshThemes"

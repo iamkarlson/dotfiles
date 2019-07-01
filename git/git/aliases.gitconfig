@@ -13,5 +13,6 @@
     ps = push
     s=status
     st = stash save --include-untracked
+    pop = stash pop
     sync = !git pull && git push
     uptag = push --tags --force

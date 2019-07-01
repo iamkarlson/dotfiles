@@ -76,6 +76,7 @@ Plugin 'VundleVim/Vundle.vim'
 "default dependcy, WTF
 Plugin 'L9'
 Plugin 'godlygeek/tabular'
+Plugin 'salsifis/vim-transpose'
 
 Plugin 'wakatime/vim-wakatime'
 
