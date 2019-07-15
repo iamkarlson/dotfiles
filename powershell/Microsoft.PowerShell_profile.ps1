@@ -4,7 +4,7 @@
 # directory where my scripts are stored
 $ScriptFolder="$home\dev\dotfiles\powershell\autorun"
 # Source all .ps1 files in PowerShell profile folder
-Get-ChildItem $ScriptFolder -name -include '*.ps1' -Recurse | foreach { Write-Host "loading script: " ("$ScriptFolder\$_") " ...."; %{. ($ScriptFolder+"\"+$_)}};
+Get-ChildItem $ScriptFolder -name -include '*.ps1' -Recurse |?{$_ -notmatch "._"}| foreach { Write-Host "loading script: " ("$ScriptFolder\$_") " ...."; %{. ($ScriptFolder+"\"+$_)}};
 
 
 ############ Loading scripts from Dropbox ######################################

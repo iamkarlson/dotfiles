@@ -67,3 +67,4 @@ POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+export PATH="/usr/local/sbin:$PATH"

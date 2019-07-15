@@ -1,5 +1,5 @@
 push-location $HOME
-$repoPath = 'c:\src\dotfiles'
+$repoPath = 'c:\users\iamkarlson\dev\dotfiles'
 
 cmd /c mklink /d dotfiles $repoPath 
 
@@ -21,7 +21,7 @@ pop-location
 pop-location
 
 push-location Documents
-cmd /c mklink /d Powershell c:\src\dotfiles\powershell
+cmd /c mklink /d Powershell "$repoPath\powershell"
 #mkdir Powershell -ErrorAction Ignore
 
 #push-location PowerShell
