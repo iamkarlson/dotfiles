@@ -18,7 +18,9 @@ cmd /c mklink init.vim $repoPath\vim\init.vim
 cmd /c mklink ginit.vim $repoPath\vim\ginit.vim
 pop-location
 
-pop-location
+pop-location # at home
+
+cmd /c mklink .gitconfig "$repoPath\git\system.gitconfig"
 
 push-location Documents
 cmd /c mklink /d Powershell "$repoPath\powershell"
