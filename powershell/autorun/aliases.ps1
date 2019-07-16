@@ -37,3 +37,12 @@ function pwd-clip {($pwd).Path |clip.exe}
 Set-Alias k kubectl
 
 Set-Alias z Search-NavigationHistory
+Set-Alias n nvim-qt.exe
+
+
+# for editing your PowerShell profile
+Function Edit-Profile
+{
+    nvim-qt.exe $profile
+}
+

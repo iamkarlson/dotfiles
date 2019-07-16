@@ -16,3 +16,4 @@
     pop = stash pop
     sync = !git pull && git push
     uptag = push --tags --force
+    a = add
