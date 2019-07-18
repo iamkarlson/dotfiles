@@ -167,6 +167,9 @@ set nospell
 set ff=unix
 
 if WINDOWS()
+    let &runtimepath = 'C:/tools/neovim/Neovim/share/nvim/runtime'.&runtimepath
+    let g:python3_host_prog = 'C:\Python37\python.exe'
+    let $NVIM_PYTHON_LOG_FILE = 'c:/tools/nvim.log'
     :source ~\.vim\windows.vimrc
     :source ~\.vim\autocmd.vimrc
     :source ~\.vim\ide.vimrc

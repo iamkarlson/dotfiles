@@ -1,7 +1,7 @@
 "
 "     GUI Settings
 
-set guifont="Hack NF"
+"set guifont="Hack NF"
 
 
 "colorscheme solarized
