@@ -6,3 +6,5 @@
 /powershell/Modules
 zsh/.zsh/antigen.zsh.zwc
 powershell/Help/
+._*
+.DS_Store
