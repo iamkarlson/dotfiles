@@ -7,9 +7,11 @@
   showUntrackedFiles = all
 [diff]
   renames = copy
+	noprefix = false
 [core]
   commentchar = ";"
   excludesfile = ~/dev/dotfiles/git/global.gitignore
+	editor = nvim
 [user]
   email = iamkarlson@gmail.com
   name = Georgy Grigoryev
