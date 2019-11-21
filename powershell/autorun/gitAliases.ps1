@@ -1,5 +1,8 @@
 
-Set-Alias g git
+function gd(){ git diff }
+function g-files { git diff --cached --name-only}
+
+function g-stagedFiles { git diff --cached --name-only}
 
 
 function git-push{
@@ -10,12 +13,6 @@ function git-push{
 function tgit-log(){ TortoiseGitProc /command:log /path:.}
 
 
-function global:Git-CommitAndPush(){
-    param([string]$Message)
-    git add .;
-    git commit -m "$Message";
-    git push;
-}
 
 
 function Git-MergeInMaster {
@@ -29,6 +26,7 @@ function Git-MergeInMaster {
     g co $git_branch_name;
     g stash pop;
 }
+
 function Git-MergeMaster {
     $git_branch_name = (git rev-parse --abbrev-ref HEAD);
     $develop = (git config --local --get gitflow.branch.develop)
@@ -43,3 +41,4 @@ function Git-MergeMaster {
 
 
 function gign(){ git ls-files -v | sls "^h" -CaseSensitive }
+
