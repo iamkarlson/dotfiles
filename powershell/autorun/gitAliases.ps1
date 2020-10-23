@@ -42,3 +42,10 @@ function Git-MergeMaster {
 
 function gign(){ git ls-files -v | sls "^h" -CaseSensitive }
 
+function fuck-it(){
+    git reset --hard; 
+    g clean -fd;
+    $develop = (git config --local --get gitflow.branch.develop)
+    g co $develop;
+    g pl;
+}

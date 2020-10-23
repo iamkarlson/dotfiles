@@ -19,7 +19,7 @@ Set-PSReadlineOption -EditMode Emacs
 ############################# Wakatime #########################################
 function Test-Wakatime{
 
-    $wakatime = $(where.exe wakatime);
+    $wakatime = $(get-command wakatime);
 
     if($wakatime) {
         return $True;
