@@ -1,5 +1,5 @@
 push-location $HOME
-$repoPath = 'c:\users\iamkarlson\dev\dotfiles'
+$repoPath = 'c:\users\iamka\dev\dotfiles'
 
 cmd /c mklink /d dotfiles $repoPath 
 

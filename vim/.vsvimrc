@@ -26,6 +26,8 @@ set ttimeoutlen=200
 set timeout
 set timeoutlen=300
 
+set relativenumber 
+set number 
 
 if (has('win32') || has('win64'))
     :source ~\.vim\simple-mapping.vimrc
