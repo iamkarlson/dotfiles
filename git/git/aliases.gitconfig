@@ -17,3 +17,4 @@
     sync = !git pull && git push
     uptag = push --tags --force
     a = add
+    u = push -u origin HEAD

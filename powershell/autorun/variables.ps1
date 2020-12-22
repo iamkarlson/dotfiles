@@ -2,10 +2,10 @@
 Set-Variable -Name Projects -Value "s:\work\" -Scope Global
 
 $envDrop = $env:Dropbox;
-if(Test-Path($envDrop)){
+if( $envDrop -and(Test-Path($envDrop))){
     Set-Variable -Name Dropbox -Value "$envDrop\Apps" -Scope Global;
 } else {
-    Set-Variable -Name Dropbox -Value "\\Mac\Dropbox\Apps" -Scope Global;
+    Set-Variable -Name Dropbox -Value "\\Mac\Home\OneDrive\Apps" -Scope Global;
 }
 
 
