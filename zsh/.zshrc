@@ -54,7 +54,7 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 #
 # Example aliases
 alias vim=nvim
-#alias cat=bat
+alias cat=bat
 alias zshconfig="vim ~/.zshrc"
 alias vimconfig="vim ~/.vimrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
