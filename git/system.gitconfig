@@ -1,6 +1,6 @@
 [include]
-  path=~/dev/dotfiles/git/local.gitconfig
-  path=~/dev/dotfiles/git/git/aliases.gitconfig
+  path=~/git/local.gitconfig
+  path=~/git/aliases.gitconfig
 [push]
   followTags = true
 [status]
@@ -10,9 +10,6 @@
 	noprefix = false
 [core]
   commentchar = ";"
-  excludesfile = ~/dev/dotfiles/git/global.gitignore
-	editor = nvim
-	autocrlf = input
-[user]
-  email = iamkarlson@gmail.com
-  name = Georgy Grigoryev
+  excludesfile = ~/git/global.gitignore
+  editor = nvim
+  autocrlf = input
