@@ -1,5 +1,14 @@
+set ignorecase
+set smartcase
+set relativenumber
+set number 
 
 set surround
 set showmod
 
-source ~\.vsvimrc
+
+if (has('win32') || has('win64'))
+    source ~\.vsvimrc
+else
+    source ~/.vsvimrc
+endif

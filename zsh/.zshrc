@@ -74,8 +74,15 @@ export PATH="/usr/local/sbin:$PATH"
 export ANT_HOME=/usr/local/share/ant
 export MAVEN_HOME=/usr/local/share/maven
 export GRADLE_HOME=/usr/local/share/gradle
-export ANDROID_HOME=/usr/local/share/android-sdk
-export ANDROID_NDK_HOME=/usr/local/share/android-ndk
+
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+export ANDROID_AVD_HOME=$HOME/.android/avd
+
+export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
 
 export PATH=$ANT_HOME/bin:$PATH
 export PATH=$MAVEN_HOME/bin:$PATH
@@ -83,3 +90,16 @@ export PATH=$GRADLE_HOME/bin:$PATH
 export PATH=$ANDROID_HOME/tools:$PATH
 export PATH=$ANDROID_HOME/platform-tools:$PATH
 export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH
+
+eval $(thefuck --alias)
+
+eval "$(rbenv init -)"
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+ZSH_DISABLE_COMPFIX=true
+eval "$(pyenv init -)"
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+eval "$(jenv init -)"

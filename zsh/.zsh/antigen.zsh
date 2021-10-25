@@ -21,8 +21,10 @@ antigen bundle rupa/z
 antigen bundle sobolevn/wakatime-zsh-plugin
 
 
-POWERLEVEL9K_INSTALLATION_PATH=~/.antigen/bundles/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
+#POWERLEVEL9K_INSTALLATION_PATH=~/.antigen/bundles/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
+POWERLEVEL9K_INSTALLATION_PATH=~/.antigen/bundles/romkatv/powerlevel10k/powerlevel9k.zsh-theme
 
-antigen theme bhilburn/powerlevel9k powerlevel9k 
+#antigen theme bhilburn/powerlevel9k powerlevel9k 
+antigen theme romkatv/powerlevel10k
 # Tell Antigen that you're done.
 antigen apply 

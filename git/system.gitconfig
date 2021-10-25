@@ -11,4 +11,5 @@
 [core]
   commentchar = ";"
   excludesfile = ~/git/global.gitignore
-	editor = nvim
+  editor = nvim
+  autocrlf = input
