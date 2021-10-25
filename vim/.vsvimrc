@@ -31,4 +31,7 @@ set number
 
 if (has('win32') || has('win64'))
     :source ~\.vim\simple-mapping.vimrc
+else
+    
+    :source ~/.vim/simple-mapping.vimrc
 endif

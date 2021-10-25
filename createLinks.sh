@@ -4,6 +4,7 @@ ln -ds ~/dev/dotfiles/zsh/.zsh ~/.zsh
 
 ln -s ~/dev/dotfiles/git/system.gitconfig ~/.gitconfig
 ln -s ~/dev/dotfiles/vim/.vsvimrc ~/.vsvimrc
+ln -s ~/dev/dotfiles/vim/.ideavimrc ~/.ideavimrc
 ln -s ~/dev/dotfiles/vim/.vimrc ~/.vimrc
 ln -s ~/dev/dotfiles/zsh/.shellrc ~/.shellrc
 ln -s ~/dev/dotfiles/zsh/.zshrc ~/.zshrc

@@ -12,6 +12,7 @@
   commentchar = ";"
   excludesfile = ~/dev/dotfiles/git/global.gitignore
 	editor = nvim
+	autocrlf = input
 [user]
   email = iamkarlson@gmail.com
   name = Georgy Grigoryev
