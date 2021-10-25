@@ -18,3 +18,4 @@ ln -s ~/src/dotfiles/vim/plugin-settings.vimrc ~/.vim/plugin-settings.vimrc
 ln -s ~/src/dotfiles/vim/ide.vimrc ~/.vim/ide.vimrc
 ln -s ~/src/dotfiles/vim/simple-mapping.vimrc ~/.vim/simple-mapping.vimrc
 ln -s ~/src/dotfiles/vim/mapping.vimrc ~/.vim/mapping.vimrc
+ln -ds ~/src/dotfiles/vim/plugins ~/.vim/plugins

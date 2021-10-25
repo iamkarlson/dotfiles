@@ -74,9 +74,10 @@ filetype off
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 "default dependcy, WTF
-Plugin 'L9'
-Plugin 'godlygeek/tabular'
-Plugin 'salsifis/vim-transpose'
+Plugin 'L9' " utilities and functions
+"Text manipulation
+Plugin 'godlygeek/tabular' "tabularizing text based on a separator
+Plugin 'salsifis/vim-transpose' "transposing/pivoting text
 
 Plugin 'wakatime/vim-wakatime'
 
