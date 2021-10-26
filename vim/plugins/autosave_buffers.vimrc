@@ -6,7 +6,7 @@ if @% == ''
         let tmp_file =  tempname()
         echo tmp_file
     else
-        let tmp_file =  /tmp/working_copy.$USER
+        let tmp_file =  tempname()
         echo tmp_file
     endif
 

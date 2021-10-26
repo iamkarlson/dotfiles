@@ -17,7 +17,7 @@ au BufEnter *.log setlocal nospell
 "au FileType json setlocal equalprg=python\ -m\ json.tool
 
 
-au BufEnter gitconfig set filetype=config
+au BufEnter .gitconfig set filetype=config
 
 au BufEnter *.xmllog set ft=xml
 

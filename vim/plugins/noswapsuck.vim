@@ -1,3 +1,4 @@
+" https://github.com/joeytwiddle/dotfiles/blob/master/.vim/plugin/noswapsuck.vim
 " NO SWAP SUCK! by joeytwiddle.  (c) Paul Clark, released under MIT license.
 
 " This plugin mitigates Vim's inconvenient swapfile behaviour by only creating

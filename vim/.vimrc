@@ -38,7 +38,7 @@ else
 
     "swap files directory
     "to create directory mkdir -p ~/.vim/{backup_files,swap_files,undo_files}
-    set backupdir=~/.vim/backup_files./
+    set backupdir=~/.vim/backup_files/
     set directory=~/.vim/swap_files/
     set undodir=~/.vim/undo_files/
 endif
@@ -124,8 +124,8 @@ Plugin 'kshenoy/vim-signature'
 "view last files
 Plugin 'yegappan/mru'
 Plugin 'xolox/vim-misc'
-"Plugin 'tpope/vim-obsession'
-Plugin 'xolox/vim-session'
+Plugin 'tpope/vim-obsession'
+"Plugin 'xolox/vim-session'
 Plugin 'Shougo/junkfile.vim'
 
 Plugin 'jlanzarotta/bufexplorer'
