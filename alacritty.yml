@@ -9,3 +9,6 @@ shell:
     - -l
     - -c
     - "tmux"
+window:
+  decorations: false
+
