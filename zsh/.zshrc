@@ -121,3 +121,7 @@ then
 fi
 
 export ZSH_WAKATIME_BIN=/usr/local/bin/wakatime
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+

@@ -10,5 +10,5 @@ shell:
     - -c
     - "tmux"
 window:
-  decorations: false
+    decorations: None
 
