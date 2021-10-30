@@ -54,7 +54,7 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 #
 # Example aliases
 alias vim=nvim
-alias cat=bat
+alias cat=batcat
 alias zshconfig="vim ~/.zshrc"
 alias vimconfig="vim ~/.vimrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -106,3 +106,4 @@ export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
+export ZSH_WAKATIME_BIN=/usr/local/bin/wakatime
