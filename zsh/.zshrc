@@ -72,6 +72,8 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 export PATH="/usr/local/sbin:$PATH"
 
 fpath+=$HOME/.local/share/zsh/site-functions
+fpath+=~/.zsh/completions
+
 PATH=$HOME/.local/bin:$PATH
 MANPATH=$HOME/.local/share/man:$MANPATH
 INFOPATH=$HOME/.local/share/info:$INFOPATH
