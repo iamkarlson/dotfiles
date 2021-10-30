@@ -71,6 +71,11 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 export PATH="/usr/local/sbin:$PATH"
 
+fpath+=$HOME/.local/share/zsh/site-functions
+PATH=$HOME/.local/bin:$PATH
+MANPATH=$HOME/.local/share/man:$MANPATH
+INFOPATH=$HOME/.local/share/info:$INFOPATH
+
 export ANT_HOME=/usr/local/share/ant
 export MAVEN_HOME=/usr/local/share/maven
 export GRADLE_HOME=/usr/local/share/gradle
@@ -93,7 +98,6 @@ export PATH=$ANDROID_HOME/build-tools/19.1.0:$PATH
 
 eval $(thefuck --alias)
 
-eval "$(rbenv init -)"
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
@@ -104,6 +108,16 @@ ZSH_DISABLE_COMPFIX=true
 eval "$(pyenv init -)"
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+
+if (( $+commands[rbenv] ))
+then
+    eval "$(rbenv init -)"
+fi
+
+if (( $+commands[jenv] ))
+then
+    export PATH="$HOME/.jenv/bin:$PATH"
+    eval "$(jenv init -)"
+fi
+
 export ZSH_WAKATIME_BIN=/usr/local/bin/wakatime

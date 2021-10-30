@@ -1,0 +1,11 @@
+font:
+    normal:
+        family: Hack Nerd Font
+        style: Regular
+    size: 7.0
+shell:
+  program: /bin/zsh
+  args:
+    - -l
+    - -c
+    - "tmux"
