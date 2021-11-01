@@ -30,3 +30,13 @@ ln -s ~/src/dotfiles/vim/ide.vimrc ~/.vim/ide.vimrc
 ln -s ~/src/dotfiles/vim/simple-mapping.vimrc ~/.vim/simple-mapping.vimrc
 ln -s ~/src/dotfiles/vim/mapping.vimrc ~/.vim/mapping.vimrc
 ln -ds ~/src/dotfiles/vim/plugins ~/.vim/plugins
+
+mkdir -p ~/.config/onedrive
+
+ln -s ~/src/dotfiles/onedrive.config ~/.config/onedrive/config
+ln -s ~/src/dotfiles/sync_list.config ~/.config/onedrive/sync_list
+
+# generating shell completions for tools
+kubectl completion zsh > ~/.zsh/completions/_kubectl
+helm completion zsh > ~/.zsh/completions/_helm
+k3d completion zsh > ~/.zsh/completions/_k3d

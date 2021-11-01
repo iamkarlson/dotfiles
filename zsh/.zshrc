@@ -20,6 +20,7 @@ ANTIGEN_LOG=/tmp/antigen.log
 POWERLEVEL9K_MODE='awesome-fontconfig'
 
 source ~/.zsh/antigen.zsh
+source ~/.zsh/private.zshrc
 
 #source ~/.shellrc
 source ~/.zsh/aliases.zshrc
