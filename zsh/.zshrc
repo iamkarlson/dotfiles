@@ -4,8 +4,10 @@ unsetopt BG_NICE
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+export HISTSIZE=1000000000
+export SAVEHIST=$HISTSIZE
+setopt EXTENDED_HISTORY
+
 setopt appendhistory autocd nomatch notify
 bindkey -v
 
@@ -47,25 +49,18 @@ zstyle ':completion:*:paths' accept-exact '[^.]' '^(*/.)'
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-alias vim=nvim
-alias cat=batcat
-alias zshconfig="vim ~/.zshrc"
-alias vimconfig="vim ~/.vimrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-
-
+    
+    
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir rbenv virtualenv pyenv vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history time battery)
 
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+
+
+#autoenv settings
+AUTOENV_FILE_ENTER=.autoenv.zsh
+AUTOENV_HANDLE_LEAVE=1
+AUTOENV_FILE_LEAVE=.autoenv.zsh
 
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -128,3 +123,5 @@ export ZSH_WAKATIME_BIN=/usr/local/bin/wakatime
 # Generated for envman. Do not edit.
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
 
+# hotfix for minikube completions 
+source <(minikube completion zsh | sed --expression='s/aliashash\["\([a-z]*\)"\]/aliashash[\1]/g')

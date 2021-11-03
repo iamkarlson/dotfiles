@@ -1,5 +1,6 @@
 #!/bin/zsh
-ln -ds ~/src/dotfiles/git/git ~/git
+(ls ~/git >> /dev/null 2>&1 && echo "~/git exists") || ln -ds ~/src/dotfiles/git/git ~/git
+
 ln -s ~/src/dotfiles/git/system.gitconfig ~/.gitconfig
 
 ln -ds ~/src/dotfiles/zsh/.zsh ~/.zsh
@@ -40,3 +41,7 @@ ln -s ~/src/dotfiles/sync_list.config ~/.config/onedrive/sync_list
 kubectl completion zsh > ~/.zsh/completions/_kubectl
 helm completion zsh > ~/.zsh/completions/_helm
 k3d completion zsh > ~/.zsh/completions/_k3d
+minikube completion zsh > ~/.zsh/completions/_minikube
+
+
+#(ls ~/.autoenv >> /dev/null 2>&1 && echo "autoenv already installed") || git clone git@github.com:hyperupcall/autoenv.git ~/.autoenv
