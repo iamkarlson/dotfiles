@@ -9,7 +9,9 @@ if has('nvim')
 endif
 
 
-if exists('g:gui_oni')
+"if exists('g:gui_oni')
     source ~\.gvimrc
     " Statements here
-endif
+"endif
+
+echom "ginit" 

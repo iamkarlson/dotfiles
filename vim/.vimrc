@@ -137,7 +137,8 @@ Plugin 'reedes/vim-pencil'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tomasr/molokai'
 Plugin 'sjl/badwolf'
-Plugin 'iamkarlson/breezy'
+"Plugin 'iamkarlson/breezy'
+Plugin 'fneu/breezy'
 Plugin 'broduo/broduo-color-scheme'
 
 "GUI

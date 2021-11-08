@@ -10,6 +10,6 @@
 	noprefix = false
 [core]
   commentchar = ";"
-  excludesfile = ~/git/global.gitignore
+	excludesFile = .autoenv.zsh
   editor = nvim
   autocrlf = input

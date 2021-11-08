@@ -16,6 +16,8 @@ ln -s ~/src/dotfiles/vim/.vsvimrc ~/.vsvimrc
 ln -s ~/src/dotfiles/vim/.ideavimrc ~/.ideavimrc
 ln -s ~/src/dotfiles/vim/.vimrc ~/.vimrc
 
+(ls ~/.gvimrc >> /dev/null 2>&1 && echo "~/.gvimrc exists") || ln -s ~/src/dotfiles/vim/.gvimrc ~/.gvimrc
+
 mkdir -p ~/.config/nvim
 
 ln -s ~/src/dotfiles/vim/init.vim ~/.config/nvim/init.vim
