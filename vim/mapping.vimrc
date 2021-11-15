@@ -42,7 +42,7 @@ if WINDOWS()
     nnoremap <C-F10> :silent !explorer .<CR>
     nnoremap <F11> :silent !start-process -FilePath 'c:\Program Files\ConEmu\ConEmu64.exe' -ArgumentList '-single -dir %:p:h'<CR>
 else
-    nmap <leader>e :tabedit $HOME/.vim/.vimrc<CR>
+    nmap <leader>e :tabedit $HOME/.vimrc<CR>
     nnoremap <C-F10> :silent !nautilus .<CR>
 endif
 

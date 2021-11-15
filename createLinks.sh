@@ -1,6 +1,10 @@
 #!/bin/zsh
+mkdir ~/.config
+
 (ls ~/git >> /dev/null 2>&1 && echo "~/git exists") || ln -ds ~/src/dotfiles/git/git ~/git
 
+
+(ls ~/.config/espanso >> /dev/null 2>&1 && echo "espanso config exists") || ln -ds ~/src/dotfiles/espanso ~/.config/espanso
 ln -s ~/src/dotfiles/git/system.gitconfig ~/.gitconfig
 
 ln -ds ~/src/dotfiles/zsh/.zsh ~/.zsh
