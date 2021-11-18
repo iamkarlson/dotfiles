@@ -14,6 +14,9 @@
 
 if has('nvim')
     let s:editor_root=expand("~/.config/nvim")
+    let g:python_host_prog  = '/usr/bin/python2'
+    let g:python3_host_prog  = '/home/iamkarlson/.pyenv/shims/python'
+
 else
     let s:editor_root=expand("~/.vim")
 endif
