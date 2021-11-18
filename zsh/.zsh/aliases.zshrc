@@ -14,4 +14,5 @@ alias vimconfig="vim ~/.vimrc"
 
 alias k="kubectl"
 
-
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
