@@ -8,7 +8,7 @@
 alias vim=nvim
 alias cat=batcat
 alias zshconfig="vim ~/.zshrc"
-alias vimconfig="vim ~/.vimrc"
+alias vimconfig="vim ~/src/dotfiles/vim/.vimrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 

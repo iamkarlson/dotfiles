@@ -2,6 +2,9 @@
 let NERDTreeShowHidden=1
 
 
+
+
+
 let g:autofenc_enable=1
 let g:autofenc_autodetect_bom=1
 

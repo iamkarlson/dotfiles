@@ -2,7 +2,7 @@ font:
   normal:
     family: Hack Nerd Font
     style: Regular
-  size: 7.0
+  size: 13.0
 shell:
   program: /bin/zsh
   args:

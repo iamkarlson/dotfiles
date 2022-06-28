@@ -27,7 +27,7 @@ command! W w
 command! Q q
 
 nmap <C-s> :s<CR>
-nnoremap <Leader>w :w<CR>
+nnoremap <Leader><Leader>w :w<CR>
 
 vmap <Leader>y "+y
 vmap <Leader>d "+d

@@ -1,6 +1,10 @@
 export TERM="xterm-256color"
 setopt NO_BEEP
 unsetopt BG_NICE
+export LANGUAGE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
@@ -71,8 +75,12 @@ fpath+=$HOME/.local/share/zsh/site-functions
 fpath+=~/.zsh/completions
 
 PATH=$HOME/.local/bin:$PATH
+PATH=$HOME/bin:$PATH
 MANPATH=$HOME/.local/share/man:$MANPATH
 INFOPATH=$HOME/.local/share/info:$INFOPATH
+
+#cargo bins
+source $HOME/.cargo/env
 
 export ANT_HOME=/usr/local/share/ant
 export MAVEN_HOME=/usr/local/share/maven
@@ -125,3 +133,5 @@ export ZSH_WAKATIME_BIN=/usr/local/bin/wakatime
 
 # hotfix for minikube completions 
 source <(minikube completion zsh | sed --expression='s/aliashash\["\([a-z]*\)"\]/aliashash[\1]/g')
+
+export PATH="$HOME/.poetry/bin:$PATH"

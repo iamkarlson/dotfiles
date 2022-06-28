@@ -2,10 +2,6 @@
     co = checkout
     d = difftool
     dc = diff --cached
-    f = flow
-    ff = flow feature
-    ffs = flow feature start
-    fff = flow feature finish
     glog = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset) %C(dim white)- %C(bold magenta)<%an %ae>%Creset %n'' %C(white)%s%C(reset)' --all
     pl = pull
     please = push --force-with-lease
@@ -18,3 +14,10 @@
     uptag = push --tags --force
     a = add
     u = push -u origin HEAD
+    # git flow
+    f = flow
+    ff = flow feature
+    ffs = flow feature start
+    fff = flow feature finish
+    ffd = flow feature delete
+
