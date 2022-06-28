@@ -21,6 +21,7 @@ antigen bundle rupa/z
 antigen bundle sobolevn/wakatime-zsh-plugin
 antigen bundle pyenv
 
+antigen bundle bobthecow/git-flow-completion
 
 #POWERLEVEL9K_INSTALLATION_PATH=~/.antigen/bundles/bhilburn/powerlevel9k/powerlevel9k.zsh-theme
 POWERLEVEL9K_INSTALLATION_PATH=~/.antigen/bundles/romkatv/powerlevel10k/powerlevel9k.zsh-theme

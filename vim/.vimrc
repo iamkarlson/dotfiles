@@ -115,6 +115,7 @@ Plugin 'tpope/vim-rsi'
 "fs utils
 Plugin 'scrooloose/nerdtree'
 Plugin 'haya14busa/incsearch.vim'
+Plugin 'haya14busa/incsearch-easymotion.vim'
 "Plugin 'mileszs/ack.vim'
 "Plugin 'rking/ag.vim'
 "Plugin 'Chun-Yang/vim-action-ag'
