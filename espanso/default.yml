@@ -6,13 +6,14 @@
 
 toggle_key: OFF
 
-
 # Matches are the substitution rules, when you type the "trigger" string
 # it gets replaced by the "replace" string.
 matches:
   # Simple text replacement
   - trigger: ":espanso"
     replace: "Hi there!"
+  - trigger: ":acc"
+    replace: "**Acceptance criteria**:\n- [ ]"
 
   # Dates
   - trigger: ":date"
@@ -21,16 +22,37 @@ matches:
       - name: mydate
         type: date
         params:
-            format: "%Y-%m-%d"
+          format: "%Y-%m-%d"
+  - trigger: ":tomorrow"
+    replace: "{{mytime}}"
+    vars:
+      - name: mytime
+        type: date
+        params:
+          format: "%Y-%m-%d"
+          offset: 86400
   - trigger: ":week"
     replace: "{{week_number}}"
-    vars: 
+    vars:
       - name: week_number
         type: date
         params:
-            format: "%U"
-
-
+          format: "%U"
+  - trigger: ":timenow"
+    replace: "{{mydate}}"
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y-%m-%d %H:%M:%S"
+  - trigger: "georgy@dexter"
+    replace: "georgy@dexterenergy.nl"
+  - trigger: ":lbl"
+    replace: "/label ~"
+  - trigger: ":apiurl"
+    replace: "https://api.dexterenergyservices.com"
+  - trigger: "/assign"
+    replace: "/assign @joao117 @nikita.dexter @patrick_star_21"
   # Shell commands
   - trigger: ":shell"
     replace: "{{output}}"
