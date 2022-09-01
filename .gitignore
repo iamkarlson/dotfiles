@@ -9,3 +9,4 @@ powershell/Help/
 ._*
 .DS_Store
 /vim/plugins/plugins
+zsh/.zsh/private.zshrc

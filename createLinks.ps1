@@ -1,36 +1,44 @@
 push-location $HOME
-$repoPath = 'c:\users\iamka\dev\dotfiles'
 
-cmd /c mklink /d dotfiles $repoPath 
+	$repoPath = 'c:\users\iamka\dev\dotfiles'
 
-cmd /c mklink .vimrc $repoPath\vim\.vimrc 
-cmd /c mklink .ideavimrc $repoPath\vim\.ideavimrc 
-cmd /c mklink .gvimrc $repoPath\vim\.gvimrc 
-cmd /c mklink .vsvimrc $repoPath\vim\.vsvimrc 
-cmd /c mklink /d .vim $repoPath\vim\ 
-mkdir .config -ErrorAction Ignore
+	cmd /c mklink /d dotfiles $repoPath 
 
-push-location .config
-mkdir nvim -ErrorAction Ignore
+	cmd /c mklink .vimrc $repoPath\vim\.vimrc 
+	cmd /c mklink .ideavimrc $repoPath\vim\.ideavimrc 
+	cmd /c mklink .gvimrc $repoPath\vim\.gvimrc 
+	cmd /c mklink .vsvimrc $repoPath\vim\.vsvimrc 
+	cmd /c mklink /d .vim $repoPath\vim\ 
+	mkdir .config -ErrorAction Ignore
 
-push-location nvim
-cmd /c mklink init.vim $repoPath\vim\init.vim
-cmd /c mklink ginit.vim $repoPath\vim\ginit.vim
-pop-location
+	push-location .config
+		mkdir nvim -ErrorAction Ignore
 
-pop-location # at home
+		push-location nvim
+			cmd /c mklink init.vim $repoPath\vim\init.vim
+			cmd /c mklink ginit.vim $repoPath\vim\ginit.vim
+		pop-location
 
-cmd /c mklink .gitconfig "$repoPath\git\system.gitconfig"
+	pop-location # at home
 
-push-location Documents
-cmd /c mklink /d Powershell "$repoPath\powershell"
-#mkdir Powershell -ErrorAction Ignore
+	cmd /c mklink .gitconfig "$repoPath\git\system.gitconfig"
+	cmd /c mklink /d git "$repoPath\git"
 
-#push-location PowerShell
-#cmd /c mklink Microsoft.PowerShell_profile.ps1 $repoPath\powershell\Microsoft.PowerShell_profile.ps1
-#cmd /c mklink /d modules $repoPath\powershell\Modules
+	push-location Documents
+		cmd /c mklink /d Powershell "$repoPath\powershell"
+		#mkdir Powershell -ErrorAction Ignore
 
-#pop-location
+		#push-location PowerShell
+		#cmd /c mklink Microsoft.PowerShell_profile.ps1 $repoPath\powershell\Microsoft.PowerShell_profile.ps1
+		#cmd /c mklink /d modules $repoPath\powershell\Modules
 
-pop-location
+	pop-location
+
+	push-location AppData\Roaming\espanso
+
+
+		cmd /c mklink /d confid $repoPath\espanso\
+	
+	pop-location
+
 pop-location

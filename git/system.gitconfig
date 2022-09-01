@@ -1,6 +1,6 @@
 [include]
-  path=~/git/local.gitconfig
-  path=~/git/aliases.gitconfig
+  path=~/git/git/local.gitconfig
+  path=~/git/git/aliases.gitconfig
 [push]
   followTags = true
 [status]
@@ -13,3 +13,6 @@
 	excludesFile = .autoenv.zsh
   editor = nvim
   autocrlf = input
+[user]
+	email = iamkarlson@gmail.com
+	name = George Green

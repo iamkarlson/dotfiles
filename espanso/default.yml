@@ -45,6 +45,10 @@ matches:
         type: date
         params:
           format: "%Y-%m-%d %H:%M:%S"
+  - trigger: "m^2"
+    replace: "m²"
+  - trigger: ":yes"
+    replace: "✓"
   - trigger: "georgy@dexter"
     replace: "georgy@dexterenergy.nl"
   - trigger: ":lbl"
