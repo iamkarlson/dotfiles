@@ -52,12 +52,37 @@ matches:
   - trigger: ":apiurl"
     replace: "https://api.dexterenergyservices.com"
   - trigger: "/assign"
-    replace: "/assign @joao117 @nikita.dexter @patrick_star_21"
+    replace: "/assign_reviewer @joao117 @nikita.dexter @patrick_star_21"
+
+  - trigger: "m2m"
+    replace: "many-to-many"
+
+  - trigger: "/gihpy"
+    replace: "/giphy"
+
   # Shell commands
-  - trigger: ":shell"
+  - trigger: ":password"
     replace: "{{output}}"
     vars:
       - name: output
         type: shell
         params:
-          cmd: "echo Hello from your shell"
+          cmd: "< /dev/urandom tr -dc A-Za-z0-9 | head -c14; echo"
+  - trigger: ":ip"
+    replace: "{{output}}"
+    vars:
+      - name: output
+        type: shell
+        params:
+          cmd: "curl 'https://api.ipify.org'"
+
+
+
+
+
+
+
+
+
+
+

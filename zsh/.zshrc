@@ -135,3 +135,7 @@ export ZSH_WAKATIME_BIN=/usr/local/bin/wakatime
 source <(minikube completion zsh | sed --expression='s/aliashash\["\([a-z]*\)"\]/aliashash[\1]/g')
 
 export PATH="$HOME/.poetry/bin:$PATH"
+
+# zsh tab title settings
+ZSH_TAB_TITLE_ADDITIONAL_TERMS='alacritty|kitty|foot'
+
