@@ -138,4 +138,3 @@ export PATH="$HOME/.poetry/bin:$PATH"
 
 # zsh tab title settings
 ZSH_TAB_TITLE_ADDITIONAL_TERMS='alacritty|kitty|foot'
-
