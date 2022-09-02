@@ -23,6 +23,7 @@ push-location $HOME
 
 	cmd /c mklink .gitconfig "$repoPath\git\system.gitconfig"
 	cmd /c mklink /d git "$repoPath\git"
+	cmd /c mklink /d .doom.d "$repoPath\doomemacs"
 
 	push-location Documents
 		cmd /c mklink /d Powershell "$repoPath\powershell"
