@@ -38,6 +38,9 @@ ln -s ~/src/dotfiles/vim/simple-mapping.vimrc ~/.vim/simple-mapping.vimrc
 ln -s ~/src/dotfiles/vim/mapping.vimrc ~/.vim/mapping.vimrc
 ln -ds ~/src/dotfiles/vim/plugins ~/.vim/plugins
 
+
+(ls ~/.doom.d >> /dev/null 2>&1 && echo "doom emacs config exists") || ln -ds ~/src/dotfiles/doomemacs ~/.doom.d
+
 mkdir -p ~/.config/onedrive
 
 ln -s ~/src/dotfiles/onedrive.config ~/.config/onedrive/config

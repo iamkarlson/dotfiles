@@ -16,3 +16,7 @@
 [user]
 	email = iamkarlson@gmail.com
 	name = George Green
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true

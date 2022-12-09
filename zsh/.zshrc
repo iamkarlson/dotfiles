@@ -112,6 +112,9 @@ export NVM_DIR="$HOME/.nvm"
 ZSH_DISABLE_COMPFIX=true
 
 eval "$(pyenv init -)"
+
+eval "$(pyenv virtualenv-init -)"
+
 export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
 
 

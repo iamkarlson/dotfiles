@@ -20,7 +20,7 @@ antigen bundle zsh-users/zsh-completions
 antigen bundle rupa/z
 antigen bundle sobolevn/wakatime-zsh-plugin
 antigen bundle pyenv
-antigen bundle trystan2k/zsh-tab-title
+#antigen bundle trystan2k/zsh-tab-title
 
 antigen bundle bobthecow/git-flow-completion
 
