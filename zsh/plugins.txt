@@ -1,0 +1,3 @@
+# frameworks like oh-my-zsh are supported
+ohmyzsh/ohmyzsh path:lib
+ohmyzsh/ohmyzsh path:plugins/colored-man-pages
