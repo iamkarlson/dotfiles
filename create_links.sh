@@ -2,11 +2,12 @@
 #
 # Purpose of this file is to create symlinks to configuration files I have in my repo.
 
-target = "$1"
-src="$1/src"
+target="$1"
+src="$target/src"
 dotfiles="$src/dotfiles"
 clear
 echo "setting up links from $dotfiles"
+echo "targeting into $target"
 read -p "Are you sure? " -n 1 -r
 echo    # (optional) move to a new line
 if [[ ! $REPLY =~ ^[Yy]$ ]]

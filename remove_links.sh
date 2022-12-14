@@ -158,3 +158,63 @@ delete_link "/.tmux.conf"
 delete_link "/.config/espanso"
 # Removing directory ********************************* /.doom.d
 delete_link "/.doom.d"
+# Removing directory ********************************* /git
+delete_link "/git"
+# Removing file -------------------------------------- /.gitconfig
+delete_link "/.gitconfig"
+# Removing file -------------------------------------- /.config/onedrive/config
+delete_link "/.config/onedrive/config"
+# Removing file -------------------------------------- /.config/onedrive/sync_list
+delete_link "/.config/onedrive/sync_list"
+# Removing directory ********************************* /.zsh
+delete_link "/.zsh"
+# Removing file -------------------------------------- /.shellrc
+delete_link "/.shellrc"
+# Removing file -------------------------------------- /.zshrc
+delete_link "/.zshrc"
+# Removing file -------------------------------------- /.tmux.conf
+delete_link "/.tmux.conf"
+# Removing directory ********************************* /.config/espanso
+delete_link "/.config/espanso"
+# Removing directory ********************************* /.doom.d
+delete_link "/.doom.d"
+# Removing directory ********************************* /home/iamkarlson/git
+delete_link "/home/iamkarlson/git"
+# Removing file -------------------------------------- /home/iamkarlson/.gitconfig
+delete_link "/home/iamkarlson/.gitconfig"
+# Removing file -------------------------------------- /home/iamkarlson/.config/onedrive/config
+delete_link "/home/iamkarlson/.config/onedrive/config"
+# Removing file -------------------------------------- /home/iamkarlson/.config/onedrive/sync_list
+delete_link "/home/iamkarlson/.config/onedrive/sync_list"
+# Removing directory ********************************* /home/iamkarlson/.zsh
+delete_link "/home/iamkarlson/.zsh"
+# Removing file -------------------------------------- /home/iamkarlson/.shellrc
+delete_link "/home/iamkarlson/.shellrc"
+# Removing file -------------------------------------- /home/iamkarlson/.zshrc
+delete_link "/home/iamkarlson/.zshrc"
+# Removing file -------------------------------------- /home/iamkarlson/.tmux.conf
+delete_link "/home/iamkarlson/.tmux.conf"
+# Removing directory ********************************* /home/iamkarlson/.config/espanso
+delete_link "/home/iamkarlson/.config/espanso"
+# Removing directory ********************************* /home/iamkarlson/.doom.d
+delete_link "/home/iamkarlson/.doom.d"
+# Removing directory ********************************* /home/iamkarlson/git
+delete_link "/home/iamkarlson/git"
+# Removing file -------------------------------------- /home/iamkarlson/.gitconfig
+delete_link "/home/iamkarlson/.gitconfig"
+# Removing file -------------------------------------- /home/iamkarlson/.config/onedrive/config
+delete_link "/home/iamkarlson/.config/onedrive/config"
+# Removing file -------------------------------------- /home/iamkarlson/.config/onedrive/sync_list
+delete_link "/home/iamkarlson/.config/onedrive/sync_list"
+# Removing directory ********************************* /home/iamkarlson/.zsh
+delete_link "/home/iamkarlson/.zsh"
+# Removing file -------------------------------------- /home/iamkarlson/.shellrc
+delete_link "/home/iamkarlson/.shellrc"
+# Removing file -------------------------------------- /home/iamkarlson/.zshrc
+delete_link "/home/iamkarlson/.zshrc"
+# Removing file -------------------------------------- /home/iamkarlson/.tmux.conf
+delete_link "/home/iamkarlson/.tmux.conf"
+# Removing directory ********************************* /home/iamkarlson/.config/espanso
+delete_link "/home/iamkarlson/.config/espanso"
+# Removing directory ********************************* /home/iamkarlson/.doom.d
+delete_link "/home/iamkarlson/.doom.d"
