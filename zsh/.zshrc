@@ -14,29 +14,12 @@ setopt EXTENDED_HISTORY
 
 setopt appendhistory autocd nomatch notify
 
-# set emacs key bindings
-bindkey -e
-
-source ~/.zsh/aliases.zshrc
-
-
 # Work related and private stuff with sensetive data
 source ~/.zsh/private.zshrc
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
     
-
-# Setting up plugin manager
-
-source '/usr/share/zsh-antidote/antidote.zsh'
-antidote load
-
-
-# Plugins are loaded from cached antidote bundle
-# antidote bundle <~/.zsh/plugins.txt >~/.zsh_plugins.zsh
-
-source ~/.zsh_plugins
 
 
 #
@@ -56,6 +39,7 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir rbenv virtualenv pyenv vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history time battery)
 
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+
 
 
 
@@ -104,38 +88,38 @@ AUTOENV_FILE_LEAVE=.autoenv.zsh
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 
-#cargo bins
-source $HOME/.cargo/env
-
 eval $(thefuck --alias)
 
 export ZSH_WAKATIME_BIN=/usr/local/bin/wakatime
 
 ################################################################################
-# languages envs: pyenv, nvm, rbenv, jenv
+# Setting up plugin manager
 ################################################################################
-# node version manager
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# python version manager
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-# ruby version manager
-if (( $+commands[rbenv] ))
-then
-    eval "$(rbenv init -)"
-fi
-
-# java version manager
-if (( $+commands[jenv] ))
-then
-    export PATH="$HOME/.jenv/bin:$PATH"
-    eval "$(jenv init -)"
-fi
+source '/usr/share/zsh-antidote/antidote.zsh'
+antidote load
 
 
+# Plugins are loaded from cached antidote bundle
+# antidote bundle <~/.zsh/plugins.txt >~/.zsh_plugins.zsh
 
+source ~/.zsh_plugins.zsh
+
+autoload -Uz promptinit && promptinit && prompt powerlevel10k
+
+
+# set emacs key bindings
+bindkey -e
+
+source ~/.zsh/aliases.zshrc
+
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:]}={[:upper:]}' '+r:|[._-]=** r:|=**' '+l:|=* r:|=*'
+zstyle :compinstall filename '/home/iamkarlson/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
 

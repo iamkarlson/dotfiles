@@ -40,7 +40,7 @@ mkdir -p $target/.config
 
 # Git configuration
 echo "creating git config at $target/git"
-ln_directory "$dotfiles/git" $target/git
+ln_directory "$dotfiles/git/git" $target/git
 
 
 ln_file "$dotfiles/git/system.gitconfig" "$target/.gitconfig"

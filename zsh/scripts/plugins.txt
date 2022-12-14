@@ -1,3 +1,9 @@
-# frameworks like oh-my-zsh are supported
+zsh-users/zsh-completions
+rupa/z
+
+
 ohmyzsh/ohmyzsh path:lib
 ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+
+romkatv/powerlevel10k kind:fpath
+
