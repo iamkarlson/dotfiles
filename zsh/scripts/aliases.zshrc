@@ -6,7 +6,7 @@
 #
 # Example aliases
 alias vim=nvim
-alias cat=batcat
+#alias cat=batcat
 alias zshconfig="vim ~/.zshrc"
 alias vimconfig="vim ~/src/dotfiles/vim/.vimrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
