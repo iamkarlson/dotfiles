@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #
 # Purpose of this file is to create symlinks to configuration files I have in my repo.
+# Because directory links have to be created with root privileges, 
+# this file has to be run with root or sudo
 
 target="$1"
 src="$target/src"
