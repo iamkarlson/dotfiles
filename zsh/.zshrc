@@ -41,8 +41,6 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs histor
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 
 
-
-
 # Uncomment the following line to use case-sensitive completion.
 CASE_SENSITIVE="false"
 
@@ -92,9 +90,31 @@ eval $(thefuck --alias)
 
 export ZSH_WAKATIME_BIN=/usr/local/bin/wakatime
 
+
+
+################################################################################
+# Setting up completion system. 
+# It must go before plugins
+################################################################################
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:]}={[:upper:]}' '+r:|[._-]=** r:|=**' '+l:|=* r:|=*'
+zstyle :compinstall filename '/home/iamkarlson/.zshrc'
+
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker
+zstyle ':completion:*:*:docker:*' option-stacking yes
+zstyle ':completion:*:*:docker-*:*' option-stacking yes
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+
 ################################################################################
 # Setting up plugin manager
 ################################################################################
+
 
 source '/usr/share/zsh-antidote/antidote.zsh'
 antidote load
@@ -105,6 +125,11 @@ antidote load
 
 source ~/.zsh_plugins.zsh
 
+
+################################################################################
+# Setting up prompt, look&feel
+# It must go after plugins
+################################################################################
 autoload -Uz promptinit && promptinit && prompt powerlevel10k
 
 
@@ -112,14 +137,4 @@ autoload -Uz promptinit && promptinit && prompt powerlevel10k
 bindkey -e
 
 source ~/.zsh/aliases.zshrc
-
-# The following lines were added by compinstall
-
-zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'm:{[:lower:]}={[:upper:]}' '+r:|[._-]=** r:|=**' '+l:|=* r:|=*'
-zstyle :compinstall filename '/home/iamkarlson/.zshrc'
-
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
 

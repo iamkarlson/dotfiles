@@ -13,6 +13,10 @@ alias vimconfig="vim ~/src/dotfiles/vim/.vimrc"
 #
 
 alias k="kubectl"
+alias g="git"
 
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'
+
+alias kopy="kitty +kitten clipboard"
+
