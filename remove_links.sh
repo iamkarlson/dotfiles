@@ -5,6 +5,8 @@
 delete_link "/home/iamkarlson/git"
 # Removing file -------------------------------------- /home/iamkarlson/.gitconfig
 delete_link "/home/iamkarlson/.gitconfig"
+# Removing file -------------------------------------- /home/iamkarlson/.config/sway/config
+delete_link "/home/iamkarlson/.config/sway/config"
 # Removing file -------------------------------------- /home/iamkarlson/.config/onedrive/config
 delete_link "/home/iamkarlson/.config/onedrive/config"
 # Removing file -------------------------------------- /home/iamkarlson/.config/onedrive/sync_list

@@ -50,6 +50,16 @@ ln_directory "$dotfiles/git/git" $target/git
 
 ln_file "$dotfiles/git/system.gitconfig" "$target/.gitconfig"
 
+# 
+# Sway config
+#
+
+
+mkdir -p $target/.config/sway
+
+ln_file $dotfiles/sway/config $target/.config/sway/config
+
+
 #
 # Onedrive syncer 
 # URL: https://github.com/abraunegg/onedrive
