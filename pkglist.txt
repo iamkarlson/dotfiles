@@ -36,6 +36,7 @@ polkit
 pyenv
 qt5ct
 rsync
+samba
 sddm-git
 sudo
 sway
@@ -49,6 +50,8 @@ ttf-hack-nerd
 vi
 vivaldi
 vivaldi-ffmpeg-codecs
+vulkan-tools
+wat-git
 wget
 which
 wlroots-nvidia
