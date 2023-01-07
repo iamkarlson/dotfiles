@@ -139,3 +139,6 @@ function autocomplete(){
 
 
 #(ls ~/.autoenv >> /dev/null 2>&1 && echo "autoenv already installed") || git clone git@github.com:hyperupcall/autoenv.git ~/.autoenv
+sudo cp sway/sway_nvidia.sh /bin/sway_nvidia
+sudo chmod +x /bin/sway_nvidia
+sudo cp sway/sway_nvidia.desktop /usr/share/wayland-sessions
