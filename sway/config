@@ -19,17 +19,12 @@ set $term kitty
 #set $menu dmenu_path | dmenu | xargs swaymsg exec --
 set $menu bemenu-run | xargs swaymsg exec --
 
-### Output configuration
-#
-
-set $monitor HDMI-A-1
-
-output $monitor scale 2
-
-
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
+
+# Toggle control center
+bindsym $mod+Shift+n exec swaync-client -t -sw
 
 
 #
@@ -43,20 +38,17 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # Example configuration:
 #
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' \
-#          resume 'swaymsg "output * dpms on"' \
+# exec swayidle -w
+#          timeout 300 'swaylock -f -c 000000'
+#          timeout 600 'swaymsg "output * dpms off"'
+#          resume 'swaymsg "output * dpms on"'
 #          before-sleep 'swaylock -f -c 000000'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
-exec swayidle -w \
-	timeout 1800 'swaylock -f' \
-	timeout 1805 'swaymsg "output * dpms off"' \
-	resume 'swaymsg "output * dpms on"'
+exec swayidle -w 	timeout 1800 'swaylock -f' 	timeout 1805 'swaymsg "output * dpms off"' 	resume 'swaymsg "output * dpms on"'
 
 ### Input configuration
 #
@@ -72,7 +64,7 @@ exec swayidle -w \
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
-input "type:keyboard" {        
+input "type:keyboard" {
     xkb_layout us,ru
     xkb_options grp:caps_toggle
 }
@@ -217,28 +209,81 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+
+#
+# Media
+#
+#
+
+# brightness control
+set $brightness_step bash -c 'echo $(( $(light -Mr) / 100 * 5 < 1 ? 1 : $(( $(light -Mr) / 100 * 5 )) ))'
+set $brightness_up light -r -A $($brightness_step) && $onscreen_bar $(light -G | cut -d'.' -f1)
+set $brightness_down light -r -U $($brightness_step) && $onscreen_bar $(light -G | cut -d'.' -f1)
+
+# audio control
+set $sink_volume pactl get-sink-volume @DEFAULT_SINK@ | grep '^Volume:' | cut -d / -f 2 | tr -d ' ' | sed 's/%//'
+set $source_volume pactl get-source-volume @DEFAULT_SOURCE@ | grep '^Volume:' | cut -d / -f 2 | tr -d ' ' | sed 's/%//'
+set $volume_down $onscreen_bar $(pactl set-sink-volume @DEFAULT_SINK@ -5% && $sink_volume)
+set $volume_up $onscreen_bar $(pactl set-sink-volume @DEFAULT_SINK@ +5% && $sink_volume)
+set $volume_mute $onscreen_bar $(pactl set-sink-mute @DEFAULT_SINK@ toggle && pactl get-sink-mute @DEFAULT_SINK@ | sed -En "/no/ s/.*/$($sink_volume)/p; /yes/ s/.*/0/p")
+set $mic_mute $onscreen_bar $(pactl set-source-mute @DEFAULT_SOURCE@ toggle && pactl get-source-mute @DEFAULT_SOURCE@ | sed -En "/no/ s/.*/$($source_volume)/p; /yes/ s/.*/0/p")
+
+
+# --locked flags allow the buttons to be used whilst the screen is locked.
+bindsym --locked XF86AudioRaiseVolume exec $volume_up
+
+bindsym --locked XF86AudioLowerVolume exec $volume_down
+
+bindsym --locked XF86AudioMute exec $volume_mute
+
+bindsym XF86AudioMicMute exec $mic_mute
+
+bindsym --locked XF86MonBrightnessUp exec $brightness_up
+
+bindsym --locked XF86MonBrightnessDown exec $brightness_down
+
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+
+bindsym XF86AudioNext exec playerctl next
+
+bindsym XF86AudioPrev exec playerctl previous
+
+
+
+
+
+
+
+
 #
 # Status Bar:
 #
+bar swaybar_command waybar
+
+
 # Read `man 5 sway-bar` for more information about this section.
-bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    #status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-    status_command i3status
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
-}
+#bar {
+#    position top
+#
+#    # When the status_command prints a new line to stdout, swaybar updates.
+#    # The default just shows the current date and time.
+#    #status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
+#    status_command i3status
+#
+#    colors {
+#        statusline #ffffff
+#        background #323232
+#        inactive_workspace #32323200 #32323200 #5c5c5c
+#    }
+#}
 
 include /etc/sway/config.d/*
+include ~/.config/sway/local/*
+include ~/.config/sway/config.d/*
 
-set $nag exec swaynagmode 
+set $nag exec swaynagmode
+
+exec_always --no-startup-id workstyle &> /tmp/workstyle.log
 
 mode "nag" {
 	bindsym {
@@ -262,4 +307,4 @@ mode "nag" {
 
 	}
 }
-
+n
