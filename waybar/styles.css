@@ -1,73 +1,77 @@
 * {
-    border: none;
-    border-radius: 0;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    min-height: 0;
+	font-size: 14px;
+	font-family: CaskaydiaCove Nerd Font;
 }
 
 window#waybar {
-    background: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
-    color: white;
+	background: #282828;
+	color: #ebdbb2;
+
 }
 
-tooltip {
-  background: rgba(43, 48, 59, 0.5);
-  border: 1px solid rgba(100, 114, 125, 0.5);
+#custom-right-arrow-dark,
+#custom-left-arrow-dark {
+	color: #1d2021;
 }
-tooltip label {
-  color: white;
+#custom-right-arrow-light,
+#custom-left-arrow-light {
+	color: #282828;
+	background: #1d2021;
+}
+
+#workspaces,
+#clock.1,
+#clock.2,
+#clock.3,
+#pulseaudio,
+#memory,
+#cpu,
+#battery,
+#disk,
+#tray {
+	background: #1d2021;
 }
 
 #workspaces button {
-    padding: 0 5px;
-    background: transparent;
-    color: white;
-    border-bottom: 3px solid transparent;
+	padding: 0;
+	color: #fbf1c7;
 }
-
 #workspaces button.focused {
-    background: #64727D;
-    border-bottom: 3px solid white;
+  color: #ebdbb2;
+	background: #d65d0e;
+}
+#workspaces button:hover {
+	box-shadow: inherit;
+	text-shadow: inherit;
+}
+#workspaces button:hover {
+  color: #ebdbb2;
+	background: #1d2021;
+	border: #1d2021;
+	padding: 0 3px;
 }
 
-#mode, #clock, #battery {
-    padding: 0 10px;
+#pulseaudio {
+	color: #83a598;
 }
-
-#mode {
-    background: #64727D;
-    border-bottom: 3px solid white;
+#memory {
+	color: #689d6a;
 }
-
-#clock {
-    background-color: #64727D;
+#cpu {
+	color: #d3869b;
 }
-
 #battery {
-    background-color: #ffffff;
-    color: black;
+	color: #b8bb26;
+}
+#disk {
+	color: #fabd2f;
 }
 
-#battery.charging {
-    color: white;
-    background-color: #26A65B;
-}
-
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: black;
-    }
-}
-
-#battery.warning:not(.charging) {
-    background: #f53c3c;
-    color: white;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+#clock,
+#pulseaudio,
+#memory,
+#cpu,
+#battery,
+#disk {
+	padding: 0 10px;
 }

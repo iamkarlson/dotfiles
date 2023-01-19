@@ -7,6 +7,7 @@
 target="$1"
 src="$target/src"
 dotfiles="$src/dotfiles"
+config="$target/.config"
 clear
 echo "setting up links from $dotfiles"
 echo "targeting into $target"
@@ -41,7 +42,7 @@ function delete_link(){
 
 # Create user home .config 
 
-mkdir -p $target/.config
+mkdir -p $config
 
 # Git configuration
 echo "creating git config at $target/git"
@@ -50,25 +51,16 @@ ln_directory "$dotfiles/git/git" $target/git
 
 ln_file "$dotfiles/git/system.gitconfig" "$target/.gitconfig"
 
-# 
-# Sway config
-#
-
-
-mkdir -p $target/.config/sway
-
-ln_file $dotfiles/sway/config $target/.config/sway/config
-
 
 #
 # Onedrive syncer 
 # URL: https://github.com/abraunegg/onedrive
 #
 
-mkdir -p $target/.config/onedrive
+mkdir -p $config/onedrive
 
-ln_file $dotfiles/onedrive.config $target/.config/onedrive/config
-ln_file $dotfiles/sync_list.config $target/.config/onedrive/sync_list
+ln_file $dotfiles/onedrive.config $config/onedrive/config
+ln_file $dotfiles/sync_list.config $config/onedrive/sync_list
 
 
 # Zsh settings
@@ -92,17 +84,17 @@ ln_file $dotfiles/.tmux.conf $target/.tmux.conf
 # URL: https://espanso.org
 #
 
-ln_directory "$dotfiles/espanso" "$target/.config/espanso"
+ln_directory "$dotfiles/espanso" "$config/espanso"
 
 
 ln_directory "$dotfiles/doomemacs" "$target/.doom.d"
 
-mkdir -p $target/.config/kitty
-ln_file $dotfiles/kitty/kitty.conf $target/.config/kitty/kitty.conf
+mkdir -p $config/kitty
+ln_file $dotfiles/kitty/kitty.conf $config/kitty/kitty.conf
 
 function alacritty(){
-	mkdir -p $target/.config/alacritty
-	ln_file $dotfiles/alacritty.yml $target/.config/alacritty/alacritty.yml
+	mkdir -p $config/alacritty
+	ln_file $dotfiles/alacritty.yml $config/alacritty/alacritty.yml
 }
 
 function vim() {
@@ -112,9 +104,9 @@ function vim() {
 
 	ln_file $dotfiles/vim/.gvimrc $target/.gvimrc
 
-	mkdir -p $target/.config/nvim
+	mkdir -p $config/nvim
 
-	ln_file $dotfiles/vim/init.vim $target/.config/nvim/init.vim
+	ln_file $dotfiles/vim/init.vim $config/nvim/init.vim
 
 	mkdir $target/.vim
 	mkdir $target/.vim/backup_files
@@ -136,9 +128,24 @@ function autocomplete(){
 	k3d completion zsh > $target/.zsh/completions/_k3d
 	minikube completion zsh > $target/.zsh/completions/_minikube
 }
-
-
+#
 #(ls ~/.autoenv >> /dev/null 2>&1 && echo "autoenv already installed") || git clone git@github.com:hyperupcall/autoenv.git ~/.autoenv
+
+#
+# Sway config
+#
+
+
+mkdir -p $config/sway
+
+ln_file $dotfiles/sway/config $config/sway/config
+ln_directory $dotfiles/sway/config.d $config/sway/config.d
+
+ln_file $dotfiles/swaylock/config $config/swaylock/config
+
+ln_file $dotfiles/waybar/config $config/waybar/config
+ln_file $dotfiles/waybar/style.css $config/waybar/style.css
+
 sudo cp sway/sway_nvidia.sh /bin/sway_nvidia
 sudo chmod +x /bin/sway_nvidia
 sudo cp sway/sway_nvidia.desktop /usr/share/wayland-sessions

@@ -1,16 +1,23 @@
 {
     "layer": "bottom",
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["sway/window"],
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode"
+    ],
+    "modules-center": [
+        "sway/window"
+    ],
     "modules-right": [
         "cpu",
         "memory",
         "network",
         "temperature",
         "battery",
+        "tray",
         "pulseaudio",
         "sway/language",
-        "clock"
+        "clock#date",
+        "clock#time"
     ],
     "sway/window": {
         "max-length": 50
