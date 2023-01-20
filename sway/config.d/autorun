@@ -1,3 +1,5 @@
+# -*- mode: conf -*-
+
 # Notification Daemon
 exec swaync
 

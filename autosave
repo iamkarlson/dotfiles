@@ -1,0 +1,64 @@
+;; -*- mode: emacs-lisp; eval: (progn (pp-buffer) (indent-buffer)) -*-
+((def-persp "main" nil
+   (def-wconf
+     (((min-height . 5)
+       (min-width . 95)
+       (min-height-ignore . 5)
+       (min-width-ignore . 95)
+       (min-height-safe . 1)
+       (min-width-safe . 2)
+       (min-pixel-height . 85)
+       (min-pixel-width . 760)
+       (min-pixel-height-ignore . 85)
+       (min-pixel-width-ignore . 760)
+       (min-pixel-height-safe . 17)
+       (min-pixel-width-safe . 16))
+      leaf
+      (pixel-width . 2129)
+      (pixel-height . 1132)
+      (total-width . 266)
+      (total-height . 67)
+      (normal-height . 1.0)
+      (normal-width . 1.0)
+      (parameters
+       (better-jumper-struct . #s(better-jumper-jump-list-struct
+                                  (0 18 .
+                                     [("/home/iamkarlson/src/dotfiles/zsh/scripts/aliases.zshrc" 1 "y29xgo")
+                                      ("/home/iamkarlson/src/dotfiles/sway/config" 8172 "7hzi6t")
+                                      ("/home/iamkarlson/src/dotfiles/create_links.sh" 2347 "hik7e0")
+                                      ("/home/iamkarlson/src/dotfiles/bootstrap-postinstall.sh" 91 "m7emfq")
+                                      ("/home/iamkarlson/src/dotfiles/bootstrap-postinstall.sh" 89 "jhjn9s")
+                                      ("/home/iamkarlson/src/dotfiles/bootstrap-postinstall.sh" 292 "cd58e8")
+                                      ("/home/iamkarlson/src/dotfiles/create_links.sh" 2886 "5f4wxa")
+                                      ("/etc/pacman.conf" 1 "pr48yn")
+                                      ("/etc/pacman.conf" 814 "zcwm2i")
+                                      ("/sudo:" 1 "r1xz4a")
+                                      ("/sudo:root@beryl:/etc/pacman.conf" 22 "26z2wy")
+                                      ("/sudo:root@beryl:/etc/pacman.conf" 802 "z83r4t")
+                                      ("/sudo:" 1 "fics8m")
+                                      ("/home/iamkarlson/src/dotfiles/doomemacs/config.el" 382 "c3oykh")
+                                      ("/home/iamkarlson/.config/rofi/launchers/type-1/launcher.sh" 389 "tqc6vz")
+                                      ("/home/iamkarlson/src/dotfiles/sway/config" 7654 "2k6jeg")
+                                      ("/home/iamkarlson/src/dotfiles/sway/config" 1 "pvmia9")
+                                      ("/home/iamkarlson/src/dotfiles/sway/config" 787 "lu70gg")
+                                      nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil nil])
+                                  -1)))
+      (buffer "*doom*"
+              (selected . t)
+              (hscroll . 0)
+              (fringes 0 0 nil nil)
+              (margins 93)
+              (scroll-bars nil 0 t nil 0 t nil)
+              (vscroll . 0)
+              (dedicated)
+              (point . 1546)
+              (start . 1))
+      (prev-buffers
+       ("*doom*" 1 1))))
+   (def-params
+     ((tab-bar-tabs
+       (current-tab
+        (name . "aliases.zshrc")
+        (explicit-name)))
+      (tab-bar-closed-tabs)))
+   nil nil nil))

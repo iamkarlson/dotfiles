@@ -17,7 +17,8 @@
         "pulseaudio",
         "sway/language",
         "clock#date",
-        "clock#time"
+        "clock#time",
+        "custom/powermenu"
     ],
     "sway/window": {
         "max-length": 50
@@ -31,7 +32,7 @@
 	"clock#date": {
 		"interval": 20,
 		"format": "{:%e %b %Y}",
-		"tooltip": false
+		"tooltip": false,
 		//"tooltip-format": "{:%e %B %Y}"
 	},
 
@@ -110,5 +111,11 @@
     },
     "clock": {
         "format-alt": "{:%a, %d. %b  %H:%M}"
+    },
+
+    "custom/powermenu": {
+        "format": "",
+        "interval": "once",
+        "on-click": "~/src/dotfiles/rofi/powermenu.sh",
     }
 }

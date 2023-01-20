@@ -146,6 +146,8 @@ ln_file $dotfiles/swaylock/config $config/swaylock/config
 ln_file $dotfiles/waybar/config $config/waybar/config
 ln_file $dotfiles/waybar/style.css $config/waybar/style.css
 
+ln_directory $dotfiles/rofi $config/rofi
+
 sudo cp sway/sway_nvidia.sh /bin/sway_nvidia
 sudo chmod +x /bin/sway_nvidia
 sudo cp sway/sway_nvidia.desktop /usr/share/wayland-sessions

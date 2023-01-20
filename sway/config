@@ -20,8 +20,10 @@ set $term kitty
 #set $menu bemenu-run | xargs swaymsg exec --
 #set $menu mauncher-launcher | xargs swaymsg exec --
 #set $menu rofi | xargs swaymsg exec --
-set $menu rofi -show drun -show-icons -font 'CaskaydiaCove Nerd Font 17'
+#set $menu rofi -show drun -show-icons -font 'CaskaydiaCove Nerd Font 17'
+set $menu ~/src/dotfiles/rofi/launcher.sh
 
+#set $menu wofi -show drun -show-icons -font 'CaskaydiaCove Nerd Font 17'
 
 
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
@@ -256,7 +258,7 @@ bindsym --locked {
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
-exec swayidle -w 	timeout 1800 'swaylock -f' 	timeout 1805 'swaymsg "output * dpms off"' 	resume 'swaymsg "output * dpms on"'
+exec swayidle -w  timeout 600 'swaylock -f'  timeout 1800 'swaymsg "output * dpms off"'  resume 'swaymsg "output * dpms on"'
 
 bindsym $mod+Shift+Escape exec swaylock -f -c 000000
 

@@ -1,3 +1,4 @@
+
 * {
 	font-size: 14px;
 	font-family: CaskaydiaCove Nerd Font;
@@ -33,11 +34,11 @@ window#waybar {
 }
 
 #workspaces button {
-	padding: 0;
 	color: #fbf1c7;
+	padding: 0 3px;
 }
 #workspaces button.focused {
-  color: #ebdbb2;
+	color: #ebdbb2;
 	background: #d65d0e;
 }
 #workspaces button:hover {
@@ -48,7 +49,6 @@ window#waybar {
   color: #ebdbb2;
 	background: #1d2021;
 	border: #1d2021;
-	padding: 0 3px;
 }
 
 #pulseaudio {
