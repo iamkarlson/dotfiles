@@ -11,8 +11,8 @@
 ## style-6     style-7     style-8     style-9     style-10
 ## style-11    style-12    style-13    style-14    style-15
 
-#theme="$HOME/.config/rofi/launchers/themes/type-1/style-6.rasi"
-theme="$HOME/.config/rofi/launchers/type-1/style-6.rasi"
+#theme="$HOME/.config/rofi/launchers/type-1/style-6.rasi"
+theme="$HOME/src/dotfiles/rofi/themes/launcher.rasi"
 
 ## Run
 rofi \

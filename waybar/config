@@ -107,7 +107,8 @@
 
     "battery": {
         "format": "{capacity}% {icon}",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": ["", "", "", "", ""],
+		"on-click": "swaymsg exec battop"
     },
     "clock": {
         "format-alt": "{:%a, %d. %b  %H:%M}"

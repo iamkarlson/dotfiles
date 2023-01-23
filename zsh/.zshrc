@@ -49,7 +49,7 @@ CASE_SENSITIVE="false"
 HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -78,17 +78,12 @@ ZSH_DISABLE_COMPFIX=true
 # Binaries, program settings, and other stuff that really goes unsorted
 ################################################################################
 
-#autoenv settings
-AUTOENV_FILE_ENTER=.autoenv.zsh
-AUTOENV_HANDLE_LEAVE=1
-AUTOENV_FILE_LEAVE=.autoenv.zsh
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 
 eval $(thefuck --alias)
 
-export ZSH_WAKATIME_BIN=/usr/local/bin/wakatime
+export ZSH_WAKATIME_BIN=/usr/bin/wakatime
 
 
 
@@ -138,3 +133,6 @@ bindkey -e
 
 source ~/.zsh/aliases.zshrc
 
+# autoenv settings
+# needs to go after plugins, because it overrides `cd`
+export AUTOENV_ENV_FILENAME=.autoenv

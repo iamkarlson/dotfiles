@@ -13,15 +13,8 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-* {
-    font:                        "JetBrains Mono Nerd Font 10";
-    background:                  #11092D;
-    background-alt:              #281657;
-    foreground:                  #FFFFFF;
-    selected:                    #DF5296;
-    active:                      #6E77FF;
-    urgent:                      #8E3596;
-}
+@import                          "colors.rasi"
+@import                          "fonts.rasi"
 
 /*
 USE_BUTTONS=YES
@@ -57,7 +50,7 @@ imagebox {
     spacing:                     30px;
     padding:                     30px;
     background-color:            transparent;
-    background-image:            url("~/.config/rofi/images/a.png", height);
+    background-image:            url("~/src/dotfiles/rofi/themes/img/astronaut.png", height);
     children:                    [ "inputbar", "dummy", "message" ];
 }
 
@@ -68,7 +61,7 @@ userimage {
     border-radius:               10px;
     border-color:                @background-alt;
     background-color:            transparent;
-    background-image:            url("~/.config/rofi/images/a.png", height);
+    background-image:            url("~/src/dotfiles/rofi/themes/img/astronaut.png", height);
 }
 
 /*****----- Inputbar -----*****/

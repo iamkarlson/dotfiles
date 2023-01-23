@@ -2,7 +2,8 @@ zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
 zsh-users/zsh-syntax-highlighting
 
-rupa/z
+agkozak/zsh-z
+Tarrasch/zsh-autoenv
 
 
 ohmyzsh/ohmyzsh path:lib
@@ -10,3 +11,4 @@ ohmyzsh/ohmyzsh path:plugins/colored-man-pages
 
 romkatv/powerlevel10k kind:fpath
 
+sobolevn/wakatime-zsh-plugin

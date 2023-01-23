@@ -30,7 +30,8 @@ set $menu ~/src/dotfiles/rofi/launcher.sh
 #output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 output * bg /home/iamkarlson/pictures/wallpapers/cosmos.jpeg fill
 
-
+set $monitor DP-2
+set $laptop eDP-1
 
 # Toggle control center
 bindsym $mod+Shift+n exec swaync-client -t -sw
@@ -113,6 +114,29 @@ input type:keyboard xkb_numlock enabled
 #
 # Workspaces:
 #
+
+set $wsm1 1:w1
+set $wsm2 2:w2
+set $wsm3 3:w3
+set $wsm4 4:w4
+set $wsm5 5:w5
+set $wsm6 6:w6
+set $wsm7 7:w7
+set $wsm8 8:w8
+set $wsm9 9:w9
+set $wsm10 10:w10
+
+set $wsl1 11:w11
+set $wsl2 12:w12
+set $wsl3 13:w13
+set $wsl4 14:w14
+set $wsl5 15:w15
+set $wsl6 16:w16
+set $wsl7 17:w17
+set $wsl8 18:w18
+set $wsl9 19:w19
+set $wsl10 20:w20
+
     # Switch to workspace
     bindsym $mod+1 workspace number 1
     bindsym $mod+2 workspace number 2
@@ -137,6 +161,57 @@ input type:keyboard xkb_numlock enabled
     bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
+
+    workspace {
+        1 output $monitor
+        2 output $monitor
+        3 output $monitor
+        4 output $monitor
+        5 output $monitor
+        6 output $monitor
+        7 output $monitor
+        8 output $monitor
+        9 output $monitor
+        10 output $monitor
+    }
+
+    workspace {
+        11 output $laptop
+        12 output $laptop
+        13 output $laptop
+        14 output $laptop
+        15 output $laptop
+        16 output $laptop
+        17 output $laptop
+        18 output $laptop
+        19 output $laptop
+        20 output $laptop
+    }
+
+
+    bindsym $mod+Alt+1 workspace number 11
+    bindsym $mod+Alt+2 workspace number 12
+    bindsym $mod+Alt+3 workspace number 13
+    bindsym $mod+Alt+4 workspace number 14
+    bindsym $mod+Alt+5 workspace number 15
+    bindsym $mod+Alt+6 workspace number 16
+    bindsym $mod+Alt+7 workspace number 17
+    bindsym $mod+Alt+8 workspace number 18
+    bindsym $mod+Alt+9 workspace number 19
+    bindsym $mod+Alt+0 workspace number 20
+    # Move focused container to workspace
+    bindsym $mod+Alt+Shift+1 move container to workspace number 11
+    bindsym $mod+Alt+Shift+2 move container to workspace number 12
+    bindsym $mod+Alt+Shift+3 move container to workspace number 13
+    bindsym $mod+Alt+Shift+4 move container to workspace number 14
+    bindsym $mod+Alt+Shift+5 move container to workspace number 15
+    bindsym $mod+Alt+Shift+6 move container to workspace number 16
+    bindsym $mod+Alt+Shift+7 move container to workspace number 17
+    bindsym $mod+Alt+Shift+8 move container to workspace number 18
+    bindsym $mod+Alt+Shift+9 move container to workspace number 19
+    bindsym $mod+Alt+Shift+0 move container to workspace number 20
+
+
 #
 # Layout stuff:
 #
