@@ -5,6 +5,7 @@
 # this file has to be run with root or sudo
 
 target="$1"
+HOME=$target
 src="$target/src"
 dotfiles="$src/dotfiles"
 config="$target/.config"
@@ -150,6 +151,10 @@ ln_file $dotfiles/waybar/style.css $config/waybar/style.css
 ln_directory $dotfiles/rofi $config/rofi
 
 ln_directory $dotfiles/swaync $config/swaync
+
+ln_directory $dotfiles/swappy $config/swappy
+
+ln_directory $dotfiles/workstyle $config/workstyle
 
 sudo cp sway/sway_nvidia.sh /bin/sway_nvidia
 sudo chmod +x /bin/sway_nvidia

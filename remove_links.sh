@@ -39,3 +39,7 @@ delete_link "/home/iamkarlson/.config/waybar/style.css"
 delete_link "/home/iamkarlson/.config/rofi"
 # Removing directory ********************************* /home/iamkarlson/.config/swaync
 delete_link "/home/iamkarlson/.config/swaync"
+# Removing directory ********************************* /home/iamkarlson/.config/swappy
+delete_link "/home/iamkarlson/.config/swappy"
+# Removing directory ********************************* /home/iamkarlson/.config/workstyle
+delete_link "/home/iamkarlson/.config/workstyle"
