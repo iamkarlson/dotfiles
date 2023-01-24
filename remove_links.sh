@@ -29,6 +29,8 @@ delete_link "/home/iamkarlson/.config/kitty/kitty.conf"
 delete_link "/home/iamkarlson/.config/sway/config"
 # Removing directory ********************************* /home/iamkarlson/.config/sway/config.d
 delete_link "/home/iamkarlson/.config/sway/config.d"
+# Removing directory ********************************* /home/iamkarlson/.config/sway/scripts
+delete_link "/home/iamkarlson/.config/sway/scripts"
 # Removing file -------------------------------------- /home/iamkarlson/.config/swaylock/config
 delete_link "/home/iamkarlson/.config/swaylock/config"
 # Removing file -------------------------------------- /home/iamkarlson/.config/waybar/config

@@ -1,0 +1,10 @@
+# -*- mode: conf -*-
+
+set $gnome-schema org.gnome.desktop.interface
+
+exec_always {
+    gsettings set $gnome-schema gtk-theme 'Breeze-Dark'
+    gsettings set $gnome-schema icon-theme 'Breeze-Dark'
+    gsettings set $gnome-schema cursor-theme 'Bibata-Rainbow-Modern'
+    gsettings set $gnome-schema font-name 'Hack Nerd Font 11'
+}

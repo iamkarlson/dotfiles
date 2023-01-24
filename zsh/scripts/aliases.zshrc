@@ -20,4 +20,7 @@ alias pbpaste='xclip -selection clipboard -o'
 
 alias kopy="kitty +kitten clipboard"
 
+alias rm='rmtrash'
+alias rmdir='rmdirtrash'
+
 alias sudo='sudo '

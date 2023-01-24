@@ -142,6 +142,7 @@ mkdir -p $config/sway
 
 ln_file $dotfiles/sway/config $config/sway/config
 ln_directory $dotfiles/sway/config.d $config/sway/config.d
+ln_directory $dotfiles/sway/scripts $config/sway/scripts
 
 ln_file $dotfiles/swaylock/config $config/swaylock/config
 
