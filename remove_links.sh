@@ -31,6 +31,8 @@ delete_link "/home/iamkarlson/.config/sway/config"
 delete_link "/home/iamkarlson/.config/sway/config.d"
 # Removing directory ********************************* /home/iamkarlson/.config/sway/scripts
 delete_link "/home/iamkarlson/.config/sway/scripts"
+# Removing directory ********************************* /home/iamkarlson/.config/sway/profiles
+delete_link "/home/iamkarlson/.config/sway/profiles"
 # Removing file -------------------------------------- /home/iamkarlson/.config/swaylock/config
 delete_link "/home/iamkarlson/.config/swaylock/config"
 # Removing file -------------------------------------- /home/iamkarlson/.config/waybar/config
