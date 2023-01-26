@@ -1,33 +1,33 @@
-anki-official-binary-bundle
-azote
-battop
-bibata-rainbow-cursor-theme
-cdw
-clipman
-cura-bin
-datagrip
-datagrip-jre
-espanso-wayland
-google-cloud-sdk
-mauncher-git
-onedrive-abraunegg
-postman-bin
-pycharm-professional
-qpwgraph-qt5
-rmtrash
-rofi-lbonn-wayland-git
-skypeforlinux-stable-bin
-slack-desktop-wayland
-spotify
-swaykbdd
-swaylock-effects-git
-swaynagmode
-swaync
-themix-full-git
-timeshift
-wlogout
-wlroots-nvidia
-workstyle-git
-wshowkeys-git
-yay
-zsh-antidote
+anki-official-binary-bundle 2.1.56-1
+azote 1.9.7-2
+battop 0.2.4-2
+bibata-rainbow-cursor-theme 1.1.2-2
+cdw 0.8.1-2
+clipman 1.6.1-1
+cura-bin 5.2.1-4
+datagrip 2022.3.3-1
+datagrip-jre 2022.3.3-1
+espanso-wayland 2.1.8-1
+google-cloud-sdk 404.0.0-1
+mauncher-git r61.adc6251-1
+onedrive-abraunegg 2.4.23-3
+postman-bin 10.8.0-1
+pycharm-professional 2022.3.1-1
+qpwgraph-qt5 0.3.9-1
+rmtrash 1.14-1
+rofi-lbonn-wayland-git 1.7.5.wayland1.r42.g5d4a3e14-1
+skypeforlinux-stable-bin 8.93.0.404-1
+slack-desktop-wayland 4.29.149-1
+spotify 1:1.1.84.716-6
+swaykbdd 1.1-1
+swaylock-effects-git r413.cd07dd1-1
+swaynagmode 0.2.1-1
+swaync 0.7.3-1
+themix-full-git 1.15.1-1
+timeshift 22.11.2-1
+wlogout 1.1.1-3
+wlroots-nvidia 0.16.1-1
+workstyle-git 0.8.2.r114.gce475aa-1
+wshowkeys-git r5.e8bfc78-1
+yay 11.3.2-1
+zsh-antidote 1.6.5-1
