@@ -29,10 +29,6 @@ set $menu ~/src/dotfiles/rofi/launcher.sh
 #set $menu wofi -show drun -show-icons -font 'CaskaydiaCove Nerd Font 17'
 
 
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-#output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-output * bg /home/iamkarlson/Pictures/wallpapers/cosmos.jpeg fill
-
 # Toggle control center
 bindsym $mod+Shift+n exec swaync-client -t -sw
 
@@ -293,4 +289,5 @@ mode "nag" {
 }
 
 set $profile $(scripts/get_profile.sh)
+exec echo "current profile: $profile" > /tmp/log
 include "profiles/$profile.conf"
