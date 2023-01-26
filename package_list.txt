@@ -1,33 +1,142 @@
-anki-official-binary-bundle 2.1.56-1
-azote 1.9.7-2
-battop 0.2.4-2
-bibata-rainbow-cursor-theme 1.1.2-2
-cdw 0.8.1-2
-clipman 1.6.1-1
-cura-bin 5.2.1-4
-datagrip 2022.3.3-1
-datagrip-jre 2022.3.3-1
-espanso-wayland 2.1.8-1
-google-cloud-sdk 404.0.0-1
-mauncher-git r61.adc6251-1
-onedrive-abraunegg 2.4.23-3
-postman-bin 10.8.0-1
-pycharm-professional 2022.3.1-1
-qpwgraph-qt5 0.3.9-1
-rmtrash 1.14-1
-rofi-lbonn-wayland-git 1.7.5.wayland1.r42.g5d4a3e14-1
-skypeforlinux-stable-bin 8.93.0.404-1
-slack-desktop-wayland 4.29.149-1
-spotify 1:1.1.84.716-6
-swaykbdd 1.1-1
-swaylock-effects-git r413.cd07dd1-1
-swaynagmode 0.2.1-1
-swaync 0.7.3-1
-themix-full-git 1.15.1-1
-timeshift 22.11.2-1
-wlogout 1.1.1-3
-wlroots-nvidia 0.16.1-1
-workstyle-git 0.8.2.r114.gce475aa-1
-wshowkeys-git r5.e8bfc78-1
-yay 11.3.2-1
-zsh-antidote 1.6.5-1
+anki-official-binary-bundle
+archlinux-keyring
+ark
+autoconf
+automake
+azote
+base
+battop
+bemenu
+bibata-rainbow-cursor-theme
+binutils
+bison
+blueman
+breeze
+breeze-gtk
+brightnessctl
+btop
+cdw
+clipman
+cura-bin
+datagrip
+datagrip-jre
+debugedit
+dmenu
+docker
+docker-compose
+efibootmgr
+emacs
+espanso-wayland
+fakeroot
+file
+filelight
+findutils
+flex
+foot
+gawk
+gcc
+gettext
+gimp
+git
+google-cloud-sdk
+grep
+grim
+groff
+grub
+gst-plugin-pipewire
+gwenview
+gzip
+htop
+i3status
+intel-ucode
+iwd
+keepassxc
+kitty
+libpulse
+libreoffice-fresh
+libtool
+linux
+linux-firmware
+lvm2
+m4
+make
+man-db
+man-pages
+mauncher-git
+mplayer
+nano
+neovim
+nvidia
+onedrive-abraunegg
+openssh
+otf-font-awesome
+pacman
+patch
+pavucontrol
+pigz
+pipewire
+pipewire-alsa
+pipewire-jack
+pipewire-pulse
+pkgconf
+plocate
+polkit
+postman-bin
+pycharm-professional
+pyenv
+qalculate-gtk
+qpwgraph-qt5
+qt5-wayland
+ripgrep
+rmtrash
+rofi-lbonn-wayland-git
+rsync
+sddm
+sed
+skypeforlinux-stable-bin
+slack-desktop-wayland
+slurp
+smartmontools
+sof-firmware
+spotify
+sudo
+swappy
+sway
+swaybg
+swayidle
+swaykbdd
+swaylock-effects-git
+swaynagmode
+swaync
+telegram-desktop
+texinfo
+thefuck
+themix-full-git
+thunar
+timeshift
+ttf-hack-nerd
+vim
+vivaldi
+vivaldi-ffmpeg-codecs
+wakatime
+waybar
+wget
+which
+wireless_tools
+wireplumber
+wlogout
+wlroots-nvidia
+wofi
+workstyle-git
+wpa_supplicant
+wshowkeys-git
+xdg-desktop-portal-wlr
+xdg-utils
+xorg-server
+xorg-xinit
+xorg-xwayland
+xorg-xwininfo
+yay
+zram-generator
+zsh
+zsh-antidote
