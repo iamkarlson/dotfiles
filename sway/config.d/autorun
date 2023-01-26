@@ -3,6 +3,8 @@
 # Notification Daemon
 exec swaync
 
+exec swaykbdd
+
 # Turn on keyboard backlight
 exec brightnessctl --device='tpacpi::kbd_backlight' set 2
 
