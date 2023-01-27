@@ -26,7 +26,6 @@
 "libreoffice" = ""
 "nvim" = ""
 "gthumb" = ""
-"menu" = ""
 "calculator" = ""
 "transmission" = ""
 "videostream" = ""
@@ -37,6 +36,7 @@
 "emacs" = ""
 "telegram" = ""
 "keepassxc"=""
+"menu" = ""
 
 [other]
 fallback_icon = ""

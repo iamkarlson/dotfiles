@@ -1,11 +1,4 @@
-/**
- *
- * Author : Aditya Shakya (adi1090x)
- * Github : @adi1090x
- * 
- * Rofi Theme File
- * Rofi Version: 1.7.3
- **/
+/*# -*- mode: css -*-*/
 
 /*****----- Configuration -----*****/
 configuration {
@@ -127,7 +120,7 @@ element {
     cursor:                      pointer;
 }
 element-text {
-    font:                        "feather bold 32";
+    font:                        "hack nerd bold 32";
     background-color:            transparent;
     text-color:                  inherit;
     cursor:                      inherit;

@@ -12,45 +12,40 @@
 @define-color urgent         #ee6352;
 
 
+* {
+	border: none;
+	border-radius: 0;
+	font-family: Nerd Font Hack;
+	font-size: 14px;
+	min-height: 15px;
+}
+
+window > *{
+	transition: none;
+	margin: 5px;
+}
 
 window#waybar {
-	background: @background;
-	color: #ebdbb2;
-
+	background: transparent;
 }
 
-#custom-right-arrow-dark,
-#custom-left-arrow-dark {
-	color: @background-alt;
+.modules-left,
+.modules-center,
+.modules-right
+{
+	background: @background-alt;
+	border-radius: 16px;
+	padding-left: 20px;
+	padding-right: 20px;
 }
-#custom-right-arrow-light,
-#custom-left-arrow-light {
-	color: @background;
+
+.modules-left > *,
+.modules-center > *,
+.modules-right > *
+{
 	background: @background-alt;
 }
 
-#workspaces,
-#clock,
-#clock.1,
-#clock.2,
-#clock.3,
-#pulseaudio,
-#memory,
-#cpu,
-#battery,
-#disk,
-#tray,
-#temperature,
-#network,
-#sway-language
-{
-	background: @background;
-}
-
-#workspaces button {
-	color: #fbf1c7;
-	padding: 0 3px;
-}
 #workspaces button.focused {
 	color: #ebdbb2;
 	background: @selected;
@@ -59,9 +54,10 @@ window#waybar {
 	box-shadow: inherit;
 	text-shadow: inherit;
 	background: @active;
-	color: #ebdbb2;
-	border: @background-alt;
+	color: #000;
 }
+
+
 
 
 #pulseaudio {
@@ -101,5 +97,7 @@ window#waybar {
 
 #custom-powermenu {
 	color: @urgent;
-	padding: 0px 5px;
+	padding: 0px 15px;
+	margin-top: -3px;
+	font-size: 25px;
 }
