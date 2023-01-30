@@ -33,6 +33,7 @@ filelight
 findutils
 flex
 foot
+foxitreader
 gawk
 gcc
 gettext
@@ -93,6 +94,7 @@ rofi-lbonn-wayland-git
 rsync
 sddm
 sed
+selectdefaultapplication-git
 skypeforlinux-stable-bin
 slack-desktop-wayland
 slurp
