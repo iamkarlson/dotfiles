@@ -1,3 +1,6 @@
+
+/*# -*- mode: json -*-*/
+
 {
     "layer": "bottom",
     "modules-left": [
@@ -9,9 +12,9 @@
     ],
     "modules-right": [
         "cpu",
+        "temperature",
         "memory",
         "network",
-        "temperature",
         "battery",
         "tray",
         "pulseaudio",
@@ -37,7 +40,7 @@
 	},
 
 	"cpu": {
-		"interval": 5,
+		"interval": 3,
 		"tooltip": false,
 		"format": " {usage}%",
 		"format-alt": " {load}",
@@ -65,12 +68,14 @@
 
 
 	"network": {
-		"interval": 5,
-		"format-wifi": " {essid} ({signalStrength}%)",
-		"format-ethernet": " {ifname}",
-		"format-disconnected": "No connection",
-		"format-alt": " {ipaddr}/{cidr}",
-		"tooltip": false
+        "interval": 2,
+        "format-wifi": "﬉ ({signalStrength}%)  {bandwidthDownBytes}  {bandwidthUpBytes}",
+        "format-ethernet": "  {bandwidthDownBytes}  {bandwidthUpBytes}",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "⚠ Disconnected",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "tooltip-format": "{essid} on {ifname} via {gwaddr} ",
+        "tooltip-format-diconnected": ""
 	},
 
 	"pulseaudio": {
@@ -92,7 +97,7 @@
 
     "temperature": {
 		"critical-threshold": 90,
-		"interval": 5,
+		"interval": 3,
 		"format": "{icon} {temperatureC}°",
 		"format-icons": [
 			"",
