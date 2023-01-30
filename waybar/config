@@ -21,6 +21,7 @@
         "sway/language",
         "clock#date",
         "clock#time",
+        // "custom/spotify",
         "custom/powermenu"
     ],
     "sway/window": {
@@ -69,8 +70,8 @@
 
 	"network": {
         "interval": 2,
-        "format-wifi": "﬉ ({signalStrength}%)  {bandwidthDownBytes}  {bandwidthUpBytes}",
-        "format-ethernet": "  {bandwidthDownBytes}  {bandwidthUpBytes}",
+        "format-wifi": "﬉ {signalStrength}%  {bandwidthDownBytes}  {bandwidthUpBytes}",
+        "Format-ethernet": "  {bandwidthDownBytes}  {bandwidthUpBytes}",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "⚠ Disconnected",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
@@ -117,6 +118,21 @@
     },
     "clock": {
         "format-alt": "{:%a, %d. %b  %H:%M}"
+    },
+
+    "custom/spotify": {
+        "format": "{icon} {}",
+        "escape": true,
+        "return-type": "json",
+        "max-length": 40,
+        "interval": 30, // Remove this if your script is endless and write in loop
+        "on-click": "playerctl -p spotify play-pause",
+        "on-click-right": "killall spotify",
+        "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+        "on-scroll-up" : "playerctl -p spotify next",
+        "on-scroll-down" : "playerctl -p spotify previous",
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
+        "exec-if": "pgrep spotify"
     },
 
     "custom/powermenu": {

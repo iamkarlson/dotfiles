@@ -22,7 +22,9 @@
 
 window > *{
 	transition: none;
-	margin: 5px;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 window#waybar {
@@ -46,11 +48,13 @@ window#waybar {
 	background: @background-alt;
 }
 
+#workspaces {
+	margin: 5px;
+}
+
 #workspaces button {
-	padding-left: 10px;
-	padding-right: 10px;
-	margin-left: 2px;
-	margin-right: 2px;
+	padding: 0px 10px;
+	min-height: 25px;
 	border-radius: 16px;
 }
 #workspaces button.focused {
