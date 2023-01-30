@@ -38,7 +38,8 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type :relative)
+(setq display-line-numbers-type `relative)
+
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -79,3 +80,6 @@
 
 (remove-hook 'doom-first-input-hook #'evil-snipe-mode)
 (setq-default evil-kill-on-visual-paste nil)
+
+(menu-bar-mode +1)
+(blink-cursor-mode +1)
