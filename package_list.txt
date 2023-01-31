@@ -51,6 +51,7 @@ htop
 i3status
 intel-ucode
 iwd
+jq
 keepassxc
 kitty
 libpulse
