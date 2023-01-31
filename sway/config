@@ -1,3 +1,4 @@
+# -*- mode: i3wm-config -*-
 # Read `man 5 sway` for a complete reference.
 
 ### Variables
@@ -56,122 +57,6 @@ input "type:keyboard" {
 input type:keyboard xkb_numlock enabled
 
 
-### Key bindings
-#
-# Basics:
-#
-    # Start a terminal
-    bindsym $mod+Return exec $term
-
-    # Kill focused window
-    bindsym $mod+Shift+q kill
-
-    # Start your launcher
-    bindsym $mod+d exec $menu
-
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
-
-    # Reload the configuration file
-    bindsym $mod+Shift+c reload
-
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynagmode -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-    #bindsym $mod+Shift+e exec swaymsg exit
-
-#
-# Moving around:
-#
-    # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
-    # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
-
-    # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
-bindsym --to-code {
-#
-# Layout stuff:
-#
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
-     $mod+b splith
-     $mod+v splitv
-
-    # Switch the current container between different layout styles
-     $mod+s layout stacking
-     $mod+w layout tabbed
-     $mod+e layout toggle split
-
-    # Make the current focus fullscreen
-     $mod+f fullscreen
-
-    # Toggle the current focus between tiling and floating mode
-     $mod+Shift+space floating toggle
-
-    # Swap focus between the tiling area and the floating area
-     $mod+space focus mode_toggle
-
-    # Move focus to the parent container
-     $mod+a focus parent
-#
-# Scratchpad:
-#
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
-
-    # Move the currently focused window to the scratchpad
-     $mod+Shift+minus move scratchpad
-
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-     $mod+minus scratchpad show
-}
-#
-# Resizing containers:
-#
-mode "resize" {
-    bindsym --to-code {
-        # left will shrink the containers width
-        # right will grow the containers width
-        # up will shrink the containers height
-        # down will grow the containers height
-        $left resize shrink width 10px
-        $down resize grow height 10px
-        $up resize shrink height 10px
-        $right resize grow width 10px
-
-        # Ditto, with arrow keys
-        Left resize shrink width 10px
-        Down resize grow height 10px
-        Up resize shrink height 10px
-        Right resize grow width 10px
-
-        # Return to default mode
-        Return mode "default"
-        Escape mode "default"
-     }
-}
-bindsym --to-code $mod+r mode "resize"
 
 #
 # Media
@@ -190,30 +75,6 @@ set $volume_down $onscreen_bar $(pactl set-sink-volume @DEFAULT_SINK@ -5% && $si
 set $volume_up $onscreen_bar $(pactl set-sink-volume @DEFAULT_SINK@ +5% && $sink_volume)
 set $volume_mute $onscreen_bar $(pactl set-sink-mute @DEFAULT_SINK@ toggle && pactl get-sink-mute @DEFAULT_SINK@ | sed -En "/no/ s/.*/$($sink_volume)/p; /yes/ s/.*/0/p")
 set $mic_mute $onscreen_bar $(pactl set-source-mute @DEFAULT_SOURCE@ toggle && pactl get-source-mute @DEFAULT_SOURCE@ | sed -En "/no/ s/.*/$($source_volume)/p; /yes/ s/.*/0/p")
-
-
-# --locked flags allow the buttons to be used whilst the screen is locked.
-
-bindsym --locked {
-
-     XF86AudioRaiseVolume exec $volume_up
-
-     XF86AudioLowerVolume exec $volume_down
-
-     XF86AudioMute exec $volume_mute
-
-     XF86AudioMicMute exec $mic_mute
-
-     XF86MonBrightnessUp exec $brightness_up
-
-     XF86MonBrightnessDown exec $brightness_down
-
-     XF86AudioPlay exec playerctl play-pause
-
-     XF86AudioNext exec playerctl next
-
-     XF86AudioPrev exec playerctl previous
-}
 
 
 
@@ -261,10 +122,6 @@ bar swaybar_command waybar
 #    }
 #}
 
-include /etc/sway/config.d/*
-include ~/.config/sway/local/*
-include ~/.config/sway/config.d/*
-
 mode "nag" {
 	bindsym --to-code {
 		Ctrl+d mode "default"
@@ -291,3 +148,7 @@ mode "nag" {
 set $profile $(scripts/get_profile.sh)
 exec echo "current profile: $profile" > /tmp/log
 include "profiles/$profile.conf"
+
+include /etc/sway/config.d/*
+include ~/.config/sway/local/*
+include ~/.config/sway/config.d/*

@@ -1,4 +1,4 @@
-# -*- mode: conf -*-
+# -*- mode: i3wm-config -*-
 
 # Notification Daemon
 exec swaync
