@@ -136,3 +136,4 @@ source ~/.zsh/aliases.zshrc
 # autoenv settings
 # needs to go after plugins, because it overrides `cd`
 export AUTOENV_ENV_FILENAME=.autoenv
+source /usr/share/nvm/init-nvm.sh
