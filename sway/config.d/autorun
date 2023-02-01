@@ -1,4 +1,5 @@
 # -*- mode: i3wm-config -*-
+workspace number 1
 
 # Notification Daemon
 exec swaync
@@ -17,7 +18,9 @@ exec wl-paste -t text --watch clipman store --no-persist
 
 set $nag exec swaynagmode
 
-exec_always --no-startup-id workstyle &> /tmp/workstyle.log
+#exec_always --no-startup-id workstyle &> /tmp/workstyle.log
+exec sworkstyle &> /tmp/sworkstyle.log
+
 
 #
 # Example configuration:

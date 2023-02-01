@@ -157,6 +157,7 @@ ln_directory $dotfiles/swaync $config/swaync
 ln_directory $dotfiles/swappy $config/swappy
 
 ln_directory $dotfiles/workstyle $config/workstyle
+ln_directory $dotfiles/sworkstyle $config/sworkstyle
 
 sudo cp sway/sway_nvidia.sh /bin/sway_nvidia
 sudo chmod +x /bin/sway_nvidia

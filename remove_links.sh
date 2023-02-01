@@ -47,3 +47,5 @@ delete_link "/home/iamkarlson/.config/swaync"
 delete_link "/home/iamkarlson/.config/swappy"
 # Removing directory ********************************* /home/iamkarlson/.config/workstyle
 delete_link "/home/iamkarlson/.config/workstyle"
+# Removing directory ********************************* /home/iamkarlson/.config/sworkstyle
+delete_link "/home/iamkarlson/.config/sworkstyle"

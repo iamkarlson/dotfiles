@@ -122,6 +122,14 @@ bar swaybar_command waybar
 #    }
 #}
 
+set $profile $(scripts/get_profile.sh)
+exec echo "current profile: $profile" > /tmp/log
+include "profiles/$profile.conf"
+
+include /etc/sway/config.d/*
+include ~/.config/sway/local/*
+include ~/.config/sway/config.d/*
+
 mode "nag" {
 	bindsym --to-code {
 		Ctrl+d mode "default"
@@ -144,11 +152,3 @@ mode "nag" {
 
 	}
 }
-
-set $profile $(scripts/get_profile.sh)
-exec echo "current profile: $profile" > /tmp/log
-include "profiles/$profile.conf"
-
-include /etc/sway/config.d/*
-include ~/.config/sway/local/*
-include ~/.config/sway/config.d/*
