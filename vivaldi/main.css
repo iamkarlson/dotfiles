@@ -11,7 +11,7 @@
     height: -webkit-fill-available !important;
     box-shadow: #0008 0 0 2px, rgb(0 0 0 / 25%) 0px 3px 6px;
     clip-path:inset(0 -50px 0 -50px);
-    transition: .15s ease-out .1s !important;
+    transition: .15s ease-out .5s !important;
     background: var(--colorBg) !important;
 }
 #tabs-tabbar-container.left {
