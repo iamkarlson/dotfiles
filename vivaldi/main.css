@@ -97,3 +97,9 @@
     transform:translateX(0);
     transition: .15s ease-out .1s !important;
 }
+
+
+#browser .tab-position .tab.active {
+  background-color: var(--colorHighlightBg)!important;
+  color: var(--colorHighlightFg)!important;
+}

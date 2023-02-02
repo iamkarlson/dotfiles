@@ -12,8 +12,10 @@ function mvMenu() {
     const menu = document.querySelector('.vivaldi');
 	const tabs = document.querySelector('#tabs-container');
 	tabs.setAttribute('style','padding-left: 1px')
-    menu.setAttribute('style','position:static;height:var(--toolbarHeight);');
     adr.appendChild(menu);
+    menu.setAttribute('style','position:static;height:var(--toolbarHeight);');
+    // proper fix with changing toolbar size. however, I don't need this toolbar at all
+    // so I'm simply removing it as a whole
     document.querySelector("#header").remove()
 };
 
