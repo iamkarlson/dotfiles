@@ -19,26 +19,27 @@
         "tray",
         "pulseaudio",
         "sway/language",
-        "clock#date",
-        "clock#time",
+        "clock",
         // "custom/spotify",
         "custom/powermenu"
     ],
     "sway/window": {
         "max-length": 50
     },
-	"clock#time": {
-		"interval": 10,
-		"format": "{:%H:%M}",
-		"tooltip": false
+    "clock": {
+		"interval": 1,
+		"format": "{:%H:%M:%S}",
+        "format-alt": "{:%a, %d. %b  %H:%M}",
+		"tooltip": true,
+        "tooltip-format": " {:%e %b %Y}"
 	},
 
-	"clock#date": {
-		"interval": 20,
-		"format": "{:%e %b %Y}",
-		"tooltip": false,
-		//"tooltip-format": "{:%e %B %Y}"
-	},
+	// "clock#date": {
+	// 	"interval": 20,
+	// 	"format": "{:%e %b %Y}",
+	// 	"tooltip": false,
+	// 	//"tooltip-format": "{:%e %B %Y}"
+	// },
 
 	"cpu": {
 		"interval": 3,
@@ -115,9 +116,6 @@
         "format": "{capacity}% {icon}",
         "format-icons": ["", "", "", "", ""],
 		"on-click": "swaymsg exec battop"
-    },
-    "clock": {
-        "format-alt": "{:%a, %d. %b  %H:%M}"
     },
 
     "custom/spotify": {
