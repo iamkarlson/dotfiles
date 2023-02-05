@@ -20,6 +20,7 @@ alias pbpaste='xclip -selection clipboard -o'
 
 alias kopy="kitty +kitten clipboard"
 
+alias rm-no-trash='/usr/bin/rm'
 alias rm='rmtrash'
 alias rmdir='rmdirtrash'
 

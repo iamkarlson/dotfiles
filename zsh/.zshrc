@@ -85,6 +85,8 @@ eval $(thefuck --alias)
 
 export ZSH_WAKATIME_BIN=/usr/bin/wakatime
 
+# nvm - node.js version manager
+source /usr/share/nvm/init-nvm.sh
 
 
 ################################################################################
@@ -136,4 +138,3 @@ source ~/.zsh/aliases.zshrc
 # autoenv settings
 # needs to go after plugins, because it overrides `cd`
 export AUTOENV_ENV_FILENAME=.autoenv
-source /usr/share/nvm/init-nvm.sh
