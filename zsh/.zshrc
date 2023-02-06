@@ -137,3 +137,9 @@ source ~/.zsh/aliases.zshrc
 # needs to go after plugins, because it overrides `cd`
 export AUTOENV_ENV_FILENAME=.autoenv
 source /usr/share/nvm/init-nvm.sh
+
+
+# setting up pyen
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"

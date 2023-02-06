@@ -17,6 +17,8 @@ delete_link "/home/iamkarlson/.zsh"
 delete_link "/home/iamkarlson/.shellrc"
 # Removing file -------------------------------------- /home/iamkarlson/.zshrc
 delete_link "/home/iamkarlson/.zshrc"
+# Removing file -------------------------------------- /home/iamkarlson/.zprofile
+delete_link "/home/iamkarlson/.zprofile"
 # Removing file -------------------------------------- /home/iamkarlson/.tmux.conf
 delete_link "/home/iamkarlson/.tmux.conf"
 # Removing directory ********************************* /home/iamkarlson/.config/espanso
