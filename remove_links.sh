@@ -27,6 +27,8 @@ delete_link "/home/iamkarlson/.config/espanso"
 delete_link "/home/iamkarlson/.doom.d"
 # Removing file -------------------------------------- /home/iamkarlson/.config/kitty/kitty.conf
 delete_link "/home/iamkarlson/.config/kitty/kitty.conf"
+# Removing directory ********************************* /home/iamkarlson/.config/alacritty
+delete_link "/home/iamkarlson/.config/alacritty"
 # Removing file -------------------------------------- /home/iamkarlson/.config/sway/config
 delete_link "/home/iamkarlson/.config/sway/config"
 # Removing directory ********************************* /home/iamkarlson/.config/sway/config.d

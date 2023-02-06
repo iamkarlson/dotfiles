@@ -85,7 +85,13 @@ eval $(thefuck --alias)
 
 export ZSH_WAKATIME_BIN=/usr/bin/wakatime
 
+# nvm - node.js version manager
+source /usr/share/nvm/init-nvm.sh
 
+# setting up pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
 ################################################################################
 # Setting up completion system. 
@@ -137,9 +143,3 @@ source ~/.zsh/aliases.zshrc
 # needs to go after plugins, because it overrides `cd`
 export AUTOENV_ENV_FILENAME=.autoenv
 source /usr/share/nvm/init-nvm.sh
-
-
-# setting up pyen
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"

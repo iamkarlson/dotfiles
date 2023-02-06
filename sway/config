@@ -15,7 +15,8 @@ focus_follows_mouse no
 
 # Your preferred terminal emulator
 #set $term LIBGL_ALWAYS_SOFTWARE=1 alacritty
-set $term kitty
+#set $term kitty
+set $term alacritty
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -94,7 +95,8 @@ set $mic_mute $onscreen_bar $(pactl set-source-mute @DEFAULT_SOURCE@ toggle && p
 
 exec swayidle -w  \
      timeout 600 'swaylock -f' \
-     timeout 1800 '~/.config/sway/scripts/dim_screen.sh'  \
+     timeout 900 '~/.config/sway/scripts/dim_screen.sh' \
+     timeout 1800 'systemctl suspend' \
      resume '~/.config/sway/scripts/undim_screen.sh'
 
 bindsym $mod+Shift+Escape exec swaylock -f -c 000000
