@@ -29,6 +29,7 @@ fallback = ""
 '/(?i).pdf/' = ''
 'Emacs' = ''
 '/(?i)telegram/' = ''
+'org.telegram.desktop' = ''
 '/(?i)keepassxc/'=''
 'menu' = ''
 
