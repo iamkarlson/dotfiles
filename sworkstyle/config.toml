@@ -31,6 +31,8 @@ fallback = ""
 '/(?i)telegram/' = ''
 '/(?i)keepassxc/'=''
 'menu' = ''
+'jetbrains-datagrip'=''
+'jetbrains-pycharm'=''
 
 'discord' = ''
 'balena-etcher' = ''
