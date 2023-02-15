@@ -153,6 +153,9 @@ function autocomplete(){
 #
 #(ls ~/.autoenv >> /dev/null 2>&1 && echo "autoenv already installed") || git clone git@github.com:hyperupcall/autoenv.git ~/.autoenv
 
+
+ln_file $dotfiles/user-dirs.dirs $config/user-dirs.dirs
+
 #
 # Sway config
 #
