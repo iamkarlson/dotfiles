@@ -16,3 +16,11 @@ yay -S \
     xorg-xwayland
 
 antidote bundle <~/.zsh/plugins.txt >~/.zsh_plugins.zsh
+
+
+
+
+wget https://framagit.org/MarianArlt/sddm-sugar-candy/-/archive/master/sddm-sugar-candy-master.tar.gz \
+    -O sugar-candy.tar.gz
+
+sudo tar -xzvf ~/Downloads/sugar-candy.tar.gz -C /usr/share/sddm/themes
