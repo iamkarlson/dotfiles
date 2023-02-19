@@ -122,3 +122,5 @@
                                        ("~/src/work/". 1)
                                        )
       )
+
+(setq password-cache-expiry nil)
