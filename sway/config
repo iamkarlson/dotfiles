@@ -57,8 +57,6 @@ input "type:keyboard" {
 
 input type:keyboard xkb_numlock enabled
 
-
-
 #
 # Media
 #
@@ -81,34 +79,15 @@ set $mic_mute $onscreen_bar $(pactl set-source-mute @DEFAULT_SOURCE@ toggle && p
 
 # Idle configuration moved to profiles, as I don't want PC to go to suspend quickly.
 
-bindsym $mod+Shift+Escape exec swaylock -f -c 000000
-
 
 #
 # Status Bar:
 #
 bar swaybar_command waybar
 
-
-# Read `man 5 sway-bar` for more information about this section.
-#bar {
-#    position top
-#
-#    # When the status_command prints a new line to stdout, swaybar updates.
-#    # The default just shows the current date and time.
-#    #status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-#    status_command i3status
-#
-#    colors {
-#        statusline #ffffff
-#        background #323232
-#        inactive_workspace #32323200 #32323200 #5c5c5c
-#    }
-#}
-
-set $profile $(scripts/get_profile.sh)
-exec echo "current profile: $profile" > /tmp/log
-include "profiles/$profile.conf"
+set $profile "$(scripts/get_profile.sh)"
+exec echo "current profile: $profile" > /tmp/sway.log
+include "profiles/$(scripts/get_profile.sh).conf"
 
 include /etc/sway/config.d/*
 include ~/.config/sway/local/*

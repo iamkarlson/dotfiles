@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 hostname=$(cat /etc/hostname)
 
-echo $hostname >> /tmp/log
-
 if [ $hostname = "garnet" ]; then
-    echo "home" >&1
+    echo "home"
 elif [ $hostname = "beryl" ]; then
-    echo "work" >&1
+    echo "work"
 else
-    echo "CANNOT DETECT PROFILE">>/tmp/log
+    echo "CANNOT DETECT PROFILE" 2>&1 >>/tmp/log
 fi
