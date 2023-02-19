@@ -182,6 +182,7 @@ ln_directory $dotfiles/swappy $config/swappy
 ln_directory $dotfiles/workstyle $config/workstyle
 ln_directory $dotfiles/sworkstyle $config/sworkstyle
 
-sudo cp sway/sway_nvidia.sh /bin/sway_nvidia
-sudo chmod +x /bin/sway_nvidia
+ln_file $dotfiles/sway/sway_nvidia.sh /usr/bin/sway_nvidia
+#sudo cp sway/sway_nvidia.sh /bin/sway_nvidia
+#sudo chmod +x /bin/sway_nvidia
 sudo cp sway/sway_nvidia.desktop /usr/share/wayland-sessions
