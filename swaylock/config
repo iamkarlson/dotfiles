@@ -11,6 +11,6 @@ grace-no-mouse
 grace-no-touch
 grace=10
 effect-blur=2x3
-image=~/Pictures/wallpapers/lockscreen.jpg
+image=~/pictures/wallpapers/lockscreen.jpg
 scaling=stretch
 font=SourceCodePro

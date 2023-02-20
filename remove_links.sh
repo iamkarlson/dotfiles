@@ -55,3 +55,5 @@ delete_link "/home/iamkarlson/.config/swappy"
 delete_link "/home/iamkarlson/.config/workstyle"
 # Removing directory ********************************* /home/iamkarlson/.config/sworkstyle
 delete_link "/home/iamkarlson/.config/sworkstyle"
+# Removing file -------------------------------------- /usr/bin/sway_nvidia
+delete_link "/usr/bin/sway_nvidia"
