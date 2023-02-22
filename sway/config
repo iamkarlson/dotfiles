@@ -85,9 +85,9 @@ set $mic_mute $onscreen_bar $(pactl set-source-mute @DEFAULT_SOURCE@ toggle && p
 #
 bar swaybar_command waybar
 
-set $profile "$(scripts/get_profile.sh)"
-exec echo "current profile: $profile" > /tmp/sway.log
-include "profiles/$(scripts/get_profile.sh).conf"
+set $profile "$(~/.config/sway/scripts/get_profile.sh)"
+exec echo "current profile: $profile" >> /tmp/sway.log
+include "profiles/$(~/.config/sway/scripts/get_profile.sh).conf"
 
 include /etc/sway/config.d/*
 include ~/.config/sway/local/*
