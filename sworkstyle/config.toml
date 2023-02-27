@@ -28,12 +28,15 @@ fallback = ""
 'disk usage' = ''
 '/(?i).pdf/' = ''
 'Emacs' = ''
+"emacs" = ''
 '/(?i)telegram/' = ''
 'org.telegram.desktop' = ''
 '/(?i)keepassxc/'=''
 'menu' = ''
 'jetbrains-datagrip'=''
 'jetbrains-pycharm'=''
+
+'/(?i)(cura)|(ultimaker)/'='󰐫'
 
 'discord' = ''
 'balena-etcher' = ''

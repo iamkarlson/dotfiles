@@ -50,3 +50,4 @@
 ;(unpin! t)
 
 (package! i3wm-config-mode)
+(package! gcode-mode)

@@ -120,7 +120,13 @@
 (setq projectile-project-search-path '(
                                        ("~/src/" . 1)
                                        ("~/src/work/". 1)
+                                       ("~/src/personal/". 1)
+                                       ("~/src/etc/". 1)
+                                       ("~/activities/". 2)
                                        )
       )
 
 (setq password-cache-expiry nil)
+
+
+(add-hook 'gcode-mode-hook 'eldoc-mode)

@@ -12,3 +12,5 @@ ohmyzsh/ohmyzsh path:plugins/colored-man-pages
 romkatv/powerlevel10k kind:fpath
 
 sobolevn/wakatime-zsh-plugin
+
+larkery/zsh-histdb
