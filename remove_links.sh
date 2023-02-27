@@ -47,6 +47,8 @@ delete_link "/home/iamkarlson/.config/waybar/config"
 delete_link "/home/iamkarlson/.config/waybar/style.css"
 # Removing directory ********************************* /home/iamkarlson/.config/rofi
 delete_link "/home/iamkarlson/.config/rofi"
+# Removing directory ********************************* /home/iamkarlson/.config/kanshi
+delete_link "/home/iamkarlson/.config/kanshi"
 # Removing directory ********************************* /home/iamkarlson/.config/swaync
 delete_link "/home/iamkarlson/.config/swaync"
 # Removing directory ********************************* /home/iamkarlson/.config/swappy

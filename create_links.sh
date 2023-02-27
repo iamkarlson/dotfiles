@@ -174,6 +174,7 @@ ln_file $dotfiles/waybar/config $config/waybar/config
 ln_file $dotfiles/waybar/style.css $config/waybar/style.css
 
 ln_directory $dotfiles/rofi $config/rofi
+ln_directory $dotfiles/kanshi $config/kanshi
 
 ln_directory $dotfiles/swaync $config/swaync
 

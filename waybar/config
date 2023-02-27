@@ -11,10 +11,10 @@
         "sway/window"
     ],
     "modules-right": [
+        "network",
         "cpu",
         "temperature",
         "memory",
-        "network",
         "battery",
         "tray",
         "pulseaudio",
