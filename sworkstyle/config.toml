@@ -4,7 +4,7 @@ fallback = ""
 [matching]
 'alacritty' = ''
 'kitty' = ''
-'/(?i)slack/' = '聆'
+'/(?i)slack/' = ''
 '/(?i)spotify/' = ''
 '/(?i)github/' = ''
 '/(?i)rust/' = ''
