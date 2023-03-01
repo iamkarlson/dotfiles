@@ -97,6 +97,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(setq-default tab-width 2)
 
 ;;
 ;; kill two birds with one stone using remap: arrow keys and h,j,k,l
@@ -130,3 +131,5 @@
 
 
 (add-hook 'gcode-mode-hook 'eldoc-mode)
+
+(setq case-fold-search t)   ; make searches case insensitive
