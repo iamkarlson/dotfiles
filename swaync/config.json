@@ -14,7 +14,7 @@
   "timeout-critical": 0,
   "fit-to-screen": false,
   "control-center-width": 500,
-  "control-center-height": 600,
+  "control-center-height": 1028,
   "notification-window-width": 500,
   "keyboard-shortcuts": true,
   "image-visibility": "when-available",
@@ -30,17 +30,16 @@
   },
   "notification-visibility": {
     "example-name": {
-      "state": "muted",
+      "state": "enabled",
       "urgency": "Low",
       "app-name": "Spotify"
     }
   },
   "widgets": [
-    "menubar#label",
+    "menubar",
     "buttons-grid",
-    "backlight",
-    "backlight#KB",
     "volume",
+    "backlight",
     "mpris",
     "title",
     "dnd",
@@ -60,69 +59,39 @@
       "text": "Controll Center"
     },
     "mpris": {
-      "image-size": 96,
+      "image-size": 100,
       "image-radius": 12
-    },
-    "backlight": {
-      "label": "",
-      "device": "intel_backlight",
-      "min": 10
-    },
-    "backlight#KB": {
-      "label": " ",
-      "device": "asus::kbd_backlight",
-      "subsystem": "leds"
     },
     "volume": {
       "label": ""
     },
-    "menubar#label": {
-      "menu#power-buttons": {
-        "label": "",
-        "position": "right",
+    "backlight": {
+      "label": ""
+    },
+    "menubar": {
+      "menu#power": {
+        "label": "  Power Menu",
+        "position": "left",
         "actions": [
           {
-            "label": " Reboot",
-            "command": "systemctl reboot"
-          },
-          {
             "label": " Lock",
-            "command": "swaylock -f --image ~/.config/wallpapers/snow_woods.jpg"
+            "command": "swaylock"
           },
           {
-            "label": " Logout",
+            "label": "󰗽 Logout",
             "command": "swaymsg exit"
           },
           {
-            "label": " Shut down",
+            "label": " Suspend",
+            "command": "systemctl suspend"
+          },
+          {
+            "label": " Reboot",
+            "command": "systemctl reboot"
+          },
+          {
+            "label": " Shutdown",
             "command": "systemctl poweroff"
-          }
-        ]
-      },
-      "menu#powermode-buttons": {
-        "label": "",
-        "position": "left",
-        "actions": [
-          {
-            "label": "Performance",
-            "command": "powerprofilesctl set performance"
-          },
-          {
-            "label": "Balanced",
-            "command": "powerprofilesctl set balanced"
-          },
-          {
-            "label": "Power-saver",
-            "command": "powerprofilesctl set power-saver"
-          }
-        ]
-      },
-      "buttons#topbar-buttons": {
-        "position": "left",
-        "actions": [
-          {
-            "label": "",
-            "command": "grim"
           }
         ]
       }
@@ -130,12 +99,20 @@
     "buttons-grid": {
       "actions": [
         {
-          "label": "直",
-          "command": "~/.config/rofi/rofi-wifi-menu.sh"
+          "label": "",
+          "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
         },
         {
-          "label": "",
-          "command": "~/.config/rofi/rofi-bluetooth"
+          "label": "",
+          "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+        },
+        {
+          "label": "",
+          "command": "swaync-client -t -sw && iwgtk"
+        },
+        {
+          "label": "",
+          "command": "swaync-client -t -sw && ~/.config/sway/scripts/screenshot_selected.sh"
         }
       ]
     }
