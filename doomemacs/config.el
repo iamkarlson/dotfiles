@@ -117,6 +117,7 @@
 (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
 ; Make horizontal movement cross lines
 (setq-default evil-cross-lines t)
+(setq-default evil-ex-search-vim-style-regexp nil)
 
 (setq projectile-project-search-path '(
                                        ("~/src/" . 1)

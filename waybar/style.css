@@ -4,8 +4,8 @@
 	font-family: CaskaydiaCove Nerd Font;
 }
 
-@define-color background     #1e2127;
-@define-color background-alt #282b31;
+@define-color background     #753AB0;
+@define-color background-alt #250C3E;
 @define-color foreground     #ffffff;
 @define-color selected       #59cd90;
 @define-color active         #fac05e;

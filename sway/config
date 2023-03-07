@@ -31,10 +31,6 @@ set $menu ~/src/dotfiles/rofi/launcher.sh
 #set $menu wofi -show drun -show-icons -font 'CaskaydiaCove Nerd Font 17'
 
 
-# Toggle control center
-bindsym $mod+Shift+n exec swaync-client -t -sw
-
-
 
 ### Input configuration
 #
