@@ -1,0 +1,16 @@
+# This needs swaylock-effects
+# https://github.com/jirutka/swaylock-effects
+clock
+indicator
+show-failed-attempts
+daemonize
+ignore-empty-password
+indicator-caps-lock
+show-keyboard-layout
+grace-no-mouse
+grace-no-touch
+grace=10
+effect-blur=2x3
+image=~/pictures/wallpapers/lockscreen.jpg
+scaling=stretch
+font=SourceCodePro

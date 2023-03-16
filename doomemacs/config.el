@@ -6,7 +6,7 @@
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
-(setq user-full-name "Georgy Grigoryev"
+(setq user-full-name "Georgy Green"
       user-mail-address "iamkarlson@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
@@ -23,7 +23,9 @@
 ;;
 ;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-;;
+(setq doom-font (font-spec :family "Hack Nerd Font" :size 15 :weight 'semi-light)
+      doom-variable-pitch-font (font-spec :family "Hack Nerd Font" :size 16))
+; FONT TEST: 0000000
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
@@ -32,11 +34,12 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-tomorrow-night)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type t)
+(setq display-line-numbers-type `relative)
+
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -74,3 +77,60 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+(remove-hook 'doom-first-input-hook #'evil-snipe-mode)
+(setq-default evil-kill-on-visual-paste nil)
+
+(menu-bar-mode +1)
+(blink-cursor-mode +1)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(evil-respect-visual-line-mode t)
+ '(org-insert-heading-respect-content t))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+(setq-default tab-width 2)
+
+;;
+;; kill two birds with one stone using remap: arrow keys and h,j,k,l
+(define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+(define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+(define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+(define-key evil-normal-state-map (kbd "<remap> <evil-backward-char>") 'left-char)
+(define-key evil-motion-state-map (kbd "<remap> <evil-forward-char>") 'right-char)
+(define-key evil-normal-state-map (kbd "<remap> <evil-backward-char>") 'left-char)
+(define-key evil-motion-state-map (kbd "<remap> <evil-forward-char>") 'right-char)
+
+;; Make movement keys work like they should
+(define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+(define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+(define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+(define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+; Make horizontal movement cross lines
+(setq-default evil-cross-lines t)
+(setq-default evil-ex-search-vim-style-regexp nil)
+
+(setq projectile-project-search-path '(
+                                       ("~/src/" . 1)
+                                       ("~/src/work/". 1)
+                                       ("~/src/personal/". 1)
+                                       ("~/src/etc/". 1)
+                                       ("~/activities/". 2)
+                                       )
+      )
+
+(setq password-cache-expiry nil)
+
+
+(add-hook 'gcode-mode-hook 'eldoc-mode)
+
+(setq case-fold-search t)   ; make searches case insensitive

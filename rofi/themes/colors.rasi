@@ -1,0 +1,10 @@
+/*# -*- mode: css -*-*/
+
+* {
+    background:     #1E2127FF;
+    background-alt: #282B31FF;
+    foreground:     #FFFFFFFF;
+    selected:       #59CD90FF;
+    active:         #FAC05EFF;
+    urgent:         #EE6352FF;
+}

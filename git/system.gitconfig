@@ -1,6 +1,6 @@
 [include]
-  path=~/git/git/local.gitconfig
-  path=~/git/git/aliases.gitconfig
+  path=~/git/local.gitconfig
+  path=~/git/aliases.gitconfig
 [push]
   followTags = true
 [status]

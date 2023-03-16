@@ -1,0 +1,113 @@
+# -*- mode: i3wm-config -*-
+# Read `man 5 sway` for a complete reference.
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+
+focus_follows_mouse no
+
+# Your preferred terminal emulator
+#set $term LIBGL_ALWAYS_SOFTWARE=1 alacritty
+#set $term kitty
+set $term alacritty
+
+# Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+#set $menu dmenu_path | dmenu | xargs swaymsg exec --
+#set $menu bemenu-run | xargs swaymsg exec --
+#set $menu mauncher-launcher | xargs swaymsg exec --
+#set $menu rofi | xargs swaymsg exec --
+#set $menu rofi -show drun -show-icons -font 'CaskaydiaCove Nerd Font 17'
+set $menu ~/src/dotfiles/rofi/launcher.sh
+
+#set $menu wofi -show drun -show-icons -font 'CaskaydiaCove Nerd Font 17'
+
+
+
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+input "type:keyboard" {
+    xkb_layout us,ru
+    xkb_options grp:caps_toggle
+}
+
+input type:keyboard xkb_numlock enabled
+
+#
+# Media
+#
+
+
+# brightness control
+set $brightness_up brightnessctl set +10%
+set $brightness_down brightnessctl set 10%-
+
+
+# audio control
+set $sink_volume pactl get-sink-volume @DEFAULT_SINK@ | grep '^Volume:' | cut -d / -f 2 | tr -d ' ' | sed 's/%//'
+set $source_volume pactl get-source-volume @DEFAULT_SOURCE@ | grep '^Volume:' | cut -d / -f 2 | tr -d ' ' | sed 's/%//'
+set $volume_down $onscreen_bar $(pactl set-sink-volume @DEFAULT_SINK@ -5% && $sink_volume)
+set $volume_up $onscreen_bar $(pactl set-sink-volume @DEFAULT_SINK@ +5% && $sink_volume)
+set $volume_mute $onscreen_bar $(pactl set-sink-mute @DEFAULT_SINK@ toggle && pactl get-sink-mute @DEFAULT_SINK@ | sed -En "/no/ s/.*/$($sink_volume)/p; /yes/ s/.*/0/p")
+set $mic_mute $onscreen_bar $(pactl set-source-mute @DEFAULT_SOURCE@ toggle && pactl get-source-mute @DEFAULT_SOURCE@ | sed -En "/no/ s/.*/$($source_volume)/p; /yes/ s/.*/0/p")
+
+
+
+# Idle configuration moved to profiles, as I don't want PC to go to suspend quickly.
+
+
+#
+# Status Bar:
+#
+bar swaybar_command waybar
+
+set $profile "$(~/.config/sway/scripts/get_profile.sh)"
+exec echo "current profile: $profile" >> /tmp/sway.log
+include "profiles/$(~/.config/sway/scripts/get_profile.sh).conf"
+
+include /etc/sway/config.d/*
+include ~/.config/sway/local/*
+include ~/.config/sway/config.d/*
+
+mode "nag" {
+	bindsym --to-code {
+		Ctrl+d mode "default"
+
+		Ctrl+c $nag --exit
+		q $nag --exit
+		Escape $nag --exit
+
+		Return $nag --confirm
+
+		Tab $nag --select prev
+		Shift+Tab $nag --select next
+
+
+		Left $nag --select prev
+		Right $nag --select next
+
+		Up $nag --select prev
+		Down $nag --select next
+
+	}
+}
