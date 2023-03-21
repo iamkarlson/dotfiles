@@ -14,3 +14,16 @@ profile {
     output "LG Electronics LG HDR 4K 0x0000F75D" position 1476,0 mode 3840x2160 scale 1.3
     output eDP-1 position 0,400 scale 1.3
 }
+
+
+profile {
+    output "LG Electronics LG HDR WQHD 0x00006E7" position 0,0 mode 3440x1440 scale 1.3
+}
+
+profile {
+    output "LG Electronics LG HDR WQHD 0x00004D0A" position 0,0 mode 3440x1440 scale 1.3
+}
+
+profile {
+    output "LG Electronics LG HDR 4K 0x0000F75D" position 0,0 mode 3840x2160 scale 1.3
+}
