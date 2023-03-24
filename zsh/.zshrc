@@ -100,6 +100,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+# google shit for using their gcloud auth pluging instead of native k8s one when calling `get-credentials`
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
 ################################################################################
 # Setting up completion system. 
 # It must go before plugins
