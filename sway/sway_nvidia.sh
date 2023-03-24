@@ -31,9 +31,6 @@ export NVD_LOG=/tmp/nvd.log
 
 #
 # Intel graphics
-#
-export LIBVA_DRIVER_NAME=iHD
-export VDPAU_DRIVER=va_gl
 
 #
 # Wayland stuff
