@@ -1,141 +1,150 @@
-
 /*# -*- mode: json -*-*/
 
 {
-    "layer": "bottom",
-    "modules-left": [
-        "sway/workspaces",
-        "sway/mode"
-    ],
-    "modules-center": [
-        "sway/window"
-    ],
-    "modules-right": [
-        "network",
-        "cpu",
-        "temperature",
-        "memory",
-        "battery",
-        "tray",
-        "pulseaudio",
-        "sway/language",
-        "clock",
-        // "custom/spotify",
-        "custom/powermenu"
-    ],
-    "sway/window": {
-        "max-length": 50
-    },
-    "clock": {
-		"interval": 1,
-		"format": "{:%H:%M:%S}",
-        "format-alt": "{:%a, %d. %b  %H:%M}",
-		"tooltip": true,
-        "tooltip-format": " {:%e %b %Y}"
-	},
+  "layer": "bottom",
+  "modules-left": [
+    "sway/workspaces",
+    "sway/mode"
+  ],
+  "modules-center": [
+    "sway/window"
+  ],
+  "modules-right": [
+    "network",
+    "cpu",
+    "temperature",
+    "memory",
+    "battery",
+    "tray",
+    "custom/scratchpad-indicator",
+    "pulseaudio",
+    "sway/language",
+    "clock",
+    // "custom/spotify",
+    "custom/powermenu"
 
-	// "clock#date": {
-	// 	"interval": 20,
-	// 	"format": "{:%e %b %Y}",
-	// 	"tooltip": false,
-	// 	//"tooltip-format": "{:%e %B %Y}"
-	// },
+  ],
+  "sway/window": {
+    "max-length": 50
+  },
+  "clock": {
+    "interval": 1,
+    "format": "{:%H:%M:%S}",
+    "format-alt": "{:%a, %d. %b  %H:%M}",
+    "tooltip": true,
+    "tooltip-format": " {:%e %b %Y}"
+  },
 
-	"cpu": {
-		"interval": 3,
-		"tooltip": false,
-		"format": " {usage}%",
-		"format-alt": " {load}",
-		"states": {
-			"warning": 70,
-			"critical": 90
-		}
-	},
-	"sway/language": {
-		"format": " {}",
-		"min-length": 5,
-		"on-click": "swaymsg 'input * xkb_switch_layout next'",
-		"tooltip": false
-	},
+  // "clock#date": {
+    // 	"interval": 20,
+    // 	"format": "{:%e %b %Y}",
+    // 	"tooltip": false,
+    // 	//"tooltip-format": "{:%e %B %Y}"
+    // },
 
-	"memory": {
-		"interval": 5,
-		"format": " {used:0.1f}G/{total:0.1f}G",
-		"states": {
-			"warning": 70,
-			"critical": 90
-		},
-        "tooltip": false
-    },
-
-
-	"network": {
-        "interval": 2,
-        "format-wifi": "﬉ {signalStrength}%  {bandwidthDownBytes}  {bandwidthUpBytes}",
-        "Format-ethernet": "  {bandwidthDownBytes}  {bandwidthUpBytes}",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "⚠ Disconnected",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}",
-        "tooltip-format": "{essid} on {ifname} via {gwaddr} ",
-        "tooltip-format-diconnected": ""
-	},
-
-	"pulseaudio": {
-		"scroll-step": 1,
-		"format": "{icon} {volume}%",
-		"format-bluetooth": "{icon} {volume}%",
-		"format-muted": "",
-		"format-icons": {
-			"headphones": "",
-			"handsfree": "",
-			"headset": "",
-			"phone": "",
-			"portable": "",
-			"car": "",
-			"default": ["", ""]
-		},
-		"on-click": "pavucontrol"
-	},
-
-    "temperature": {
-		"critical-threshold": 90,
-		"interval": 3,
-		"format": "{icon} {temperatureC}°",
-		"format-icons": [
-			"",
-			"",
-			"",
-			"",
-			""
-		],
-		"tooltip": false
-	},
-
-
-    "battery": {
-        "format": "{capacity}% {icon}",
-        "format-icons": ["", "", "", "", ""],
-		"on-click": "swaymsg exec battop"
-    },
-
-    "custom/spotify": {
-        "format": "{icon} {}",
-        "escape": true,
-        "return-type": "json",
-        "max-length": 40,
-        "interval": 30, // Remove this if your script is endless and write in loop
-        "on-click": "playerctl -p spotify play-pause",
-        "on-click-right": "killall spotify",
-        "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
-        "on-scroll-up" : "playerctl -p spotify next",
-        "on-scroll-down" : "playerctl -p spotify previous",
-        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
-        "exec-if": "pgrep spotify"
-    },
-
-    "custom/powermenu": {
-        "format": "",
-        "interval": "once",
-        "on-click": "~/src/dotfiles/rofi/powermenu.sh",
+  "cpu": {
+    "interval": 3,
+    "tooltip": false,
+    "format": " {usage}%",
+    "format-alt": " {load}",
+    "states": {
+      "warning": 70,
+      "critical": 90
     }
+  },
+  "sway/language": {
+    "format": " {}",
+    "min-length": 5,
+    "on-click": "swaymsg 'input * xkb_switch_layout next'",
+    "tooltip": false
+  },
+
+  "memory": {
+    "interval": 5,
+    "format": " {used:0.1f}G/{total:0.1f}G",
+    "states": {
+      "warning": 70,
+      "critical": 90
+    },
+    "tooltip": false
+  },
+
+
+  "network": {
+    "interval": 2,
+    "format-wifi": "﬉ {signalStrength}%  {bandwidthDownBytes}  {bandwidthUpBytes}",
+    "Format-ethernet": "  {bandwidthDownBytes}  {bandwidthUpBytes}",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "⚠ Disconnected",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "tooltip-format": "{essid} on {ifname} via {gwaddr} ",
+    "tooltip-format-diconnected": ""
+  },
+
+  "pulseaudio": {
+    "scroll-step": 1,
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "{icon} {volume}%",
+    "format-muted": "",
+    "format-icons": {
+      "headphones": "",
+      "handsfree": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", ""]
+    },
+    "on-click": "pavucontrol"
+  },
+
+  "temperature": {
+    "critical-threshold": 90,
+    "interval": 3,
+    "format": "{icon} {temperatureC}°",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      ""
+    ],
+    "tooltip": false
+  },
+
+
+  "battery": {
+    "format": "{capacity}% {icon}",
+    "format-icons": ["", "", "", "", ""],
+    "on-click": "swaymsg exec battop"
+  },
+
+  "custom/spotify": {
+    "format": "{icon} {}",
+    "escape": true,
+    "return-type": "json",
+    "max-length": 40,
+    "interval": 30, // Remove this if your script is endless and write in loop
+    "on-click": "playerctl -p spotify play-pause",
+    "on-click-right": "killall spotify",
+    "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
+      "on-scroll-up" : "playerctl -p spotify next",
+    "on-scroll-down" : "playerctl -p spotify previous",
+    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
+    "exec-if": "pgrep spotify"
+  },
+
+  "custom/powermenu": {
+    "format": "",
+    "interval": "once",
+    "on-click": "~/src/dotfiles/rofi/powermenu.sh",
+  },
+  "custom/scratchpad-indicator": {
+    "interval": 3,
+    "return-type": "json",
+    "exec": "swaymsg -t get_tree | jq --unbuffered --compact-output '(recurse(.nodes[]) | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | if ($scratch_nodes|length) > 0 then { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") } else empty end'",
+    "format": " | {} 󱊖 | ",
+    "on-click": "exec swaymsg 'scratchpad show'",
+    "on-click-right": "exec swaymsg 'move scratchpad'"
+  }
 }
