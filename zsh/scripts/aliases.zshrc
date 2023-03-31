@@ -25,3 +25,6 @@ alias rm='rmtrash'
 alias rmdir='rmdirtrash'
 
 alias sudo='sudo '
+
+
+alias poetry_activate='source "$( poetry env info --path )/bin/activate"'

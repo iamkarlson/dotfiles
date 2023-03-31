@@ -36,6 +36,7 @@ fallback = ""
 'jetbrains-datagrip'=''
 'jetbrains-pycharm'=''
 'OpenLens'='󱡴'
+'1Password'='󰢁'
 
 '/(?i)(cura)|(ultimaker)/'='󰐫'
 
