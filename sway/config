@@ -47,7 +47,7 @@ set $menu ~/src/dotfiles/rofi/launcher.sh
 # Read `man 5 sway-input` for more information about this section.
 
 input "type:keyboard" {
-    xkb_layout us,ru
+    xkb_layout eu,ru
     xkb_options grp:caps_toggle
 }
 
