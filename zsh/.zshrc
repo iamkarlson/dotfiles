@@ -151,7 +151,9 @@ source ~/.zsh/aliases.zshrc
 
 # autoenv settings
 # needs to go after plugins, because it overrides `cd`
-export AUTOENV_ENV_FILENAME=.autoenv
+#export AUTOENV_ENV_FILENAME=.autoenv
+export AUTOENV_FILE_ENTER=.autoenv.zsh
+export AUTOENV_AUTH_FILE=.autoenv
 source /usr/share/nvm/init-nvm.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
