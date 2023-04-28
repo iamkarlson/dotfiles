@@ -26,7 +26,10 @@ set $term alacritty
 #set $menu mauncher-launcher | xargs swaymsg exec --
 #set $menu rofi | xargs swaymsg exec --
 #set $menu rofi -show drun -show-icons -font 'CaskaydiaCove Nerd Font 17'
+#
+# rofi script with options
 set $menu ~/src/dotfiles/rofi/launcher.sh
+#set $menu nwg-menu
 
 #set $menu wofi -show drun -show-icons -font 'CaskaydiaCove Nerd Font 17'
 
