@@ -10,4 +10,5 @@ powershell/Help/
 .DS_Store
 /vim/plugins/plugins
 *private*
+.autoenv.zsh
 .autoenv

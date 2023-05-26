@@ -146,4 +146,5 @@
 
 (setq case-fold-search t)   ; make searches case insensitive
 
-;; Themes switcher
+(setq treemacs-follow-after-init t)
+(setq treemacs-project-follow-cleanup t)
