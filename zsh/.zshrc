@@ -135,6 +135,7 @@ antidote load
 # antidote bundle <~/.zsh/plugins.txt >~/.zsh_plugins.zsh
 
 source ~/.zsh_plugins.zsh
+source "$(antidote home)/https-COLON--SLASH--SLASH-github.com-SLASH-larkery-SLASH-zsh-histdb/sqlite-history.zsh"
 
 
 ################################################################################
