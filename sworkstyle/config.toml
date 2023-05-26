@@ -1,5 +1,5 @@
 
-fallback = ""
+fallback = "󰀻"
 
 [matching]
 'alacritty' = ''
@@ -15,16 +15,17 @@ fallback = ""
 'chrome' = ''
 '/(?i)thunar/' = ''
 '/(?i)libreoffice calc/' = ''
-'/(?i)libreoffice writer/' = ''
-'LibreOffice' = ''
+'/(?i)libreoffice writer/' = '󰈬'
+'LibreOffice' = '󰏆'
 'libreoffice-startcenter' = ''
 '/(?i)nvim/' = ''
 '/(?i)gthumb/' = ''
-'/(?i)calculator/' = ''
+'/(?i)calculator/' = '󱖦'
+'/(?i)qalculate/' = '󱖦'
 '/(?i)transmission/' = ''
 '/(?i)videostream/' = ''
 '/(?i)mpv/' = ''
-'/(?i)music/' = ''
+'/(?i)music/' = '󰗾'
 'disk usage' = ''
 '/(?i).pdf/' = ''
 'Emacs' = ''

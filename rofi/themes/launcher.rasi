@@ -9,12 +9,13 @@
 
 /*****----- Configuration -----*****/
 configuration {
-	modi:                       "drun,run,filebrowser,window";
+	modi:                       "drun,run,filebrowser,window,emoji";
     show-icons:                 true;
     display-drun:               " Apps";
     display-run:                " Run";
     display-filebrowser:        " Files";
     display-window:             " Windows";
+    display-emoji:              "😀Emoji";
 	drun-display-format:        "{name}";
 	window-format:              "{w} · {c} · {t}";
 }
@@ -30,7 +31,7 @@ configuration {
     foreground-colour:           var(foreground);
     alternate-background:        var(background-alt);
     normal-background:           var(background);
-    normal-foreground:           var(foreground);
+    normal-foreground:           var(foreground)  ;
     urgent-background:           var(urgent);
     urgent-foreground:           var(background);
     active-background:           var(active);

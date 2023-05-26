@@ -21,7 +21,8 @@
     "sway/language",
     "clock",
     // "custom/spotify",
-    "custom/powermenu"
+    //"custom/powermenu"
+    "custom/menu"
 
   ],
   "sway/window": {
@@ -72,7 +73,7 @@
 
   "network": {
     "interval": 2,
-    "format-wifi": "﬉ {signalStrength}%  {bandwidthDownBytes}  {bandwidthUpBytes}",
+    "format-wifi": "󰘊 {signalStrength}%  {bandwidthDownBytes}  {bandwidthUpBytes}",
     "Format-ethernet": "  {bandwidthDownBytes}  {bandwidthUpBytes}",
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "⚠ Disconnected",
@@ -134,6 +135,11 @@
     "exec-if": "pgrep spotify"
   },
 
+  "custom/menu": {
+    "format": "󰹯",
+    "interval": "once",
+    "on-click": "swaync-client -t -sw",
+  },
   "custom/powermenu": {
     "format": "",
     "interval": "once",

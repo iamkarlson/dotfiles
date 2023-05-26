@@ -106,9 +106,10 @@ window#waybar {
 	padding: 5px 10px;
 }
 
-#custom-powermenu {
+#custom-powermenu, #custom-menu {
 	color: @urgent;
 	padding: 0px 15px;
 	margin-top: -3px;
 	font-size: 25px;
 }
+
