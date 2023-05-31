@@ -12,6 +12,7 @@ set $up k
 set $right l
 
 focus_follows_mouse no
+mouse_warping output
 
 # Your preferred terminal emulator
 #set $term LIBGL_ALWAYS_SOFTWARE=1 alacritty
@@ -29,6 +30,7 @@ set $term alacritty
 #
 # rofi script with options
 set $menu ~/src/dotfiles/rofi/launcher.sh
+#set $menu ulauncher
 #set $menu nwg-menu
 
 #set $menu wofi -show drun -show-icons -font 'CaskaydiaCove Nerd Font 17'

@@ -51,3 +51,4 @@
 
 (package! i3wm-config-mode)
 (package! gcode-mode)
+(package! org-roam)
