@@ -12,3 +12,4 @@ powershell/Help/
 *private*
 .autoenv.zsh
 .autoenv
+doomemacs/custom.el
