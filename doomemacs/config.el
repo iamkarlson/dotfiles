@@ -36,16 +36,13 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;;(setq doom-theme 'doom-tomorrow-night)
-;;(setq doom-theme 'doom-tomorrow-day)
-(setq doom-theme 'doom-feather-light)
+(setq doom-theme 'doom-manegarm)
+;;(setq doom-theme 'doom-feather-light)
 
 (after! doom-themes
   (setq doom-themes-enable-bold t)
-  (setq doom-themes-enable-italic t))
-
-(custom-set-faces!
-  '(font-lock-comment-face :slant italic)
-  '(font-lock-keyword-face :slant italic))
+  (setq doom-themes-enable-italic t)
+  (setq custom-safe-themes t))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -89,20 +86,11 @@
 
 (menu-bar-mode +1)
 (blink-cursor-mode +1)
+(global-wakatime-mode)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(evil-respect-visual-line-mode t)
- '(org-insert-heading-respect-content t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+(setq-default evil-respect-visual-line-mode t)
+(setq-default org-insert-heading-respect-content t)
 (setq-default tab-width 2)
 
 ;;
@@ -174,3 +162,27 @@
   (require 'org-roam-dailies) ;; Ensure the keymap is available
   (org-roam-db-autosync-mode)
 )
+
+
+
+;; Copying org-mode text into buffer as markdown
+
+(defun my/org-to-markdown-and-copy ()
+  "Convert selected Org-mode text to Markdown and copy to clipboard."
+  (interactive)
+  (require 'ox-md) ;; Ensure the Org Markdown exporter is available
+
+  ;; Store the current point and mark positions
+  (let ((start (if (region-active-p) (region-beginning) (point-min)))
+        (end (if (region-active-p) (region-end) (point-max))))
+    ;; Export the selected region or the entire buffer to Markdown
+    (let ((markdown (shell-command-on-region-to-string start end "pandoc -f org -t markdown")))
+      ;; Copy the converted Markdown to the clipboard
+      (when (stringp markdown)
+        (kill-new markdown)
+        (message "Converted Markdown copied to clipboard.")))))
+
+
+;; Bind the function to a keybinding (leader y)
+(map! :leader
+      :desc "Convert Org to Markdown and Copy" "y" #'my/org-to-markdown-and-copy)
