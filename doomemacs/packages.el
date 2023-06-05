@@ -53,6 +53,7 @@
 (package! gcode-mode)
 (package! rainbow-mode)
 
-(package! org-roam)
+;;(package! org-roam)
 (unpin! org-roam)
 (package! org-roam-ui)
+(package! wakatime-mode)
