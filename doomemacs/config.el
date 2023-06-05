@@ -36,8 +36,8 @@
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;;(setq doom-theme 'doom-tomorrow-night)
-(setq doom-theme 'doom-manegarm)
-;;(setq doom-theme 'iamkarlson-fallout)
+;;(setq doom-theme 'doom-manegarm)
+(setq doom-theme 'iamkarlson-fallout)
 ;;(setq doom-theme 'doom-feather-light)
 
 (after! doom-themes
