@@ -43,6 +43,8 @@
   (setq doom-themes-enable-bold t)
   (setq doom-themes-enable-italic t))
 
+(setq sml/no-confirm-load-theme t)
+
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))

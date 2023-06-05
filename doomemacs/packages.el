@@ -52,4 +52,7 @@
 (package! i3wm-config-mode)
 (package! gcode-mode)
 (package! rainbow-mode)
+
 (package! org-roam)
+(unpin! org-roam)
+(package! org-roam-ui)
