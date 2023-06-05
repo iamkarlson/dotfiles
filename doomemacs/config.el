@@ -37,13 +37,14 @@
 ;; `load-theme' function. This is the default:
 ;;(setq doom-theme 'doom-tomorrow-night)
 (setq doom-theme 'doom-manegarm)
+;;(setq doom-theme 'iamkarlson-fallout)
 ;;(setq doom-theme 'doom-feather-light)
 
 (after! doom-themes
   (setq doom-themes-enable-bold t)
   (setq doom-themes-enable-italic t)
   (setq custom-safe-themes t))
-
+  ;;(load-theme 'iamkarlson-fallout t))
 (setq sml/no-confirm-load-theme t)
 
 (custom-set-faces!
@@ -92,7 +93,9 @@
 
 (menu-bar-mode +1)
 (blink-cursor-mode +1)
-(global-wakatime-mode)
+
+;; Disabled by default
+;(global-wakatime-mode)
 
  (setq-default evil-respect-visual-line-mode t)
  (setq-default org-insert-heading-respect-content t)
@@ -177,26 +180,15 @@
   (org-roam-db-autosync-mode)
 )
 
-
-
-;; Copying org-mode text into buffer as markdown
-
-(defun my/org-to-markdown-and-copy ()
-  "Convert selected Org-mode text to Markdown and copy to clipboard."
-  (interactive)
-  (require 'ox-md) ;; Ensure the Org Markdown exporter is available
-
-  ;; Store the current point and mark positions
-  (let ((start (if (region-active-p) (region-beginning) (point-min)))
-        (end (if (region-active-p) (region-end) (point-max))))
-    ;; Export the selected region or the entire buffer to Markdown
-    (let ((markdown (shell-command-on-region-to-string start end "pandoc -f org -t markdown")))
-      ;; Copy the converted Markdown to the clipboard
-      (when (stringp markdown)
-        (kill-new markdown)
-        (message "Converted Markdown copied to clipboard.")))))
-
-
-;; Bind the function to a keybinding (leader y)
-(map! :leader
-      :desc "Convert Org to Markdown and Copy" "y" #'my/org-to-markdown-and-copy)
+(use-package treemacs
+  :init
+    (setq treemacs-follow-after-init t)
+    (setq      treemacs-is-never-other-window t)
+    (setq  treemacs-project-follow-cleanup t)
+    (setq treemacs-collapse-dirs 3)
+    (setq     treemacs-width 40)
+  :config
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (treemacs-git-mode 'simple)
+    (treemacs-fringe-indicator-mode t))
