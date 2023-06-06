@@ -57,6 +57,7 @@
    (teal       '("#dbc077" "#dbc077" "brightgreen"  )) ;; more of a sand/beige color
    (violet     '("#76597b" "#76597b" "magenta"      ))
    (yellow     '("#ffbf00" "#ffbf00" "yellow"       ))
+   (black      '("#000000" "#000000" "black"        ))
 
    ;; These are the "universal syntax classes" that doom-themes establishes.
    ;; These *must* be included in every doom themes, or your theme will throw an
@@ -73,7 +74,8 @@
    (methods        (doom-darken purple 0.5))
    (operators      yellow)
    (type           green)
-   (strings        (doom-darken teal 0.1))
+   (strings        base8)
+   ;(strings        (doom-darken teal 0.1))
    (variables      green)
    (numbers        teal)
    (region         (doom-darken dark-cyan 0.7))
@@ -149,6 +151,7 @@
    (org-level-4 :foreground violet :bold t)
    (org-level-5 :foreground red :bold t)
    (org-level-6 :foreground yellow :bold t)
+   (org-code :foreground green :background (doom-darken black 1))
 
 
 )

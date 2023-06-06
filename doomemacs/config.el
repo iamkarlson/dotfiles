@@ -95,7 +95,7 @@
 (blink-cursor-mode +1)
 
 ;; Disabled by default
-;(global-wakatime-mode)
+(global-wakatime-mode)
 
  (setq-default evil-respect-visual-line-mode t)
  (setq-default org-insert-heading-respect-content t)
@@ -145,6 +145,7 @@
 (add-hook 'gcode-mode-hook 'eldoc-mode)
 
 (setq case-fold-search t)   ; make searches case insensitive
+(setq completion-ignore-case t) ; make autocomplete case insensitive
 
 (setq treemacs-follow-after-init t)
 (setq treemacs-project-follow-cleanup t)

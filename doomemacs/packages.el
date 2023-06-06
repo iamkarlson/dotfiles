@@ -49,6 +49,8 @@
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
 
+;;(package! consult)
+
 (package! i3wm-config-mode)
 (package! gcode-mode)
 (package! rainbow-mode)
