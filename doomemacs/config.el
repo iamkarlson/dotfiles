@@ -181,6 +181,18 @@
   (org-roam-db-autosync-mode)
 )
 
+(defun my/org-roam-preview-other-window ()
+  (interactive)
+  (org-roam-preview-visit
+   (org-roam-buffer-file-at-point 'assert)
+   (oref (magit-current-section) point)
+   :other-window))
+
+(define-key org-roam-mode-map [mouse-1] #'my/org-roam-preview-other-window)
+
+
+
+
 (use-package treemacs
   :init
     (setq treemacs-follow-after-init t)
