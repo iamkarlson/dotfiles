@@ -144,6 +144,18 @@
 
 (add-hook 'gcode-mode-hook 'eldoc-mode)
 
+(add-hook 'org-mode-hook 'git-auto-commit-mode)
+(defun my-auto-commit-message (filename)
+  "Specify that my commit is a work in progress"
+  (concat "braindb connect from " system-name ". file: " (gac-relative-file-name filename)))
+
+(with-eval-after-load 'git-auto-commit-mode
+  (setq gac-default-message #'my-auto-commit-message
+        ;gac-ask-for-summary-p t
+        gac-automatically-push-p t
+        gac-debounce-interval 30)
+  )
+
 (setq case-fold-search t)   ; make searches case insensitive
 (setq completion-ignore-case t) ; make autocomplete case insensitive
 
