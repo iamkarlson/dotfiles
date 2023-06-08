@@ -59,3 +59,6 @@
 (unpin! org-roam)
 (package! org-roam-ui)
 (package! wakatime-mode)
+
+
+(package! git-auto-commit-mode)
