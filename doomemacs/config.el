@@ -183,14 +183,20 @@
          ("C-c n i" . org-roam-node-insert)
          :map org-mode-map
          ("C-M-i" . completion-at-point)
+         ;; Also see leader binding below for "SPC d" menu
          :map org-roam-dailies-map
          ("Y" . org-roam-dailies-capture-yesterday)
          ("T" . org-roam-dailies-capture-tomorrow))
-  :bind-keymap
-  ("C-c n d" . org-roam-dailies-map)
+  :bind-keymap (
+        ("C-c n d" . org-roam-dailies-map)
+  )
   :config
   (require 'org-roam-dailies) ;; Ensure the keymap is available
   (org-roam-db-autosync-mode)
+)
+
+(map! :leader
+      "d"  org-roam-dailies-map
 )
 
 (defun my/org-roam-preview-other-window ()
