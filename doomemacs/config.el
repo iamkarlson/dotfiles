@@ -30,21 +30,21 @@
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
-;; wasn't installed correctly. Font issues are rarely Doom issues!
+;;      wasn't installed correctly. Font issues are rarely Doom issues!
 
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
-;; `load-theme' function. This is the default:
-;;(setq doom-theme 'doom-tomorrow-night)
-;;(setq doom-theme 'doom-manegarm)
-(setq doom-theme 'iamkarlson-fallout)
-;;(setq doom-theme 'doom-feather-light)
+        ;; There are two ways to load a theme. Both assume the theme is installed and
+        ;; available. You can either set `doom-theme' or manually load a theme with the
+        ;; `load-theme' function. This is the default:
+        ;;(setq doom-theme 'doom-tomorrow-night)
+        ;;(setq doom-theme 'doom-manegarm)
+        (setq doom-theme 'iamkarlson-fallout)
+        ;;(setq doom-theme 'doom-feather-light)
 
-(after! doom-themes
-  (setq doom-themes-enable-bold t)
-  (setq doom-themes-enable-italic t)
-  (setq custom-safe-themes t))
-  ;;(load-theme 'iamkarlson-fallout t))
+        (after! doom-themes
+        (setq doom-themes-enable-bold t)
+        (setq doom-themes-enable-italic t)
+        (setq custom-safe-themes t))
+        ;;(load-theme 'iamkarlson-fallout t))
 (setq sml/no-confirm-load-theme t)
 
 (custom-set-faces!
@@ -90,6 +90,7 @@
 
 (remove-hook 'doom-first-input-hook #'evil-snipe-mode)
 (setq-default evil-kill-on-visual-paste nil)
+(setq-default evil-respect-visual-line-mode t)
 
 (menu-bar-mode +1)
 (blink-cursor-mode +1)
@@ -97,11 +98,10 @@
 ;; Disabled by default
 (global-wakatime-mode)
 
- (setq-default evil-respect-visual-line-mode t)
  (setq-default org-insert-heading-respect-content t)
  (setq-default treemacs-follow-after-init t)
  (setq-default treemacs-project-follow-cleanup t)
-
+ (setq-default evil-shift-width 2)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -147,7 +147,7 @@
 (add-hook 'org-mode-hook 'git-auto-commit-mode)
 (defun my-auto-commit-message (filename)
   "Specify that my commit is a work in progress"
-  (concat "braindb connect from " system-name ". file: " (gac-relative-file-name filename)))
+  (concat "braindb connect from " (system-name) ". file: " (gac-relative-file-name filename)))
 
 (with-eval-after-load 'git-auto-commit-mode
   (setq gac-default-message #'my-auto-commit-message
@@ -171,8 +171,15 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/braindb/")
 
-(use-package! org-roam
-  :ensure t
+(defun my/org-roam-preview-other-window ()
+  (interactive)
+  (org-roam-preview-visit
+   (org-roam-buffer-file-at-point 'assert)
+   (oref (magit-current-section) point)
+   :other-window))
+
+
+(use-package org-roam
   :init
     (setq org-roam-v2-ack t)
   :custom
@@ -195,19 +202,12 @@
   (org-roam-db-autosync-mode)
 )
 
-(map! :leader
-      "d"  org-roam-dailies-map
-)
+;;(map! :leader
+      ;;"d"  org-roam-dailies-map
+;;)
 
-(defun my/org-roam-preview-other-window ()
-  (interactive)
-  (org-roam-preview-visit
-   (org-roam-buffer-file-at-point 'assert)
-   (oref (magit-current-section) point)
-   :other-window))
 
-(define-key org-roam-mode-map [mouse-1] #'my/org-roam-preview-other-window)
-
+;;(define-key org-roam-mode-map [mouse-1] #'my/org-roam-preview-other-window)
 
 
 
@@ -223,3 +223,9 @@
     (treemacs-filewatch-mode t)
     (treemacs-git-mode 'simple)
     (treemacs-fringe-indicator-mode t))
+
+
+ (message "Test message")
+
+;; Add the modules folder to the load path
+;;(add-to-list 'load-path (expand-file-name "~/.doom.d/modules/" user-emacs-directory))
