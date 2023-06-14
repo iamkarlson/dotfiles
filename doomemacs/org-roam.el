@@ -1,8 +1,5 @@
 ;;; ../src/dotfiles/doomemacs/org-roam.el -*- lexical-binding: t; -*-
 
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/braindb/")
 
 (defun my/org-roam-preview-other-window ()
   (interactive)
@@ -35,9 +32,9 @@
   (org-roam-db-autosync-mode)
 )
 
-;;(map! :leader
-      ;;"d"  org-roam-dailies-map
-;;)
+(map! :leader
+      "d"  org-roam-dailies-map
+)
 
 
 ;;(define-key org-roam-mode-map [mouse-1] #'my/org-roam-preview-other-window)

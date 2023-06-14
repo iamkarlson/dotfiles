@@ -56,9 +56,10 @@
 (package! rainbow-mode)
 
 ;;(package! org-roam)
-(unpin! org-roam)
+;;(unpin! org-roam)
 (package! org-roam-ui)
 (package! wakatime-mode)
 
 
 (package! git-auto-commit-mode)
+(package! ox-slack)

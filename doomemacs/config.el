@@ -176,9 +176,26 @@
     (treemacs-git-mode 'simple)
     (treemacs-fringe-indicator-mode t))
 
-(load! "org-roam.el")
+;; If you use `org' and don't want your org files in the default location below,
+;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/braindb/")
+(setq org-roam-directory "~/braindb/")
 
- (message "Test message")
+(use-package ox-slack)
+
+(map! :after evil
+      :desc "Roam Capture"
+      :leader
+      :n "X" #'org-roam-dailies-capture-today
+
+      :desc "Roam Today"
+      :leader
+      :n "j" #'org-roam-dailies-goto-today
+      )
+
+
+;;(load! "org-roam.el")
+
 
 ;; Add the modules folder to the load path
 ;;(add-to-list 'load-path (expand-file-name "~/.doom.d/modules/" user-emacs-directory))
