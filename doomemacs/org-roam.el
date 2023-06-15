@@ -1,40 +1,37 @@
 ;;; ../src/dotfiles/doomemacs/org-roam.el -*- lexical-binding: t; -*-
 
-
-(defun my/org-roam-preview-other-window ()
-  (interactive)
-  (org-roam-preview-visit
-   (org-roam-buffer-file-at-point 'assert)
-   (oref (magit-current-section) point)
-   :other-window))
+;; If you use `org' and don't want your org files in the default location below,
+;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/braindb/")
+(setq org-roam-directory "~/braindb/")
 
 
-(use-package org-roam
-  :init
-    (setq org-roam-v2-ack t)
-  :custom
-    (org-roam-directory "~/braindb")
-    (org-roam-completion-everywhere t)
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n i" . org-roam-node-insert)
-         :map org-mode-map
-         ("C-M-i" . completion-at-point)
-         ;; Also see leader binding below for "SPC d" menu
-         :map org-roam-dailies-map
-         ("Y" . org-roam-dailies-capture-yesterday)
-         ("T" . org-roam-dailies-capture-tomorrow))
-  :bind-keymap (
-        ("C-c n d" . org-roam-dailies-map)
-  )
-  :config
-  (require 'org-roam-dailies) ;; Ensure the keymap is available
-  (org-roam-db-autosync-mode)
-)
 
-(map! :leader
-      "d"  org-roam-dailies-map
-)
+(after! org-roam
+  (setq org-roam-capture-templates
+        `(
+          ("d" "default" plain
+           "* %?"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                              "#+title: ${title}\n")
+           :target (file "%<%Y%m%d%H%M%S>-${slug}.org")
+           :unnarrowed t)
+          ("t" "technology" plain "* %?"
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+                              ,(format ":PROPERTIES:\n:ROAM_ALIASES: ${alias}\n:END:\n#+title: ${title}\n%%[%s/templates/technology.org]" org-roam-directory)
+           )
+           :target (file "%<%Y%m%d%H%M%S>-${slug}.org")
+           :unnarrowed t)
+          )
+        ;; Use human readable dates for dailies titles
+        ;; Default:
+        ;; org-roam-dailies-capture-templates
+        ;; '(("d" "default" entry "* %?"
+        ;;   :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%B %d, %Y>\n\n")))))
 
 
-;;(define-key org-roam-mode-map [mouse-1] #'my/org-roam-preview-other-window)
+        org-roam-dailies-capture-templates
+        '(("d" "default" entry "* %?"
+          :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%B %d, %Y>\n\n* Goals for today\n- \n\n* Agenda \n- \n\n* Open tickets in [[https://gitlab.com/groups/dexter-energy/-/boards/2728779?assignee_username=georgydexter][gitlab]] \n- ")))))
+
+
