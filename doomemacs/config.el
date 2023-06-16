@@ -183,3 +183,5 @@
 
 ;; Add the modules folder to the load path
 ;;(add-to-list 'load-path (expand-file-name "~/.doom.d/modules/" user-emacs-directory))
+
+(use-package prometheus-mode :defer t)

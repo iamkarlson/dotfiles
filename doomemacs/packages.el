@@ -63,3 +63,7 @@
 
 (package! git-auto-commit-mode)
 (package! ox-slack)
+(package! prometheus-mode)
+(package! promql-mode
+
+  :recipe (:host github :repo "Andor/promql-mode" ))
