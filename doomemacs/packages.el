@@ -67,3 +67,8 @@
 (package! promql-mode
 
   :recipe (:host github :repo "Andor/promql-mode" ))
+
+(package! jinja2-mode)
+
+(package! copilot
+  :recipe (:host github :repo "zerolfx/copilot.el" :files ("*.el" "dist")))
