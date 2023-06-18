@@ -23,8 +23,11 @@
 ;;
 ;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
 ;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
+;; (setq doom-font (font-spec :family "IntelOne Mono" :size 15 :weight 'semi-light)
+;;       doom-variable-pitch-font (font-spec :family "IntelOne Mono" :size 16))
 (setq doom-font (font-spec :family "Hack Nerd Font" :size 15 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "Hack Nerd Font" :size 16))
+
 (setq doom-unicode-font doom-font)
 ; FONT TEST: 0000000      e5ca 
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
@@ -37,7 +40,10 @@
         ;; `load-theme' function. This is the default:
         ;;(setq doom-theme 'doom-tomorrow-night)
         ;;(setq doom-theme 'doom-manegarm)
-        (setq doom-theme 'iamkarlson-fallout)
+        ;;(setq doom-theme 'iamkarlson-fallout)
+        (setq doom-theme 'doom-henna
+              doom-henna-brighter-comments t)
+
         ;;(setq doom-theme 'doom-feather-light)
 
         (after! doom-themes
@@ -99,9 +105,12 @@
 (global-wakatime-mode)
 
  (setq-default org-insert-heading-respect-content t)
+ (setq-default evil-shift-width 2)
  (setq-default treemacs-follow-after-init t)
  (setq-default treemacs-project-follow-cleanup t)
  (setq-default evil-shift-width 2)
+ (setq-default visual-line-mode t)
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -178,10 +187,22 @@
 
 
 
-(load! "org-roam.el")
+(load! "parts/org-roam.el")
 
 
 ;; Add the modules folder to the load path
 ;;(add-to-list 'load-path (expand-file-name "~/.doom.d/modules/" user-emacs-directory))
 
 (use-package prometheus-mode :defer t)
+
+;; accept completion from copilot and fallback to company
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)
+              ("S-TAB" 'copilot-accept-completion-by-word)
+              ("C-n" . 'copilot-next-completion)
+              ("C-p" . 'copilot-previous-completion)))
