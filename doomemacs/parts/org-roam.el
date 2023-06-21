@@ -44,3 +44,9 @@
       :leader
       :n "j" #'org-roam-dailies-goto-today
       )
+
+
+
+;; Pomodoro
+(setq-default org-pomodoro-length 15
+              org-pomodoro-short-break-length 3)
