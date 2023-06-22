@@ -73,13 +73,17 @@
 
   "network": {
     "interval": 2,
+    "format": "{ifname}",
     "format-wifi": "󰘊 {signalStrength}%  {bandwidthDownBytes}  {bandwidthUpBytes}",
-    "Format-ethernet": "  {bandwidthDownBytes}  {bandwidthUpBytes}",
+    "format-ethernet": "  {bandwidthDownBytes}  {bandwidthUpBytes}",
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "⚠ Disconnected",
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
     "tooltip-format": "{essid} on {ifname} via {gwaddr} ",
-    "tooltip-format-diconnected": ""
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
   },
 
   "pulseaudio": {

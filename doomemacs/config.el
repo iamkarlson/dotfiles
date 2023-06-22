@@ -29,28 +29,28 @@
       doom-variable-pitch-font (font-spec :family "Hack Nerd Font" :size 16))
 
 (setq doom-unicode-font doom-font)
-; FONT TEST: 0000000      e5ca 
+                                        ; FONT TEST: 0000000      e5ca 
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;;      wasn't installed correctly. Font issues are rarely Doom issues!
 
-        ;; There are two ways to load a theme. Both assume the theme is installed and
-        ;; available. You can either set `doom-theme' or manually load a theme with the
-        ;; `load-theme' function. This is the default:
-        ;;(setq doom-theme 'doom-tomorrow-night)
-        ;;(setq doom-theme 'doom-manegarm)
-        ;;(setq doom-theme 'iamkarlson-fallout)
-        (setq doom-theme 'doom-henna
-              doom-henna-brighter-comments t)
+;; There are two ways to load a theme. Both assume the theme is installed and
+;; available. You can either set `doom-theme' or manually load a theme with the
+;; `load-theme' function. This is the default:
+;;(setq doom-theme 'doom-tomorrow-night)
+;;(setq doom-theme 'doom-manegarm)
+;;(setq doom-theme 'iamkarlson-fallout)
+(setq doom-theme 'doom-henna
+      doom-henna-brighter-comments t)
 
-        ;;(setq doom-theme 'doom-feather-light)
+;;(setq doom-theme 'doom-feather-light)
 
-        (after! doom-themes
-        (setq doom-themes-enable-bold t)
-        (setq doom-themes-enable-italic t)
-        (setq custom-safe-themes t))
-        ;;(load-theme 'iamkarlson-fallout t))
+(after! doom-themes
+  (setq doom-themes-enable-bold t)
+  (setq doom-themes-enable-italic t)
+  (setq custom-safe-themes t))
+;;(load-theme 'iamkarlson-fallout t))
 (setq sml/no-confirm-load-theme t)
 
 (custom-set-faces!
@@ -104,12 +104,12 @@
 ;; Disabled by default
 (global-wakatime-mode)
 
- (setq-default org-insert-heading-respect-content t)
- (setq-default evil-shift-width 2)
- (setq-default treemacs-follow-after-init t)
- (setq-default treemacs-project-follow-cleanup t)
- (setq-default evil-shift-width 2)
- (setq-default visual-line-mode t)
+(setq-default org-insert-heading-respect-content t)
+(setq-default evil-shift-width 2)
+(setq-default treemacs-follow-after-init t)
+(setq-default treemacs-project-follow-cleanup t)
+(setq-default evil-shift-width 2)
+(setq-default visual-line-mode t)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -135,7 +135,7 @@
 (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
 (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
 (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-; Make horizontal movement cross lines
+                                        ; Make horizontal movement cross lines
 (setq-default evil-cross-lines t)
 (setq-default evil-ex-search-vim-style-regexp nil)
 
@@ -160,7 +160,7 @@
 
 (with-eval-after-load 'git-auto-commit-mode
   (setq gac-default-message #'my-auto-commit-message
-        ;gac-ask-for-summary-p t
+                                        ;gac-ask-for-summary-p t
         gac-automatically-push-p t
         gac-debounce-interval 30)
   )
@@ -174,16 +174,16 @@
 
 (use-package treemacs
   :init
-    (setq treemacs-follow-after-init t)
-    (setq      treemacs-is-never-other-window t)
-    (setq  treemacs-project-follow-cleanup t)
-    (setq treemacs-collapse-dirs 3)
-    (setq     treemacs-width 40)
+  (setq treemacs-follow-after-init t)
+  (setq      treemacs-is-never-other-window t)
+  (setq  treemacs-project-follow-cleanup t)
+  (setq treemacs-collapse-dirs 3)
+  (setq     treemacs-width 40)
   :config
-    (treemacs-follow-mode t)
-    (treemacs-filewatch-mode t)
-    (treemacs-git-mode 'simple)
-    (treemacs-fringe-indicator-mode t))
+  (treemacs-follow-mode t)
+  (treemacs-filewatch-mode t)
+  (treemacs-git-mode 'simple)
+  (treemacs-fringe-indicator-mode t))
 
 
 
@@ -208,3 +208,11 @@
 
 
 (global-copilot-mode 1)
+
+(use-package lsp-pyright
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright)
+                         (lsp))))  ; or lsp-deferred
+
+(after! writegood-mode
+  (writegood-passive-voice-turn-off))
