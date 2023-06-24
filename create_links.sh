@@ -187,3 +187,11 @@ ln_file $dotfiles/sway/sway_nvidia.sh /usr/bin/sway_nvidia
 #sudo cp sway/sway_nvidia.sh /bin/sway_nvidia
 #sudo chmod +x /bin/sway_nvidia
 sudo cp sway/sway_nvidia.desktop /usr/share/wayland-sessions
+
+
+
+# link desktop files
+
+for file in $dotfiles/desktop/*; do
+	ln_file $file $target/.local/share/applications/$(basename $file)
+done
