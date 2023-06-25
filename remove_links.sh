@@ -69,3 +69,5 @@ delete_link "/home/iamkarlson/.local/share/applications/emacsclient-mail.desktop
 delete_link "/home/iamkarlson/.local/share/applications/emacs.desktop"
 # Removing file -------------------------------------- /home/iamkarlson/.local/share/applications/emacs-mail.desktop
 delete_link "/home/iamkarlson/.local/share/applications/emacs-mail.desktop"
+# Removing file -------------------------------------- /home/iamkarlson/.local/share/applications/skypeforlinux.desktop
+delete_link "/home/iamkarlson/.local/share/applications/skypeforlinux.desktop"
