@@ -209,10 +209,5 @@
 
 (global-copilot-mode 1)
 
-(use-package lsp-pyright
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-pyright)
-                         (lsp))))  ; or lsp-deferred
-
 (after! writegood-mode
   (writegood-passive-voice-turn-off))
