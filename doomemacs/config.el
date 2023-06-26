@@ -214,5 +214,15 @@
                          (require 'lsp-pyright)
                          (lsp))))  ; or lsp-deferred
 
-(after! writegood-mode
-  (writegood-passive-voice-turn-off))
+;; (after! writegood-mode
+;;   (writegood-passive-voice-turn-off))
+
+
+(map! :after evil
+      :desc "Toggle visual line mode"
+      :leader
+      :n "t x" #'visual-line-mode
+      :desc "Toggle evil mode"
+      :leader
+      :n "t e" #'evil-mode
+      )
