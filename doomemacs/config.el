@@ -105,11 +105,11 @@
 (global-wakatime-mode)
 
 (setq-default org-insert-heading-respect-content t)
-(setq-default evil-shift-width 2)
 (setq-default treemacs-follow-after-init t)
 (setq-default treemacs-project-follow-cleanup t)
-(setq-default evil-shift-width 2)
-(setq-default visual-line-mode t)
+(after! evil
+        (setq-default evil-shift-width 2)
+        (setq-default visual-line-mode t))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -209,5 +209,12 @@
 
 (global-copilot-mode 1)
 
-(after! writegood-mode
-  (writegood-passive-voice-turn-off))
+
+(map! :after evil
+      :desc "Toggle visual line mode"
+      :leader
+      :n "t x" #'visual-line-mode
+      :desc "Toggle evil mode"
+      :leader
+      :n "t e" #'evil-mode
+      )
