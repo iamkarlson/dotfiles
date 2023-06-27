@@ -16,6 +16,10 @@
                               "#+title: ${title}\n")
            :target (file "%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
+          ("r" "thought" plain
+           ,(format "#+title: ${title}\n%%[%s/templates/idea.org.txt]" org-roam-directory)
+           :target (file "thought/%<%Y%m%d%H%M%S>-${slug}.org")
+           :unnarrowed t)
           ("t" "technology" plain "* %?"
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                               ,(format ":PROPERTIES:\n:ROAM_ALIASES: ${alias}\n:END:\n#+title: ${title}\n%%[%s/templates/technology.org]" org-roam-directory)
@@ -23,13 +27,6 @@
            :target (file "%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
           )
-        ;; Use human readable dates for dailies titles
-        ;; Default:
-        ;; org-roam-dailies-capture-templates
-        ;; '(("d" "default" entry "* %?"
-        ;;   :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%B %d, %Y>\n\n")))))
-
-
         org-roam-dailies-capture-templates
         '(("d" "default" entry "* %?"
           :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%B %d, %Y>\n\n* Goals for today\n- \n\n* Agenda \n- \n\n* Open tickets in [[https://gitlab.com/groups/dexter-energy/-/boards/2728779?assignee_username=georgydexter][gitlab]] \n- ")))))
