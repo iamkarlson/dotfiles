@@ -16,13 +16,13 @@
                               "#+title: ${title}\n")
            :target (file "%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
-          ("r" "thought" plain
+          ("i" "idea" plain
            ,(format "#+title: ${title}\n%%[%s/templates/idea.org.txt]" org-roam-directory)
            :target (file "thought/%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
           ("t" "technology" plain "* %?"
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                              ,(format ":PROPERTIES:\n:ROAM_ALIASES: ${alias}\n:END:\n#+title: ${title}\n%%[%s/templates/technology.org]" org-roam-directory)
+                              ,(format "%%[%s/templates/technology.org.txt]" org-roam-directory)
            )
            :target (file "%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)

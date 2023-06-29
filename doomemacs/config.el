@@ -40,11 +40,12 @@
 ;; `load-theme' function. This is the default:
 ;;(setq doom-theme 'doom-tomorrow-night)
 ;;(setq doom-theme 'doom-manegarm)
-(setq doom-theme 'iamkarlson-fallout)
+;;(setq doom-theme 'iamkarlson-fallout)
 ;; (setq doom-theme 'doom-henna
 ;;       doom-henna-brighter-comments t)
 
 ;;(setq doom-theme 'doom-feather-light)
+(setq doom-theme 'ef-autumn)
 
 (after! doom-themes
   (setq doom-themes-enable-bold t)
