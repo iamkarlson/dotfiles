@@ -21,9 +21,7 @@
            :target (file "thought/%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
           ("t" "technology" plain "* %?"
-           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-                              ,(format "%%[%s/templates/technology.org.txt]" org-roam-directory)
-           )
+           :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" ":PROPERTIES:\n:ROAM_ALIASES: ${alias}\n:END:\n#+title: ${title}\n\n\n* Characteristics\n- Documentation:\n- Developer:\n* Snippets:\n")
            :target (file "%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
           )
