@@ -114,6 +114,9 @@
     :box (if -modeline-pad `(:line-width ,-modeline-pad :color ,modeline-bg-inactive)))
    (mode-line-emphasis :foreground base8)
 
+   ;;Margins in org-mode while centering
+   (fringe :background fg)
+
    ;;;; css-mode <built-in> / scss-mode
    (css-proprietary-property :foreground orange)
    (css-property             :foreground green)

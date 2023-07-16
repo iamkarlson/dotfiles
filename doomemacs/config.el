@@ -63,6 +63,11 @@
 (setq display-line-numbers-type `relative)
 
 
+(+global-word-wrap-mode +1)
+(setq-default visual-fill-column-width 100)
+(setq-default visual-fill-column-center-text t)
+;;(setq-default visual-line-mode t)
+
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
@@ -110,7 +115,8 @@
 (setq-default treemacs-project-follow-cleanup t)
 (after! evil
         (setq-default evil-shift-width 2)
-        (setq-default visual-line-mode t))
+        ;;(setq-default visual-line-mode t)
+        )
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -165,6 +171,14 @@
         gac-automatically-push-p t
         gac-debounce-interval 30)
   )
+
+
+(add-hook 'org-mode-hook
+          (lambda ()
+            (setq visual-fill-column-width 100
+                  visual-fill-column-center-text t)
+            (visual-fill-column-mode 1)))
+
 
 (setq case-fold-search t)   ; make searches case insensitive
 (setq completion-ignore-case t) ; make autocomplete case insensitive
