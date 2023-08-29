@@ -27,7 +27,7 @@
           )
         org-roam-dailies-capture-templates
         '(("d" "default" entry "* %?"
-          :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%B %d, %Y>\n\n* Goals for today\n- \n\n* Agenda \n- \n\n* Open tickets in [[https://gitlab.com/groups/dexter-energy/-/boards/2728779?assignee_username=georgydexter][gitlab]] \n- \n\n* Notes")))))
+          :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%B %d, %Y>\n\n* Goals for today\n** \n\n* Agenda \n- \n\n* Open tickets in [[https://gitlab.com/groups/dexter-energy/-/boards/2728779?assignee_username=georgydexter][gitlab]] \n- \n\n* Notes")))))
 
 
 
@@ -37,7 +37,17 @@
       :n "X" #'org-roam-dailies-capture-today
       :desc "Roam Today"
       :leader
-      :n "j" #'org-roam-dailies-goto-today
+      :n "d" #'org-roam-dailies-goto-today
+
+
+      :desc "Open Journal Node"
+      :leader
+      :n "j" (lambda () (interactive)
+                (let ((node (org-roam-node-from-title-or-alias "Log journal")))
+                  (if node
+                      (org-roam-node-visit node)
+                    (message "journal.org node not found."))))
+
       )
 
 

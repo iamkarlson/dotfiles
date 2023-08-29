@@ -20,7 +20,7 @@
     "pulseaudio",
     "sway/language",
     "clock",
-    // "custom/spotify",
+    //"custom/spotify",
     //"custom/powermenu"
     "custom/menu"
 
@@ -35,13 +35,6 @@
     "tooltip": true,
     "tooltip-format": " {:%e %b %Y}"
   },
-
-  // "clock#date": {
-    // 	"interval": 20,
-    // 	"format": "{:%e %b %Y}",
-    // 	"tooltip": false,
-    // 	//"tooltip-format": "{:%e %B %Y}"
-    // },
 
   "cpu": {
     "interval": 3,
@@ -78,12 +71,13 @@
     "format-ethernet": "  {bandwidthDownBytes}  {bandwidthUpBytes}",
     "format-linked": "{ifname} (No IP) ",
     "format-disconnected": "⚠ Disconnected",
-    "format-alt": "{ifname}: {ipaddr}/{cidr}",
     "tooltip-format": "{essid} on {ifname} via {gwaddr} ",
     "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
     "tooltip-format-ethernet": "{ifname} ",
     "tooltip-format-disconnected": "Disconnected",
-    "max-length": 50
+    "max-length": 50,
+    "on-click": "iwgtk"
+
   },
 
   "pulseaudio": {
