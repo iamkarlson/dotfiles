@@ -28,3 +28,20 @@ alias sudo='sudo '
 
 
 alias poetry_activate='source "$( poetry env info --path )/bin/activate"'
+
+timer_countdown() {
+  local total_seconds=300
+
+  if [[ $1 =~ ([0-9]+)h ]]; then
+    total_seconds=$((total_seconds + ${match[1]} * 3600))
+  fi
+
+  if [[ $1 =~ ([0-9]+)m ]]; then
+    total_seconds=$((total_seconds + ${match[1]} * 60))
+  fi
+
+  if [[ $1 =~ ([0-9]+)s ]]; then
+    total_seconds=$((total_seconds + ${match[1]}))
+  fi
+  {sleep $total_seconds && notify-send "Timer countdown $1" "Time's up!" }&
+}
