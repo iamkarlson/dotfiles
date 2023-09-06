@@ -31,6 +31,8 @@ delete_link "/home/iamkarlson/.config/kitty/kitty.conf"
 delete_link "/home/iamkarlson/.config/alacritty"
 # Removing file -------------------------------------- /home/iamkarlson/.config/user-dirs.dirs
 delete_link "/home/iamkarlson/.config/user-dirs.dirs"
+# Removing directory ********************************* /home/iamkarlson/.config/paru
+delete_link "/home/iamkarlson/.config/paru"
 # Removing file -------------------------------------- /home/iamkarlson/.config/sway/config
 delete_link "/home/iamkarlson/.config/sway/config"
 # Removing directory ********************************* /home/iamkarlson/.config/sway/config.d

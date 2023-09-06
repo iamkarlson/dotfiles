@@ -156,6 +156,9 @@ function autocomplete(){
 
 ln_file $dotfiles/user-dirs.dirs $config/user-dirs.dirs
 
+
+ln_directory $dotfiles/paru $config/paru
+
 #
 # Sway config
 #
