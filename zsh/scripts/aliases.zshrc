@@ -35,7 +35,7 @@ ring_the_bell(){
   local TIME=$1
   notify-send \
     --urgency=critical \
-    --expire-time=300 \
+    --expire-time=120 \
     --icon=appointment-soon-symbolic \
   "Timer countdown $TIME" "Time's up!"
 }
