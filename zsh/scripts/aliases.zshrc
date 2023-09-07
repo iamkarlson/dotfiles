@@ -38,6 +38,7 @@ ring_the_bell(){
     --expire-time=120 \
     --icon=appointment-soon-symbolic \
   "Timer countdown $TIME" "Time's up!"
+  echo "timer rang at $(date +'%H:%M:%S')"
 }
 
 timer_countdown() {
