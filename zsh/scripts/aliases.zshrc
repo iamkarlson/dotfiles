@@ -29,6 +29,17 @@ alias sudo='sudo '
 
 alias poetry_activate='source "$( poetry env info --path )/bin/activate"'
 
+# Function to create a notification with the notify-send command
+# parameter $TIME is the time to wait before sending the notification
+ring_the_bell(){
+  local TIME=$1
+  notify-send \
+    --urgency=critical \
+    --expire-time=300 \
+    --icon=appointment-soon-symbolic \
+  "Timer countdown $TIME" "Time's up!"
+}
+
 timer_countdown() {
   # validate input
   #
@@ -73,5 +84,5 @@ timer_countdown() {
   fi
 
   echo "total seconds: $total_seconds"
-  {sleep $total_seconds && notify-send "Timer countdown $1" "Time's up!" }&
+  {sleep $total_seconds && ring_the_bell $1 }&
 }
