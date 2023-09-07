@@ -30,18 +30,48 @@ alias sudo='sudo '
 alias poetry_activate='source "$( poetry env info --path )/bin/activate"'
 
 timer_countdown() {
-  local total_seconds=300
+  # validate input
+  #
+  #validate that the time parameter is passed. Otherwise, echo an error message and return 1.
+
+  if [[ -z $1 ]]; then
+    echo "missing time parameter"
+    echo "usage: timer_countdown 2h3m4s"
+    return 1
+  fi
+
+  if [[ ! $1 =~ ^[0-9]+[hms]?$ ]]; then
+    echo "wrong format"
+    return 1
+  fi
+
+  local total_seconds=0
 
   if [[ $1 =~ ([0-9]+)h ]]; then
+    echo "parsed ${match[1]} hours"
     total_seconds=$((total_seconds + ${match[1]} * 3600))
   fi
 
   if [[ $1 =~ ([0-9]+)m ]]; then
+    echo "parsed ${match[1]} minutes"
     total_seconds=$((total_seconds + ${match[1]} * 60))
   fi
 
   if [[ $1 =~ ([0-9]+)s ]]; then
+    echo "parsed ${match[1]} seconds"
     total_seconds=$((total_seconds + ${match[1]}))
   fi
+
+  if [[ $1 =~ ^([0-9]+)$ ]]; then
+    echo "parsed ${match[1]} seconds from number argument"
+    total_seconds=$((total_seconds + ${match[1]}))
+  fi
+
+  if [[ $total_seconds -eq 0 ]]; then
+    echo "no seconds parsed"
+    return 1
+  fi
+
+  echo "total seconds: $total_seconds"
   {sleep $total_seconds && notify-send "Timer countdown $1" "Time's up!" }&
 }
