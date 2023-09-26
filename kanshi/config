@@ -1,5 +1,19 @@
 # -*- mode: i3wm-config -*-
 # Read `man 5 sway` for a complete reference.
+#
+
+# home setup
+profile home {
+    output "LG Electronics LG HDR 4K 0x0000F75D" position 1476,0 mode 3840x2160 scale 1.5
+    output eDP-1 position 0,400 scale 1.3
+}
+
+profile home_monitor_only {
+    output "LG Electronics LG HDR WQHD 0x00006FD8" position 0,0 mode 3840x2160 scale 1.5
+}
+
+
+# office monitors
 profile work1 {
     output "LG Electronics LG HDR WQHD 0x00006E79" position 0,0 mode 3440x1440 scale 1.3
     output eDP-1 position 570,1107 scale 1.3
@@ -29,17 +43,6 @@ profile work5 {
     output "LG Electronics LG HDR WQHD 0x0000490E" position 0,0 mode 3440x1440 scale 1.3
     output eDP-1 position 570,1107 scale 1.3
 }
-
-profile home {
-    output "LG Electronics LG HDR 4K 0x0000F75D" position 1476,0 mode 3840x2160 scale 1.3
-    output eDP-1 position 0,400 scale 1.3
-}
-
-profile home_monitor_only {
-    output "LG Electronics LG HDR WQHD 0x00006FD8" position 0,0 mode 3840x2160 scale 1.3
-}
-
-
 profile work_monitor_only_1 {
     output "LG Electronics LG HDR WQHD 0x00006E79" position 0,0 mode 3440x1440 scale 1.3
 }
