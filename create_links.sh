@@ -191,6 +191,10 @@ ln_file $dotfiles/sway/sway_nvidia.sh /usr/bin/sway_nvidia
 #sudo chmod +x /bin/sway_nvidia
 sudo cp sway/sway_nvidia.desktop /usr/share/wayland-sessions
 
+ln_file $dotfiles/sway/sway_amd.sh /usr/bin/sway_amd
+#sudo cp sway/sway_nvidia.sh /bin/sway_nvidia
+sudo chmod +x /bin/sway_amd
+sudo cp sway/sway_amd.desktop /usr/share/wayland-sessions
 
 
 # link desktop files
