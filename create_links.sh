@@ -186,15 +186,17 @@ ln_directory $dotfiles/swappy $config/swappy
 ln_directory $dotfiles/workstyle $config/workstyle
 ln_directory $dotfiles/sworkstyle $config/sworkstyle
 
-ln_file $dotfiles/sway/sway_nvidia.sh /usr/bin/sway_nvidia
-#sudo cp sway/sway_nvidia.sh /bin/sway_nvidia
-#sudo chmod +x /bin/sway_nvidia
-sudo cp sway/sway_nvidia.desktop /usr/share/wayland-sessions
+ln_file $dotfiles/sway/desktops/sway_nvidia.sh /usr/bin/sway_nvidia
+sudo chmod +x /usr/bin/sway_nvidia
+sudo cp $dotfiles/sway/desktops/sway_nvidia.desktop /usr/share/wayland-sessions
 
-ln_file $dotfiles/sway/sway_amd.sh /usr/bin/sway_amd
-#sudo cp sway/sway_nvidia.sh /bin/sway_nvidia
-sudo chmod +x /bin/sway_amd
-sudo cp sway/sway_amd.desktop /usr/share/wayland-sessions
+ln_file $dotfiles/sway/desktops/sway_amd.sh /usr/bin/sway_amd
+sudo chmod +x /usr/bin/sway_amd
+sudo cp $dotfiles/sway/desktops/sway_amd.desktop /usr/share/wayland-sessions
+
+ln_file $dotfiles/sway/desktops/sway_intel.sh /usr/bin/sway_intel
+sudo chmod +x /usr/bin/sway_intel
+sudo cp $dotfiles/sway/desktops/sway_intel.desktop /usr/share/wayland-sessions
 
 
 # link desktop files

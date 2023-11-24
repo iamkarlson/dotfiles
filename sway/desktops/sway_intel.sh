@@ -1,38 +1,16 @@
 #!/usr/bin/env sh
 
 
-
-#######################################
-# NVIDIA settings
-#######################################
-export WLR_DRM_NO_ATOMIC=1
-export WLR_NO_HARDWARE_CURSORS=1
-export GBM_BACKEND=nvidia-drm
-export __GL_SYNC_ALLOWED=0
-export __GL_VRR_ALLOWED=0
-export __GLX_VENDOR_LIBRARY_NAME=nvidia
-export __NV_PRIME_RENDER_OFFLOAD=1
-export __VK_LAYER_NV_optimus=NVIDIA_only
-export LIBVA_DRIVER_NAME=nvidia
-export VDPAU_DRIVER=nvidia
-#export NVD_BACKEND=egl
-export NVD_BACKEND=direct
-export NVD_LOG=/tmp/nvd.log
-
-
-#export WLR_DRM_DEVICES=/dev/dri/card1
-#
-
-########################################
-# AMD
-########################################
-
-#export LIBVA_DRIVER_NAME=radeonsi
-
-
 ##################################################
 # Intel graphics
 ##################################################
+
+export WLR_DRM_NO_ATOMIC=1
+export WLR_NO_HARDWARE_CURSORS=1
+export LIBVA_DRIVER_NAME=iHD
+export VDPAU_DRIVER=va_gl
+#export NVD_BACKEND=egl
+#export NVD_BACKEND=direct
 
 
 
