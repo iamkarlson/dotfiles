@@ -61,6 +61,8 @@ delete_link "/home/iamkarlson/.config/workstyle"
 delete_link "/home/iamkarlson/.config/sworkstyle"
 # Removing file -------------------------------------- /usr/bin/sway_nvidia
 delete_link "/usr/bin/sway_nvidia"
+# Removing file -------------------------------------- /usr/bin/sway_amd
+delete_link "/usr/bin/sway_amd"
 # Removing file -------------------------------------- /home/iamkarlson/.local/share/applications/doomemacs.desktop
 delete_link "/home/iamkarlson/.local/share/applications/doomemacs.desktop"
 # Removing file -------------------------------------- /home/iamkarlson/.local/share/applications/emacsclient.desktop
