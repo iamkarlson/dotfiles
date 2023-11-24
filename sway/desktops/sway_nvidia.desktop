@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Sway NVidia compatible
+Comment=An i3-compatible Wayland compositor
+Exec=/bin/sway_nvidia
+Type=Application
