@@ -37,7 +37,7 @@
   },
 
   "cpu": {
-    "interval": 3,
+    "interval": 5,
     "tooltip": false,
     "format": " {usage}%",
     "format-alt": " {load}",
@@ -65,7 +65,7 @@
 
 
   "network": {
-    "interval": 2,
+    "interval": 5,
     "format": "{ifname}",
     "format-wifi": "󰘊 {signalStrength}%  {bandwidthDownBytes}  {bandwidthUpBytes}",
     "format-ethernet": "  {bandwidthDownBytes}  {bandwidthUpBytes}",
@@ -99,7 +99,7 @@
 
   "temperature": {
     "critical-threshold": 90,
-    "interval": 3,
+    "interval": 5,
     "format": "{icon} {temperatureC}°",
     "format-icons": [
       "",
