@@ -43,6 +43,34 @@ profile work5 {
     output "LG Electronics LG HDR WQHD 0x0000490E" position 0,0 mode 3440x1440 scale 1.3
     output eDP-1 position 570,1107 scale 1.3
 }
+
+profile work6 {
+    output "LG Electronics LG HDR WQHD 0x0000FDFF" position 0,0 mode 3440x1440 scale 1.3
+    output eDP-1 position 570,1107 scale 1.3
+}
+
+profile work7 {
+    output "LG Electronics LG HDR WQHD 301NTPC8R624" position 0,0 mode 3440x1440 scale 1.3
+    output eDP-1 position 570,1107 scale 1.3
+}
+
+profile work8 {
+    output "LG Electronics LG HDR WQHD 303NTSU7M806" position 0,0 mode 3440x1440 scale 1.3
+    output eDP-1 position 570,1107 scale 1.3
+}
+
+profile work9 {
+    output "LG Electronics LG HDR WQHD 0x00001C61" position 0,0 mode 3440x1440 scale 1.3
+    output eDP-1 position 570,1107 scale 1.3
+}
+
+profile work10 {
+    output "LG Electronics LG HDR WQHD 0x00006E6C" position 0,0 mode 3440x1440 scale 1.3
+    output eDP-1 position 570,1107 scale 1.3
+}
+
+
+
 profile work_monitor_only_1 {
     output "LG Electronics LG HDR WQHD 0x00006E79" position 0,0 mode 3440x1440 scale 1.3
 }

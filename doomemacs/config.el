@@ -114,9 +114,9 @@
 (setq-default treemacs-follow-after-init t)
 (setq-default treemacs-project-follow-cleanup t)
 (after! evil
-        (setq-default evil-shift-width 2)
-        ;;(setq-default visual-line-mode t)
-        )
+  (setq-default evil-shift-width 2)
+  ;;(setq-default visual-line-mode t)
+  )
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -147,10 +147,10 @@
 (setq-default evil-ex-search-vim-style-regexp nil)
 
 (setq projectile-project-search-path '(
-                                       ("~/src/" . 1)
-                                       ("~/src/work/". 1)
-                                       ("~/src/personal/". 1)
-                                       ("~/src/etc/". 1)
+                                       ("~/src/" . 2)
+                                       ;; ("~/src/work/". 1)
+                                       ;; ("~/src/personal/". 1)
+                                       ;; ("~/src/etc/". 1)
                                        ("~/activities/". 2)
                                        )
       )
