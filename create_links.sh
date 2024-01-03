@@ -201,6 +201,9 @@ sudo cp $dotfiles/sway/desktops/sway_intel.desktop /usr/share/wayland-sessions
 
 # link desktop files
 
+# To override default desktop files you can create a .desktop file with the same name in ~/.local/share/applications
+# Arch by default uses /usr/share/applications
+
 for file in $dotfiles/desktop/*; do
 	ln_file $file $target/.local/share/applications/$(basename $file)
 done
