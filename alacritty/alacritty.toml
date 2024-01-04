@@ -1,4 +1,4 @@
-theme = "hyper"
+#theme = "hyper"
 
 [colors.bright]
 black = "0x808080"
