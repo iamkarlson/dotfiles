@@ -3,7 +3,7 @@
 
 
 #######################################
-# NVIDIA settings
+# AMD
 #######################################
 export WLR_DRM_NO_ATOMIC=1
 export WLR_NO_HARDWARE_CURSORS=1
@@ -70,4 +70,4 @@ export RTC_USE_PIPEWIRE=true
 
 # Sway command line
 #exec sway -d 2> ~/sway.log
-exec sway --unsupported-gpu
+exec sway
