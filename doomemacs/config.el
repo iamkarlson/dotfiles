@@ -211,19 +211,18 @@
 (use-package prometheus-mode :defer t)
 
 ;; accept completion from copilot and fallback to company
-(use-package! copilot
-  :hook (prog-mode . copilot-mode)
-  :bind (:map copilot-completion-map
-              ("<tab>" . 'copilot-accept-completion)
-              ("TAB" . 'copilot-accept-completion)
-              ("C-TAB" . 'copilot-accept-completion-by-word)
-              ("C-<tab>" . 'copilot-accept-completion-by-word)
-              ("C-n" . 'copilot-next-completion)
-              ("C-p" . 'copilot-previous-completion)))
-
-
-(global-copilot-mode 1)
-
+;;(use-package! copilot
+;;  :hook (prog-mode . copilot-mode)
+;;  :bind (:map copilot-completion-map
+;;              ("<tab>" . 'copilot-accept-completion)
+;;              ("TAB" . 'copilot-accept-completion)
+;;              ("C-TAB" . 'copilot-accept-completion-by-word)
+;;              ("C-<tab>" . 'copilot-accept-completion-by-word)
+;;              ("C-n" . 'copilot-next-completion)
+;;              ("C-p" . 'copilot-previous-completion)))
+;;
+;;
+;;(global-copilot-mode 1)
 
 (map! :after evil
       :desc "Toggle visual line mode"
@@ -232,4 +231,11 @@
       :desc "Toggle evil mode"
       :leader
       :n "t e" #'evil-mode
-      )
+
+
+      ;; ;; window resizing commands
+      ;; :n "C-<left>"  #'evil-window-decrease-width
+      ;; :n "C-<right>" #'evil-window-increase-width
+      ;; :n "C-<up>"    #'evil-window-decrease-height
+      ;; :n "C-<down>"  #'evil-window-increase-height
+)
