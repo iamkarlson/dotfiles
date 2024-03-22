@@ -102,6 +102,15 @@ window#waybar {
 	padding: 2px 10px;
 }
 
+#battery {
+    color: #FF5555;
+}
+
+#battery.charging {
+    color: #26A65B;
+}
+
+
 #clock {
 	padding: 5px 10px;
 }

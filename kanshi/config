@@ -93,7 +93,10 @@ profile work14 {
     output "LG Electronics LG HDR WQHD 0x0000764D" position 0,0 mode 3440x1440 scale 1
     output eDP-1 position 670,1440 scale 1
 }
-
+profile work15 {
+    output "LG Electronics LG HDR WQHD 0x0000FD03" position 0,0 mode 3440x1440 scale 1
+    output eDP-1 position 670,1440 scale 1
+}
 
 profile work_monitor_only_1 {
     output "LG Electronics LG HDR WQHD 0x00006E79" position 0,0 mode 3440x1440 scale 1

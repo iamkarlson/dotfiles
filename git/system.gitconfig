@@ -1,6 +1,8 @@
 [include]
   path=~/git/local.gitconfig
   path=~/git/aliases.gitconfig
+[includeIf "gitdir:~/src/work/"]
+    path = "~/src/work/.gitconfig"
 [push]
   followTags = true
 [status]
@@ -25,3 +27,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[maintenance]
+	repo = /home/iamkarlson/src/work/core-api
