@@ -183,23 +183,24 @@
 (setq case-fold-search t)   ; make searches case insensitive
 (setq completion-ignore-case t) ; make autocomplete case insensitive
 
-(setq treemacs-follow-after-init t)
-(setq treemacs-project-follow-cleanup t)
-(setq treemacs-read-string-input 'from-minibuffer)
-
-(use-package treemacs
-  :init
+(after! treemacs
   (setq treemacs-follow-after-init t)
-  (setq      treemacs-is-never-other-window t)
-  (setq  treemacs-project-follow-cleanup t)
-  (setq treemacs-collapse-dirs 3)
-  (setq     treemacs-width 40)
-  :config
-  (treemacs-follow-mode t)
-  (treemacs-filewatch-mode t)
-  (treemacs-git-mode 'simple)
-  (treemacs-fringe-indicator-mode t))
+  (setq treemacs-project-follow-cleanup t)
+  (setq treemacs-read-string-input 'from-minibuffer)
 
+  (use-package treemacs
+    :init
+    (setq treemacs-follow-after-init t)
+    (setq      treemacs-is-never-other-window t)
+    (setq  treemacs-project-follow-cleanup t)
+    (setq treemacs-collapse-dirs 3)
+    (setq     treemacs-width 40)
+    :config
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (treemacs-git-mode 'simple)
+    (treemacs-fringe-indicator-mode t))
+  )
 
 
 (load! "parts/org-roam.el")

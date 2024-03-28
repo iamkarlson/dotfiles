@@ -80,3 +80,7 @@
 (package! writegood-mode :disable t)
 
 (package! ef-themes)
+
+
+(package! mermaid-mode)
+(package! ob-mermaid)

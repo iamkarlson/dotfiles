@@ -4,7 +4,6 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/braindb/")
 
-;; (setq org-agenda-files (directory-files-recursively "/path/to/your/org-roam-directory/" "\\.org$"))
 
 (after! org
   (setq org-agenda-files (append org-agenda-files
