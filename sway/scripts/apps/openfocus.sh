@@ -1,10 +1,7 @@
 #!/usr/bin/env zsh
 
-# Enhanced Script for focusing or running applications in swaywm
-
 BINARY=$1
-# Convert to lowercase for matching purposes
-SEARCH_TERM=${1:l}
+SEARCH_TERM=${1:l} # Lowercase for case-insensitive matching
 
 # Function to find the app_id from swaywm's tree
 find_app_id() {
@@ -12,28 +9,31 @@ find_app_id() {
     echo $APP_ID
 }
 
+# Function to focus on the application, retrying a few times if it does not succeed initially
 focus_or_run() {
-    # Find the app_id that matches our SEARCH_TERM
-    APP_ID=$(find_app_id)
+    for attempt in {1..5}; do
+        APP_ID=$(find_app_id)
+        echo "attempt $attempt"
 
-    if [[ -n "$APP_ID" ]]; then
-        # Focus if the app is found
-        swaymsg "[app_id=\"$APP_ID\"] focus"
-    else
-        # Try to find the binary in /usr/bin and execute it
-        BINARY_PATH=$(find /usr/bin -name "$BINARY*" | head -1)
-        if [[ -n "$BINARY_PATH" ]]; then
-            nohup "$BINARY_PATH" >/dev/null 2>&1 &
-            sleep 1 # Give it a second to open
-            # Focus after giving time to open
-            APP_ID=$(find_app_id)
-            if [[ -n "$APP_ID" ]]; then
-                swaymsg "[app_id=\"$APP_ID\"] focus"
-            fi
+        if [[ -n "$APP_ID" ]]; then
+            swaymsg "[app_id=\"$APP_ID\"] focus" && return
         else
-            echo "Error: Application not found."
+            if [[ $attempt -eq 1 ]]; then
+                # Try to find and run the binary only on the first attempt
+                BINARY_PATH=$(find /usr/bin -name "$BINARY*" -executable | head -1)
+                if [[ -n "$BINARY_PATH" ]]; then
+                    nohup "$BINARY_PATH" >/dev/null 2>&1 &
+                    sleep 2
+                else
+                    echo "Error: Application binary not found."
+                    return 1
+                fi
+            fi
         fi
-    fi
+    done
+
+    echo "Error: Failed to focus or start the application after several attempts."
+    return 1
 }
 
 # Main
