@@ -74,3 +74,16 @@
 ;; Pomodoro
 (setq-default org-pomodoro-length 15
               org-pomodoro-short-break-length 3)
+
+
+(defun org-roam-dailies-calendar-preview ()
+  (let ((date (calendar-cursor-to-date t)))
+    (when date
+      (org-roam-dailies--capture date t)
+      (other-window 1))))
+
+(defun setup-org-roam-dailies-calendar-preview ()
+  (add-hook 'calendar-move-hook 'org-roam-dailies-calendar-preview))
+
+(with-eval-after-load 'calendar
+  (setup-org-roam-dailies-calendar-preview))
