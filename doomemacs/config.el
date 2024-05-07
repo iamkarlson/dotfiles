@@ -183,23 +183,24 @@
 (setq case-fold-search t)   ; make searches case insensitive
 (setq completion-ignore-case t) ; make autocomplete case insensitive
 
-(setq treemacs-follow-after-init t)
-(setq treemacs-project-follow-cleanup t)
-(setq treemacs-read-string-input 'from-minibuffer)
-
-(use-package treemacs
-  :init
+(after! treemacs
   (setq treemacs-follow-after-init t)
-  (setq      treemacs-is-never-other-window t)
-  (setq  treemacs-project-follow-cleanup t)
-  (setq treemacs-collapse-dirs 3)
-  (setq     treemacs-width 40)
-  :config
-  (treemacs-follow-mode t)
-  (treemacs-filewatch-mode t)
-  (treemacs-git-mode 'simple)
-  (treemacs-fringe-indicator-mode t))
+  (setq treemacs-project-follow-cleanup t)
+  (setq treemacs-read-string-input 'from-minibuffer)
 
+  (use-package treemacs
+    :init
+    (setq treemacs-follow-after-init t)
+    (setq      treemacs-is-never-other-window t)
+    (setq  treemacs-project-follow-cleanup t)
+    (setq treemacs-collapse-dirs 3)
+    (setq     treemacs-width 40)
+    :config
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    (treemacs-git-mode 'simple)
+    (treemacs-fringe-indicator-mode t))
+  )
 
 
 (load! "parts/org-roam.el")
@@ -211,19 +212,18 @@
 (use-package prometheus-mode :defer t)
 
 ;; accept completion from copilot and fallback to company
-(use-package! copilot
-  :hook (prog-mode . copilot-mode)
-  :bind (:map copilot-completion-map
-              ("<tab>" . 'copilot-accept-completion)
-              ("TAB" . 'copilot-accept-completion)
-              ("C-TAB" . 'copilot-accept-completion-by-word)
-              ("C-<tab>" . 'copilot-accept-completion-by-word)
-              ("C-n" . 'copilot-next-completion)
-              ("C-p" . 'copilot-previous-completion)))
+;; (use-package! copilot
+;;   :hook (prog-mode . copilot-mode)
+;;   :bind (:map copilot-completion-map
+;;               ("<tab>" . 'copilot-accept-completion)
+;;               ("TAB" . 'copilot-accept-completion)
+;;               ("C-TAB" . 'copilot-accept-completion-by-word)
+;;               ("C-<tab>" . 'copilot-accept-completion-by-word)
+;;               ("C-n" . 'copilot-next-completion)
+;;               ("C-p" . 'copilot-previous-completion)))
 
 
-(global-copilot-mode 1)
-
+                                        ;(global-copilot-mode 1)
 
 (map! :after evil
       :desc "Toggle visual line mode"
@@ -232,4 +232,11 @@
       :desc "Toggle evil mode"
       :leader
       :n "t e" #'evil-mode
+
+
+      ;; ;; window resizing commands
+      ;; :n "C-<left>"  #'evil-window-decrease-width
+      ;; :n "C-<right>" #'evil-window-increase-width
+      ;; :n "C-<up>"    #'evil-window-decrease-height
+      ;; :n "C-<down>"  #'evil-window-increase-height
       )

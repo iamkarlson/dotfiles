@@ -115,7 +115,9 @@
   "battery": {
     "format": "{capacity}% {icon}",
     "format-icons": ["", "", "", "", ""],
-    "on-click": "swaymsg exec battop"
+    "on-click": "swaymsg exec battop",
+    "interval": 5
+
   },
 
   "custom/spotify": {

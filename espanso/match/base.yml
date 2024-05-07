@@ -7,7 +7,7 @@ matches:
   - trigger: ":acc"
     replace: |-
       **Acceptance criteria**:
-      - [ ]
+      -
   - trigger: ":date"
     replace: "{{mydate}}"
     vars:
@@ -42,7 +42,7 @@ matches:
   - trigger: ":yes"
     replace: ✓
   - trigger: georgy@dexter
-    replace: georgy@dexterenergy.nl
+    replace: georgy@dexterenergy.ai
   - trigger: ":lbl"
     replace: /label ~
   - trigger: ":apiurl"

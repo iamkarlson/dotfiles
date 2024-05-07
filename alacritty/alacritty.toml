@@ -39,6 +39,11 @@ style = "Regular"
 args = ["-l", "-c", "tmux attach || tmux new -s main"]
 program = "/bin/zsh"
 
+# [shell]
+# program = "/bin/zsh"
+# args = ["-l", "-c", "tmux has-session -t main 2>/dev/null && (tmux list-sessions | grep -q 'main:.*attached' && tmux new-session -d -s temp && tmux switch-client -t temp || tmux attach -t main) || tmux new -s main"]
+
+
 [window]
 decorations = "None"
 opacity = 0.8
