@@ -9,6 +9,8 @@
 (setq user-full-name "Georgy Green"
       user-mail-address "iamkarlson@gmail.com")
 
+(setq fancy-splash-image (concat doom-user-dir "splash.jpg"))
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
 ;; - `doom-font' -- the primary font to use
@@ -58,6 +60,11 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
+(setq ispell-program-name "hunspell")
+(setq ispell-really-hunspell t)
+(setq ispell-dictionary "en_US")
+
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type `relative)
@@ -104,6 +111,13 @@
 (setq-default evil-kill-on-visual-paste nil)
 (setq-default evil-respect-visual-line-mode t)
 
+(defun save-buffer-on-insert-exit ()
+  "Save the current buffer when exiting insert mode."
+  (when (buffer-file-name) (save-buffer)))
+
+(add-hook 'evil-insert-state-exit-hook #'save-buffer-on-insert-exit)
+
+
 (menu-bar-mode +1)
 (blink-cursor-mode +1)
 
@@ -124,7 +138,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-(setq-default tab-width 2)
+(setq-default tab-width 2)            ; Set width for tabs
+(setq-default standard-indent 2)      ; Set default indentation
+(setq-default indent-tabs-mode nil)   ; Use spaces instead of tabs
+
 
 ;;
 ;; kill two birds with one stone using remap: arrow keys and h,j,k,l
@@ -212,15 +229,15 @@
 (use-package prometheus-mode :defer t)
 
 ;; accept completion from copilot and fallback to company
-;; (use-package! copilot
-;;   :hook (prog-mode . copilot-mode)
-;;   :bind (:map copilot-completion-map
-;;               ("<tab>" . 'copilot-accept-completion)
-;;               ("TAB" . 'copilot-accept-completion)
-;;               ("C-TAB" . 'copilot-accept-completion-by-word)
-;;               ("C-<tab>" . 'copilot-accept-completion-by-word)
-;;               ("C-n" . 'copilot-next-completion)
-;;               ("C-p" . 'copilot-previous-completion)))
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)
+              ("C-n" . 'copilot-next-completion)
+              ("C-p" . 'copilot-previous-completion)))
 
 
                                         ;(global-copilot-mode 1)
