@@ -46,7 +46,7 @@
           )
         org-roam-dailies-capture-templates
         '(("d" "default" entry "* %?"
-           :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y %B %d, %A, Week %V>\n\n* Goals for today\n** \n\n* Agenda \n- 10:00 API Daily Sync \n- \n\n* Open tickets in [[https://dexterenergy.atlassian.net/jira/software/projects/API/boards/2?assignee=712020%3A2d1033ce-f19e-42dc-b72e-bc70bc672df2][Jira]] \n- \n\n* Journal:")))))
+           :target (file+head "%<%Y-%m>/%<%d - %A>.org" "#+title: %<%Y %B %d, %A, Week %V>\n\n* Goals for today\n** \n\n* Agenda \n- 10:00 API Daily Sync \n- \n\n* Open tickets in [[https://dexterenergy.atlassian.net/jira/software/projects/API/boards/2?assignee=712020%3A2d1033ce-f19e-42dc-b72e-bc70bc672df2][Jira]] \n- \n\n* Journal:")))))
 
 
 
