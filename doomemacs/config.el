@@ -111,13 +111,6 @@
 (setq-default evil-kill-on-visual-paste nil)
 (setq-default evil-respect-visual-line-mode t)
 
-(defun save-buffer-on-insert-exit ()
-  "Save the current buffer when exiting insert mode."
-  (when (buffer-file-name) (save-buffer)))
-
-(add-hook 'evil-insert-state-exit-hook #'save-buffer-on-insert-exit)
-
-
 (menu-bar-mode +1)
 (blink-cursor-mode +1)
 
@@ -129,7 +122,6 @@
 (setq-default treemacs-project-follow-cleanup t)
 (after! evil
   (setq-default evil-shift-width 2)
-  ;;(setq-default visual-line-mode t)
   )
 
 (custom-set-faces
@@ -142,6 +134,7 @@
 (setq-default standard-indent 2)      ; Set default indentation
 (setq-default indent-tabs-mode nil)   ; Use spaces instead of tabs
 
+(setq-default visual-line-mode t)
 
 ;;
 ;; kill two birds with one stone using remap: arrow keys and h,j,k,l
@@ -177,6 +170,15 @@
 
 (add-hook 'gcode-mode-hook 'eldoc-mode)
 
+
+
+(defun save-buffer-on-insert-exit ()
+  "Save the current buffer when exiting insert mode."
+  (when (buffer-file-name) (save-buffer)))
+
+(add-hook 'evil-insert-state-exit-hook #'save-buffer-on-insert-exit)
+
+
 (add-hook 'org-mode-hook 'git-auto-commit-mode)
 (defun my-auto-commit-message (filename)
   "Specify that my commit is a work in progress"
@@ -185,7 +187,7 @@
 (with-eval-after-load 'git-auto-commit-mode
   (setq gac-default-message #'my-auto-commit-message
                                         ;gac-ask-for-summary-p t
-        gac-automatically-push-p t
+        ;; gac-automatically-push-p t
         gac-debounce-interval 30)
   )
 
