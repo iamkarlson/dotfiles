@@ -194,6 +194,7 @@
           (lambda ()
             (setq visual-fill-column-width 100
                   visual-fill-column-center-text t)
+            (copilot-mode 1)
             (visual-fill-column-mode 1)))
 
 
