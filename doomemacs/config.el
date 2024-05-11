@@ -122,6 +122,25 @@
 (setq-default treemacs-project-follow-cleanup t)
 (after! evil
   (setq-default evil-shift-width 2)
+  ;;
+  ;; kill two birds with one stone using remap: arrow keys and h,j,k,l
+  (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+  (define-key evil-normal-state-map (kbd "<remap> <evil-backward-char>") 'left-char)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-forward-char>") 'right-char)
+  (define-key evil-normal-state-map (kbd "<remap> <evil-backward-char>") 'left-char)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-forward-char>") 'right-char)
+
+  ;; Make movement keys work like they should
+  (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+                                        ; Make horizontal movement cross lines
+  (setq-default evil-cross-lines t)
+  (setq-default evil-ex-search-vim-style-regexp nil)
   )
 
 (custom-set-faces
@@ -136,25 +155,6 @@
 
 (setq-default visual-line-mode t)
 
-;;
-;; kill two birds with one stone using remap: arrow keys and h,j,k,l
-(define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-(define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-(define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-(define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-(define-key evil-normal-state-map (kbd "<remap> <evil-backward-char>") 'left-char)
-(define-key evil-motion-state-map (kbd "<remap> <evil-forward-char>") 'right-char)
-(define-key evil-normal-state-map (kbd "<remap> <evil-backward-char>") 'left-char)
-(define-key evil-motion-state-map (kbd "<remap> <evil-forward-char>") 'right-char)
-
-;; Make movement keys work like they should
-(define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-(define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-(define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-(define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-                                        ; Make horizontal movement cross lines
-(setq-default evil-cross-lines t)
-(setq-default evil-ex-search-vim-style-regexp nil)
 
 (setq projectile-project-search-path '(
                                        ("~/src/" . 2)
