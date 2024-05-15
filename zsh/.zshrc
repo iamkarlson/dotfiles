@@ -150,6 +150,13 @@ bindkey -e
 
 source ~/.zsh/aliases.zshrc
 
+
+# Restore FZF Key bindings
+zvm_after_init() {
+  source "$(antidote home)/junegunn/fzf/shell/completion.zsh"
+  source "$(antidote home)/junegunn/fzf/shell/key-bindings.zsh"
+}
+
 # autoenv settings
 # needs to go after plugins, because it overrides `cd`
 #export AUTOENV_ENV_FILENAME=.autoenv
