@@ -13,4 +13,11 @@ romkatv/powerlevel10k kind:fpath
 
 sobolevn/wakatime-zsh-plugin
 
+
 larkery/zsh-histdb
+# Clone fzf repo
+# Binary is installed in ~/.zshrc
+junegunn/fzf kind:clone
+# Add completion scripts and fzf binary to PATH
+junegunn/fzf path:shell kind:zsh
+#junegunn/fzf path:bin kind:path

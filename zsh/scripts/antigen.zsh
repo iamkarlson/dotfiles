@@ -21,6 +21,7 @@ antigen bundle rupa/z
 antigen bundle sobolevn/wakatime-zsh-plugin
 antigen bundle pyenv
 #antigen bundle trystan2k/zsh-tab-title
+antigen bundle unixorn/fzf-zsh-plugin
 
 antigen bundle bobthecow/git-flow-completion
 
