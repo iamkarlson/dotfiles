@@ -5,12 +5,10 @@
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+
 alias vim=nvim
-#alias cat=batcat
-alias zshconfig="vim ~/.zshrc"
-alias vimconfig="vim ~/src/dotfiles/vim/.vimrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#
+
+alias e=emacsclient -r -n
 
 alias k="kubectl"
 alias g="git"

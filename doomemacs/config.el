@@ -38,6 +38,7 @@
 ;;      wasn't installed correctly. Font issues are rarely Doom issues!
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
+;; 
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 ;;(setq doom-theme 'doom-tomorrow-night)
@@ -47,13 +48,16 @@
 ;;       doom-henna-brighter-comments t)
 
 ;;(setq doom-theme 'doom-feather-light)
-(setq doom-theme 'ef-autumn)
+;; (setq doom-theme 'ef-autumn)
+;; (setq doom-theme 'iamkarlson-fallout)
+(setq doom-theme 'doom-badger)
 
 (after! doom-themes
   (setq doom-themes-enable-bold t)
   (setq doom-themes-enable-italic t)
   (setq custom-safe-themes t))
-;;(load-theme 'iamkarlson-fallout t))
+                                        ;(load-theme 'iamkarlson-fallout t)
+
 (setq sml/no-confirm-load-theme t)
 
 (custom-set-faces!
@@ -229,7 +233,8 @@
 ;; Add the modules folder to the load path
 ;;(add-to-list 'load-path (expand-file-name "~/.doom.d/modules/" user-emacs-directory))
 
-(use-package prometheus-mode :defer t)
+(use-package! prometheus-mode
+  :defer t)
 
 ;; accept completion from copilot and fallback to company
 (use-package! copilot
@@ -240,7 +245,12 @@
               ("C-TAB" . 'copilot-accept-completion-by-word)
               ("C-<tab>" . 'copilot-accept-completion-by-word)
               ("C-n" . 'copilot-next-completion)
-              ("C-p" . 'copilot-previous-completion)))
+              ("C-p" . 'copilot-previous-completion))
+
+  :config (add-to-list 'copilot-indentation-alist
+                       '(prog-mode 2)
+                       '(org-mode 2)
+                       ))
 
 
                                         ;(global-copilot-mode 1)
