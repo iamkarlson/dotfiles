@@ -1,0 +1,10 @@
+[Unit]
+Description=Change wallpaper for Sway
+
+[Service]
+Type=oneshot
+ExecStart=/home/iamkarlson/.config/sway/scripts/wallpaper-cycle.sh
+
+
+[Install]
+WantedBy=default.target

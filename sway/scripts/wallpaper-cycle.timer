@@ -1,0 +1,10 @@
+[Unit]
+Description=Wallpaper Cycle
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=1min
+Unit=wallpaper_cycle.service
+
+[Install]
+WantedBy=timers.target
