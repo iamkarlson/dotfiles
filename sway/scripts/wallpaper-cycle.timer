@@ -2,9 +2,9 @@
 Description=Wallpaper Cycle
 
 [Timer]
-OnBootSec=1min
+OnBootSec=0s
 OnUnitActiveSec=1min
-Unit=wallpaper_cycle.service
+Unit=wallpaper-cycle.service
 
 [Install]
 WantedBy=timers.target

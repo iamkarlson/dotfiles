@@ -42,7 +42,8 @@ fi
 # Iterate over each monitor and set wallpaper
 for MONITOR in $MONITORS; do
   NEW_WALLPAPER=$(get_next_wallpaper "$LAST_WALLPAPER")
-  swaymsg output "$MONITOR" bg "$NEW_WALLPAPER" fill
+  echo "swaybg --output \"$MONITOR\" --image \"$NEW_WALLPAPER\" --mode fill"
+  swww img -o "$MONITOR" "$NEW_WALLPAPER"
   echo "$NEW_WALLPAPER" > "$CURRENT_WALLPAPER_FILE"
   LAST_WALLPAPER="$NEW_WALLPAPER"
 done
