@@ -13,7 +13,7 @@ find_app_id() {
 focus_or_run() {
     for attempt in {1..5}; do
         APP_ID=$(find_app_id)
-        echo "attempt $attempt"
+        echo "attempt $attempt and app id is $APP_ID"
 
         if [[ -n "$APP_ID" ]]; then
             swaymsg "[app_id=\"$APP_ID\"] focus" && return
