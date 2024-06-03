@@ -6,8 +6,7 @@
 
 
 (after! org
-  (setq org-agenda-files (append org-agenda-files
-                                 (directory-files-recursively (file-truename org-directory) "\\.org$"))))
+  (setq org-agenda-files (directory-files-recursively (file-truename org-directory) "\\.org$")))
 
 
 (setq org-roam-directory "~/braindb/")

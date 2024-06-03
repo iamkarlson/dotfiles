@@ -3,6 +3,21 @@
 # Directory with wallpapers
 WALLPAPERS_DIR="$HOME/pictures/wallpapers/collection"
 
+if [ -z "$WALLPAPERS_DIR" ]; then
+  echo "WALLPAPERS_DIR is not set."
+  echo "wallpapers dir does not exist - using fallback"
+  WALLPAPERS_DIR="$HOME/pictures/wallpapers/collection"
+elif [ -d $WALLPAPERS_DIR ]; then
+  echo "wallpapers dir exists"
+  #ls $WALLPAPERS_DIR
+
+fi
+
+#WALLPAPERS_DIR="$HOME/pictures/wallpapers/collection"
+
+echo "wallpapers dir"
+echo $WALLPAPERS_DIR
+
 # File to store the current wallpaper
 CURRENT_WALLPAPER_FILE="$HOME/.current_wallpaper"
 
@@ -42,7 +57,7 @@ fi
 # Iterate over each monitor and set wallpaper
 for MONITOR in $MONITORS; do
   NEW_WALLPAPER=$(get_next_wallpaper "$LAST_WALLPAPER")
-  echo "swaybg --output \"$MONITOR\" --image \"$NEW_WALLPAPER\" --mode fill"
+
   swww img -o "$MONITOR" "$NEW_WALLPAPER"
   echo "$NEW_WALLPAPER" > "$CURRENT_WALLPAPER_FILE"
   LAST_WALLPAPER="$NEW_WALLPAPER"
