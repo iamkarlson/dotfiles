@@ -30,7 +30,7 @@
 (setq doom-font (font-spec :family "Hack Nerd Font" :size 15 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "Hack Nerd Font" :size 16))
 
-(setq doom-unicode-font doom-font)
+(setq doom-symbol-font doom-font)
                                         ; FONT TEST: 0000000      e5ca 
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -247,10 +247,12 @@
               ("C-n" . 'copilot-next-completion)
               ("C-p" . 'copilot-previous-completion))
 
-  :config (add-to-list 'copilot-indentation-alist
-                       '(prog-mode 2)
-                       '(org-mode 2)
-                       ))
+  :config
+  (add-to-list 'copilot-indentation-alist '(prog-mode . 2))
+  (add-to-list 'copilot-indentation-alist '(org-mode . 2))
+  (add-to-list 'copilot-indentation-alist '(text-mode . 2))
+  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode . 2)))
+
 
 
                                         ;(global-copilot-mode 1)
