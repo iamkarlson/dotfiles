@@ -30,8 +30,8 @@
 (setq doom-font (font-spec :family "Hack Nerd Font" :size 15 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "Hack Nerd Font" :size 16))
 
-(setq doom-unicode-font doom-font)
-                                        ; FONT TEST: 0000000      e5ca 
+;;(setq doom-symbol-font doom-font)
+;; TEST: 0000000      e5ca 
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
@@ -115,6 +115,7 @@
 (setq-default evil-kill-on-visual-paste nil)
 (setq-default evil-respect-visual-line-mode t)
 
+
 (menu-bar-mode +1)
 (blink-cursor-mode +1)
 
@@ -172,18 +173,29 @@
 (setq password-cache-expiry nil)
 
 
-(add-hook 'gcode-mode-hook 'eldoc-mode)
+(add-hook! 'gcode-mode-hook 'eldoc-mode)
 
 
 
-(defun save-buffer-on-insert-exit ()
-  "Save the current buffer when exiting insert mode."
+(defun my/save-buffer-on-insert-exit ()
+  "Save the current buffer when leaving insert mode."
   (when (buffer-file-name) (save-buffer)))
+(add-hook! 'evil-insert-state-exit-hook #'my/save-buffer-on-insert-exit)
 
-(add-hook 'evil-insert-state-exit-hook #'save-buffer-on-insert-exit)
+
+;; This little piece of shit was producing a lot of ~SPC <mouse-movement> is undefined~
+;; Well, not anymore
+(defun my/disable-mouse-hook()
+  (setq track-mouse nil))
+
+(add-hook! 'window-configuration-change-hook #'my/disable-mouse-hook)
+(add-hook! 'prog-mode-hook #'my/disable-mouse-hook)
+(add-hook! 'lsp-mode-hook #'my/disable-mouse-hook)
 
 
-(add-hook 'org-mode-hook 'git-auto-commit-mode)
+
+
+(add-hook! 'org-mode-hook 'git-auto-commit-mode)
 (defun my-auto-commit-message (filename)
   "Specify that my commit is a work in progress"
   (concat "braindb connect from " (system-name) ". file: " (gac-relative-file-name filename)))
@@ -196,12 +208,12 @@
   )
 
 
-(add-hook 'org-mode-hook
-          (lambda ()
-            (setq visual-fill-column-width 100
-                  visual-fill-column-center-text t)
-            (copilot-mode 1)
-            (visual-fill-column-mode 1)))
+(add-hook! 'org-mode-hook
+  (lambda ()
+    (setq visual-fill-column-width 100
+          visual-fill-column-center-text t)
+    (copilot-mode 1)
+    (visual-fill-column-mode 1)))
 
 
 (setq case-fold-search t)   ; make searches case insensitive
@@ -247,10 +259,12 @@
               ("C-n" . 'copilot-next-completion)
               ("C-p" . 'copilot-previous-completion))
 
-  :config (add-to-list 'copilot-indentation-alist
-                       '(prog-mode 2)
-                       '(org-mode 2)
-                       ))
+  :config
+  (add-to-list 'copilot-indentation-alist '(prog-mode . 2))
+  (add-to-list 'copilot-indentation-alist '(org-mode . 2))
+  (add-to-list 'copilot-indentation-alist '(text-mode . 2))
+  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode . 2)))
+
 
 
                                         ;(global-copilot-mode 1)
