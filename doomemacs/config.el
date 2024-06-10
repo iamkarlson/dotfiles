@@ -191,6 +191,7 @@
 (add-hook! 'window-configuration-change-hook #'my/disable-mouse-hook)
 (add-hook! 'prog-mode-hook #'my/disable-mouse-hook)
 (add-hook! 'lsp-mode-hook #'my/disable-mouse-hook)
+(add-hook! 'python-mode-hook #'my/disable-mouse-hook)
 
 
 
