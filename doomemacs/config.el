@@ -68,6 +68,8 @@
 (setq ispell-really-hunspell t)
 (setq ispell-dictionary "en_US")
 
+;; Disable automatic deletion of trailing whitespace
+(remove-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -225,19 +227,23 @@
   (setq treemacs-project-follow-cleanup t)
   (setq treemacs-read-string-input 'from-minibuffer)
 
-  (use-package treemacs
-    :init
-    (setq treemacs-follow-after-init t)
-    (setq      treemacs-is-never-other-window t)
-    (setq  treemacs-project-follow-cleanup t)
-    (setq treemacs-collapse-dirs 3)
-    (setq     treemacs-width 40)
-    :config
-    (treemacs-follow-mode t)
-    (treemacs-filewatch-mode t)
-    (treemacs-git-mode 'simple)
-    (treemacs-fringe-indicator-mode t))
   )
+
+(use-package! treemacs
+  :init
+  (setq treemacs-follow-after-init t)
+  (setq      treemacs-is-never-other-window t)
+  (setq  treemacs-project-follow-cleanup t)
+  (setq treemacs-collapse-dirs 3)
+  (setq     treemacs-width 40)
+  :config
+  (treemacs-follow-mode t)
+  (treemacs-filewatch-mode t)
+  (treemacs-git-mode 'simple)
+  (treemacs-fringe-indicator-mode t))
+
+(after! ediff
+  (setq ediff-scroll-vertically t))
 
 
 (load! "parts/org-roam.el")
@@ -277,6 +283,8 @@
       :desc "Toggle evil mode"
       :leader
       :n "t e" #'evil-mode
+      :leader
+      :n "p l" #'treemacs-add-and-display-current-project-exclusively
 
 
       ;; ;; window resizing commands
@@ -285,3 +293,5 @@
       ;; :n "C-<up>"    #'evil-window-decrease-height
       ;; :n "C-<down>"  #'evil-window-increase-height
       )
+
+(server-start)

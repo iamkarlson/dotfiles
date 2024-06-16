@@ -8,6 +8,7 @@
 [diff]
   renames = copy
 	noprefix = false
+	tool = emacs
 [core]
   commentchar = ";"
 	excludesFile = .autoenv.zsh
@@ -31,3 +32,5 @@
 
 [includeIf "gitdir:~/src/work/"]
     path = "~/src/work/.gitconfig"
+[difftool "emacs"]
+	cmd = emacsclient --eval \"(ediff-files \\\"$LOCAL\\\" \\\"$REMOTE\\\")\"
