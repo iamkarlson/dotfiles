@@ -36,7 +36,8 @@ family = "Hack Nerd Font"
 style = "Regular"
 
 [shell]
-args = ["-l", "-c", "tmux attach || tmux new -s main"]
+#args = ["-l", "-c", "tmux attach || tmux new -s main"]
+args = ["-l", "-c", "tmux"]
 program = "/bin/zsh"
 
 # [shell]
