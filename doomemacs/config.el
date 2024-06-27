@@ -238,6 +238,22 @@
     (treemacs-fringe-indicator-mode t))
   )
 
+(after! doom-modeline
+  :custom
+  (setq all-the-icons-scale-factor 1.1
+        auto-revert-check-vc-info t
+        doom-modeline-major-mode-icon (display-graphic-p)
+        doom-modeline-major-mode-color-icon (display-graphic-p)
+        doom-modeline-buffer-file-name-style 'relative-to-project
+        doom-modeline-github t
+        doom-modeline-height 15
+        doom-modeline-bar-width 4
+        doom-modeline-hud nil
+        doom-modeline-github-interval 60
+        doom-modeline-env-enable-python t
+        doom-modeline-vcs-max-length 60)
+  )
+
 
 (load! "parts/org-roam.el")
 
