@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env zsh
 # Script for jumping to Emacs
 #
 #
@@ -27,30 +27,9 @@
 
 BINARY='emacsclient'
 FOCUS='[app_id="emacs"]'
+FILE=$1
 
-focus() {
-    swaymsg "$FOCUS focus" >/dev/null
-}
-open_if_not_running() {
-    if ! pgrep -fa "/usr/.*/$BINARY" >/dev/null; then
-        # When the application is already running in the background,
-        # I don't want to do anything
-        # If the application is not running, start it but do not wait for it.
-        emacsclient -c -a "" -n >/dev/null 2>/dev/null &
-    fi
-}
-focus_wait() {
-    # For applications that are slow to start, we try every 0.1s until their
-    # window is open.
-    for i in {1..30}; do
-        if focus; then
-            break
-        fi
-        sleep 0.1
-    done
-}
 
-focus || (
-    open_if_not_running
-    focus_wait
-)
+emacsclient -r -a "" -n $FILE>/dev/null 2>/dev/null &
+sleep 0.1
+swaymsg "$FOCUS focus" >/dev/null

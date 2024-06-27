@@ -1,8 +1,6 @@
 [include]
   path=~/git/local.gitconfig
   path=~/git/aliases.gitconfig
-[includeIf "gitdir:~/src/work/"]
-    path = "~/src/work/.gitconfig"
 [push]
   followTags = true
 [status]
@@ -10,6 +8,7 @@
 [diff]
   renames = copy
 	noprefix = false
+	tool = emacs
 [core]
   commentchar = ";"
 	excludesFile = .autoenv.zsh
@@ -29,3 +28,9 @@
 	required = true
 [maintenance]
 	repo = /home/iamkarlson/src/work/core-api
+
+
+[includeIf "gitdir:~/src/work/"]
+    path = "~/src/work/.gitconfig"
+[difftool "emacs"]
+	cmd = emacsclient --eval \"(ediff-files \\\"$LOCAL\\\" \\\"$REMOTE\\\")\"
