@@ -91,6 +91,7 @@ ln_directory "$dotfiles/zsh/scripts" "$target/.zsh"
 ln_file "$dotfiles/zsh/.shellrc" "$target/.shellrc"
 ln_file "$dotfiles/zsh/.zshrc" "$target/.zshrc"
 ln_file "$dotfiles/zsh/.zprofile" "$target/.zprofile"
+ln_file "$dotfiles/zsh/.p10k.zsh" "$target/.p10k.zsh"
 
 
 #

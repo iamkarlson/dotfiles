@@ -37,7 +37,7 @@ style = "Regular"
 
 [shell]
 #args = ["-l", "-c", "tmux attach || tmux new -s main"]
-args = ["-l", "-c", "tmux"]
+#args = ["-l", "-c", "tmux"]
 program = "/bin/zsh"
 
 # [shell]
@@ -48,3 +48,4 @@ program = "/bin/zsh"
 [window]
 decorations = "None"
 opacity = 0.8
+
