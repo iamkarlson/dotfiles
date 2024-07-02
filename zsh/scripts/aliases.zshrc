@@ -22,7 +22,11 @@ alias rm-no-trash='/usr/bin/rm'
 alias rm='rmtrash'
 alias rmdir='rmdirtrash'
 
-alias sudo='sudo '
+# why??
+#alias sudo='sudo '
+
+# arch distribution avoids a conflict with another tool
+alias task='go-task'
 
 
 alias poetry_activate='source "$( poetry env info --path )/bin/activate"'

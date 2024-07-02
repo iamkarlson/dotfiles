@@ -81,3 +81,5 @@ delete_link "/home/iamkarlson/.local/share/applications/emacs.desktop"
 delete_link "/home/iamkarlson/.local/share/applications/emacs-mail.desktop"
 # Removing file -------------------------------------- /home/iamkarlson/.local/share/applications/skypeforlinux.desktop
 delete_link "/home/iamkarlson/.local/share/applications/skypeforlinux.desktop"
+# Removing directory ********************************* /home/iamkarlson/.thunderbird/y2d13ngf.default-release/chrome
+delete_link "/home/iamkarlson/.thunderbird/y2d13ngf.default-release/chrome"

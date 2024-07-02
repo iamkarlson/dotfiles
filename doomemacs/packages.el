@@ -85,3 +85,6 @@
 (package! mermaid-mode)
 (package! ob-mermaid)
 (package! journalctl-mode)
+
+
+(package! prometheus-mode)

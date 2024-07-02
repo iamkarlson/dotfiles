@@ -225,9 +225,10 @@
 (after! treemacs
   (setq treemacs-follow-after-init t)
   (setq treemacs-project-follow-cleanup t)
-  (setq treemacs-read-string-input 'from-minibuffer)
+  (setq treemacs-read-string-input 'from-minibuffer))
 
-  )
+(after! lsp-python-ms
+  (setq dap-python-debugger 'debugpy))
 
 (use-package! treemacs
   :init
@@ -251,9 +252,6 @@
 
 ;; Add the modules folder to the load path
 ;;(add-to-list 'load-path (expand-file-name "~/.doom.d/modules/" user-emacs-directory))
-
-(use-package! prometheus-mode
-  :defer t)
 
 ;; accept completion from copilot and fallback to company
 (use-package! copilot
