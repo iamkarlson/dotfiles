@@ -1,0 +1,32 @@
+@namespace url(http://www.w3.org/1999/xhtml);
+
+:focus-visible {
+    outline: gray 3px dotted !important;
+}
+
+:root {
+  --grey-background: rgba(128, 128, 128, 0.5);
+}
+
+
+/* threads pane bg image */
+table[is="tree-view-table"] {
+    background: var(--grey-background) !important;
+    position: relative;
+    overflow: hidden;
+}
+
+table[is="tree-view-table"]::after {
+    content: "";
+    background: linear-gradient(to bottom, var(--grey-background), rgba(0, 0, 0, 0));
+    height: 20px;
+    width: 100%;
+    position: absolute;
+}
+
+/* threads pane bg image */
+tree-view#threadTree {
+    background-image: url("file:///home/iamkarlson/src/dotfiles/thunderbird/background_list.jpg") !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

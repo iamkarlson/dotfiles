@@ -19,6 +19,8 @@ delete_link "/home/iamkarlson/.shellrc"
 delete_link "/home/iamkarlson/.zshrc"
 # Removing file -------------------------------------- /home/iamkarlson/.zprofile
 delete_link "/home/iamkarlson/.zprofile"
+# Removing file -------------------------------------- /home/iamkarlson/.p10k.zsh
+delete_link "/home/iamkarlson/.p10k.zsh"
 # Removing file -------------------------------------- /home/iamkarlson/.tmux.conf
 delete_link "/home/iamkarlson/.tmux.conf"
 # Removing directory ********************************* /home/iamkarlson/.config/espanso
@@ -79,3 +81,5 @@ delete_link "/home/iamkarlson/.local/share/applications/emacs.desktop"
 delete_link "/home/iamkarlson/.local/share/applications/emacs-mail.desktop"
 # Removing file -------------------------------------- /home/iamkarlson/.local/share/applications/skypeforlinux.desktop
 delete_link "/home/iamkarlson/.local/share/applications/skypeforlinux.desktop"
+# Removing directory ********************************* /home/iamkarlson/.thunderbird/y2d13ngf.default-release/chrome
+delete_link "/home/iamkarlson/.thunderbird/y2d13ngf.default-release/chrome"

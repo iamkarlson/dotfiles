@@ -1,0 +1,11 @@
+@namespace url(http://www.w3.org/1999/xhtml);
+
+body {
+  padding: 30px !important;
+}
+
+table {
+  margin: auto; /* Ensures tables are centered */
+}
+
+

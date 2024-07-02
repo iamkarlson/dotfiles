@@ -91,6 +91,7 @@ ln_directory "$dotfiles/zsh/scripts" "$target/.zsh"
 ln_file "$dotfiles/zsh/.shellrc" "$target/.shellrc"
 ln_file "$dotfiles/zsh/.zshrc" "$target/.zshrc"
 ln_file "$dotfiles/zsh/.zprofile" "$target/.zprofile"
+ln_file "$dotfiles/zsh/.p10k.zsh" "$target/.p10k.zsh"
 
 
 #
@@ -207,3 +208,17 @@ sudo cp $dotfiles/sway/desktops/sway_intel.desktop /usr/share/wayland-sessions
 for file in $dotfiles/desktop/*; do
 	ln_file $file $target/.local/share/applications/$(basename $file)
 done
+
+# Thunderbird and Firefox are bastards. There's no way to customize their look without hacking the css files
+# To make things worse, it's not really possible to get profile path from the command line easily
+# grep "Path=" ~/.thunderbird/profiles.ini | sed 's/^Path=//'
+#
+# I will try linking the whole thunderbird dir to this path from search command above, let's see if it works on all machines
+
+thunderbird_profile=$(grep "Path=" ~/.thunderbird/profiles.ini | sed 's/^Path=//')
+
+if [ -z "$thunderbird_profile" ]; then
+	log_warning "Thunderbird profile not found"
+else
+	ln_directory $dotfiles/thunderbird $target/.thunderbird/$thunderbird_profile/chrome
+fi
