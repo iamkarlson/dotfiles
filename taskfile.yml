@@ -2,15 +2,8 @@
 
 version: '3'
 
-vars:
-  GREETING: Hello, World!
 
 tasks:
-  default:
-    cmds:
-      - echo "{{.GREETING}}"
-    silent: true
-
   create-links:
     cmds:
       - sudo ./create_links.sh /home/iamkarlson
