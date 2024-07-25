@@ -6,7 +6,8 @@
 
 
 (after! org
-  (setq org-agenda-files (directory-files-recursively (file-truename org-directory) "\\.org$")))
+  (setq org-agenda-files (directory-files-recursively (file-truename org-directory) "\\.org$"))
+  (setq warning-suppress-types (append warning-suppress-types '((org-element-cache)))))
 
 
 (setq org-roam-directory "~/braindb/")

@@ -11,7 +11,7 @@
 	tool = emacs
 [core]
   commentchar = ";"
-	excludesFile = .autoenv.zsh
+	excludesFile = ~/.gitignore
   editor = nvim
   autocrlf = input
 [user]
