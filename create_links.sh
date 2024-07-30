@@ -200,6 +200,9 @@ sudo chmod +x /usr/bin/sway_intel
 sudo cp $dotfiles/sway/desktops/sway_intel.desktop /usr/share/wayland-sessions
 
 
+ln_file $dotfiles/taskfile/global.yml $target/taskfile.yml
+
+
 # link desktop files
 
 # To override default desktop files you can create a .desktop file with the same name in ~/.local/share/applications

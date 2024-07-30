@@ -1,0 +1,13 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  pre-commit:
+    cmds:
+      - pre-commit run -a
+    silent: false
+  compose-restart:
+    cmds:
+      - docker-compose down
+      - docker-compose up

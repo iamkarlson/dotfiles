@@ -1,0 +1,42 @@
+
+# https://taskfile.dev
+
+version: '3'
+
+
+tasks:
+  default:
+    cmds:
+      - echo "Hello"
+  init:
+    cmds:
+      - cp ~/src/dotfiles/taskfile/default.yml {{.USER_WORKING_DIR}}/taskfile.yml
+
+  reset-git-author:
+    desc: "Goes over list of commits, and run rebase on it.\n Usage is the following: \n$ task -g reset-git-author 3 \n3 is a number of commits to rewrite"
+    dir: '{{.USER_WORKING_DIR}}'
+    cmds:
+      - pwd
+      - git config --local user.name "Georgy Grigoryev"
+      - git config --local user.email "georgy@dexterenergy.ai"
+      - git rebase -i HEAD~{{.CLI_ARGS}} # as required by number of commits
+
+  proxy-testing-sql:
+    desc: "Connect to the SQL instance if it exists"
+    vars:
+      INSTANCE_BASE_NAME: core-api-testing
+      PORT: 5436
+    cmds:
+      - |
+        output=$(gcloud sql instances list | grep '{{.INSTANCE_BASE_NAME}}')
+        if [[ $(echo "$output" | wc -l) -eq 1 ]]; then
+          instance_name=$(echo "$output" | { read a _; echo $a; })
+          echo "Connecting to instance: $instance_name"
+          cloud-sql-proxy --private-ip "dexter-general:europe-west1:$instance_name" --port={{.PORT}}
+        else
+          echo "No {{.INSTANCE_BASE_NAME}} instance found or multiple instances found."
+        fi
+
+  get-git-ignore:
+    cmds:
+      - curl https://raw.githubusercontent.com/github/gitignore/main/Python.gitignore >> {{.USER_WORKING_DIR}}/.gitignore

@@ -67,6 +67,8 @@ delete_link "/usr/bin/sway_nvidia"
 delete_link "/usr/bin/sway_amd"
 # Removing file -------------------------------------- /usr/bin/sway_intel
 delete_link "/usr/bin/sway_intel"
+# Removing file -------------------------------------- /home/iamkarlson/taskfile.yml
+delete_link "/home/iamkarlson/taskfile.yml"
 # Removing file -------------------------------------- /home/iamkarlson/.local/share/applications/discord.desktop
 delete_link "/home/iamkarlson/.local/share/applications/discord.desktop"
 # Removing file -------------------------------------- /home/iamkarlson/.local/share/applications/doomemacs.desktop
@@ -81,5 +83,5 @@ delete_link "/home/iamkarlson/.local/share/applications/emacs.desktop"
 delete_link "/home/iamkarlson/.local/share/applications/emacs-mail.desktop"
 # Removing file -------------------------------------- /home/iamkarlson/.local/share/applications/skypeforlinux.desktop
 delete_link "/home/iamkarlson/.local/share/applications/skypeforlinux.desktop"
-# Removing directory ********************************* /home/iamkarlson/.thunderbird/y2d13ngf.default-release/chrome
-delete_link "/home/iamkarlson/.thunderbird/y2d13ngf.default-release/chrome"
+# Removing directory ********************************* /home/iamkarlson/.thunderbird/g32zrqcx.default
+delete_link "/home/iamkarlson/.thunderbird/g32zrqcx.default"
