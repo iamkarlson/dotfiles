@@ -69,6 +69,7 @@ ln_directory "$dotfiles/git/git" $target/git
 
 
 ln_file "$dotfiles/git/system.gitconfig" "$target/.gitconfig"
+ln_file "$dotfiles/git/global.gitignore" "$target/.gitignore"
 
 
 #

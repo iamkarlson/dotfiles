@@ -1,13 +1,22 @@
+#
+# antidote packages
+#
+
+
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
 zsh-users/zsh-syntax-highlighting
 
 agkozak/zsh-z
-Tarrasch/zsh-autoenv
+
+# pyenv should be able to integrate with
+#Tarrasch/zsh-autoenv
 
 
 ohmyzsh/ohmyzsh path:lib
 ohmyzsh/ohmyzsh path:plugins/colored-man-pages
+ohmyzsh/ohmyzsh path:plugins/direnv
+
 
 romkatv/powerlevel10k kind:fpath
 
@@ -15,9 +24,12 @@ sobolevn/wakatime-zsh-plugin
 
 
 larkery/zsh-histdb
+
+
 # Clone fzf repo
 # Binary is installed in ~/.zshrc
 junegunn/fzf kind:clone
+
 # Add completion scripts and fzf binary to PATH
 junegunn/fzf path:shell kind:zsh
 #junegunn/fzf path:bin kind:path

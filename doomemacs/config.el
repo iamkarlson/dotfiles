@@ -113,7 +113,7 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(remove-hook 'doom-first-input-hook #'evil-snipe-mode)
+;;(remove-hook 'doom-first-input-hook #'evil-snipe-mode)
 (setq-default evil-kill-on-visual-paste nil)
 (setq-default evil-respect-visual-line-mode t)
 
@@ -127,6 +127,14 @@
 (setq-default org-insert-heading-respect-content t)
 (setq-default treemacs-follow-after-init t)
 (setq-default treemacs-project-follow-cleanup t)
+
+
+
+(defun my-evil-disable-remove-spaces ()
+  "Disable automatic removal of trailing spaces in `evil-mode'."
+  (setq-local evil-maybe-remove-spaces nil))
+
+
 (after! evil
   (setq-default evil-shift-width 2)
   ;;
@@ -148,6 +156,7 @@
                                         ; Make horizontal movement cross lines
   (setq-default evil-cross-lines t)
   (setq-default evil-ex-search-vim-style-regexp nil)
+  (add-hook 'evil-insert-state-entry-hook #'my-evil-disable-remove-spaces)
   )
 
 (custom-set-faces
@@ -163,8 +172,10 @@
 (setq-default visual-line-mode t)
 
 
+
 (setq projectile-project-search-path '(
                                        ("~/src/" . 2)
+                                       ("~/src/work/" . 2)
                                        ;; ("~/src/work/". 1)
                                        ;; ("~/src/personal/". 1)
                                        ;; ("~/src/etc/". 1)
@@ -211,12 +222,12 @@
   )
 
 
-(add-hook! 'org-mode-hook
-  (lambda ()
-    (setq visual-fill-column-width 100
-          visual-fill-column-center-text t)
-    (copilot-mode 1)
-    (visual-fill-column-mode 1)))
+;; (add-hook! 'org-mode-hook
+;;   (lambda ()
+;;     (setq visual-fill-column-width 100
+;;           visual-fill-column-center-text t)
+;;     (copilot-mode 1)
+;;     (visual-fill-column-mode 1)))
 
 
 (setq case-fold-search t)   ; make searches case insensitive
@@ -270,8 +281,9 @@
 
 ;; accept completion from copilot and fallback to company
 (use-package! copilot
-  :hook (prog-mode . copilot-mode)
-  :hook (org-mode . copilot-mode)
+  :hook
+  (prog-mode . copilot-mode)
+  (org-mode . copilot-mode)
   :bind (:map copilot-completion-map
               ("<tab>" . 'copilot-accept-completion)
               ("TAB" . 'copilot-accept-completion)
@@ -281,10 +293,10 @@
               ("C-p" . 'copilot-previous-completion))
 
   :config
-  (add-to-list 'copilot-indentation-alist '(prog-mode . 2))
-  (add-to-list 'copilot-indentation-alist '(org-mode . 2))
-  (add-to-list 'copilot-indentation-alist '(text-mode . 2))
-  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode . 2)))
+  (add-to-list 'copilot-indentation-alist '(prog-mode 2))
+  (add-to-list 'copilot-indentation-alist '(org-mode 2))
+  (add-to-list 'copilot-indentation-alist '(text-mode 2))
+  (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
 
 
 

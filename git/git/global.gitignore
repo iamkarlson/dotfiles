@@ -1,3 +1,7 @@
 .wakatime-project
 .autoenv
 .autoenv.zsh
+.venv/
+.idea/
+.envrc
+*.pyc
