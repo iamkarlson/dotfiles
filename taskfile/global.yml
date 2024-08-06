@@ -7,8 +7,12 @@ version: '3'
 tasks:
   default:
     cmds:
-      - echo "Hello"
+      - echo "default task. run task --list to get all the goodies"
+  echo-args:
+    cmds:
+      - echo "args {{.CLI_ARGS}}"
   init:
+    desc: "Copy default task file to current working directory"
     cmds:
       - cp ~/src/dotfiles/taskfile/default.yml {{.USER_WORKING_DIR}}/taskfile.yml
 
@@ -38,5 +42,6 @@ tasks:
         fi
 
   get-git-ignore:
+    desc: "Use GitHub Python gitignore"
     cmds:
       - curl https://raw.githubusercontent.com/github/gitignore/main/Python.gitignore >> {{.USER_WORKING_DIR}}/.gitignore

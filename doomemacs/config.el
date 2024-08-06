@@ -176,6 +176,7 @@
 (setq projectile-project-search-path '(
                                        ("~/src/" . 2)
                                        ("~/src/work/" . 2)
+                                       ("~/src/work/dwh" . 2)
                                        ;; ("~/src/work/". 1)
                                        ;; ("~/src/personal/". 1)
                                        ;; ("~/src/etc/". 1)
