@@ -11,7 +11,7 @@
 	tool = emacs
 [core]
   commentchar = ";"
-	excludesFile = ~/.gitignore
+	excludesFile = ~/src/dotfiles/git/git/global.gitignore
   editor = nvim
   autocrlf = input
 [user]
