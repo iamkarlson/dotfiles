@@ -9,7 +9,7 @@ set hlsearch
 
 
 
-"set indetations`
+"set indetations"
 set expandtab
 
 set tabstop=4

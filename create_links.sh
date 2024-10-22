@@ -145,6 +145,8 @@ function vim() {
 	ln -ds $dotfiles/vim/plugins $target/.vim/plugins
 }
 
+vim
+
 function autocomplete(){
 	# generating shell completions for tools
 	kubectl completion zsh > $target/.zsh/completions/_kubectl
@@ -209,6 +211,11 @@ sudo cp $dotfiles/sway/desktops/sway_intel.desktop /usr/share/wayland-sessions
 for file in $dotfiles/desktop/*; do
 	ln_file $file $target/.local/share/applications/$(basename $file)
 done
+
+for file in $dotfiles/services/*; do
+	cp $file $target/.config/systemd/user
+done
+
 
 # Thunderbird and Firefox are bastards. There's no way to customize their look without hacking the css files
 # To make things worse, it's not really possible to get profile path from the command line easily
