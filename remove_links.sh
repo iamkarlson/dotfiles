@@ -27,6 +27,8 @@ delete_link "/home/iamkarlson/.p10k.zsh"
 delete_link "/home/iamkarlson/.tmux.conf"
 # Removing directory ********************************* /home/iamkarlson/.config/espanso
 delete_link "/home/iamkarlson/.config/espanso"
+# Removing directory ********************************* /home/iamkarlson/.config/thefuck
+delete_link "/home/iamkarlson/.config/thefuck"
 # Removing directory ********************************* /home/iamkarlson/.doom.d
 delete_link "/home/iamkarlson/.doom.d"
 # Removing file -------------------------------------- /home/iamkarlson/.config/kitty/kitty.conf

@@ -107,7 +107,7 @@ ln_file $dotfiles/.tmux.conf $target/.tmux.conf
 #
 
 ln_directory "$dotfiles/espanso" "$config/espanso"
-
+ln_directory "$dotfiles/thefuck" "$config/thefuck"
 
 ln_directory "$dotfiles/doomemacs" "$target/.doom.d"
 

@@ -207,29 +207,6 @@
 (add-hook! 'python-mode-hook #'my/disable-mouse-hook)
 
 
-
-
-(add-hook! 'org-mode-hook 'git-auto-commit-mode)
-(defun my-auto-commit-message (filename)
-  "Specify that my commit is a work in progress"
-  (concat "braindb connect from " (system-name) ". file: " (gac-relative-file-name filename)))
-
-(with-eval-after-load 'git-auto-commit-mode
-  (setq gac-default-message #'my-auto-commit-message
-                                        ;gac-ask-for-summary-p t
-        ;; gac-automatically-push-p t
-        gac-debounce-interval 30)
-  )
-
-
-;; (add-hook! 'org-mode-hook
-;;   (lambda ()
-;;     (setq visual-fill-column-width 100
-;;           visual-fill-column-center-text t)
-;;     (copilot-mode 1)
-;;     (visual-fill-column-mode 1)))
-
-
 (setq case-fold-search t)   ; make searches case insensitive
 (setq completion-ignore-case t) ; make autocomplete case insensitive
 
@@ -258,6 +235,7 @@
   (setq ediff-scroll-vertically t))
 
 
+;; All org related configuration goes there
 (load! "parts/org-roam.el")
 
 

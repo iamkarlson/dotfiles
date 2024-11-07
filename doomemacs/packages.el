@@ -88,3 +88,5 @@
 
 
 (package! prometheus-mode)
+
+(package! nginx-mode)
