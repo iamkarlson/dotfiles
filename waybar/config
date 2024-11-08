@@ -4,6 +4,7 @@
   "layer": "bottom",
   "modules-left": [
     "sway/workspaces",
+    "hyprland/workspaces",
     "sway/mode"
   ],
   "modules-center": [
