@@ -3,7 +3,7 @@
 
 FILE_NAME=$(date +"%Y%m%d%H%M%S").png;
 IMG_FILE=~/pictures/screenshots/$FILE_NAME;
-grim -o "$(hyprctl -j activewindow | jq .title)" $IMG_FILE;
+grim -o $(hyprctl -j monitors | jq -r '.[] | select(.focused == true) | .name') $IMG_FILE;
 $(wl-copy < $IMG_FILE);
 
 

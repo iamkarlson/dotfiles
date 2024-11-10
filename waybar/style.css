@@ -1,18 +1,33 @@
 /* Define colors for the theme */
-@define-color background         #1e1e2e;
-@define-color background-alt     #282828;
-@define-color foreground         #f4d9e1;
-@define-color selected           #e6b9c6;
-@define-color active             #fb4934;
-@define-color urgent             #db4b4b;
-@define-color focus              #9ece6a;
-@define-color muted              #928374;
-@define-color highlight          #d3869b;
-@define-color accent             #e5809e;
+/* @define-color background         #1e1e2e; */
+/* @define-color background-alt     #282828; */
+/* @define-color foreground         #f4d9e1; */
+/* @define-color selected           #e6b9c6; */
+/* @define-color active             #fb4934; */
+/* @define-color urgent             #db4b4b; */
+/* @define-color focus              #9ece6a; */
+/* @define-color muted              #928374; */
+/* @define-color highlight          #d3869b; */
+/* @define-color accent             #e5809e; */
+
+
+
+/* Define colors for the theme */
+@define-color background         #2a003e;    /* Deep purple background */
+@define-color background-alt     #3a0053;    /* Darker violet for secondary background */
+@define-color foreground         #ffeefb;    /* Light pink for text */
+@define-color selected           #ff67f5;    /* Neon pink highlight */
+@define-color active             #ff00a0;    /* Vivid magenta for active elements */
+@define-color urgent             #ff1a75;    /* Intense pinkish-red for urgency */
+@define-color focus              #19d3ff;    /* Bright cyan for focused elements */
+@define-color muted              #8c84a6;    /* Muted lavender-gray */
+@define-color highlight          #d87eff;    /* Soft purple for subtle highlights */
+@define-color accent             #ff8ed4;    /* Light magenta for accents */
+
 
 * {
     border: none;
-    border-radius: 0px;
+    border-radius: 3px;
     font-family: Iosevka, FontAwesome, Noto Sans CJK;
     font-size: 14px;
     font-style: normal;
@@ -31,26 +46,22 @@ window#waybar {
     background: @background-alt;
     margin: 5px;
     padding: 0px 5px;
-    border-radius: 16px;
     font-weight: normal;
     font-style: normal;
 }
 #workspaces button {
     padding: 0px 5px;
-    border-radius: 16px;
     color: @muted;
 }
 
 #workspaces button.active {
     color: @foreground;
     background-color: transparent;
-    border-radius: 16px;
 }
 
 #workspaces button:hover {
     background-color: @selected;
     color: black;
-    border-radius: 16px;
 }
 
 /* General module styling */
@@ -58,7 +69,6 @@ window#waybar {
     background: transparent;
     padding: 5px;
     margin: 5px;
-    border-radius: 8px;
     border: solid 0px @foreground;
 }
 
@@ -69,7 +79,6 @@ window#waybar {
 #custom-power {
     color: @background;
     background-color: @urgent;
-    border-radius: 5px;
     margin: 5px 10px 5px 0px;
     padding: 5px 10px;
 }
@@ -77,7 +86,6 @@ window#waybar {
 #tray {
     background: @background-alt;
     margin: 5px;
-    border-radius: 16px;
     padding: 0px 5px;
 }
 
@@ -85,7 +93,6 @@ window#waybar {
 #clock {
     color: @selected;
     background-color: @background-alt;
-    border-radius: 0px 0px 0px 24px;
     padding: 0px 15px 0px 13px;
     margin: 0px 10px 0px 0px;
     font-weight: bold;
@@ -103,36 +110,30 @@ window#waybar {
 #battery.warning:not(.charging) {
     background-color: @active;
     color: @background;
-    border-radius: 5px;
 }
 
 /* Network and Audio settings */
 #network {
     color: @foreground;
-    border-radius: 8px;
     margin-right: 5px;
 }
 
 #pulseaudio {
     color: @foreground;
-    border-radius: 8px;
 }
 
 #pulseaudio.muted {
     background: transparent;
     color: @muted;
-    border-radius: 8px;
 }
 
 #custom-randwall {
     color: @foreground;
-    border-radius: 8px;
 }
 
 #custom-launcher {
     color: @accent;
     background-color: @background-alt;
-    border-radius: 0px 24px 0px 0px;
     margin: 0px;
     padding: 0 20px 0 13px;
     font-size: 20px;
@@ -141,7 +142,6 @@ window#waybar {
 #custom-launcher button:hover {
     background-color: @active;
     color: transparent;
-    border-radius: 8px;
     margin: 0px 10px 0px 0px;
 }
 
@@ -149,7 +149,6 @@ window#waybar {
 #custom-playerctl, #custom-playerlabel, #window {
     background: @background-alt;
     padding: 15px;
-    border-radius: 16px;
     margin: 5px;
     font-weight: normal;
     font-style: normal;
@@ -164,7 +163,6 @@ window#waybar {
 
 #cpu, #memory, #disk, #custom-hyprpicker {
     background-color: @background-alt;
-    border-radius: 16px;
     margin: 5px;
     padding: 0px 10px;
     font-weight: bold;
