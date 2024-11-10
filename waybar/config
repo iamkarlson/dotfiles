@@ -20,6 +20,7 @@
     "custom/scratchpad-indicator",
     "pulseaudio",
     "sway/language",
+    "hyprland/language",
     "clock",
     //"custom/spotify",
     //"custom/powermenu"
@@ -51,6 +52,12 @@
     "format": " {}",
     "min-length": 5,
     "on-click": "swaymsg 'input * xkb_switch_layout next'",
+    "tooltip": false
+  },
+  "hyprland/language": {
+    "format": " {}",
+    "min-length": 5,
+    //"on-click": "swaymsg 'input * xkb_switch_layout next'",
     "tooltip": false
   },
 
