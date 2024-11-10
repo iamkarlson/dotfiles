@@ -244,11 +244,3 @@ window#waybar {
     padding: 0px 11px 0px 9px;
     font-weight: bold;
 }
-
-
-#custom-powermenu, #custom-menu {
-	color: @urgent;
-	padding: 0px 15px;
-	margin-top: -3px;
-	font-size: 25px;
-}
