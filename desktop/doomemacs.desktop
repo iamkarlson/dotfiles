@@ -3,7 +3,7 @@
 Version=1.0
 Type=Application
 Name=Doom Emacs Client
-Exec=/home/iamkarlson/.config/sway/scripts/apps/emacs.sh
+Exec=/home/iamkarlson/.config/hypr/scripts/apps/emacs.sh
 Icon=emacs
 Categories=Development;TextEditor;
 Terminal=false

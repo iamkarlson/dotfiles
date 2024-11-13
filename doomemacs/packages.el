@@ -90,3 +90,8 @@
 (package! prometheus-mode)
 
 (package! nginx-mode)
+
+(package! structurizr-mode
+
+  :recipe (:host github :repo "gilesp/structurizr-mode" )
+  )

@@ -1,124 +1,177 @@
+/* Define colors for the theme */
+/* @define-color background         #1e1e2e; */
+/* @define-color background-alt     #282828; */
+/* @define-color foreground         #f4d9e1; */
+/* @define-color selected           #e6b9c6; */
+/* @define-color active             #fb4934; */
+/* @define-color urgent             #db4b4b; */
+/* @define-color focus              #9ece6a; */
+/* @define-color muted              #928374; */
+/* @define-color highlight          #d3869b; */
+/* @define-color accent             #e5809e; */
+
+
+
+/* Define colors for the theme */
+@define-color background         #2a003e;    /* Deep purple background */
+@define-color background-alt     #3a0053;    /* Darker violet for secondary background */
+@define-color foreground         #ffeefb;    /* Light pink for text */
+@define-color selected           #ff67f5;    /* Neon pink highlight */
+@define-color active             #ff00a0;    /* Vivid magenta for active elements */
+@define-color urgent             #ff1a75;    /* Intense pinkish-red for urgency */
+@define-color focus              #19d3ff;    /* Bright cyan for focused elements */
+@define-color muted              #8c84a6;    /* Muted lavender-gray */
+@define-color highlight          #d87eff;    /* Soft purple for subtle highlights */
+@define-color accent             #ff8ed4;    /* Light magenta for accents */
+
 
 * {
-	font-size: 14px;
-	font-family: CaskaydiaCove Nerd Font;
+    border: none;
+    border-radius: 3px;
+    font-family: Iosevka, FontAwesome, Noto Sans CJK;
+    font-size: 14px;
+    font-style: normal;
+    min-height: 0;
 }
 
-@define-color background     #753AB0;
-@define-color background-alt #250C3E;
-@define-color foreground     #ffffff;
-@define-color selected       #59cd90;
-@define-color active         #fac05e;
-@define-color urgent         #ee6352;
-
-
-* {
-	border: none;
-	border-radius: 0;
-	font-family: Nerd Font Hack;
-	font-size: 14px;
-	min-height: 15px;
-}
-
-window > *{
-	transition: none;
-	padding-top: 5px;
-	padding-left: 5px;
-	padding-right: 5px;
-}
-
+/* Main window settings */
 window#waybar {
-	background: transparent;
+    background: rgba(30, 30, 46, 0.5);
+    border-bottom: 1px solid @background-alt;
+    color: @foreground;
 }
 
-.modules-left,
-.modules-center,
-.modules-right
-{
-	background: @background-alt;
-	border-radius: 16px;
-	padding-left: 20px;
-	padding-right: 20px;
-}
-
-.modules-left > *,
-.modules-center > *,
-.modules-right > *
-{
-	background: @background-alt;
-}
-
+/* Workspaces styling */
 #workspaces {
-	margin: 5px;
+    background: @background-alt;
+    margin: 5px;
+    padding: 0px 5px;
+    font-weight: normal;
+    font-style: normal;
 }
-
 #workspaces button {
-	padding: 0px 10px;
-	min-height: 25px;
-	border-radius: 16px;
+    padding: 0px 5px;
+    color: @muted;
 }
-#workspaces button.focused {
-	color: #ebdbb2;
-	background: @selected;
+
+#workspaces button.active {
+    color: @foreground;
+    background-color: transparent;
 }
+
 #workspaces button:hover {
-	box-shadow: inherit;
-	text-shadow: inherit;
-	background: @active;
-	color: #000;
+    background-color: @selected;
+    color: black;
 }
 
-
-
-
-#pulseaudio {
-	color: #83a598;
+/* General module styling */
+#custom-date, #clock, #battery, #pulseaudio, #network, #custom-randwall, #custom-launcher {
+    background: transparent;
+    padding: 5px;
+    margin: 5px;
+    border: solid 0px @foreground;
 }
-#memory {
-	color: #689d6a;
+
+#custom-date {
+    color: @highlight;
 }
-#cpu {
-	color: #d3869b;
+
+#custom-power {
+    color: @background;
+    background-color: @urgent;
+    margin: 5px 10px 5px 0px;
+    padding: 5px 10px;
 }
+
+#tray {
+    background: @background-alt;
+    margin: 5px;
+    padding: 0px 5px;
+}
+
+/* Clock settings */
+#clock {
+    color: @selected;
+    background-color: @background-alt;
+    padding: 0px 15px 0px 13px;
+    margin: 0px 10px 0px 0px;
+    font-weight: bold;
+}
+
+/* Battery styling */
 #battery {
-	color: #b8bb26;
-}
-#disk {
-	color: #fabd2f;
-}
-
-#temperature{
-	color: #ff8090;
-}
-
-#pulseaudio,
-#memory,
-#cpu,
-#battery,
-#disk,
-#temperature,
-#network
-{
-	padding: 2px 10px;
-}
-
-#battery {
-    color: #FF5555;
+    color: @focus;
 }
 
 #battery.charging {
-    color: #26A65B;
+    color: @focus;
 }
 
-
-#clock {
-	padding: 5px 10px;
+#battery.warning:not(.charging) {
+    background-color: @active;
+    color: @background;
 }
 
+/* Network and Audio settings */
+#network {
+    color: @foreground;
+    margin-right: 5px;
+}
+
+#pulseaudio {
+    color: @foreground;
+}
+
+#pulseaudio.muted {
+    background: transparent;
+    color: @muted;
+}
+
+#custom-randwall {
+    color: @foreground;
+}
+
+#custom-launcher {
+    color: @accent;
+    background-color: @background-alt;
+    margin: 0px;
+    padding: 0 20px 0 13px;
+    font-size: 20px;
+}
+
+#custom-launcher button:hover {
+    background-color: @active;
+    color: transparent;
+    margin: 0px 10px 0px 0px;
+}
+
+/* Player Control styling */
+#custom-playerctl, #custom-playerlabel, #window {
+    background: @background-alt;
+    padding: 15px;
+    margin: 5px;
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Specific Component Styling */
+#custom-wf-recorder {
+    padding: 0 20px;
+    color: @accent;
+    background-color: @background;
+}
+
+#cpu, #memory, #disk, #custom-hyprpicker {
+    background-color: @background-alt;
+    margin: 5px;
+    padding: 0px 10px;
+    font-weight: bold;
+}
+
+/* Custom Powermenu and Menu styling */
 #custom-powermenu, #custom-menu {
-	color: @urgent;
-	padding: 0px 15px;
-	margin-top: -3px;
-	font-size: 25px;
+    color: @urgent;
+    padding: 0px 15px;
+    margin-top: -3px;
+    font-size: 25px;
 }
-
