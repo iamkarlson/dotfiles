@@ -3,6 +3,7 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/braindb/")
+(setq org-roam-directory "~/braindb/")
 
 
 (after! org
@@ -44,9 +45,42 @@
   )
 
 
-(setq org-roam-directory "~/braindb/")
+
+(add-hook! 'org-mode-hook
+  (defun +my-org-mode-settings ()
+    (git-auto-commit-mode 1)
+    (visual-fill-column-mode 1)
+    (visual-line-mode 1)
+    ;;(print "hook added")
+    ))
+
+(add-hook! 'org-agenda-mode-hook
+  (defun +my-org-agenda-settings ()
+    (visual-fill-column-mode -1) ;; Turn off visual-fill-column-mode
+    (visual-line-mode -1)        ;; Turn off visual-line-mode (word-wrap)
+    (evil-local-mode -1)))       ;; Turn off evil-mode locally in the buffer
 
 
+(defun my-auto-commit-message (filename)
+  "Specify that my commit is a work in progress"
+  (concat "braindb connect from " (system-name) ". file: " (gac-relative-file-name filename)))
+
+(with-eval-after-load 'git-auto-commit-mode
+  (setq gac-default-message #'my-auto-commit-message
+                                        ;gac-ask-for-summary-p t
+        ;; gac-automatically-push-p t
+        gac-debounce-interval 30)
+  )
+
+
+;; (add-hook! 'org-mode-hook
+;;   (lambda ()
+;;     (setq visual-fill-column-width 100
+;;           visual-fill-column-center-text t)
+;;     (copilot-mode 1)
+;;     (visual-fill-column-mode 1)))
+
+;; this is mostly an example how to use a function as a callback for a capture template
 (defun my/org-roam-capture-contact ()
   (let ((is-colleague (y-or-n-p "Is this a current colleague? ")))
     (concat

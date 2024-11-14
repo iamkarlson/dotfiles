@@ -29,8 +29,7 @@ BINARY='emacsclient'
 FOCUS='[app_id="emacs"]'
 FILE=$1
 
-echo "Running emacs.sh from $USER user" >> /tmp/scripts.log
 
-emacsclient -n -r -a "" -n $FILE>/dev/null 2>/dev/null &
+emacsclient -r -a "" -n $FILE>/dev/null 2>/dev/null &
 sleep 0.1
 swaymsg "$FOCUS focus" >/dev/null

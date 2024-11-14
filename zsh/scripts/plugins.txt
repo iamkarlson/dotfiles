@@ -9,9 +9,6 @@ zsh-users/zsh-syntax-highlighting
 
 agkozak/zsh-z
 
-# pyenv should be able to integrate with
-#Tarrasch/zsh-autoenv
-
 
 ohmyzsh/ohmyzsh path:lib
 ohmyzsh/ohmyzsh path:plugins/colored-man-pages

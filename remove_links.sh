@@ -27,12 +27,34 @@ delete_link "/home/iamkarlson/.p10k.zsh"
 delete_link "/home/iamkarlson/.tmux.conf"
 # Removing directory ********************************* /home/iamkarlson/.config/espanso
 delete_link "/home/iamkarlson/.config/espanso"
+# Removing directory ********************************* /home/iamkarlson/.config/thefuck
+delete_link "/home/iamkarlson/.config/thefuck"
 # Removing directory ********************************* /home/iamkarlson/.doom.d
 delete_link "/home/iamkarlson/.doom.d"
 # Removing file -------------------------------------- /home/iamkarlson/.config/kitty/kitty.conf
 delete_link "/home/iamkarlson/.config/kitty/kitty.conf"
 # Removing directory ********************************* /home/iamkarlson/.config/alacritty
 delete_link "/home/iamkarlson/.config/alacritty"
+# Removing file -------------------------------------- /home/iamkarlson/.vsvimrc
+delete_link "/home/iamkarlson/.vsvimrc"
+# Removing file -------------------------------------- /home/iamkarlson/.ideavimrc
+delete_link "/home/iamkarlson/.ideavimrc"
+# Removing file -------------------------------------- /home/iamkarlson/.vimrc
+delete_link "/home/iamkarlson/.vimrc"
+# Removing file -------------------------------------- /home/iamkarlson/.gvimrc
+delete_link "/home/iamkarlson/.gvimrc"
+# Removing file -------------------------------------- /home/iamkarlson/.config/nvim/init.vim
+delete_link "/home/iamkarlson/.config/nvim/init.vim"
+# Removing file -------------------------------------- /home/iamkarlson/.vim/autocmd.vimrc
+delete_link "/home/iamkarlson/.vim/autocmd.vimrc"
+# Removing file -------------------------------------- /home/iamkarlson/.vim/plugin-settings.vimrc
+delete_link "/home/iamkarlson/.vim/plugin-settings.vimrc"
+# Removing file -------------------------------------- /home/iamkarlson/.vim/ide.vimrc
+delete_link "/home/iamkarlson/.vim/ide.vimrc"
+# Removing file -------------------------------------- /home/iamkarlson/.vim/simple-mapping.vimrc
+delete_link "/home/iamkarlson/.vim/simple-mapping.vimrc"
+# Removing file -------------------------------------- /home/iamkarlson/.vim/mapping.vimrc
+delete_link "/home/iamkarlson/.vim/mapping.vimrc"
 # Removing file -------------------------------------- /home/iamkarlson/.config/user-dirs.dirs
 delete_link "/home/iamkarlson/.config/user-dirs.dirs"
 # Removing directory ********************************* /home/iamkarlson/.config/paru
@@ -63,14 +85,16 @@ delete_link "/home/iamkarlson/.config/swappy"
 delete_link "/home/iamkarlson/.config/workstyle"
 # Removing directory ********************************* /home/iamkarlson/.config/sworkstyle
 delete_link "/home/iamkarlson/.config/sworkstyle"
+# Removing directory ********************************* /home/iamkarlson/.config/hypr
+delete_link "/home/iamkarlson/.config/hypr"
 # Removing file -------------------------------------- /usr/bin/sway_nvidia
 delete_link "/usr/bin/sway_nvidia"
 # Removing file -------------------------------------- /usr/bin/sway_amd
 delete_link "/usr/bin/sway_amd"
 # Removing file -------------------------------------- /usr/bin/sway_intel
 delete_link "/usr/bin/sway_intel"
-# Removing file -------------------------------------- /home/iamkarlson/taskfile.yml
-delete_link "/home/iamkarlson/taskfile.yml"
+# Removing file -------------------------------------- /usr/bin/hyprland_launcher
+delete_link "/usr/bin/hyprland_launcher"
 # Removing file -------------------------------------- /home/iamkarlson/.local/share/applications/discord.desktop
 delete_link "/home/iamkarlson/.local/share/applications/discord.desktop"
 # Removing file -------------------------------------- /home/iamkarlson/.local/share/applications/doomemacs.desktop
@@ -85,5 +109,5 @@ delete_link "/home/iamkarlson/.local/share/applications/emacs.desktop"
 delete_link "/home/iamkarlson/.local/share/applications/emacs-mail.desktop"
 # Removing file -------------------------------------- /home/iamkarlson/.local/share/applications/skypeforlinux.desktop
 delete_link "/home/iamkarlson/.local/share/applications/skypeforlinux.desktop"
-# Removing directory ********************************* /home/iamkarlson/.thunderbird/g32zrqcx.default
-delete_link "/home/iamkarlson/.thunderbird/g32zrqcx.default"
+# Removing directory ********************************* /home/iamkarlson/.thunderbird/y2d13ngf.default-release/chrome
+delete_link "/home/iamkarlson/.thunderbird/y2d13ngf.default-release/chrome"

@@ -1,0 +1,124 @@
+
+* {
+	font-size: 14px;
+	font-family: CaskaydiaCove Nerd Font;
+}
+
+@define-color background     #753AB0;
+@define-color background-alt #250C3E;
+@define-color foreground     #ffffff;
+@define-color selected       #59cd90;
+@define-color active         #fac05e;
+@define-color urgent         #ee6352;
+
+
+* {
+	border: none;
+	border-radius: 0;
+	font-family: Nerd Font Hack;
+	font-size: 14px;
+	min-height: 15px;
+}
+
+window > *{
+	transition: none;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+window#waybar {
+	background: transparent;
+}
+
+.modules-left,
+.modules-center,
+.modules-right
+{
+	background: @background-alt;
+	border-radius: 16px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.modules-left > *,
+.modules-center > *,
+.modules-right > *
+{
+	background: @background-alt;
+}
+
+#workspaces {
+	margin: 5px;
+}
+
+#workspaces button {
+	padding: 0px 10px;
+	min-height: 25px;
+	border-radius: 16px;
+}
+#workspaces button.focused {
+	color: #ebdbb2;
+	background: @selected;
+}
+#workspaces button:hover {
+	box-shadow: inherit;
+	text-shadow: inherit;
+	background: @active;
+	color: #000;
+}
+
+
+
+
+#pulseaudio {
+	color: #83a598;
+}
+#memory {
+	color: #689d6a;
+}
+#cpu {
+	color: #d3869b;
+}
+#battery {
+	color: #b8bb26;
+}
+#disk {
+	color: #fabd2f;
+}
+
+#temperature{
+	color: #ff8090;
+}
+
+#pulseaudio,
+#memory,
+#cpu,
+#battery,
+#disk,
+#temperature,
+#network
+{
+	padding: 2px 10px;
+}
+
+#battery {
+    color: #FF5555;
+}
+
+#battery.charging {
+    color: #26A65B;
+}
+
+
+#clock {
+	padding: 5px 10px;
+}
+
+#custom-powermenu, #custom-menu {
+	color: @urgent;
+	padding: 0px 15px;
+	margin-top: -3px;
+	font-size: 25px;
+}
+

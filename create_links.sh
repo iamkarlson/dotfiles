@@ -107,7 +107,7 @@ ln_file $dotfiles/.tmux.conf $target/.tmux.conf
 #
 
 ln_directory "$dotfiles/espanso" "$config/espanso"
-
+ln_directory "$dotfiles/thefuck" "$config/thefuck"
 
 ln_directory "$dotfiles/doomemacs" "$target/.doom.d"
 
@@ -144,6 +144,8 @@ function vim() {
 	ln_file $dotfiles/vim/mapping.vimrc $target/.vim/mapping.vimrc
 	ln -ds $dotfiles/vim/plugins $target/.vim/plugins
 }
+
+vim
 
 function autocomplete(){
 	# generating shell completions for tools
@@ -188,9 +190,12 @@ ln_directory $dotfiles/swappy $config/swappy
 ln_directory $dotfiles/workstyle $config/workstyle
 ln_directory $dotfiles/sworkstyle $config/sworkstyle
 
+ln_directory $dotfiles/hyprland $config/hypr
+
 ln_file $dotfiles/sway/desktops/sway_nvidia.sh /usr/bin/sway_nvidia
 sudo chmod +x /usr/bin/sway_nvidia
 sudo cp $dotfiles/sway/desktops/sway_nvidia.desktop /usr/share/wayland-sessions
+
 
 ln_file $dotfiles/sway/desktops/sway_amd.sh /usr/bin/sway_amd
 sudo chmod +x /usr/bin/sway_amd
@@ -201,7 +206,11 @@ sudo chmod +x /usr/bin/sway_intel
 sudo cp $dotfiles/sway/desktops/sway_intel.desktop /usr/share/wayland-sessions
 
 
-ln_file $dotfiles/taskfile/global.yml $target/taskfile.yml
+
+ln_file $dotfiles/hyprland/hyprland.sh /usr/bin/hyprland_launcher
+sudo chmod +x /usr/bin/hyprland_launcher
+sudo cp $dotfiles/hyprland/hyprland.desktop /usr/share/wayland-sessions
+
 
 
 # link desktop files
@@ -212,6 +221,11 @@ ln_file $dotfiles/taskfile/global.yml $target/taskfile.yml
 for file in $dotfiles/desktop/*; do
 	ln_file $file $target/.local/share/applications/$(basename $file)
 done
+
+for file in $dotfiles/services/*; do
+	cp $file $target/.config/systemd/user
+done
+
 
 # Thunderbird and Firefox are bastards. There's no way to customize their look without hacking the css files
 # To make things worse, it's not really possible to get profile path from the command line easily

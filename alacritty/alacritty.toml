@@ -35,7 +35,7 @@ size = 13.0
 family = "Hack Nerd Font"
 style = "Regular"
 
-[shell]
+[terminal.shell]
 #args = ["-l", "-c", "tmux attach || tmux new -s main"]
 #args = ["-l", "-c", "tmux"]
 program = "/bin/zsh"
@@ -48,4 +48,6 @@ program = "/bin/zsh"
 [window]
 decorations = "None"
 opacity = 0.8
+
+[terminal]
 

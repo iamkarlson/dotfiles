@@ -176,7 +176,6 @@
 (setq projectile-project-search-path '(
                                        ("~/src/" . 2)
                                        ("~/src/work/" . 2)
-                                       ("~/src/work/dwh" . 2)
                                        ;; ("~/src/work/". 1)
                                        ;; ("~/src/personal/". 1)
                                        ;; ("~/src/etc/". 1)
@@ -208,29 +207,6 @@
 (add-hook! 'python-mode-hook #'my/disable-mouse-hook)
 
 
-
-
-(add-hook! 'org-mode-hook 'git-auto-commit-mode)
-(defun my-auto-commit-message (filename)
-  "Specify that my commit is a work in progress"
-  (concat "braindb connect from " (system-name) ". file: " (gac-relative-file-name filename)))
-
-(with-eval-after-load 'git-auto-commit-mode
-  (setq gac-default-message #'my-auto-commit-message
-                                        ;gac-ask-for-summary-p t
-        ;; gac-automatically-push-p t
-        gac-debounce-interval 30)
-  )
-
-
-;; (add-hook! 'org-mode-hook
-;;   (lambda ()
-;;     (setq visual-fill-column-width 100
-;;           visual-fill-column-center-text t)
-;;     (copilot-mode 1)
-;;     (visual-fill-column-mode 1)))
-
-
 (setq case-fold-search t)   ; make searches case insensitive
 (setq completion-ignore-case t) ; make autocomplete case insensitive
 
@@ -242,21 +218,6 @@
 (after! lsp-python-ms
   (setq dap-python-debugger 'debugpy))
 
-(after! doom-modeline
-  :custom
-  (setq all-the-icons-scale-factor 1.1
-        auto-revert-check-vc-info t
-        doom-modeline-major-mode-icon (display-graphic-p)
-        doom-modeline-major-mode-color-icon (display-graphic-p)
-        doom-modeline-buffer-file-name-style 'relative-to-project
-        doom-modeline-github t
-        doom-modeline-height 15
-        doom-modeline-bar-width 4
-        doom-modeline-hud nil
-        doom-modeline-github-interval 60
-        doom-modeline-env-enable-python t
-        doom-modeline-vcs-max-length 60)
-  )
 (use-package! treemacs
   :init
   (setq treemacs-follow-after-init t)
@@ -274,6 +235,7 @@
   (setq ediff-scroll-vertically t))
 
 
+;; All org related configuration goes there
 (load! "parts/org-roam.el")
 
 
