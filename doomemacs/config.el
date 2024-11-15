@@ -237,6 +237,7 @@
 
 ;; All org related configuration goes there
 (load! "parts/org-roam.el")
+(load! "parts/magit.el")
 
 
 ;; Add the modules folder to the load path
