@@ -122,7 +122,11 @@
 (add-hook! org-mode-hook 'org-display-inline-images)
 
 
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; This supposed to be called from a desktop file in hyprland
+;; so I can make an action on the keyboard to call it on
+;; and quickly type something not to forget
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun my/org-roam-dailies-capture-today-and-maximize ()
   "Capture today's daily note in a maximized frame and close the frame when done."
   (interactive)
@@ -175,3 +179,36 @@
 
 (with-eval-after-load 'calendar
   (setup-org-roam-dailies-calendar-preview))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; EXPORT SETTINGS
+;;
+;; All about pdf/markdown/html for default org export
+;; But also about exporting agenda data
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(setq org-latex-compiler "xelatex")
+
+(after! org
+  (setq org-latex-packages-alist
+        '(("" "fontspec" t)        ; Load fontspec for xelatex/lualatex
+          ("" "polyglossia" t)))   ; Load polyglossia for multilingual support
+  (setq org-latex-classes
+        '(("article"
+           "\\documentclass[11pt]{article}
+            \\usepackage{fontspec}
+            \\usepackage{polyglossia}
+            \\setmainlanguage{russian}
+            \\setotherlanguage{english}
+            \\newfontfamily\\cyrillicfont{Times New Roman}" ; Or another Cyrillic font
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))

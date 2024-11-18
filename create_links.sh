@@ -145,7 +145,7 @@ function vim() {
 	ln -ds $dotfiles/vim/plugins $target/.vim/plugins
 }
 
-vim
+#vim
 
 function autocomplete(){
 	# generating shell completions for tools
@@ -154,7 +154,8 @@ function autocomplete(){
 	k3d completion zsh > $target/.zsh/completions/_k3d
 	minikube completion zsh > $target/.zsh/completions/_minikube
 }
-#
+
+
 #(ls ~/.autoenv >> /dev/null 2>&1 && echo "autoenv already installed") || git clone git@github.com:hyperupcall/autoenv.git ~/.autoenv
 
 
