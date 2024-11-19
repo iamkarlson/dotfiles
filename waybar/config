@@ -3,12 +3,9 @@
 {
   "layer": "bottom",
   "modules-left": [
-    "sway/workspaces",
     "hyprland/workspaces",
-    "sway/mode"
   ],
   "modules-center": [
-    "sway/window",
     "hyprland/window"
   ],
   "modules-right": [
@@ -20,7 +17,6 @@
     "tray",
     "custom/scratchpad-indicator",
     "pulseaudio",
-    "sway/language",
     "hyprland/language",
     "clock",
     //"custom/spotify",
@@ -28,9 +24,6 @@
     "custom/menu"
 
   ],
-  "sway/window": {
-    "max-length": 50
-  },
   "hyprland/window": {
     "separate-outputs": true
   },
@@ -58,16 +51,10 @@
       "critical": 90
     }
   },
-  "sway/language": {
-    "format": " {}",
-    "min-length": 5,
-    "on-click": "swaymsg 'input * xkb_switch_layout next'",
-    "tooltip": false
-  },
   "hyprland/language": {
     "format": " {}",
     "min-length": 5,
-    //"on-click": "swaymsg 'input * xkb_switch_layout next'",
+    "on-click": "hyprctl switchxkblayout current next",
     "tooltip": false
   },
 
@@ -135,7 +122,7 @@
   "battery": {
     "format": "{capacity}% {icon}",
     "format-icons": ["", "", "", "", ""],
-    "on-click": "swaymsg exec battop",
+    "on-click": "hyprctl dispatch exec battop",
     "interval": 5
 
   },

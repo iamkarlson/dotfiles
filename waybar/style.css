@@ -1,3 +1,12 @@
+
+/*
+ * To debug this CSS, run waybar with debugger attached:
+
+pkill waybar ; env GTK_DEBUG=interactive waybar
+
+
+ */
+
 /* Define colors for the theme */
 /* @define-color background         #1e1e2e; */
 /* @define-color background-alt     #282828; */
@@ -45,11 +54,42 @@ window#waybar {
 
 window#waybar > * {
     margin: 10px;
+    background: @background;
 }
 /* #modules-right > * { */
 /*     margin: 40px; */
 /*     padding: 40px; */
 /* } */
+
+
+
+
+/*
+You can type here any CSS rule recognized by GTK+.
+You can temporarily disable this custom CSS by clicking on the “Pause” button above.
+
+Changes are applied instantly and globally, for the whole application.
+*/
+
+.modules-right {
+    background-color: @background-alt; /* Similar to workspaces */
+    border-radius: 5px; /* Rounded edges for a cleaner look */
+    color: @foreground; /* Text color */
+    font-weight: normal; /* Adjust font weight if needed */
+    padding: 0px 10px;
+}
+/* Modules-right styling */
+.modules-right  *.module {
+    margin: 0 10px; /* Horizontal spacing between widgets */
+    padding: 0px 5px; /* Padding inside each widget */
+}
+
+.modules-right *.module:hover {
+    background-color: @selected; /* Highlight effect on hover */
+    color: black; /* Change text color on hover */
+}
+
+
 
 /* Workspaces styling */
 #workspaces {
@@ -57,6 +97,7 @@ window#waybar > * {
     font-weight: normal;
     font-style: normal;
 }
+
 #workspaces button {
     /* padding: 0px 10px; */
     color: @muted;
@@ -74,31 +115,7 @@ window#waybar > * {
     color: black;
 }
 
-/* General module styling */
-#custom-date, #clock, #battery, #pulseaudio, #network, #custom-randwall, #custom-launcher {
-    background: transparent;
-    border: solid 0px @foreground;
-}
 
-#custom-date {
-    color: @highlight;
-}
-
-#custom-power {
-    color: @background;
-    background-color: @urgent;
-}
-
-#tray {
-    background: @background-alt;
-}
-
-/* Clock settings */
-#clock {
-    color: @selected;
-    background-color: @background-alt;
-    font-weight: bold;
-}
 
 /* Battery styling */
 #battery {
@@ -114,57 +131,14 @@ window#waybar > * {
     color: @background;
 }
 
-/* Network and Audio settings */
-#network {
-    color: @foreground;
-    margin-right: 5px;
-}
-
-#pulseaudio {
-    color: @foreground;
-}
-
-#pulseaudio.muted {
-    background: transparent;
-    color: @muted;
-}
-
-#custom-randwall {
-    color: @foreground;
-}
-
-#custom-launcher {
-    color: @accent;
-    background-color: @background-alt;
-    font-size: 20px;
-}
-
-#custom-launcher button:hover {
-    background-color: @active;
-    color: transparent;
-}
-
-/* Player Control styling */
-#custom-playerctl, #custom-playerlabel, #window {
-    background: @background-alt;
-    font-weight: normal;
-    font-style: normal;
-}
-
-/* Specific Component Styling */
-#custom-wf-recorder {
-    color: @accent;
-    background-color: @background;
-}
-
-#cpu, #memory, #disk, #custom-hyprpicker {
-    background-color: @background-alt;
-    font-weight: bold;
-}
-
 /* Custom Powermenu and Menu styling */
 #custom-powermenu, #custom-menu {
-    color: @urgent;
-    padding: 0px 15px;
+    color: @focus;
+    padding: 0px 10px 0px 5px;
+    margin: 0 10px;
     font-size: 25px;
+}
+#custom-powermenu:hover, #custom-menu:hover {
+    background-color: @background-alt; /* Similar to workspaces */
+    color: @urgent;
 }
