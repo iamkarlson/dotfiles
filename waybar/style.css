@@ -31,7 +31,7 @@
     font-family: Iosevka, FontAwesome, Noto Sans CJK;
     font-size: 14px;
     font-style: normal;
-    min-height: 0;
+    min-height: 0px;
 }
 
 /* Main window settings */
@@ -39,24 +39,34 @@ window#waybar {
     background: rgba(30, 30, 46, 0.5);
     border-bottom: 1px solid @background-alt;
     color: @foreground;
+    margin: 5px;
+    padding: 5px;
 }
+
+window#waybar > * {
+    margin: 10px;
+}
+/* #modules-right > * { */
+/*     margin: 40px; */
+/*     padding: 40px; */
+/* } */
 
 /* Workspaces styling */
 #workspaces {
     background: @background-alt;
-    margin: 5px;
-    padding: 0px 5px;
     font-weight: normal;
     font-style: normal;
 }
 #workspaces button {
-    padding: 0px 5px;
+    /* padding: 0px 10px; */
     color: @muted;
+    margin: 0px 2px;
+    padding: 5px;
 }
 
 #workspaces button.active {
     color: @foreground;
-    background-color: transparent;
+    background-color: @active;
 }
 
 #workspaces button:hover {
@@ -67,8 +77,6 @@ window#waybar {
 /* General module styling */
 #custom-date, #clock, #battery, #pulseaudio, #network, #custom-randwall, #custom-launcher {
     background: transparent;
-    padding: 5px;
-    margin: 5px;
     border: solid 0px @foreground;
 }
 
@@ -79,22 +87,16 @@ window#waybar {
 #custom-power {
     color: @background;
     background-color: @urgent;
-    margin: 5px 10px 5px 0px;
-    padding: 5px 10px;
 }
 
 #tray {
     background: @background-alt;
-    margin: 5px;
-    padding: 0px 5px;
 }
 
 /* Clock settings */
 #clock {
     color: @selected;
     background-color: @background-alt;
-    padding: 0px 15px 0px 13px;
-    margin: 0px 10px 0px 0px;
     font-weight: bold;
 }
 
@@ -134,37 +136,29 @@ window#waybar {
 #custom-launcher {
     color: @accent;
     background-color: @background-alt;
-    margin: 0px;
-    padding: 0 20px 0 13px;
     font-size: 20px;
 }
 
 #custom-launcher button:hover {
     background-color: @active;
     color: transparent;
-    margin: 0px 10px 0px 0px;
 }
 
 /* Player Control styling */
 #custom-playerctl, #custom-playerlabel, #window {
     background: @background-alt;
-    padding: 15px;
-    margin: 5px;
     font-weight: normal;
     font-style: normal;
 }
 
 /* Specific Component Styling */
 #custom-wf-recorder {
-    padding: 0 20px;
     color: @accent;
     background-color: @background;
 }
 
 #cpu, #memory, #disk, #custom-hyprpicker {
     background-color: @background-alt;
-    margin: 5px;
-    padding: 0px 10px;
     font-weight: bold;
 }
 
@@ -172,6 +166,5 @@ window#waybar {
 #custom-powermenu, #custom-menu {
     color: @urgent;
     padding: 0px 15px;
-    margin-top: -3px;
     font-size: 25px;
 }

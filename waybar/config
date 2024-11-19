@@ -8,7 +8,8 @@
     "sway/mode"
   ],
   "modules-center": [
-    "sway/window"
+    "sway/window",
+    "hyprland/window"
   ],
   "modules-right": [
     "network",
@@ -29,6 +30,15 @@
   ],
   "sway/window": {
     "max-length": 50
+  },
+  "hyprland/window": {
+    "separate-outputs": true
+  },
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1"
   },
   "clock": {
     "interval": 1,
