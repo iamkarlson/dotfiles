@@ -56,20 +56,8 @@ window#waybar > * {
     margin: 10px;
     background: @background;
 }
-/* #modules-right > * { */
-/*     margin: 40px; */
-/*     padding: 40px; */
-/* } */
 
 
-
-
-/*
-You can type here any CSS rule recognized by GTK+.
-You can temporarily disable this custom CSS by clicking on the “Pause” button above.
-
-Changes are applied instantly and globally, for the whole application.
-*/
 
 .modules-right {
     background-color: @background-alt; /* Similar to workspaces */
