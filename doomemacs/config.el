@@ -64,9 +64,19 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-(setq ispell-program-name "hunspell")
-(setq ispell-really-hunspell t)
-(setq ispell-dictionary "en_US")
+;; Set the default Hunspell program and dictionary path
+(setq ispell-program-name "hunspell"
+      ispell-really-hunspell t
+      ispell-dictionary "en_US,ru_RU" ;; Default dictionaries to use
+      ispell-local-dictionary-alist
+      '(("en_US,ru_RU"
+         "[[:alpha:]]"
+         "[^[:alpha:]]"
+         "[']"
+         nil
+         ("-d" "en_US,ru_RU")
+         nil
+         utf-8)))
 
 ;; Disable automatic deletion of trailing whitespace
 (remove-hook 'before-save-hook 'delete-trailing-whitespace)

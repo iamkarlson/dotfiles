@@ -199,14 +199,30 @@
   (setq org-latex-packages-alist
         '(("" "fontspec" t)        ; Load fontspec for xelatex/lualatex
           ("" "polyglossia" t)))   ; Load polyglossia for multilingual support
+  (setq org-latex-default-packages-alist
+        '(("" "amssymb" t))) ; Add the amssymb package for symbols
+  ;; Disable Table of Contents for LaTeX exports
+  ;;(setq org-latex-with-toc nil)
+  (setq org-latex-toc-command nil)
   (setq org-latex-classes
         '(("article"
-           "\\documentclass[11pt]{article}
-            \\usepackage{fontspec}
-            \\usepackage{polyglossia}
-            \\setmainlanguage{russian}
-            \\setotherlanguage{english}
-            \\newfontfamily\\cyrillicfont{Times New Roman}" ; Or another Cyrillic font
+           "\\documentclass[14pt]{article}
+            \\usepackage[margin=1in]{geometry} % Set minimal margins
+                \\usepackage{fontspec}
+                \\usepackage[russian]{babel}
+                \\usepackage{polyglossia}
+                \\setmainlanguage{english}
+                \\setotherlanguage{russian}
+                \\defaultfontfeatures{mapping=tex-text,scale=matchlowercase}
+
+                \\setmainfont{DejaVu Serif}
+                \\setmonofont{Courier New}
+                \\usepackage{hyperref}
+                \\hypersetup{pdfauthor={},pdftitle={},pdfsubject={},pdfkeywords={},pdfproducer={},pdfcreator={}}
+
+                \\usepackage{titlesec}
+                \\newcommand{\\sectionbreak}{\\clearpage}
+"
            ("\\section{%s}" . "\\section*{%s}")
            ("\\subsection{%s}" . "\\subsection*{%s}")
            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")

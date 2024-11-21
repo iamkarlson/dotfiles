@@ -21,7 +21,10 @@ pkill waybar ; env GTK_DEBUG=interactive waybar
 
 
 
-/* Define colors for the theme */
+/*
+ *
+ * Retrowave theme (purple)
+ */
 @define-color background         #2a003e;    /* Deep purple background */
 @define-color background-alt     #3a0053;    /* Darker violet for secondary background */
 @define-color foreground         #ffeefb;    /* Light pink for text */
@@ -32,6 +35,25 @@ pkill waybar ; env GTK_DEBUG=interactive waybar
 @define-color muted              #8c84a6;    /* Muted lavender-gray */
 @define-color highlight          #d87eff;    /* Soft purple for subtle highlights */
 @define-color accent             #ff8ed4;    /* Light magenta for accents */
+
+
+/*
+ *
+ * Green theme
+ *
+ *
+ **/
+/* @define-color background         #002a0e;    /\* Deep green background *\/ */
+/* @define-color background-alt     #00401a;    /\* Darker forest green for secondary background *\/ */
+/* @define-color foreground         #e6ffea;    /\* Light mint green for text *\/ */
+/* @define-color selected           #67ffa0;    /\* Bright neon green highlight *\/ */
+/* @define-color active             #00ff66;    /\* Vivid lime green for active elements *\/ */
+/* @define-color urgent             #1aff3d;    /\* Intense vibrant green for urgency *\/ */
+/* @define-color focus              #19ffb3;    /\* Bright aqua green for focused elements *\/ */
+/* @define-color muted              #84a690;    /\* Muted sage-green *\/ */
+/* @define-color highlight          #7effd8;    /\* Soft aqua green for subtle highlights *\/ */
+/* @define-color accent             #8ed4a3;    /\* Light pastel green for accents *\/ */
+
 
 
 * {
