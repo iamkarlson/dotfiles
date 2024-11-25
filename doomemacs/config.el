@@ -89,6 +89,16 @@
 (+global-word-wrap-mode +1)
 (setq-default visual-fill-column-width 100)
 (setq-default visual-fill-column-center-text t)
+
+
+(add-hook! 'markdown-mode-hook
+  (defun +my-markdown-mode-settings ()
+    (visual-fill-column-mode 1)
+    (visual-line-mode 1)
+    ))
+
+
+
 ;;(setq-default visual-line-mode t)
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an

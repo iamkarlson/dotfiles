@@ -1,5 +1,3 @@
-# -*- encoding: utf-8 -*-
-
 # A rule for `thefuck` to run the suggested `journalctl` command
 # when `systemctl` complains about a service failing to start.
 
@@ -15,8 +13,9 @@ def match(command):
             )
         )
         and "Job for" in command.output
-        and "failed" in command.output
-        and "journalctl -xeu" in command.output
+        and ("failed" in command.output or "error code" in command.output)
+        and "journalctl" in command.output
+        and "-xeu" in command.output
     )
 
 
@@ -26,7 +25,10 @@ def get_new_command(command):
     for line in lines:
         if "Job for" in line and ".service" in line:
             service_name = line.split()[2].replace(".service", "")
-            return f"journalctl -xeu {service_name}"
+            if "--user" in command.output:
+                return f"journalctl --user -xeu {service_name}"
+            else:
+                return f"journalctl -xeu {service_name}"
     return None  # No valid command found, but this should rarely happen if the match succeeds
 
 

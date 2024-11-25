@@ -8,7 +8,7 @@
 
 alias vim=nvim
 
-alias e="~/.config/sway/scripts/apps/openfocus.sh emacs && emacsclient -n"
+alias e="~/.config/hypr/scripts/apps/emacs.sh"
 
 alias k="kubectl"
 alias g="git"
