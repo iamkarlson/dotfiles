@@ -23,6 +23,8 @@ delete_link "/home/iamkarlson/.zshrc"
 delete_link "/home/iamkarlson/.zprofile"
 # Removing file -------------------------------------- /home/iamkarlson/.p10k.zsh
 delete_link "/home/iamkarlson/.p10k.zsh"
+# Removing file -------------------------------------- /home/iamkarlson/taskfile.yaml
+delete_link "/home/iamkarlson/taskfile.yaml"
 # Removing file -------------------------------------- /home/iamkarlson/.tmux.conf
 delete_link "/home/iamkarlson/.tmux.conf"
 # Removing directory ********************************* /home/iamkarlson/.config/espanso
@@ -35,26 +37,6 @@ delete_link "/home/iamkarlson/.doom.d"
 delete_link "/home/iamkarlson/.config/kitty/kitty.conf"
 # Removing directory ********************************* /home/iamkarlson/.config/alacritty
 delete_link "/home/iamkarlson/.config/alacritty"
-# Removing file -------------------------------------- /home/iamkarlson/.vsvimrc
-delete_link "/home/iamkarlson/.vsvimrc"
-# Removing file -------------------------------------- /home/iamkarlson/.ideavimrc
-delete_link "/home/iamkarlson/.ideavimrc"
-# Removing file -------------------------------------- /home/iamkarlson/.vimrc
-delete_link "/home/iamkarlson/.vimrc"
-# Removing file -------------------------------------- /home/iamkarlson/.gvimrc
-delete_link "/home/iamkarlson/.gvimrc"
-# Removing file -------------------------------------- /home/iamkarlson/.config/nvim/init.vim
-delete_link "/home/iamkarlson/.config/nvim/init.vim"
-# Removing file -------------------------------------- /home/iamkarlson/.vim/autocmd.vimrc
-delete_link "/home/iamkarlson/.vim/autocmd.vimrc"
-# Removing file -------------------------------------- /home/iamkarlson/.vim/plugin-settings.vimrc
-delete_link "/home/iamkarlson/.vim/plugin-settings.vimrc"
-# Removing file -------------------------------------- /home/iamkarlson/.vim/ide.vimrc
-delete_link "/home/iamkarlson/.vim/ide.vimrc"
-# Removing file -------------------------------------- /home/iamkarlson/.vim/simple-mapping.vimrc
-delete_link "/home/iamkarlson/.vim/simple-mapping.vimrc"
-# Removing file -------------------------------------- /home/iamkarlson/.vim/mapping.vimrc
-delete_link "/home/iamkarlson/.vim/mapping.vimrc"
 # Removing file -------------------------------------- /home/iamkarlson/.config/user-dirs.dirs
 delete_link "/home/iamkarlson/.config/user-dirs.dirs"
 # Removing directory ********************************* /home/iamkarlson/.config/paru
@@ -109,5 +91,5 @@ delete_link "/home/iamkarlson/.local/share/applications/emacs.desktop"
 delete_link "/home/iamkarlson/.local/share/applications/emacs-mail.desktop"
 # Removing file -------------------------------------- /home/iamkarlson/.local/share/applications/skypeforlinux.desktop
 delete_link "/home/iamkarlson/.local/share/applications/skypeforlinux.desktop"
-# Removing directory ********************************* /home/iamkarlson/.thunderbird/g32zrqcx.default
-delete_link "/home/iamkarlson/.thunderbird/g32zrqcx.default"
+# Removing directory ********************************* /home/iamkarlson/.thunderbird/y2d13ngf.default-release/chrome
+delete_link "/home/iamkarlson/.thunderbird/y2d13ngf.default-release/chrome"
