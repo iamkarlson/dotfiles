@@ -3,6 +3,9 @@
   path=~/git/aliases.gitconfig
 [push]
   followTags = true
+	default = simple
+[branch]
+	autoSetupRemote = always
 [status]
   showUntrackedFiles = all
 [diff]
