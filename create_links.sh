@@ -95,6 +95,8 @@ ln_file "$dotfiles/zsh/.zprofile" "$target/.zprofile"
 ln_file "$dotfiles/zsh/.p10k.zsh" "$target/.p10k.zsh"
 
 
+ln_file "$dotfiles/tasks/tasks.yaml" "$target/taskfile.yaml"
+
 #
 # Tmux
 #
@@ -206,6 +208,9 @@ ln_file $dotfiles/sway/desktops/sway_intel.sh /usr/bin/sway_intel
 sudo chmod +x /usr/bin/sway_intel
 sudo cp $dotfiles/sway/desktops/sway_intel.desktop /usr/share/wayland-sessions
 
+#
+# Hyprland config
+#
 
 
 ln_file $dotfiles/hyprland/hyprland.sh /usr/bin/hyprland_launcher

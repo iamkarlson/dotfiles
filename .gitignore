@@ -13,3 +13,4 @@ powershell/Help/
 .autoenv.zsh
 .autoenv
 doomemacs/custom.el
+tasks/tasks.yaml
