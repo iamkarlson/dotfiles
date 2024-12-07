@@ -91,6 +91,12 @@
 (setq-default visual-fill-column-center-text t)
 
 
+(add-hook! 'magit-mode-hook
+  (defun +my-markdown-mode-settings ()
+    (evil-mode nil)
+    (visual-line-mode 1)
+    ))
+
 (add-hook! 'markdown-mode-hook
   (defun +my-markdown-mode-settings ()
     (visual-fill-column-mode 1)
@@ -225,6 +231,7 @@
 (add-hook! 'prog-mode-hook #'my/disable-mouse-hook)
 (add-hook! 'lsp-mode-hook #'my/disable-mouse-hook)
 (add-hook! 'python-mode-hook #'my/disable-mouse-hook)
+(add-hook! 'magit-mode-hook #'my/disable-mouse-hook)
 
 
 (setq case-fold-search t)   ; make searches case insensitive
@@ -282,6 +289,7 @@
   (add-to-list 'copilot-indentation-alist '(prog-mode 2))
   (add-to-list 'copilot-indentation-alist '(org-mode 2))
   (add-to-list 'copilot-indentation-alist '(text-mode 2))
+  (add-to-list 'copilot-indentation-alist '(yaml-mode 2))
   (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
 
 

@@ -6,7 +6,8 @@
 (defun wl-copy (text)
   (setq wl-copy-process (make-process :name "wl-copy"
                                       :buffer nil
-                                      :command '("wl-copy" "-f" "-p" "-n")
+                                      :command '("wl-copy" "-f" "-n")
+                                      ;;:command '("wl-copy" "-f" "-p" "-n")
                                       :connection-type 'pipe
                                       :noquery t))
   (process-send-string wl-copy-process text)
