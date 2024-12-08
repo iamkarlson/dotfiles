@@ -8,11 +8,13 @@ vars:
 
 tasks:
   default:
+    desc: "Default greeting command"
     cmds:
       - echo "{{.GREETING}}"
     silent: true
 
   create-links:
+    desc: "Create symbolic links to my config files"
     cmds:
       - sudo ./create_links.sh /home/iamkarlson
     interactive: true

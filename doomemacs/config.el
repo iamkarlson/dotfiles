@@ -90,7 +90,6 @@
 (setq-default visual-fill-column-width 100)
 (setq-default visual-fill-column-center-text t)
 
-
 (add-hook! 'magit-mode-hook
   (defun +my-markdown-mode-settings ()
     (evil-mode nil)
@@ -266,6 +265,7 @@
 (load! "parts/org-roam.el")
 (load! "parts/magit.el")
 (load! "parts/wayland.el")
+(load! "parts/code.el")
 
 
 
@@ -305,13 +305,6 @@
       :n "t e" #'evil-mode
       :leader
       :n "p l" #'treemacs-add-and-display-current-project-exclusively
-
-
-      ;; ;; window resizing commands
-      ;; :n "C-<left>"  #'evil-window-decrease-width
-      ;; :n "C-<right>" #'evil-window-increase-width
-      ;; :n "C-<up>"    #'evil-window-decrease-height
-      ;; :n "C-<down>"  #'evil-window-increase-height
       )
 
 (server-start)
