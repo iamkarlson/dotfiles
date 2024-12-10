@@ -90,6 +90,11 @@
 (setq-default visual-fill-column-width 100)
 (setq-default visual-fill-column-center-text t)
 
+(add-hook! 'magit-mode-hook
+  (defun +my-markdown-mode-settings ()
+    (evil-mode nil)
+    (visual-line-mode 1)
+    ))
 
 (add-hook! 'markdown-mode-hook
   (defun +my-markdown-mode-settings ()
@@ -225,6 +230,7 @@
 (add-hook! 'prog-mode-hook #'my/disable-mouse-hook)
 (add-hook! 'lsp-mode-hook #'my/disable-mouse-hook)
 (add-hook! 'python-mode-hook #'my/disable-mouse-hook)
+(add-hook! 'magit-mode-hook #'my/disable-mouse-hook)
 
 
 (setq case-fold-search t)   ; make searches case insensitive
@@ -259,6 +265,9 @@
 (load! "parts/org-roam.el")
 (load! "parts/magit.el")
 (load! "parts/structurizr.el")
+(load! "parts/wayland.el")
+(load! "parts/code.el")
+
 
 
 ;; Add the modules folder to the load path
@@ -281,6 +290,7 @@
   (add-to-list 'copilot-indentation-alist '(prog-mode 2))
   (add-to-list 'copilot-indentation-alist '(org-mode 2))
   (add-to-list 'copilot-indentation-alist '(text-mode 2))
+  (add-to-list 'copilot-indentation-alist '(yaml-mode 2))
   (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
 
 
@@ -296,13 +306,6 @@
       :n "t e" #'evil-mode
       :leader
       :n "p l" #'treemacs-add-and-display-current-project-exclusively
-
-
-      ;; ;; window resizing commands
-      ;; :n "C-<left>"  #'evil-window-decrease-width
-      ;; :n "C-<right>" #'evil-window-increase-width
-      ;; :n "C-<up>"    #'evil-window-decrease-height
-      ;; :n "C-<down>"  #'evil-window-increase-height
       )
 
 (server-start)
