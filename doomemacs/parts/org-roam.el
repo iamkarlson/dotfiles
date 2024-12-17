@@ -153,7 +153,8 @@
 
       :desc "Open Journal Node"
       :leader
-      :n "j" (lambda () (interactive)
+      :n "j" (lambda ()
+               (interactive)
                (let ((node (org-roam-node-from-title-or-alias "Log journal")))
                  (if node
                      (org-roam-node-visit node)

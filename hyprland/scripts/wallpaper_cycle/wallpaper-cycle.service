@@ -1,0 +1,10 @@
+[Unit]
+Description=Change wallpaper for Hyprland
+
+[Service]
+Type=oneshot
+ExecStart=/home/iamkarlson/src/dotfiles/hyprland/scripts/wallpaper_cycle/wallpaper-cycle.sh
+
+
+[Install]
+WantedBy=default.target
