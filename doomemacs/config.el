@@ -297,6 +297,7 @@
 
                                         ;(global-copilot-mode 1)
 
+
 (map! :after evil
       :desc "Toggle visual line mode"
       :leader

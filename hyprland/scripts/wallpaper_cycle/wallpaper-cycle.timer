@@ -1,0 +1,10 @@
+[Unit]
+Description=Wallpaper Cycle for Hyprland
+
+[Timer]
+OnBootSec=0s
+OnUnitActiveSec=1min
+Unit=wallpaper-cycle.service
+
+[Install]
+WantedBy=timers.target

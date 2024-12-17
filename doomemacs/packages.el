@@ -95,3 +95,5 @@
 
   :recipe (:host github :repo "gilesp/structurizr-mode" )
   )
+
+(package! gptel)

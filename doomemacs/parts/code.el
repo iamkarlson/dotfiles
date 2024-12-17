@@ -6,14 +6,14 @@
 (setq my-project-task-command "go-task --list-all")
 (setq my-global-task-command "go-task -g --list-all")
 
-
 (defun my-select-and-run-task (task-command)
   "Generic function to select and run a task using TASK-COMMAND."
   (interactive)
   (let* ((default-directory (file-name-directory (or buffer-file-name default-directory)))
          (task-output (shell-command-to-string task-command))
          ;; Filter lines starting with '*'
-         (task-lines (seq-filter (lambda (line) (string-match-p "^\\* " line))
+         (task-lines (seq-filter (lambda (line)
+                                   (string-match-p "^\\* " line))
                                  (split-string task-output "\n" t)))
          ;; Parse task names and descriptions
          (tasks (mapcar (lambda (line)
@@ -31,10 +31,30 @@
     (let ((task-name (car (assoc (car (split-string selected-task ":")) tasks))))
       ;; Use `comint` to run the command interactively
       (let ((compile-command (format "go-task %s" task-name)))
+        (compilation-start
+         compile-command
+         'comint-mode
+         (lambda (_) "*Go Task Output*"))
+        ;; Add password handling once the buffer is ready
+        (add-hook 'compilation-start-hook
+                  (lambda ()
+                    (message "Adding password prompt")
+                    (when (string= (buffer-name) "*Go Task Output*")
+                      (add-hook 'comint-output-filter-functions 'comint-watch-for-password-prompt nil t)))
+                  nil t)))))
 
-        (message "Selected task: %s" task-name)
-        (message "Compiling using this command: %s" compile-command)
-        (compile compile-command)))))
+(defun my-close-compilation-window (buffer status)
+  "Close the compilation window if the task completes successfully."
+  (when (and (string-match "finished" status)
+             (string-match "\\*Go Task Output\\*" (buffer-name buffer))) ;; Match buffer name as a string
+
+    (message "Buffer: %s"  (buffer-name buffer))
+    (message "Task completed with status lalalal")
+    (delete-window (get-buffer-window buffer)))
+  (message "Task completed with status: %s" status))
+
+(add-hook 'compilation-finish-functions #'my-close-compilation-window)
+
 
 (defun my-project-tasks ()
   "Run project-local tasks."
@@ -51,6 +71,6 @@
 (map! :after evil
       :leader
       :desc "Run Project Task"
-      :n "c c" #'my-project-tasks
+      :n "c b" #'my-project-tasks
       :desc "Run Global Task"
       :n "c g" #'my-global-tasks)
