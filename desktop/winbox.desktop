@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Mikrotik WinBox
+StartupWMClass=winbox
+Exec=/home/iamkarlson/activities/smarthome/winbox/WinBox_Linux/WinBox
+Type=Application
+Categories=Network;Administration;
