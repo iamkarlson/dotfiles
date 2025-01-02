@@ -89,36 +89,53 @@
        "")
      "* %?")))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; This is the most horrible part of org-roam. I absotely hate it.
+;; I want to place my templates in a private repo, but I can't outsource the templates from config
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun my/read-file (file)
+  "Return the contents of FILE as a string."
+  (with-temp-buffer
+    (insert-file-contents file)
+    (buffer-string)))
+
 (after! org-roam
   (setq org-roam-capture-templates
         `(
+          ;; Nothing special
           ("d" "default" plain
            "* %?"
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                               "#+title: ${title}\n")
            :target (file "%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
+          ;; Contact
           ("c" "contact" plain (function my/org-roam-capture-contact)
            :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
                               "#+title: ${title}\n")
            :target (file "%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
+          ;; Idea
           ("i" "idea" plain
-           ,(format "#+title: ${title}\n%%[%s/templates/idea.org.txt]" org-roam-directory)
+           ,(my/read-file (concat org-roam-directory "templates/idea.org"))
            :target (file "thought/%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
+          ;; Technology or tool
           ("t" "technology" plain "* %?"
            :if-new (file+head
                     "%<%Y%m%d%H%M%S>-${slug}.org"
-                    ":PROPERTIES:\n:ROAM_ALIASES: ${alias}\n:END:\n#+title: ${title}\n\n\n* Characteristics\n- Documentation:\n- Developer:\n* Snippets:\n")
+                    ,(my/read-file (concat org-roam-directory "templates/technology.org"))
+                    )
            :target (file "%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
           )
+        ;; This is daily template
         org-roam-dailies-capture-templates
-        '(("d" "default" entry "* %?"
-           :target (file+head "%<%Y-%m>/%<%d - %A>.org" "#+title: %<%Y %B %d, %A, Week %V>\n\n* Goals for today\n** \n\n* Agenda \n- 10:00 API Daily Sync \n- \n\n* Open tickets in [[https://dexterenergy.atlassian.net/jira/software/projects/API/boards/2?assignee=712020%3A2d1033ce-f19e-42dc-b72e-bc70bc672df2][Jira]] \n- \n\n* Journal:"))))
+        `(("d" "default" entry "* %?"
+           :target (file+head "%<%Y-%m>/%<%d - %A>.org" ,(my/read-file (concat org-roam-directory "templates/daily.org"))))))
   (setq-default visual-fill-column-mode t))
-
 (add-hook! org-mode-hook 'org-display-inline-images)
 
 

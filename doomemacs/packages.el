@@ -97,3 +97,5 @@
   )
 
 (package! gptel)
+
+(package! python-docstring)
