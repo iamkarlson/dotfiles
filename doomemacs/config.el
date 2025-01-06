@@ -89,6 +89,7 @@
 (+global-word-wrap-mode +1)
 (setq-default visual-fill-column-width 100)
 (setq-default visual-fill-column-center-text t)
+(setq-default doom-modeline-vcs-max-length 60)
 
 (add-hook! 'magit-mode-hook
   (defun +my-markdown-mode-settings ()
