@@ -137,7 +137,7 @@
            :target (file+head "%<%Y-%m>/%<%d - %A>.org" ,(my/read-file (concat org-roam-directory "templates/daily.org"))))
 
           ("w" "weekly" entry "* %?"
-           :target (file+head "%<%Y-%m>/%<%U>.org" ,(my/read-file (concat org-roam-directory "templates/weekly.org"))))
+           :target (file+head "%<%Y-%m>/agenda-week-%<%U>.org" ,(my/read-file (concat org-roam-directory "templates/weekly.org"))))
           ))
   (setq-default visual-fill-column-mode t))
 (add-hook! org-mode-hook 'org-display-inline-images)

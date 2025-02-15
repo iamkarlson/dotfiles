@@ -310,3 +310,11 @@
       )
 
 (server-start)
+
+(use-package! gptel
+  :config
+  (setq
+   gptel-model 'gemini-pro
+   gptel-backend (gptel-make-gemini "Gemini"
+                   :key "AIzaSyC2mRdll5WWftIWEq2o_EmlURRq5fWfDxA"
+                   :stream t)))
