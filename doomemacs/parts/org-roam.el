@@ -92,7 +92,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; This is the most horrible part of org-roam. I absotely hate it.
-;; I want to place my templates in a private repo, but I can't outsource the templates from config
+;; ~I want to place my templates in a private repo, but I can't outsource the templates from config~
+;;
+;; Update: it seems like I found the way eventually, but haven't updated the comment.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun my/read-file (file)
@@ -130,6 +132,14 @@
                     )
            :target (file "%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
+          ;; Area
+          ("a" "area" plain "* %?"
+           :if-new (file+head
+                    "area/%<%Y%m%d%H%M%S>-${slug}.org"
+                    ,(my/read-file (concat org-roam-directory "templates/area.org")))
+           :target (file "area/%<%Y%m%d%H%M%S>-${slug}.org")
+           :unnarrowed t)
+
           )
         ;; This is daily template
         org-roam-dailies-capture-templates
