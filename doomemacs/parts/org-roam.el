@@ -250,3 +250,13 @@
            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
            ("\\paragraph{%s}" . "\\paragraph*{%s}")
            ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
+;;
+;; Add this to your config
+(defun my/org-set-project-root-default-directory ()
+  "Set `default-directory` to project root if in org-mode."
+  (when (derived-mode-p 'org-mode)
+    (let ((root (or (projectile-project-root) (vc-root-dir))))
+      (when root
+        (setq-local default-directory root)))))
+
+(add-hook! 'org-mode-hook #'my/org-set-project-root-default-directory)
