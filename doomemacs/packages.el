@@ -96,6 +96,8 @@
   :recipe (:host github :repo "gilesp/structurizr-mode" )
   )
 
-(package! gptel)
+;;(package! gptel)
 
 (package! python-docstring)
+
+(package! org-super-agenda)
