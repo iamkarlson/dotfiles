@@ -140,7 +140,14 @@
            :target (file "area/%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
 
-          )
+          ;; Project
+          ("p" "project" plain "* %?"
+           :if-new (file+head
+                    "%<%Y%m%d%H%M%S>-${slug}.org"
+                    ,(my/read-file (concat org-roam-directory "templates/project.org"))
+                    )
+           :target (file "%<%Y%m%d%H%M%S>-${slug}.org")
+           :unnarrowed t))
         ;; This is daily template
         org-roam-dailies-capture-templates
         `(("d" "default" entry "* %?"
