@@ -48,6 +48,8 @@
   )
 
 
+
+
 (defun my/file-ordering (file &optional default)
   "Return numeric ORDERING property found in FILE.
 If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
@@ -398,7 +400,8 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
   ;;(setq org-latex-with-toc nil)
   (setq org-latex-toc-command nil)
   (setq org-latex-classes
-        '(("article"
+        '(
+          ("article"
            "\\documentclass[14pt]{article}
             \\usepackage[margin=1in]{geometry} % Set minimal margins
                 \\usepackage{fontspec}
@@ -420,7 +423,9 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
            ("\\subsection{%s}" . "\\subsection*{%s}")
            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
            ("\\paragraph{%s}" . "\\paragraph*{%s}")
-           ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+           )
+          )
         )
   ;; Fold or unfold the subtree you’re in whenever its children change.
   (defun +org/toggle-fold-when-all-done (&rest _)
@@ -458,3 +463,35 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
     )
 
   (add-hook! 'org-mode-hook #'my/org-set-project-root-default-directory)
+
+  (require 'cl-lib)
+
+  ;; t  → subtree has TODOs and every one is DONE
+  ;; nil → either some TODOs are still open, or there were no TODOs at all
+  (defun +org/all-children-done-p ()
+    (save-excursion
+      (org-back-to-heading t)
+      (let ((open 0) (seen-todo nil))
+        (org-map-entries
+         (lambda ()
+           (let ((state (org-get-todo-state)))
+             (when state                       ; it’s a task
+               (setq seen-todo t)
+               (unless (org-entry-is-done-p)   ; …but not DONE
+                 (cl-incf open)))))
+         nil 'tree)
+        (and seen-todo (= open 0))))        ; only fold if something was seen
+    )
+  )
+
+(defun +org/fold-done-subtrees-on-load ()
+  "Fold any subtree whose tasks are all DONE, once, when the file opens."
+  (org-fold-show-all)
+  (save-excursion
+    (org-map-entries
+     (lambda ()
+       (when (+org/all-children-done-p)
+         (org-fold-hide-subtree)))
+     nil 'file)))
+
+(add-hook 'org-mode-hook #'+org/fold-done-subtrees-on-load)

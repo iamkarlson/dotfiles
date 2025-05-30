@@ -257,11 +257,16 @@
 
 
 ;; All org related configuration goes there
-(load! "parts/org-roam.el")
-(load! "parts/magit.el")
-(load! "parts/structurizr.el")
-(load! "parts/wayland.el")
-(load! "parts/code.el")
+;; (load! "parts/org-roam.el")
+;; (load! "parts/magit.el")
+;; (load! "parts/structurizr.el")
+;; (load! "parts/wayland.el")
+;; (load! "parts/code.el")
+(dolist (f
+         (file-expand-wildcards (expand-file-name "parts/*.el" doom-user-dir))
+         )
+  (load! f)
+  )
 
 
 
