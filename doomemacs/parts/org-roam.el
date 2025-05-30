@@ -5,8 +5,36 @@
 (setq org-directory "~/braindb/")
 (setq org-roam-directory "~/braindb/")
 
+;; Ugly llm script but whatever
+(defun my/generate-project-groups ()
+  "Generate dynamic org-super-agenda groups for files in projects/ with :ORDERING: property."
+  (let ((project-dir (expand-file-name "projects/" org-directory))
+        groups)
+    (dolist (file (directory-files-recursively project-dir "\\.org$"))
+      (with-temp-buffer
+        (insert-file-contents file)
+        (let ((category (or (progn (goto-char (point-min))
+                                   (when (re-search-forward "^#\\+CATEGORY: +\\(.*\\)" nil t)
+                                     (match-string 1)))
+                            (file-name-base file)))
+              (ordering (progn
+                          (goto-char (point-min))
+                          (when (re-search-forward "^#\\+:ORDERING: +\\([0-9]+\\)" nil t)
+                            (string-to-number (match-string 1))))))
+          (when ordering
+            (push `(:name ,category
+                    :order ,ordering
+                    :predicate
+                    ,(lambda (item)
+                       (let ((marker (get-text-property 0 'org-hd-marker item)))
+                         (and marker
+                              (string-prefix-p ,(expand-file-name file)
+                                               (or (buffer-file-name (marker-buffer marker)) ""))))))
+                  groups)))))
+    (reverse groups))) ;; Keep order from filesystem
 
 (after! org
+  (setq org-agenda-inhibit-startup t)
   (setq org-agenda-files (directory-files-recursively (file-truename org-directory) "\\.org$"))
   (setq warning-suppress-types (append warning-suppress-types '((org-element-cache))))
   (setq org-todo-keywords
@@ -61,54 +89,56 @@
                             :order 1)))))
             (alltodo "" ((org-agenda-overriding-header "")
                          (org-super-agenda-groups
-                          '(
-                            ;; Scheduled tasks
-                            (:name "Next to do"
-                             :todo "NEXT"
-                             :order 1)
-                            (:name "Due Today"
-                             :deadline today
-                             :order 2)
-                            (:name "Due Soon"
-                             :deadline future
-                             :order 3)
-                            (:name "Overdue"
-                             :deadline past
-                             :order 4)
+                          (append
+                           (my/generate-project-groups)
+                           '(
+                             ;; Scheduled tasks
+                             (:name "Next to do"
+                              :todo "NEXT"
+                              :order 1)
+                             (:name "Due Today"
+                              :deadline today
+                              :order 2)
+                             (:name "Due Soon"
+                              :deadline future
+                              :order 3)
+                             (:name "Overdue"
+                              :deadline past
+                              :order 4)
 
-                            ;; Tagged work tasks
-                            (:name "Work high priority"
-                             :and (:tag "work"
-                                   :priority "A")
-                             :order 10)
-                            (:name "All Work"
-                             :tag "work"
-                             :order 11)
+                             ;; Tagged work tasks
+                             (:name "Work high priority"
+                              :and (:tag "work"
+                                    :priority "A")
+                              :order 10)
+                             (:name "All Work"
+                              :tag "work"
+                              :order 11)
 
-                            ;; Personal stuff
-                            (:name "Personal"
-                             :tag "personal"
-                             :order 20)
+                             ;; Personal stuff
+                             (:name "Personal"
+                              :tag "personal"
+                              :order 20)
 
-                            (:name "Home"
-                             :tag "home"
-                             :order 21)
+                             (:name "Home"
+                              :tag "home"
+                              :order 21)
 
-                            ;; Projects
-                            (:name "Project ideas"
-                             :todo "PROJ"
-                             :order 30)
+                             ;; Projects
+                             (:name "Project ideas"
+                              :todo "PROJ"
+                              :order 30)
 
-                            ;; Specific tags
-                            (:name "Notes"
-                             :tag "notes"
-                             :order 50)
-                            (:name "Emacs"
-                             :tag "Emacs"
-                             :order 51)
+                             ;; Specific tags
+                             (:name "Notes"
+                              :tag "notes"
+                              :order 50)
+                             (:name "Emacs"
+                              :tag "Emacs"
+                              :order 51)
 
-                            ;; Discard
-                            (:discard (:tag ("Chore" "Routine" "Daily"))))))))))))
+                             ;; Discard
+                             (:discard (:tag ("Chore" "Routine" "Daily")))))))))))))
 
 (add-hook! 'org-mode-hook
   (defun +my-org-mode-settings ()
