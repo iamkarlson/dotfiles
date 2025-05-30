@@ -1,35 +1,49 @@
+;;; -*- lexical-binding: t; -*-
+
+(message "Debug start %s" (current-time-string))
+(require 'org)
+(require 'org-element)
 (require 'pp)
 
+(defun my/file-ordering (file &optional default)
+  "Return numeric ORDERING property found in FILE.
+If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
+(or 10 if DEFAULT is nil)."
+  (with-temp-buffer
+    (insert-file-contents file)
+    (goto-char (point-min))
+    (if (re-search-forward
+         "^#\\+PROPERTY:[ \t]+\\(?:[^ \t]+[ \t]+\\)*ORDERING[ \t]+\\([0-9]+\\)"
+         nil t)
+        (string-to-number (match-string 1))
+      (or default 200))))
+
 (defun my/generate-project-groups ()
-  "Generate dynamic org-super-agenda groups for files in projects/ with :ORDERING: property."
-  (let ((project-dir (expand-file-name "projects/" org-directory))
-        groups)
+  "Return a list of org-super-agenda groups for every file in projects/."
+  (let* ((project-dir (expand-file-name "projects/" org-directory))
+         (org-directory (file-name-as-directory project-dir))
+         groups)
     (dolist (file (directory-files-recursively project-dir "\\.org$"))
-      (message "Checking file: %s" file)
-      ;;(message "Category: %s, Ordering: %s" category ordering)
+      (let* ((order   (my/file-ordering file 10))
+             (name    (file-name-base file))
+             (f       file))              ; close over FILE safely
+        (push (list :name name
+                    :order order
+                    :pred
+                    (lambda (item)
+                      (let ((m (get-text-property 0 'org-hd-marker item)))
+                        (when m
+                          (equal (expand-file-name f)
+                                 (buffer-file-name (marker-buffer m)))))))
+              groups)))
+    ;; org-super-agenda uses the lowest :order first; sort for sanity
+    (sort groups (lambda (a b) (< (plist-get a :order)
+                                  (plist-get b :order))))
+    (message "Final groups:\n%s" (pp-to-string groups))
+    groups
+    ))
 
-      (with-temp-buffer
-        (insert-file-contents file)
-        (let ((ordering (progn
-                          (goto-char (point-min))
-                          (or (when (re-search-forward "^#\\:ORDERING: +\\([0-9]+\\)" nil t)
-                                (string-to-number (match-string 1)))
-                              1000))))
-          (when ordering
-
-            (message "File: %s, Ordering: %s" file ordering)
-            (push `(:name ,file
-                    :order ,ordering
-                    :predicate
-                    ,(lambda (item)
-                       (let ((marker (get-text-property 0 'org-hd-marker item)))
-                         (and marker
-                              (string-prefix-p ,(expand-file-name file)
-                                               (or (buffer-file-name (marker-buffer marker)) ""))))))
-                  groups)))))
-    ;;(reverse groups)
-    (message "%s" (pp-to-string groups))
-    )) ;; Keep order from filesystem
 
 (my/generate-project-groups)
 
+(message "Debug end %s" (current-time-string))

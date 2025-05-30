@@ -5,34 +5,6 @@
 (setq org-directory "~/braindb/")
 (setq org-roam-directory "~/braindb/")
 
-;; Ugly llm script but whatever
-(defun my/generate-project-groups ()
-  "Generate dynamic org-super-agenda groups for files in projects/ with :ORDERING: property."
-  (let ((project-dir (expand-file-name "projects/" org-directory))
-        groups)
-    (dolist (file (directory-files-recursively project-dir "\\.org$"))
-      (with-temp-buffer
-        (insert-file-contents file)
-        (let ((category (or (progn (goto-char (point-min))
-                                   (when (re-search-forward "^#\\+CATEGORY: +\\(.*\\)" nil t)
-                                     (match-string 1)))
-                            (file-name-base file)))
-              (ordering (progn
-                          (goto-char (point-min))
-                          (when (re-search-forward "^#\\+:ORDERING: +\\([0-9]+\\)" nil t)
-                            (string-to-number (match-string 1))))))
-          (when ordering
-            (push `(:name ,category
-                    :order ,ordering
-                    :predicate
-                    ,(lambda (item)
-                       (let ((marker (get-text-property 0 'org-hd-marker item)))
-                         (and marker
-                              (string-prefix-p ,(expand-file-name file)
-                                               (or (buffer-file-name (marker-buffer marker)) ""))))))
-                  groups)))))
-    (reverse groups))) ;; Keep order from filesystem
-
 (after! org
   (setq org-agenda-inhibit-startup t)
   (setq org-agenda-files (directory-files-recursively (file-truename org-directory) "\\.org$"))
@@ -72,6 +44,44 @@
 
   )
 
+
+;; Ugly llm script but whatever
+(defun my/file-ordering (file &optional default)
+  "Return numeric ORDERING property found in FILE.
+If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
+(or 10 if DEFAULT is nil)."
+  (with-temp-buffer
+    (insert-file-contents file)
+    (goto-char (point-min))
+    (if (re-search-forward
+         "^#\\+PROPERTY:[ \t]+\\(?:[^ \t]+[ \t]+\\)*ORDERING[ \t]+\\([0-9]+\\)"
+         nil t)
+        (string-to-number (match-string 1))
+      (or default 200))))
+
+(defun my/generate-project-groups ()
+  "Return a list of org-super-agenda groups for every file in projects/."
+  (let* ((project-dir (expand-file-name "projects/" org-directory))
+         (org-directory (file-name-as-directory project-dir))
+         groups)
+    (dolist (file (directory-files-recursively project-dir "\\.org$"))
+      (let* ((order   (my/file-ordering file 10))
+             (name    (file-name-base file))
+             (f       file))              ; close over FILE safely
+        (push (list :name name
+                    :order order
+                    :pred (lambda (item)
+                            (let ((m (get-text-property 0 'org-hd-marker item)))
+                              (when m
+                                (equal (expand-file-name f)
+                                       (buffer-file-name (marker-buffer m)))))))
+              groups)))
+    ;; org-super-agenda uses the lowest :order first; sort for sanity
+    (sort groups (lambda (a b) (< (plist-get a :order)
+                                  (plist-get b :order))))
+    (message "Final groups:\n%s" (pp-to-string groups))
+    groups
+    ))
 
 (use-package! org-super-agenda
   :after org-agenda
