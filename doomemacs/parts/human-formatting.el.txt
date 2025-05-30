@@ -1,0 +1,26 @@
+;;; -*- lexical-binding: t; -*-
+
+(defun +lisp-vertical-close-paren ()
+  "If current line is only a close paren, indent it under its opener.
+   Gives   (foo
+            (bar
+             baz
+             )
+            )   instead of Lisp’s default.)"
+  (when (and (eq major-mode 'emacs-lisp-mode)
+             (looking-at-p "^\\s-*\\s)"))
+    (save-excursion
+      (let ((col (progn (backward-up-list) (current-column))))
+        (indent-line-to col)))
+    ;; keep point on the close paren
+    (back-to-indentation)))
+
+(defun +lisp-vertical-setup ()
+  ;; call the function *after* every normal lisp indent
+  (advice-add #'lisp-indent-line :after #'+lisp-vertical-close-paren)
+  ;; auto-format buffer on save
+  (add-hook 'before-save-hook
+            (lambda () (indent-region (point-min) (point-max)))
+            nil :local))
+
+;;(eval . (+lisp-vertical-setup))

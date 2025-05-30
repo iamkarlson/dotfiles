@@ -1,4 +1,4 @@
-;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+;; -*- lexical-binding: t; -*-
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
@@ -95,14 +95,8 @@
   (defun +my-markdown-mode-settings ()
     (evil-mode nil)
     (visual-line-mode 1)
-    ))
-
-(add-hook! 'markdown-mode-hook
-  (defun +my-markdown-mode-settings ()
-    (visual-fill-column-mode 1)
-    (visual-line-mode 1)
-    ))
-
+    )
+  )
 
 
 ;;(setq-default visual-line-mode t)

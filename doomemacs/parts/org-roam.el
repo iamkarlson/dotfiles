@@ -33,19 +33,21 @@
            "YES(y)"
            "NO(n)"))
         org-todo-keyword-faces
-        '(("[-]"  . +org-todo-active)
+        '(
+          ("[-]"  . +org-todo-active)
           ("STRT" . +org-todo-active)
           ("[?]"  . +org-todo-onhold)
           ("WAIT" . +org-todo-onhold)
           ("HOLD" . +org-todo-onhold)
           ("PROJ" . +org-todo-project)
           ("NO"   . +org-todo-cancel)
-          ("KILL" . +org-todo-cancel)))
+          ("KILL" . +org-todo-cancel)
+          )
+        )
 
   )
 
 
-;; Ugly llm script but whatever
 (defun my/file-ordering (file &optional default)
   "Return numeric ORDERING property found in FILE.
 If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
@@ -57,7 +59,10 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
          "^#\\+PROPERTY:[ \t]+\\(?:[^ \t]+[ \t]+\\)*ORDERING[ \t]+\\([0-9]+\\)"
          nil t)
         (string-to-number (match-string 1))
-      (or default 200))))
+      (or default 200)
+      )
+    )
+  )
 
 (defun my/file-title (file)
   "Return #+TITLE of FILE, or its base name if no title."
@@ -67,7 +72,10 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
     ;; case-insensitive search for ‘#+title: …’
     (if (re-search-forward "^#\\+title:[ \t]+\\(.+\\)$" nil t)
         (string-trim (match-string 1))
-      (file-name-base file))))
+      (file-name-base file)
+      )
+    )
+  )
 
 
 (defun my/generate-project-groups ()
@@ -84,25 +92,39 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
                     :file-path (regexp-quote (expand-file-name file))) ; must be string/regexp
               groups)))
     ;; org-super-agenda uses the lowest :order first; sort for sanity
-    (sort groups (lambda (a b) (< (plist-get a :order)
-                                  (plist-get b :order))))
-    groups))
+    (sort groups (lambda (a b) (
+                                < (plist-get a :order)
+                                (plist-get b :order)
+                                )
+                   )
+          )
+    groups)
+  )
 
 (use-package! org-super-agenda
   :after org-agenda
   :config
   (org-super-agenda-mode)
   (setq org-agenda-custom-commands
-        '(("n" "Super view"
-           ((agenda "" ((org-agenda-span 'day)
+        '(
+          ("n" "Super view"
+           (
+            (agenda "" (
+                        (org-agenda-span 'day)
                         (org-super-agenda-groups
-                         '((:name "Today"
+                         '(
+                           (:name "Today"
                             :time-grid t
                             :date today
                             :todo "TODAY"
                             :scheduled today
-                            :order 1)))))
-            (alltodo "" ((org-agenda-overriding-header "")
+                            :order 1)
+                           )
+                         )
+                        )
+                    )
+            (alltodo "" (
+                         (org-agenda-overriding-header "")
                          (org-super-agenda-groups
                           (append
                            (my/generate-project-groups)
@@ -153,7 +175,15 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
                               :order 51)
 
                              ;; Discard
-                             (:discard (:tag ("Chore" "Routine" "Daily")))))))))))))
+                             (:discard (:tag ("Chore" "Routine" "Daily")))))
+                          )
+                         )
+                     )
+            )
+           )
+          )
+        )
+  )
 
 (add-hook! 'org-mode-hook
   (defun +my-org-mode-settings ()
@@ -161,18 +191,22 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
     (visual-fill-column-mode 1)
     (visual-line-mode 1)
     ;;(print "hook added")
-    ))
+    )
+  )
 
 (add-hook! 'org-agenda-mode-hook
   (defun +my-org-agenda-settings ()
     (visual-fill-column-mode -1) ;; Turn off visual-fill-column-mode
     (visual-line-mode -1)        ;; Turn off visual-line-mode (word-wrap)
-    (evil-local-mode -1)))       ;; Turn off evil-mode locally in the buffer
+    (evil-local-mode -1)         ;; Turn off evil-mode locally in the buffer
+    )
+  )
 
 
 (defun my-auto-commit-message (filename)
   "Specify that my commit is a work in progress"
-  (concat "braindb connect from " (system-name) ". file: " (gac-relative-file-name filename)))
+  (concat "braindb connect from " (system-name) ". file: " (gac-relative-file-name filename))
+  )
 
 (with-eval-after-load 'git-auto-commit-mode
   (setq gac-default-message #'my-auto-commit-message
@@ -256,16 +290,20 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
                     ,(my/read-file (concat org-roam-directory "templates/project.org"))
                     )
            :target (file "%<%Y%m%d%H%M%S>-${slug}.org")
-           :unnarrowed t))
+           :unnarrowed t)
+          )
         ;; This is daily template
         org-roam-dailies-capture-templates
-        `(("d" "default" entry "* %?"
+        `(
+          ("d" "default" entry "* %?"
            :target (file+head "%<%Y-%m>/%<%d - %A>.org" ,(my/read-file (concat org-roam-directory "templates/daily.org"))))
 
           ("w" "weekly" entry "* %?"
            :target (file+head "%<%Y-%m>/agenda-week-%<%U>.org" ,(my/read-file (concat org-roam-directory "templates/weekly.org"))))
-          ))
-  (setq-default visual-fill-column-mode t))
+          )
+        )
+  (setq-default visual-fill-column-mode t)
+  )
 (add-hook! org-mode-hook 'org-display-inline-images)
 
 
@@ -279,12 +317,15 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
   (interactive)
   (org-roam-dailies-capture-today)
   (delete-other-windows)
-  (add-hook 'org-capture-after-finalize-hook 'delete-frame))
+  (add-hook 'org-capture-after-finalize-hook 'delete-frame)
+  )
 
 (defun my/delete-frame-if-no-other ()
   "Delete the current frame if it is the only one."
   (when (= (length (frame-list)) 1)
-    (delete-frame)))
+    (delete-frame)
+    )
+  )
 
 (add-hook 'org-capture-after-finalize-hook 'my/delete-frame-if-no-other)
 
@@ -302,7 +343,9 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
       :leader
       :n "j" (lambda ()
                (interactive)
-               (let ((node (org-roam-node-from-title-or-alias "Log journal")))
+               (let (
+                     (node (org-roam-node-from-title-or-alias "Log journal"))
+                     )
                  (if node
                      (org-roam-node-visit node)
                    (message "journal.org node not found."))))
@@ -317,7 +360,9 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
 
 
 (defun org-roam-dailies-calendar-preview ()
-  (let ((date (calendar-cursor-to-date t)))
+  (let (
+        (date (calendar-cursor-to-date t))
+        )
     (when date
       (org-roam-dailies--capture date t)
       (other-window 1))))
@@ -375,16 +420,41 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
            ("\\subsection{%s}" . "\\subsection*{%s}")
            ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
            ("\\paragraph{%s}" . "\\paragraph*{%s}")
-           ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))))
-;;
-;; Add this to your config
-(defun my/org-set-project-root-default-directory ()
-  "Set `default-directory` to project root if in org-mode."
-  (when (derived-mode-p 'org-mode)
-    (let ((root (or (projectile-project-root) (vc-root-dir))))
-      (when root
-        (setq-local default-directory root)))))
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+        )
+  ;; Fold or unfold the subtree you’re in whenever its children change.
+  (defun +org/toggle-fold-when-all-done (&rest _)
+    (save-excursion
+      (org-back-to-heading t)
+      (pcase (org-get-todo-statistics)      ; ⇒ (NOT-DONE . DONE)
+        (`(0 . ,_) (org-fold-hide-subtree)) ; every child DONE → fold
+        (_          (org-fold-show-subtree)))
+      )
 
-(add-hook! 'org-mode-hook #'my/org-set-project-root-default-directory)
+    ;; Run the same check for every heading in the file when you first open it.
+    (defun +org/fold-done-headings-on-load ()
+      (org-map-entries #'+org/toggle-fold-when-all-done nil 'file))
 
+    ;; Wire it up
+    ;;(add-hook 'org-after-todo-state-change-hook #'+org/toggle-fold-when-all-done)
+    ;;(add-hook 'org-after-todo-statistics-hook   #'+org/toggle-fold-when-all-done)
+    (add-hook 'org-mode-hook #'+org/fold-done-headings-on-load)
+    )
+  ;;
+  ;; Add this to your config
+  (defun my/org-set-project-root-default-directory ()
+    "Set `default-directory` to project root if in org-mode."
+    (when (derived-mode-p 'org-mode)
+      (let (
+            (root
+             (or (projectile-project-root) (vc-root-dir))
+             )
+            )
+        (when root
+          (setq-local default-directory root)
+          )
+        )
+      )
+    )
 
+  (add-hook! 'org-mode-hook #'my/org-set-project-root-default-directory)
