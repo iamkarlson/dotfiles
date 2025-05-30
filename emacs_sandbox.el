@@ -19,30 +19,18 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
       (or default 200))))
 
 (defun my/generate-project-groups ()
-  "Return a list of org-super-agenda groups for every file in projects/."
+  "Create one group per project file under projects/."
   (let* ((project-dir (expand-file-name "projects/" org-directory))
-         (org-directory (file-name-as-directory project-dir))
          groups)
     (dolist (file (directory-files-recursively project-dir "\\.org$"))
-      (let* ((order   (my/file-ordering file 10))
-             (name    (file-name-base file))
-             (f       file))              ; close over FILE safely
+      (let* ((order (my/file-ordering file 200))
+             (name  (file-name-base file)))
         (push (list :name name
                     :order order
-                    :pred
-                    (lambda (item)
-                      (let ((m (get-text-property 0 'org-hd-marker item)))
-                        (when m
-                          (equal (expand-file-name f)
-                                 (buffer-file-name (marker-buffer m)))))))
+                    :file-path (regexp-quote (expand-file-name file)))
               groups)))
-    ;; org-super-agenda uses the lowest :order first; sort for sanity
     (sort groups (lambda (a b) (< (plist-get a :order)
-                                  (plist-get b :order))))
-    (message "Final groups:\n%s" (pp-to-string groups))
-    groups
-    ))
-
+                                  (plist-get b :order))))))
 
 (my/generate-project-groups)
 
