@@ -5,6 +5,8 @@
 (setq org-directory "~/braindb/")
 (setq org-roam-directory "~/braindb/")
 
+(setq org-latex-compiler "xelatex")
+
 (after! org
   (setq org-agenda-inhibit-startup t)
   (setq org-agenda-files (directory-files-recursively (file-truename org-directory) "\\.org$"))
@@ -45,9 +47,130 @@
           )
         )
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;;
+  ;; EXPORT SETTINGS
+  ;;
+  ;; All about pdf/markdown/html for default org export
+  ;; But also about exporting agenda data
+  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+  (setq org-latex-packages-alist
+        '(("" "fontspec" t)        ; Load fontspec for xelatex/lualatex
+          ("" "polyglossia" t)))   ; Load polyglossia for multilingual support
+  (setq org-latex-default-packages-alist
+        '(("" "amssymb" t))) ; Add the amssymb package for symbols
+  ;; Disable Table of Contents for LaTeX exports
+  ;;(setq org-latex-with-toc nil)
+  (setq org-latex-toc-command nil)
+  (setq org-latex-classes
+        '(
+          ("article"
+           "\\documentclass[14pt]{article}
+            \\usepackage[margin=1in]{geometry} % Set minimal margins
+                \\usepackage{fontspec}
+                \\usepackage[russian]{babel}
+                \\usepackage{polyglossia}
+                \\setmainlanguage{english}
+                \\setotherlanguage{russian}
+                \\defaultfontfeatures{mapping=tex-text,scale=matchlowercase}
+
+                \\setmainfont{DejaVu Serif}
+                \\setmonofont{Courier New}
+                \\usepackage{hyperref}
+                \\hypersetup{pdfauthor={},pdftitle={},pdfsubject={},pdfkeywords={},pdfproducer={},pdfcreator={}}
+
+                \\usepackage{titlesec}
+                \\newcommand{\\sectionbreak}{\\clearpage}
+"
+           ("\\section{%s}" . "\\section*{%s}")
+           ("\\subsection{%s}" . "\\subsection*{%s}")
+           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+           ("\\paragraph{%s}" . "\\paragraph*{%s}")
+           ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
+           )
+          )
+        )
+
+
+
+  ;; Optional: stop Org from nagging about vanished agenda files
+  (setq org-agenda-skip-unavailable-files t)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; auto-fold DONE families (respect existing folds, no agenda nags) ──────────
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+  (require 'cl-lib)
+
+  ;; t → subtree has TODO kids and every one is DONE
+  (defun +org/all-children-done-p ()
+    (save-excursion
+      (org-back-to-heading t)
+      (let ((open 0) (seen nil))
+        (org-map-entries
+         (lambda ()
+           (let ((state (org-get-todo-state)))
+             (when state
+               (setq seen t)
+               (unless (org-entry-is-done-p)
+                 (cl-incf open))))
+           nil 'tree)
+         (and seen (= open 0)))))
+
+    (defun +org/fold-done-on-load ()
+      "Fold subtrees whose tasks are all DONE, once, when visiting a real file."
+      (when buffer-file-name                 ; skip untitled/new buffers
+        (save-excursion
+          (org-with-wide-buffer              ; temporarily widen if narrowed
+           (goto-char (point-min))
+           (while (re-search-forward org-heading-regexp nil t)
+             (when (+org/all-children-done-p)
+               (org-fold-hide-subtree))))))
+
+
+      )
+    )
+  (add-hook! org-mode #'my/fold-done-on-load)
   )
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; Setting up root directory for org-mode files
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun my/org-set-project-root-default-directory ()
+  "Set `default-directory` to project root if in org-mode."
+  (when (derived-mode-p 'org-mode)
+    (let (
+          (root
+           (or (projectile-project-root) (vc-root-dir))
+           )
+          )
+      (when root
+        (setq-local default-directory root)
+        )
+      )
+    )
+  )
 
+(add-hook! 'org-mode-hook #'my/org-set-project-root-default-directory)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; org-super-agenda settings
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (defun my/file-ordering (file &optional default)
@@ -309,11 +432,11 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
 (add-hook! org-mode-hook 'org-display-inline-images)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; This supposed to be called from a desktop file in hyprland
 ;; so I can make an action on the keyboard to call it on
 ;; and quickly type something not to forget
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun my/org-roam-dailies-capture-today-and-maximize ()
   "Capture today's daily note in a maximized frame and close the frame when done."
   (interactive)
@@ -374,124 +497,3 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
 
 (with-eval-after-load 'calendar
   (setup-org-roam-dailies-calendar-preview))
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;
-;; EXPORT SETTINGS
-;;
-;; All about pdf/markdown/html for default org export
-;; But also about exporting agenda data
-;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-
-(setq org-latex-compiler "xelatex")
-
-(after! org
-  (setq org-latex-packages-alist
-        '(("" "fontspec" t)        ; Load fontspec for xelatex/lualatex
-          ("" "polyglossia" t)))   ; Load polyglossia for multilingual support
-  (setq org-latex-default-packages-alist
-        '(("" "amssymb" t))) ; Add the amssymb package for symbols
-  ;; Disable Table of Contents for LaTeX exports
-  ;;(setq org-latex-with-toc nil)
-  (setq org-latex-toc-command nil)
-  (setq org-latex-classes
-        '(
-          ("article"
-           "\\documentclass[14pt]{article}
-            \\usepackage[margin=1in]{geometry} % Set minimal margins
-                \\usepackage{fontspec}
-                \\usepackage[russian]{babel}
-                \\usepackage{polyglossia}
-                \\setmainlanguage{english}
-                \\setotherlanguage{russian}
-                \\defaultfontfeatures{mapping=tex-text,scale=matchlowercase}
-
-                \\setmainfont{DejaVu Serif}
-                \\setmonofont{Courier New}
-                \\usepackage{hyperref}
-                \\hypersetup{pdfauthor={},pdftitle={},pdfsubject={},pdfkeywords={},pdfproducer={},pdfcreator={}}
-
-                \\usepackage{titlesec}
-                \\newcommand{\\sectionbreak}{\\clearpage}
-"
-           ("\\section{%s}" . "\\section*{%s}")
-           ("\\subsection{%s}" . "\\subsection*{%s}")
-           ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-           ("\\paragraph{%s}" . "\\paragraph*{%s}")
-           ("\\subparagraph{%s}" . "\\subparagraph*{%s}")
-           )
-          )
-        )
-  ;; Fold or unfold the subtree you’re in whenever its children change.
-  (defun +org/toggle-fold-when-all-done (&rest _)
-    (save-excursion
-      (org-back-to-heading t)
-      (pcase (org-get-todo-statistics)      ; ⇒ (NOT-DONE . DONE)
-        (`(0 . ,_) (org-fold-hide-subtree)) ; every child DONE → fold
-        (_          (org-fold-show-subtree)))
-      )
-
-    ;; Run the same check for every heading in the file when you first open it.
-    (defun +org/fold-done-headings-on-load ()
-      (org-map-entries #'+org/toggle-fold-when-all-done nil 'file))
-
-    ;; Wire it up
-    ;;(add-hook 'org-after-todo-state-change-hook #'+org/toggle-fold-when-all-done)
-    ;;(add-hook 'org-after-todo-statistics-hook   #'+org/toggle-fold-when-all-done)
-    (add-hook 'org-mode-hook #'+org/fold-done-headings-on-load)
-    )
-  ;;
-  ;; Add this to your config
-  (defun my/org-set-project-root-default-directory ()
-    "Set `default-directory` to project root if in org-mode."
-    (when (derived-mode-p 'org-mode)
-      (let (
-            (root
-             (or (projectile-project-root) (vc-root-dir))
-             )
-            )
-        (when root
-          (setq-local default-directory root)
-          )
-        )
-      )
-    )
-
-  (add-hook! 'org-mode-hook #'my/org-set-project-root-default-directory)
-
-  (require 'cl-lib)
-
-  ;; t  → subtree has TODOs and every one is DONE
-  ;; nil → either some TODOs are still open, or there were no TODOs at all
-  (defun +org/all-children-done-p ()
-    (save-excursion
-      (org-back-to-heading t)
-      (let ((open 0) (seen-todo nil))
-        (org-map-entries
-         (lambda ()
-           (let ((state (org-get-todo-state)))
-             (when state                       ; it’s a task
-               (setq seen-todo t)
-               (unless (org-entry-is-done-p)   ; …but not DONE
-                 (cl-incf open)))))
-         nil 'tree)
-        (and seen-todo (= open 0))))        ; only fold if something was seen
-    )
-  )
-
-(defun +org/fold-done-subtrees-on-load ()
-  "Fold any subtree whose tasks are all DONE, once, when the file opens."
-  (org-fold-show-all)
-  (save-excursion
-    (org-map-entries
-     (lambda ()
-       (when (+org/all-children-done-p)
-         (org-fold-hide-subtree)))
-     nil 'file)))
-
-(add-hook 'org-mode-hook #'+org/fold-done-subtrees-on-load)
