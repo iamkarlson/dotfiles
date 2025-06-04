@@ -7,6 +7,13 @@
 
 (setq org-latex-compiler "xelatex")
 
+
+;; put this *before* you enable the mode
+(setq-default gac-silent-message-p nil    ;; show commit messages
+              gac-debounce-interval 10    ;; whatever you prefer
+              gac-automatically-push-p t) ;; optional
+;;(setq gac-ask-for-summary-p t) ;; ask for commit message on auto-commit
+
 (after! org
   (setq org-agenda-inhibit-startup t)
   (setq org-agenda-files (directory-files-recursively (file-truename org-directory) "\\.org$"))
@@ -109,38 +116,46 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
   (require 'cl-lib)
 
-  ;; t → subtree has TODO kids and every one is DONE
-  (defun +org/all-children-done-p ()
+  ;; Return t when subtree has ≥1 TODO child and they’re all DONE
+  (defun my/org-all-children-done-p ()
     (save-excursion
       (org-back-to-heading t)
       (let ((open 0) (seen nil))
         (org-map-entries
          (lambda ()
-           (let ((state (org-get-todo-state)))
-             (when state
-               (setq seen t)
-               (unless (org-entry-is-done-p)
-                 (cl-incf open))))
-           nil 'tree)
-         (and seen (= open 0)))))
-
-    (defun +org/fold-done-on-load ()
-      "Fold subtrees whose tasks are all DONE, once, when visiting a real file."
-      (when buffer-file-name                 ; skip untitled/new buffers
-        (save-excursion
-          (org-with-wide-buffer              ; temporarily widen if narrowed
-           (goto-char (point-min))
-           (while (re-search-forward org-heading-regexp nil t)
-             (when (+org/all-children-done-p)
-               (org-fold-hide-subtree))))))
-
-
+           (when-let ((state (org-get-todo-state)))
+             (setq seen t)
+             (unless (org-entry-is-done-p)
+               (cl-incf open))))
+         nil 'tree)
+        (and seen (= open 0))
+        )
       )
     )
-  (add-hook! org-mode #'my/fold-done-on-load)
+
+  (defun my/org-fold-done-on-load ()
+    "Fold subtrees whose tasks are all DONE—runs once per new buffer."
+    (when buffer-file-name                      ; skip brand-new unsaved buffers
+      (save-excursion
+        (org-with-wide-buffer
+         (goto-char (point-min))
+         (while (re-search-forward org-heading-regexp nil t)
+           (when (my/org-all-children-done-p)
+             (org-fold-hide-subtree)
+             (message "Folded all DONE subtrees")
+             )
+           )
+         )
+        )
+      )
+    )
+
+  ;; register the helper *after* Org is loaded
+  (add-hook 'org-mode-hook #'my/org-fold-done-on-load)
+
+
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -158,6 +173,7 @@
           )
       (when root
         (setq-local default-directory root)
+        (message "HOOK: Setting default-directory to %s" root)
         )
       )
     )
@@ -217,10 +233,9 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
                     :file-path (regexp-quote (expand-file-name file))) ; must be string/regexp
               groups)))
     ;; org-super-agenda uses the lowest :order first; sort for sanity
-    (sort groups (lambda (a b) (
-                                < (plist-get a :order)
-                                (plist-get b :order)
-                                )
+    (sort groups (lambda (a b) (< (plist-get a :order)
+                                  (plist-get b :order)
+                                  )
                    )
           )
     groups)
@@ -309,15 +324,15 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
           )
         )
   )
-
-(add-hook! 'org-mode-hook
-  (defun +my-org-mode-settings ()
-    (git-auto-commit-mode 1)
-    (visual-fill-column-mode 1)
-    (visual-line-mode 1)
-    ;;(print "hook added")
-    )
+(defun +my-org-mode-settings ()
+  (git-auto-commit-mode 1)
+  (visual-fill-column-mode 1)
+  (visual-line-mode 1)
+  ;;(print "hook added")
   )
+
+(add-hook 'org-mode-hook #'+my-org-mode-settings)
+
 
 (add-hook! 'org-agenda-mode-hook
   (defun +my-org-agenda-settings ()
@@ -430,6 +445,40 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
   (setq-default visual-fill-column-mode t)
   )
 (add-hook! org-mode-hook 'org-display-inline-images)
+
+
+(after! git-auto-commit-mode
+  ;; Replace the original gac-commit with one that does “git add -A && git commit …”
+  (defun gac-commit (buffer)
+    "Commit all changes in the repo (not just the current buffer’s file)."
+    (let* (
+           (buffer-file (buffer-file-name buffer))
+           ;; Compute a commit message using the existing helper:
+           (commit-msg  (gac--commit-msg buffer-file))
+           ;; Find the repo root (so that “git add -A” sees all files).
+           (repo-root    (or (vc-root-dir) default-directory))
+           )
+      (when repo-root
+        (let (
+              (default-directory repo-root)
+              )
+          ;; If gac-silent-message-p is non-nil, use call-process-shell-command;
+          ;; otherwise shell-command (which echos output in *Shell Command Output*).
+          (funcall (if gac-silent-message-p
+                       #'call-process-shell-command
+                     #'shell-command)
+                   (concat
+                    "git add -A"        ;; stage all modifications & deletions
+                    gac-shell-and
+                    "git commit -m "
+                    (shell-quote-argument commit-msg)
+                    " " gac-commit-additional-flag)
+                   )
+          )
+        )
+      )
+    )
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
