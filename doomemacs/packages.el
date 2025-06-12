@@ -101,3 +101,5 @@
 (package! python-docstring)
 
 (package! org-super-agenda)
+
+(package! gnuplot)

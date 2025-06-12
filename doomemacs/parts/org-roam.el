@@ -156,6 +156,10 @@
   (add-hook 'org-mode-hook #'my/org-fold-done-on-load)
 
 
+  (add-to-list 'safe-local-variable-values
+               '(eval . (visual-fill-column-mode -1)))
+
+
   )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
