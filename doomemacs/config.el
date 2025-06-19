@@ -254,13 +254,14 @@
 (after! ediff
   (setq ediff-scroll-vertically t))
 
-
-;; All org related configuration goes there
-;; (load! "parts/org-roam.el")
-;; (load! "parts/magit.el")
-;; (load! "parts/structurizr.el")
-;; (load! "parts/wayland.el")
-;; (load! "parts/code.el")
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;
+;; This block here is very important because
+;; it loads stuff from the ~parts/~ folder
+;; You may have some UB if you just add a file there and
+;; it's gonna be loaded automatically
+;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (dolist (f
          (file-expand-wildcards (expand-file-name "parts/*.el" doom-user-dir))
          )
@@ -298,6 +299,9 @@
 
 
 (map! :after evil
+      :desc "Toggle visual line mode"
+      :leader
+      :n "t z" #'visual-fill-column-mode
       :desc "Toggle visual line mode"
       :leader
       :n "t x" #'visual-line-mode
