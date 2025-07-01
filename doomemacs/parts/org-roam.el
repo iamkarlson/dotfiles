@@ -340,7 +340,7 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
 
 (add-hook! 'org-agenda-mode-hook
   (defun +my-org-agenda-settings ()
-    (setq visual-fill-column-width 200) ;; Turn off visual-fill-column-mode
+    ;;(setq visual-fill-column-width 200) ;; Turn off visual-fill-column-mode
     (visual-line-mode -1)        ;; Turn off visual-line-mode (word-wrap)
     (evil-local-mode -1)         ;; Turn off evil-mode locally in the buffer
     )
