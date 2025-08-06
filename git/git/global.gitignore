@@ -6,3 +6,5 @@
 .envrc
 *.pyc
 .envrc
+.history/
+.github/

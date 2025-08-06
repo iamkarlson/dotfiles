@@ -15,7 +15,7 @@
 [core]
   commentchar = ";"
 	excludesfile = /home/iamkarlson/src/dotfiles/git/git/global.gitignore
-  editor = nvim
+  editor = emacsclient -nw
   autocrlf = input
 [user]
 	email = iamkarlson@gmail.com
