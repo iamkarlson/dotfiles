@@ -23,8 +23,12 @@ delete_link "/home/iamkarlson/.zshrc"
 delete_link "/home/iamkarlson/.zprofile"
 # Removing file -------------------------------------- /home/iamkarlson/.p10k.zsh
 delete_link "/home/iamkarlson/.p10k.zsh"
-# Removing file -------------------------------------- /home/iamkarlson/taskfile.yml
-delete_link "/home/iamkarlson/taskfile.yml"
+# Removing file -------------------------------------- /home/iamkarlson/taskfile.yaml
+delete_link "/home/iamkarlson/taskfile.yaml"
+# Removing file -------------------------------------- /home/iamkarlson/taskfile.env
+delete_link "/home/iamkarlson/taskfile.env"
+# Removing file -------------------------------------- /home/iamkarlson/private-tasks.yaml
+delete_link "/home/iamkarlson/private-tasks.yaml"
 # Removing file -------------------------------------- /home/iamkarlson/.tmux.conf
 delete_link "/home/iamkarlson/.tmux.conf"
 # Removing directory ********************************* /home/iamkarlson/.config/espanso
@@ -93,5 +97,5 @@ delete_link "/home/iamkarlson/.local/share/applications/emacs-mail.desktop"
 delete_link "/home/iamkarlson/.local/share/applications/skypeforlinux.desktop"
 # Removing file -------------------------------------- /home/iamkarlson/.local/share/applications/winbox.desktop
 delete_link "/home/iamkarlson/.local/share/applications/winbox.desktop"
-# Removing directory ********************************* /home/iamkarlson/.thunderbird/g32zrqcx.default
-delete_link "/home/iamkarlson/.thunderbird/g32zrqcx.default"
+# Removing directory ********************************* /home/iamkarlson/.thunderbird/y2d13ngf.default-release/chrome
+delete_link "/home/iamkarlson/.thunderbird/y2d13ngf.default-release/chrome"

@@ -1,0 +1,384 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+# https://taskfile.dev
+
+version: "3"
+
+dotenv: ['{{.DOTFILES}}/tasks/taskfile.env']
+
+vars:
+  VSCODE_CONFIG_DIR: "{{.HOME}}/.config/vscode_project_configs"
+  GITHUB_CONFIG_DIR: "{{.HOME}}/.config/github_project_configs"
+  PROJECT_NAME: "{{base .USER_WORKING_DIR}}"
+  PROJECT_CONFIG_DIR: "{{.VSCODE_CONFIG_DIR}}/{{.PROJECT_NAME}}"
+  PROJECT_GITHUB_CONFIG_DIR: "{{.GITHUB_CONFIG_DIR}}/{{.PROJECT_NAME}}"
+  LOCAL_VSCODE_DIR: ".vscode"
+  LOCAL_GITHUB_DIR: ".github"
+
+includes:
+  private: 
+    taskfile: ./private-tasks.yaml
+    flatten: true
+
+tasks:
+  init:
+    dir: "{{.USER_WORKING_DIR}}"
+    cmds:
+      - go-task --init
+      #- mv Taskfile.yml taskfile.yml
+      #
+      - |
+        echo "# yaml-language-server: \$schema=https://taskfile.dev/schema.json"  > taskfile.yml
+      - cat Taskfile.yml >>taskfile.yml
+      - rm Taskfile.yml
+    silent: false
+
+  select-and-run:
+    desc: "Interactively select and run a global task"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: false
+    cmds:
+      - |
+        # Get all tasks and filter for global ones
+        echo "🔍 Fetching global tasks..."
+        selected_task=$(go-task -g --list-all --json | jq -r '.tasks[] |  "\(.name): \(.desc // "")"' | fzf --prompt="Select global task: " --height=40% --border)
+        echo "Selected task: $selected_task"
+
+        if [ -n "$selected_task" ]; then
+          task_name=$(echo "$selected_task" | cut -d':' -f1)
+          echo "🚀 Running task: $task_name"
+          go-task -g "$task_name"
+        else
+          echo "❌ No task selected"
+        fi
+
+  new-sketch:
+    dir: "{{.HOME}}/src/sketches"
+    cmds:
+      - ls -la
+    silent: false
+  gcloud-account:
+    cmds:
+      - gcloud config set account {{.GCLOUD_ACCOUNT}}
+
+  gcloud-project:
+    cmds:
+      - gcloud config set project {{.GCLOUD_PROJECT}}
+      - gcloud auth application-default login
+      - gcloud auth application-default set-quota-project {{.GCLOUD_PROJECT}}
+  _ensure-config-dir:
+    internal: true
+    dir: "{{.USER_WORKING_DIR}}"
+    status:
+      - test -d {{.CONFIG_DIR}}
+    cmds:
+      - echo "Ensuring config directory exists at {{.CONFIG_DIR}}"
+      - mkdir -p {{.CONFIG_DIR}}
+
+  _sync-logic:
+    internal: true
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    cmds:
+      - |
+        # Check if local directory exists
+        if [ -d "{{.LOCAL_DIR}}" ]; then
+          # Local directory exists
+          if [ -d "{{.SAVED_DIR}}" ]; then
+            # Both exist - compare files
+            echo "🔍 Comparing {{.CONFIG_TYPE}} configs for {{.PROJECT_NAME}}..."
+
+            differences_found=false
+
+            if [ "{{.SYNC_MODE}}" = "file-specific" ]; then
+              # Check each important file for VS Code
+              for file in tasks.json launch.json settings.json extensions.json; do
+                local_file="{{.LOCAL_DIR}}/$file"
+                remote_file="{{.SAVED_DIR}}/$file"
+
+                if [ -f "$local_file" ] && [ -f "$remote_file" ]; then
+                  if ! cmp -s "$local_file" "$remote_file"; then
+                    echo "⚠️  Difference detected in $file"
+                    echo "   Local: $local_file"
+                    echo "   Saved: $remote_file"
+                    echo "   Run 'task -g {{.PUSH_TASK}}' to update saved config or 'task -g {{.PULL_TASK}}' to use saved config"
+                    differences_found=true
+                  fi
+                elif [ -f "$local_file" ] && [ ! -f "$remote_file" ]; then
+                  echo "📤 New file detected: $file (run 'task -g {{.PUSH_TASK}}' to save)"
+                  differences_found=true
+                elif [ ! -f "$local_file" ] && [ -f "$remote_file" ]; then
+                  echo "📥 Saved file available: $file (run 'task -g {{.PULL_TASK}}' to restore)"
+                  differences_found=true
+                fi
+              done
+            else
+              # Use diff to compare entire directories
+              if ! diff -r "{{.LOCAL_DIR}}" "{{.SAVED_DIR}}" >/dev/null 2>&1; then
+                echo "⚠️  Differences detected in {{.CONFIG_TYPE}} directory"
+                echo "   Local: {{.LOCAL_DIR}}"
+                echo "   Saved: {{.SAVED_DIR}}"
+                echo "   Run 'task -g {{.PUSH_TASK}}' to update saved config or 'task -g {{.PULL_TASK}}' to use saved config"
+                differences_found=true
+              fi
+            fi
+
+            # If no differences found, print success message
+            if [ "$differences_found" = false ]; then
+              echo "✅ All good, {{.CONFIG_TYPE}} configs are safe - local and saved configurations match perfectly"
+            fi
+          else
+            # Local exists, remote doesn't - copy to remote
+            echo "📤 Backing up {{.CONFIG_TYPE}} config for {{.PROJECT_NAME}}..."
+            cp -r "{{.LOCAL_DIR}}" "{{.SAVED_DIR}}"
+            echo "✅ Config backed up to {{.SAVED_DIR}}"
+          fi
+        else
+          # No local directory
+          if [ -d "{{.SAVED_DIR}}" ]; then
+            # Remote exists, local doesn't - copy from remote
+            echo "📥 Restoring {{.CONFIG_TYPE}} config for {{.PROJECT_NAME}}..."
+            cp -r "{{.SAVED_DIR}}" "{{.LOCAL_DIR}}"
+            echo "✅ Config restored from {{.SAVED_DIR}}"
+          else
+            # Neither exists
+            echo "ℹ️  No {{.CONFIG_TYPE}} config found for {{.PROJECT_NAME}}"
+          fi
+        fi
+
+  vscode:push:
+    desc: "Force push local VS Code config to saved location"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    cmds:
+      - task: _ensure-config-dir
+        vars:
+          CONFIG_DIR: "{{.VSCODE_CONFIG_DIR}}"
+      - |
+        if [ -d "{{.LOCAL_VSCODE_DIR}}" ]; then
+          echo "📤 Pushing VS Code config for {{.PROJECT_NAME}}..."
+          rm -r "{{.PROJECT_CONFIG_DIR}}"
+          cp -r "{{.LOCAL_VSCODE_DIR}}" "{{.PROJECT_CONFIG_DIR}}"
+          echo "✅ Config pushed to {{.PROJECT_CONFIG_DIR}}"
+        else
+          echo "❌ No local .vscode directory found"
+          exit 1
+        fi
+
+  vscode:pull:
+    desc: "Force pull saved VS Code config to local project"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    cmds:
+      - |
+        if [ -d "{{.PROJECT_CONFIG_DIR}}" ]; then
+          echo "📥 Pulling VS Code config for {{.PROJECT_NAME}}..."
+          if [-d "{{.LOCAL_VSCODE_DIR}}" ]; then
+            echo "Removing existing local .vscode directory: {{.LOCAL_VSCODE_DIR}}"
+            rm -r "{{.LOCAL_VSCODE_DIR}}"
+          fi
+          cp -r "{{.PROJECT_CONFIG_DIR}}" "{{.LOCAL_VSCODE_DIR}}"
+          echo "✅ Config pulled from {{.PROJECT_CONFIG_DIR}}"
+        else
+          echo "❌ No saved config found for {{.PROJECT_NAME}}"
+          exit 1
+        fi
+
+  vscode:status:
+    desc: "Show VS Code config sync status"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    cmds:
+      - |
+        echo "📁 Project: {{.PROJECT_NAME}}"
+        echo "📂 Local config: {{.LOCAL_VSCODE_DIR}}"
+        echo "💾 Saved config: {{.PROJECT_CONFIG_DIR}}"
+        echo ""
+
+        if [ -d "{{.LOCAL_VSCODE_DIR}}" ]; then
+          echo "Current folder: $PWD"
+          echo "✅ Local .vscode directory exists: {{.LOCAL_VSCODE_DIR}}"
+          ls -la "{{.LOCAL_VSCODE_DIR}}"
+        else
+          echo "❌ No local .vscode directory"
+        fi
+
+        echo ""
+
+        if [ -d "{{.PROJECT_CONFIG_DIR}}" ]; then
+          echo "✅ Saved config exists in {{.PROJECT_CONFIG_DIR}}"
+          ls -la "{{.PROJECT_CONFIG_DIR}}"
+        else
+          echo "❌ No saved config"
+        fi
+
+  vscode:clean:
+    desc: "Remove saved VS Code config for this project"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    prompt: "This will permanently delete saved VS Code config for {{.PROJECT_NAME}}. Continue?"
+    cmds:
+      - |
+        if [ -d "{{.PROJECT_CONFIG_DIR}}" ]; then
+          rm -r "{{.PROJECT_CONFIG_DIR}}"
+          echo "🗑️ Removed saved config for {{.PROJECT_NAME}}"
+        else
+          echo "ℹ️  No saved config to remove"
+        fi
+
+  vscode:list:
+    desc: "List all saved VS Code project configurations"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    cmds:
+      - |
+        if [ -d "{{.VSCODE_CONFIG_DIR}}" ]; then
+          echo "💾 Saved VS Code configurations:"
+          ls -la "{{.VSCODE_CONFIG_DIR}}"
+        else
+          echo "ℹ️  No saved configurations found"
+        fi
+
+  vscode:sync:
+    desc: "Sync VS Code configuration files between project and global config directory"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    cmds:
+      - task: _ensure-config-dir
+        vars:
+          CONFIG_DIR: "{{.VSCODE_CONFIG_DIR}}"
+      - task: _sync-logic
+        vars:
+          LOCAL_DIR: "{{.LOCAL_VSCODE_DIR}}"
+          SAVED_DIR: "{{.PROJECT_CONFIG_DIR}}"
+          CONFIG_TYPE: "VS Code"
+          PUSH_TASK: "vscode:push"
+          PULL_TASK: "vscode:pull"
+          SYNC_MODE: "file-specific"
+
+  github:sync:
+    desc: "Sync GitHub configuration files between project and global config directory"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    cmds:
+      - task: _ensure-config-dir
+        vars:
+          CONFIG_DIR: "{{.GITHUB_CONFIG_DIR}}"
+      - task: _sync-logic
+        vars:
+          LOCAL_DIR: "{{.LOCAL_GITHUB_DIR}}"
+          SAVED_DIR: "{{.PROJECT_GITHUB_CONFIG_DIR}}"
+          CONFIG_TYPE: "GitHub"
+          PUSH_TASK: "github:push"
+          PULL_TASK: "github:pull"
+          SYNC_MODE: "directory"
+
+  github:push:
+    desc: "Force push local GitHub config to saved location"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    cmds:
+      - task: _ensure-config-dir
+        vars:
+          CONFIG_DIR: "{{.GITHUB_CONFIG_DIR}}"
+      - |
+        if [ -d "{{.LOCAL_GITHUB_DIR}}" ]; then
+          echo "📤 Pushing GitHub config for {{.PROJECT_NAME}}..."
+          rm -r "{{.PROJECT_GITHUB_CONFIG_DIR}}"
+          cp -r "{{.LOCAL_GITHUB_DIR}}" "{{.PROJECT_GITHUB_CONFIG_DIR}}"
+          echo "✅ Config pushed to {{.PROJECT_GITHUB_CONFIG_DIR}}"
+        else
+          echo "❌ No local .github directory found"
+          exit 1
+        fi
+
+  github:pull:
+    desc: "Force pull saved GitHub config to local project"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    cmds:
+      - |
+        if [ -d "{{.PROJECT_GITHUB_CONFIG_DIR}}" ]; then
+          echo "📥 Pulling GitHub config for {{.PROJECT_NAME}}..."
+          rm -r "{{.LOCAL_GITHUB_DIR}}"
+          cp -r "{{.PROJECT_GITHUB_CONFIG_DIR}}" "{{.LOCAL_GITHUB_DIR}}"
+          echo "✅ Config pulled from {{.PROJECT_GITHUB_CONFIG_DIR}}"
+        else
+          echo "❌ No saved GitHub config found for {{.PROJECT_NAME}}"
+          exit 1
+        fi
+
+  github:status:
+    desc: "Show GitHub config sync status"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    cmds:
+      - |
+        echo "📁 Project: {{.PROJECT_NAME}}"
+        echo "📂 Local config: {{.LOCAL_GITHUB_DIR}}"
+        echo "💾 Saved config: {{.PROJECT_GITHUB_CONFIG_DIR}}"
+        echo ""
+
+        if [ -d "{{.LOCAL_GITHUB_DIR}}" ]; then
+          echo "✅ Local .github directory exists: {{.LOCAL_GITHUB_DIR}}"
+          find "{{.LOCAL_GITHUB_DIR}}" -type f -exec ls -la {} \;
+        else
+          echo "❌ No local .github directory"
+        fi
+
+        echo ""
+
+        if [ -d "{{.PROJECT_GITHUB_CONFIG_DIR}}" ]; then
+          echo "✅ Saved GitHub config exists in {{.PROJECT_GITHUB_CONFIG_DIR}}"
+          find "{{.PROJECT_GITHUB_CONFIG_DIR}}" -type f -exec ls -la {} \;
+        else
+          echo "❌ No saved GitHub config"
+        fi
+
+  github:clean:
+    desc: "Remove saved GitHub config for this project"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    prompt: "This will permanently delete saved GitHub config for {{.PROJECT_NAME}}. Continue?"
+    cmds:
+      - |
+        if [ -d "{{.PROJECT_GITHUB_CONFIG_DIR}}" ]; then
+          rm -r "{{.PROJECT_GITHUB_CONFIG_DIR}}"
+          echo "🗑️  Removed saved GitHub config for {{.PROJECT_NAME}}"
+        else
+          echo "ℹ️  No saved GitHub config to remove"
+        fi
+
+  github:list:
+    desc: "List all saved GitHub project configurations"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    cmds:
+      - |
+        if [ -d "{{.GITHUB_CONFIG_DIR}}" ]; then
+          echo "💾 Saved GitHub configurations:"
+          ls -la "{{.GITHUB_CONFIG_DIR}}"
+        else
+          echo "ℹ️  No saved GitHub configurations found"
+        fi
+
+  sync:all:
+    desc: "Sync both VS Code and GitHub configurations"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    cmds:
+      - task: vscode:sync
+      - task: github:sync
+
+  sync:remote:
+    desc: "Sync config directories with remote host"
+    silent: false
+    vars:
+      CONFIG_DIRS: "vscode_project_configs,github_project_configs"
+      TEMP_DIR: "/tmp/config_sync_{{.USER}}_$$"
+    cmds:
+      - |
+        echo "hosts: {{.HOSTS}}"
+      - "{{.DOTFILES}}/tasks/sync_remote_configs.sh {{.HOSTS}} {{.CONFIG_DIRS}} {{.TEMP_DIR}}"
+    preconditions:
+      - sh: 'ssh beryl "echo \$HOST"'
+        msg: "Target host is not reachable, halting sync"

@@ -95,7 +95,9 @@ ln_file "$dotfiles/zsh/.zprofile" "$target/.zprofile"
 ln_file "$dotfiles/zsh/.p10k.zsh" "$target/.p10k.zsh"
 
 
-ln_file "$dotfiles/tasks/tasks.yaml" "$target/taskfile.yml"
+ln_file "$dotfiles/tasks/global-tasks.yaml" "$target/taskfile.yaml"
+ln_file "$dotfiles/tasks/taskfile.env" "$target/taskfile.env"
+ln_file "$dotfiles/tasks/private-tasks.yaml" "$target/private-tasks.yaml"
 
 #
 # Tmux
