@@ -3,7 +3,7 @@
 
 version: "3"
 
-dotenv: ['{{.DOTFILES}}/tasks/taskfile.env']
+dotenv: ["{{.DOTFILES}}/tasks/taskfile.env"]
 
 vars:
   VSCODE_CONFIG_DIR: "{{.HOME}}/.config/vscode_project_configs"
@@ -15,7 +15,7 @@ vars:
   LOCAL_GITHUB_DIR: ".github"
 
 includes:
-  private: 
+  private:
     taskfile: ./private-tasks.yaml
     flatten: true
 
@@ -44,7 +44,7 @@ tasks:
         echo "Selected task: $selected_task"
 
         if [ -n "$selected_task" ]; then
-          task_name=$(echo "$selected_task" | cut -d':' -f1)
+          task_name=$(echo "$selected_task" | cut -d":" -f1)
           echo "🚀 Running task: $task_name"
           go-task -g "$task_name"
         else

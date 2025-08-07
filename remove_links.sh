@@ -97,5 +97,5 @@ delete_link "/home/iamkarlson/.local/share/applications/emacs-mail.desktop"
 delete_link "/home/iamkarlson/.local/share/applications/skypeforlinux.desktop"
 # Removing file -------------------------------------- /home/iamkarlson/.local/share/applications/winbox.desktop
 delete_link "/home/iamkarlson/.local/share/applications/winbox.desktop"
-# Removing directory ********************************* /home/iamkarlson/.thunderbird/y2d13ngf.default-release/chrome
-delete_link "/home/iamkarlson/.thunderbird/y2d13ngf.default-release/chrome"
+# Removing directory ********************************* /home/iamkarlson/.thunderbird/g32zrqcx.default
+delete_link "/home/iamkarlson/.thunderbird/g32zrqcx.default"
