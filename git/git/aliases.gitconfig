@@ -21,3 +21,6 @@
     fff = flow feature finish
     ffd = flow feature delete
 
+    last-tag = describe --tags --abbrev=0
+    last-tag-commits = !git log $(git last-tag)..HEAD --oneline
+    last-tag-diff = !git diff $(git last-tag)..HEAD
