@@ -8,3 +8,5 @@
 .envrc
 .history/
 .github/
+.vscode/
+.claude/

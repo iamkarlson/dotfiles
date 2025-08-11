@@ -530,6 +530,11 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
 
       )
 
+(map! :after org
+      :map org-mode-map
+      :desc "Insert inactive timestamp"
+      "C-c ." #'org-timestamp-inactive)
+
 
 
 ;; Pomodoro
