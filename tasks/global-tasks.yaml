@@ -65,6 +65,7 @@ tasks:
       - gcloud config set project {{.GCLOUD_PROJECT}}
       - gcloud auth application-default login
       - gcloud auth application-default set-quota-project {{.GCLOUD_PROJECT}}
+
   _ensure-config-dir:
     internal: true
     dir: "{{.USER_WORKING_DIR}}"

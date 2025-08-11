@@ -24,3 +24,5 @@
     last-tag = describe --tags --abbrev=0
     last-tag-commits = !git log $(git last-tag)..HEAD --oneline
     last-tag-diff = !git diff $(git last-tag)..HEAD
+
+    squash = "!f() { git tag backup-before-squash-$(date +%Y%m%d-%H%M%S) && git reset --soft HEAD~$1 && git commit -C HEAD@{1}; }; f"
