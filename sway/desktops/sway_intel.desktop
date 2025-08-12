@@ -1,5 +1,0 @@
-[Desktop Entry]
-Name=Sway Intel compatible
-Comment=An i3-compatible Wayland compositor
-Exec=/usr/bin/sway_intel
-Type=Application

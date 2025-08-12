@@ -1,5 +1,0 @@
-[Desktop Entry]
-Name=Sway AMD Radeon
-Comment=An i3-compatible Wayland compositor
-Exec=/usr/bin/sway_amd
-Type=Application
