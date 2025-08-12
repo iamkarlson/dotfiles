@@ -155,7 +155,6 @@
 
 
 (after! evil
-  (setq-default evil-shift-width 2)
   ;;
   ;; kill two birds with one stone using remap: arrow keys and h,j,k,l
   (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
@@ -172,9 +171,12 @@
   (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
   (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
   (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-                                        ; Make horizontal movement cross lines
+  ;; Make horizontal movement cross lines
   (setq-default evil-cross-lines t)
+  (setq-default evil-move-cursor-back nil)
   (setq-default evil-ex-search-vim-style-regexp nil)
+  (setq-default evil-move-beyond-eol t)
+  (setq-default evil-shift-width 2)
   (add-hook 'evil-insert-state-entry-hook #'my-evil-disable-remove-spaces)
   )
 
@@ -195,9 +197,6 @@
 (setq projectile-project-search-path '(
                                        ("~/src/" . 2)
                                        ("~/src/work/" . 2)
-                                       ;; ("~/src/work/". 1)
-                                       ;; ("~/src/personal/". 1)
-                                       ;; ("~/src/etc/". 1)
                                        ("~/activities/". 2)
                                        )
       )

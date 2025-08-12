@@ -40,13 +40,31 @@ tasks:
       - |
         # Get all tasks and filter for global ones
         echo "🔍 Fetching global tasks..."
-        selected_task=$(go-task -g --list-all --json | jq -r '.tasks[] |  "\(.name): \(.desc // "")"' | fzf --prompt="Select global task: " --height=40% --border)
-        echo "Selected task: $selected_task"
+
+        # Get task list as JSON
+        task_json=$(go-task -g --list-all --json)
+        #echo "Raw JSON: $task_json"
+
+        # Format tasks for fzf display
+        formatted_tasks=$(echo "$task_json" | jq -r '.tasks[] | if .desc and .desc != "" then "\(.name): \(.desc)" else .name end')
+        #echo "Formatted tasks:"
+        #echo "$formatted_tasks"
+
+        # Let user select task
+        selected_task=$(echo "$formatted_tasks" | fzf --prompt="Select global task: " --height=40% --border)
+        #echo "Selected task: $selected_task"
 
         if [ -n "$selected_task" ]; then
-          task_name=$(echo "$selected_task" | cut -d":" -f1)
-          echo "🚀 Running task: $task_name"
-          go-task -g "$task_name"
+          task_name=$(echo "$selected_task" | sed 's/: .*//')
+          echo "🚀 About to run task: $task_name"
+          read -p "Press ENTER to continue, any other key to cancel: " confirm
+          if [[ -z "$confirm" ]]; then
+            echo "Running task: $task_name"
+            go-task -g "$task_name"
+          else
+            echo "❌ Task cancelled"
+            exit 0
+          fi
         else
           echo "❌ No task selected"
         fi
@@ -65,6 +83,7 @@ tasks:
       - gcloud config set project {{.GCLOUD_PROJECT}}
       - gcloud auth application-default login
       - gcloud auth application-default set-quota-project {{.GCLOUD_PROJECT}}
+
   _ensure-config-dir:
     internal: true
     dir: "{{.USER_WORKING_DIR}}"
@@ -299,7 +318,10 @@ tasks:
       - |
         if [ -d "{{.PROJECT_GITHUB_CONFIG_DIR}}" ]; then
           echo "📥 Pulling GitHub config for {{.PROJECT_NAME}}..."
-          rm -r "{{.LOCAL_GITHUB_DIR}}"
+          if [-d "{{.LOCAL_GITHUB_DIR}}" ]; then
+            echo "Removing existing local .vscode directory: {{.LOCAL_GITHUB_DIR}}"
+            rm -r "{{.LOCAL_GITHUB_DIR}}"
+          fi
           cp -r "{{.PROJECT_GITHUB_CONFIG_DIR}}" "{{.LOCAL_GITHUB_DIR}}"
           echo "✅ Config pulled from {{.PROJECT_GITHUB_CONFIG_DIR}}"
         else
