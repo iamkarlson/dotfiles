@@ -29,7 +29,7 @@ source ~/.zsh/private.zshrc
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
-    
+
 
 
 #
@@ -110,7 +110,7 @@ export PATH="$PATH:$DOOMPATH"
 
 
 ################################################################################
-# Setting up completion system. 
+# Setting up completion system.
 # It must go before plugins
 ################################################################################
 # The following lines were added by compinstall
@@ -141,6 +141,11 @@ antidote load
 # antidote bundle <~/.zsh/plugins.txt >~/.zsh_plugins.zsh
 
 source ~/.zsh_plugins.zsh
+#source "$(antidote home)/https-COLON--SLASH--SLASH-github.com-SLASH-larkery-SLASH-zsh-histdb/sqlite-history.zsh"
+
+# # histdb interactive search with local directory filtering
+source "$HOME/.cache/antidote/https-COLON--SLASH--SLASH-github.com-SLASH-larkery-SLASH-zsh-histdb/histdb-interactive.zsh"
+bindkey '^[^r' _histdb-isearch  # Ctrl+Alt+R for histdb search
 
 
 ################################################################################
@@ -156,10 +161,6 @@ bindkey -e
 source ~/.zsh/aliases.zshrc
 
 
-#
-# TODO remove
-# THIS IS NO LONGER NEEDED AS I PLUG IT IN THE PLUGINS.ZSH
-#
 # # Restore FZF Key bindings
 # zvm_after_init() {
 #   source "$(antidote home)/junegunn/fzf/shell/completion.zsh"
@@ -180,4 +181,3 @@ source /usr/share/nvm/init-nvm.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
