@@ -12,6 +12,7 @@ alias e="~/.config/hypr/scripts/apps/emacs.sh"
 
 alias k="kubectl"
 alias g="git"
+alias gs="git status"
 
 alias pbcopy='xclip -selection clipboard'
 alias pbpaste='xclip -selection clipboard -o'

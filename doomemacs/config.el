@@ -66,7 +66,7 @@
 ;; Set the default Hunspell program and dictionary path
 (setq ispell-program-name "hunspell"
       ispell-really-hunspell t
-      ispell-dictionary "en_US,ru_RU" ;; Default dictionaries to use
+      ispell-dictionary "en_US,ru_RU,nl_NL" ;; Default dictionaries to use
       ispell-local-dictionary-alist
       '(("en_US,ru_RU"
          "[[:alpha:]]"
