@@ -5,7 +5,7 @@ SUPPORTED_APPS=(
     "emacs"
     "Alacritty" 
     "thunar"
-    "code"
+    # "Code"  # Disabled - shitty VSCode doesn't set CWD to workspace
     "pycharm"
     "datagrip"
 )
