@@ -45,7 +45,8 @@ echo "$(date): Current window class: '$CURRENT_WINDOW'" >> "$LOGFILE"
 if [[ "$CURRENT_WINDOW" == "emacs" ]]; then
     echo "$(date): Launching terminal from emacs" >> "$LOGFILE"
     
-    RAW_OUTPUT=$(emacsclient -e '
+    # Get directory using combined elisp logic with timeout
+    RAW_OUTPUT=$(timeout 1s emacsclient -e '
     (if (and (featurep (quote projectile)) (projectile-project-p))
         (projectile-project-root)
       (if (featurep (quote projectile))
@@ -60,12 +61,28 @@ if [[ "$CURRENT_WINDOW" == "emacs" ]]; then
               (expand-file-name default-directory)))
         (expand-file-name default-directory)))' 2>&1)
     
-    EMACS_DIR=$(echo "$RAW_OUTPUT" | tr -d '"')
-    echo "$(date): Emacs directory result: '$EMACS_DIR'" >> "$LOGFILE"
+    EMACS_EXIT_CODE=$?
     
-    if [[ -z "$EMACS_DIR" || "$EMACS_DIR" == "nil" ]]; then
+    # Check if emacsclient timed out or failed
+    if [[ $EMACS_EXIT_CODE -ne 0 ]]; then
         EMACS_DIR="$HOME"
-        echo "$(date): Using fallback: $EMACS_DIR" >> "$LOGFILE"
+        if [[ $EMACS_EXIT_CODE -eq 124 ]]; then
+            echo "$(date): emacsclient timed out, using home directory" >> "$LOGFILE"
+            notify-send "Smart Terminal" "emacsclient timed out - using home directory" -i terminal
+        else
+            echo "$(date): emacsclient failed (exit $EMACS_EXIT_CODE), using home directory" >> "$LOGFILE"
+            notify-send "Smart Terminal" "emacsclient failed - using home directory" -i terminal
+        fi
+    else
+        EMACS_DIR=$(echo "$RAW_OUTPUT" | tr -d '"')
+        echo "$(date): Emacs directory result: '$EMACS_DIR'" >> "$LOGFILE"
+        
+        # Fallback to home if emacsclient returns nil
+        if [[ -z "$EMACS_DIR" || "$EMACS_DIR" == "nil" ]]; then
+            EMACS_DIR="$HOME"
+            echo "$(date): emacsclient returned nil, using home directory" >> "$LOGFILE"
+            notify-send "Smart Terminal" "Could not get Emacs directory - using home directory" -i terminal
+        fi
     fi
     
     echo "$(date): Launching alacritty with --working-directory '$EMACS_DIR'" >> "$LOGFILE"
