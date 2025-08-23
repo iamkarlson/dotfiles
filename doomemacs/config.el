@@ -68,7 +68,15 @@
       ispell-really-hunspell t
       ispell-dictionary "en_US,ru_RU,nl_NL" ;; Default dictionaries to use
       ispell-local-dictionary-alist
-      '(("en_US,ru_RU"
+      '(("en_US,ru_RU,nl_NL"
+         "[[:alpha:]]"
+         "[^[:alpha:]]"
+         "[']"
+         nil
+         ("-d" "en_US,ru_RU,nl_NL")
+         nil
+         utf-8)
+        ("en_US,ru_RU"
          "[[:alpha:]]"
          "[^[:alpha:]]"
          "[']"

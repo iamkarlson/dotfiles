@@ -347,8 +347,7 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
   )
 
 
-(defun my-auto-
-    commit-message (filename)
+(defun my-auto-commit-message (filename)
     "Specify that my commit is a work in progress"
     (concat "braindb connect from " (system-name) ". file: " (gac-relative-file-name filename))
     )
