@@ -100,7 +100,8 @@ ln_file "$dotfiles/zsh/.zprofile" "$target/.zprofile"
 ln_file "$dotfiles/zsh/.p10k.zsh" "$target/.p10k.zsh"
 
 # Zsh plugins
-ln_file "$dotfiles/zsh/scripts/plugins.zsh" "$target/.zsh_plugins.zsh"
+ln_file "$dotfiles/zsh/plugins.txt" "$target/.zsh_plugins.txt"
+ln_file "$dotfiles/zsh/plugins.zsh" "$target/.zsh_plugins.zsh"
 
 
 ln_file "$dotfiles/tasks/global-tasks.yaml" "$target/taskfile.yaml"
