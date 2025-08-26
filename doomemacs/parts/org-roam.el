@@ -329,7 +329,11 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
         )
   )
 (defun +my-org-mode-settings ()
-  (git-auto-commit-mode 1)
+  ;; Only enable git-auto-commit-mode if we're in the braindb project
+  (when (and (buffer-file-name)
+             (string-match-p (expand-file-name org-roam-directory) 
+                           (expand-file-name (buffer-file-name))))
+    (git-auto-commit-mode 1))
   (visual-fill-column-mode 1)
   (visual-line-mode 1)
   ;;(print "hook added")
