@@ -5,7 +5,6 @@ SUPPORTED_APPS=(
     "emacs"
     "Alacritty" 
     "thunar"
-    # "Code"  # Disabled - shitty VSCode doesn't set CWD to workspace
     "pycharm"
     "datagrip"
 )
@@ -68,10 +67,10 @@ if [[ "$CURRENT_WINDOW" == "emacs" ]]; then
         EMACS_DIR="$HOME"
         if [[ $EMACS_EXIT_CODE -eq 124 ]]; then
             echo "$(date): emacsclient timed out, using home directory" >> "$LOGFILE"
-            notify-send "Smart Terminal" "emacsclient timed out - using home directory" -i terminal
+            notify-send "Smart Terminal" "emacsclient timed out - using home directory" -i utilities-terminal
         else
             echo "$(date): emacsclient failed (exit $EMACS_EXIT_CODE), using home directory" >> "$LOGFILE"
-            notify-send "Smart Terminal" "emacsclient failed - using home directory" -i terminal
+            notify-send "Smart Terminal" "emacsclient failed - using home directory" -i utilities-terminal
         fi
     else
         EMACS_DIR=$(echo "$RAW_OUTPUT" | tr -d '"')
@@ -81,12 +80,31 @@ if [[ "$CURRENT_WINDOW" == "emacs" ]]; then
         if [[ -z "$EMACS_DIR" || "$EMACS_DIR" == "nil" ]]; then
             EMACS_DIR="$HOME"
             echo "$(date): emacsclient returned nil, using home directory" >> "$LOGFILE"
-            notify-send "Smart Terminal" "Could not get Emacs directory - using home directory" -i terminal
+            notify-send "Smart Terminal" "Could not get Emacs directory - using home directory" -i utilities-terminal
         fi
     fi
     
     echo "$(date): Launching alacritty with --working-directory '$EMACS_DIR'" >> "$LOGFILE"
     alacritty --working-directory "$EMACS_DIR" &
+
+elif [[ "$CURRENT_WINDOW" == "Code" ]]; then
+    echo "$(date): Launching terminal from vscode" >> "$LOGFILE"
+    
+    # Get VSCode workspace from window title [~/path/to/workspace]
+    VSCODE_TITLE=$(hyprctl -j activewindow | jq -r '.title')
+    echo "$(date): VSCode title: '$VSCODE_TITLE'" >> "$LOGFILE"
+    
+    # Extract path from brackets and expand tilde
+    VSCODE_PATH=$(echo "$VSCODE_TITLE" | grep -o '\[~/[^]]*\]' | tr -d '[]' | sed "s|^~|$HOME|")
+    echo "$(date): Extracted VSCode path: '$VSCODE_PATH'" >> "$LOGFILE"
+    
+    if [[ -n "$VSCODE_PATH" && -d "$VSCODE_PATH" ]]; then
+        echo "$(date): Launching alacritty with --working-directory '$VSCODE_PATH'" >> "$LOGFILE"
+        alacritty --working-directory "$VSCODE_PATH" &
+    else
+        echo "$(date): VSCode path not found or invalid, launching normally" >> "$LOGFILE"
+        alacritty &
+    fi
 
 elif (( ${SUPPORTED_APPS[(Ie)$CURRENT_WINDOW]} )); then
     APP_PID=$(hyprctl -j activewindow | jq -r '.pid')
