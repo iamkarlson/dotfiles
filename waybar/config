@@ -3,12 +3,8 @@
 {
   "position": "top",
   "layer": "bottom",
-  "modules-left": [
-    "hyprland/workspaces",
-  ],
-  "modules-center": [
-    "hyprland/window"
-  ],
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["hyprland/window"],
   "modules-right": [
     "network",
     "cpu",
@@ -16,13 +12,10 @@
     "memory",
     "battery",
     "tray",
-    "custom/scratchpad-indicator",
     "pulseaudio",
     "hyprland/language",
     "clock",
-    //"custom/powermenu"
     "custom/menu"
-
   ],
   "hyprland/window": {
     "separate-outputs": true
@@ -62,12 +55,13 @@
     "interval": 5,
     "format": " {used:0.1f}G/{total:0.1f}G",
     "states": {
+      "good": 50,
       "warning": 70,
-      "critical": 90
+      "high": 85,
+      "critical": 95
     },
     "tooltip": false
   },
-
 
   "network": {
     "interval": 5,
@@ -82,7 +76,6 @@
     "tooltip-format-disconnected": "Disconnected",
     "max-length": 50,
     "on-click": "iwgtk"
-
   },
 
   "pulseaudio": {
@@ -106,43 +99,41 @@
     "critical-threshold": 90,
     "interval": 5,
     "format": "{icon} {temperatureC}°",
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      ""
-    ],
+    "format-icons": ["", "", "", "", ""],
     "tooltip": false,
     "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:18.3/hwmon/",
-    "input-filename": "temp1_input"
+    "input-filename": "temp1_input",
+    "states": {
+      "good": 50,
+      "warning": 65,
+      "hot": 75,
+      "critical": 85
+    }
   },
-
 
   "battery": {
     "format": "{capacity}% {icon}",
+    "format-charging": "{capacity}% 󰂄",
+    "format-plugged": "{capacity}% ",
     "format-icons": ["", "", "", "", ""],
     "on-click": "hyprctl dispatch exec battop",
-    "interval": 5
-
+    "interval": 2,
+    "states": {
+      "good": 70,
+      "warning": 50,
+      "low": 35,
+      "critical": 15
+    }
   },
 
   "custom/menu": {
-    "format": "󰹯",
+    "format": "󰀻",
     "interval": "once",
-    "on-click": "swaync-client -t -sw",
+    "on-click": "swaync-client -t -sw"
   },
   "custom/powermenu": {
     "format": "",
     "interval": "once",
-    "on-click": "~/src/dotfiles/rofi/powermenu.sh",
-  },
-  "custom/scratchpad-indicator": {
-    "interval": 3,
-    "return-type": "json",
-    "exec": "swaymsg -t get_tree | jq --unbuffered --compact-output '(recurse(.nodes[]) | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | if ($scratch_nodes|length) > 0 then { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") } else empty end'",
-    "format": " | {} 󱊖 | ",
-    "on-click": "exec swaymsg 'scratchpad show'",
-    "on-click-right": "exec swaymsg 'move scratchpad'"
+    "on-click": "~/src/dotfiles/rofi/powermenu.sh"
   }
 }
