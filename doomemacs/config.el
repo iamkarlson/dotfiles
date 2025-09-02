@@ -233,6 +233,12 @@
 (add-hook! 'python-mode-hook #'my/disable-mouse-hook)
 (add-hook! 'magit-mode-hook #'my/disable-mouse-hook)
 
+(after! apheleia
+  ;; Enable debug logging to see what's happening
+  (setq apheleia-log-debug-info t)
+
+  ;; Disable Apheleia's automatic indentation override so it doesn't add --tab-width
+  (setq apheleia-formatters-respect-indent-level nil))
 
 (setq case-fold-search t)   ; make searches case insensitive
 (setq completion-ignore-case t) ; make autocomplete case insensitive
@@ -319,6 +325,12 @@
       :n "p l" #'treemacs-add-and-display-current-project-exclusively
       :n "&" #'evil-ex-repeat-substitute
       :desc "Repeat last substitute"
+      :desc "Copy buffer name"
+      :leader
+      :n "b y" (lambda () (interactive) (kill-new (buffer-name)))
+      :desc "Copy project-relative file path"
+      :leader
+      :n "b Y" (lambda () (interactive) (kill-new (file-relative-name (buffer-file-name) (projectile-project-root))))
       )
 
 
