@@ -8,10 +8,6 @@
 	autoSetupRemote = always
 [status]
   showUntrackedFiles = all
-[diff]
-  renames = copy
-	noprefix = false
-	tool = emacs
 [core]
   commentchar = ";"
 	excludesfile = /home/iamkarlson/src/dotfiles/git/git/global.gitignore
@@ -35,5 +31,12 @@
 
 [includeIf "gitdir:~/src/work/"]
     path = "~/src/work/.gitconfig"
+
+
+[diff]
+  renames = copy
+	noprefix = false
+	tool = emacs
 [difftool "emacs"]
-	cmd = emacsclient --eval \"(ediff-files \\\"$LOCAL\\\" \\\"$REMOTE\\\")\"
+  cmd = emacsclient -t --eval \"(ediff \\\"$LOCAL\\\" \\\"$REMOTE\\\")\"
+  prompt = false
