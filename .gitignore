@@ -16,3 +16,6 @@ doomemacs/custom.el
 tasks/private-tasks.yaml
 tasks/taskfile.env
 remove_links.sh
+
+hyprland/host-specific.conf
+hyprland/hosts/

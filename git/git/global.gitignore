@@ -6,7 +6,7 @@
 .envrc
 *.pyc
 .envrc
-.history/
 .github/
 .vscode/
 .claude/
+.history/
