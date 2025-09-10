@@ -93,6 +93,7 @@ tasks:
       - echo "Ensuring config directory exists at {{.CONFIG_DIR}}"
       - mkdir -p {{.CONFIG_DIR}}
 
+
   _sync-logic:
     internal: true
     dir: "{{.USER_WORKING_DIR}}"
@@ -116,33 +117,52 @@ tasks:
 
                 if [ -f "$local_file" ] && [ -f "$remote_file" ]; then
                   if ! cmp -s "$local_file" "$remote_file"; then
-                    echo "⚠️  Difference detected in $file"
-                    echo "   Local: $local_file"
-                    echo "   Saved: $remote_file"
-                    echo "   Run 'task -g {{.PUSH_TASK}}' to update saved config or 'task -g {{.PULL_TASK}}' to use saved config"
                     differences_found=true
+                    break
                   fi
                 elif [ -f "$local_file" ] && [ ! -f "$remote_file" ]; then
-                  echo "📤 New file detected: $file (run 'task -g {{.PUSH_TASK}}' to save)"
                   differences_found=true
+                  break
                 elif [ ! -f "$local_file" ] && [ -f "$remote_file" ]; then
-                  echo "📥 Saved file available: $file (run 'task -g {{.PULL_TASK}}' to restore)"
                   differences_found=true
+                  break
                 fi
               done
             else
               # Use diff to compare entire directories
               if ! diff -r "{{.LOCAL_DIR}}" "{{.SAVED_DIR}}" >/dev/null 2>&1; then
-                echo "⚠️  Differences detected in {{.CONFIG_TYPE}} directory"
-                echo "   Local: {{.LOCAL_DIR}}"
-                echo "   Saved: {{.SAVED_DIR}}"
-                echo "   Run 'task -g {{.PUSH_TASK}}' to update saved config or 'task -g {{.PULL_TASK}}' to use saved config"
                 differences_found=true
               fi
             fi
 
-            # If no differences found, print success message
-            if [ "$differences_found" = false ]; then
+            # If differences found, show diff and original behavior
+            if [ "$differences_found" = true ]; then
+              # Show diff output first
+              echo "📄 Showing differences:"
+              if [ "{{.SYNC_MODE}}" = "file-specific" ]; then
+                for file in tasks.json launch.json settings.json extensions.json; do
+                  local_file="{{.LOCAL_DIR}}/$file"
+                  remote_file="{{.SAVED_DIR}}/$file"
+                  if [ -f "$local_file" ] && [ -f "$remote_file" ]; then
+                    if ! cmp -s "$local_file" "$remote_file"; then
+                      echo "--- Differences in $file ---"
+                      diff -u "$remote_file" "$local_file" || true
+                      echo ""
+                    fi
+                  elif [ -f "$local_file" ] && [ ! -f "$remote_file" ]; then
+                    echo "📤 New file: $file (local only)"
+                  elif [ ! -f "$local_file" ] && [ -f "$remote_file" ]; then
+                    echo "📥 Missing file: $file (saved only)"
+                  fi
+                done
+              else
+                diff -r "{{.SAVED_DIR}}" "{{.LOCAL_DIR}}" || true
+              fi
+              echo ""
+              
+              # Show instructions
+              echo "⚠️  Run 'task -g {{.PUSH_TASK}}' to update saved config or 'task -g {{.PULL_TASK}}' to use saved config"
+            else
               echo "✅ All good, {{.CONFIG_TYPE}} configs are safe - local and saved configurations match perfectly"
             fi
           else
