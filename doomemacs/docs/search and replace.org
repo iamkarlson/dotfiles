@@ -1,0 +1,45 @@
+* Emacs cheatsheet - Search and Replace
+** Replace in multiple files
+1. Query Replace (Interactive with confirmation):
+- M-% (or SPC s r if using evil-mode) - Query replace in current buffer
+- C-M-% - Query replace using regex
+
+2. Project-wide search and replace:
+- SPC s p - Search in project (uses your configured search tool)
+- SPC / - Search in project root
+- After searching, press C-c C-e to enter "edit mode" in the search results buffer
+- Make your changes and press C-c C-c to apply them with confirmation
+
+3. Using Vertico + Consult (from your init.el):
+- SPC s s - Search symbol at point
+- SPC s S - Search symbol at point in project
+
+4. Using your configured tools:
+Since you have vertico, magit, and treemacs configured, the most efficient workflow for project-wide search and replace with confirmation would be:
+
+1. SPC / or SPC s p to search your project
+2. When results appear, press C-c C-e to make the buffer editable
+3. Use M-% to do query-replace within the results buffer
+4. Press y for each replacement you want to confirm, n to skip, ! to replace all remaining
+
+This gives you full control over each replacement while working across your entire project.
+
+** Repeat search and search history
+
+For regular search (/ or C-s):
+- C-s then press ↑ (up arrow) or M-p to go through previous searches
+- ↓ (down arrow) or M-n to go forward in search history
+
+For query replace (M-%):
+- When prompted for the search string, press M-p to cycle through previous search terms
+- When prompted for replacement string, press M-p for previous replacements
+
+For project search (SPC /):
+- After invoking the command, press M-p to access previous search terms
+
+Evil mode specific (if using vim keybindings):
+- In normal mode, press / then ↑ to access search history
+- Or use n and N to repeat the last search forward/backward
+
+The search history persists across sessions, so your recent searches will be available even
+after restarting Emacs.
