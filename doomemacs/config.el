@@ -66,9 +66,17 @@
 ;; Set the default Hunspell program and dictionary path
 (setq ispell-program-name "hunspell"
       ispell-really-hunspell t
-      ispell-dictionary "en_US,ru_RU,nl_NL" ;; Default dictionaries to use
+      ispell-dictionary "en_US" ;; Default to English
       ispell-local-dictionary-alist
-      '(("en_US,ru_RU,nl_NL"
+      '(("en_US"
+         "[[:alpha:]]"
+         "[^[:alpha:]]"
+         "[']"
+         nil
+         ("-d" "en_US")
+         nil
+         utf-8)
+        ("en_US,ru_RU,nl_NL"
          "[[:alpha:]]"
          "[^[:alpha:]]"
          "[']"
@@ -76,14 +84,31 @@
          ("-d" "en_US,ru_RU,nl_NL")
          nil
          utf-8)
-        ("en_US,ru_RU"
+        ("ru_RU"
          "[[:alpha:]]"
          "[^[:alpha:]]"
          "[']"
          nil
-         ("-d" "en_US,ru_RU")
+         ("-d" "ru_RU")
+         nil
+         utf-8)
+        ("nl_NL"
+         "[[:alpha:]]"
+         "[^[:alpha:]]"
+         "[']"
+         nil
+         ("-d" "nl_NL")
          nil
          utf-8)))
+
+;; Configure hunspell dictionary paths
+(setq ispell-hunspell-dict-paths-alist
+      '(("en_US" "/usr/share/hunspell/en_US.dic")
+        ("ru_RU" "/usr/share/hunspell/ru_RU.dic")
+        ("nl_NL" "/usr/share/hunspell/nl_NL.dic")))
+
+;; Set personal dictionary path
+(setq ispell-personal-dictionary "~/.hunspell_personal")
 
 ;; Disable automatic deletion of trailing whitespace
 (remove-hook 'before-save-hook 'delete-trailing-whitespace)
@@ -242,6 +267,12 @@
 (add-hook! 'python-mode-hook #'my/disable-mouse-hook)
 (add-hook! 'magit-mode-hook #'my/disable-mouse-hook)
 
+(after! apheleia
+  ;; Enable debug logging to see what's happening
+  (setq apheleia-log-debug-info t)
+
+  ;; Disable Apheleia's automatic indentation override so it doesn't add --tab-width
+  (setq apheleia-formatters-respect-indent-level nil))
 
 (setq case-fold-search t)   ; make searches case insensitive
 (setq completion-ignore-case t) ; make autocomplete case insensitive
@@ -328,6 +359,12 @@
       :n "p l" #'treemacs-add-and-display-current-project-exclusively
       :n "&" #'evil-ex-repeat-substitute
       :desc "Repeat last substitute"
+      :desc "Copy buffer name"
+      :leader
+      :n "b y" (lambda () (interactive) (kill-new (buffer-name)))
+      :desc "Copy project-relative file path"
+      :leader
+      :n "b Y" (lambda () (interactive) (kill-new (file-relative-name (buffer-file-name) (projectile-project-root))))
       )
 
 

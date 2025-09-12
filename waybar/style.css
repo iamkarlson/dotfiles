@@ -1,4 +1,3 @@
-
 /*
  * To debug this CSS, run waybar with debugger attached:
 
@@ -7,148 +6,225 @@ pkill waybar ; env GTK_DEBUG=interactive waybar
 
  */
 
-/* Define colors for the theme */
-/* @define-color background         #1e1e2e; */
-/* @define-color background-alt     #282828; */
-/* @define-color foreground         #f4d9e1; */
-/* @define-color selected           #e6b9c6; */
-/* @define-color active             #fb4934; */
-/* @define-color urgent             #db4b4b; */
-/* @define-color focus              #9ece6a; */
-/* @define-color muted              #928374; */
-/* @define-color highlight          #d3869b; */
-/* @define-color accent             #e5809e; */
-
-
-
 /*
  *
  * Retrowave theme (purple)
  */
-@define-color background         #2a003e;    /* Deep purple background */
-@define-color background-alt     #3a0053;    /* Darker violet for secondary background */
-@define-color foreground         #ffeefb;    /* Light pink for text */
-@define-color selected           #ff67f5;    /* Neon pink highlight */
-@define-color active             #ff00a0;    /* Vivid magenta for active elements */
-@define-color urgent             #ff1a75;    /* Intense pinkish-red for urgency */
-@define-color focus              #19d3ff;    /* Bright cyan for focused elements */
-@define-color muted              #8c84a6;    /* Muted lavender-gray */
-@define-color highlight          #d87eff;    /* Soft purple for subtle highlights */
-@define-color accent             #ff8ed4;    /* Light magenta for accents */
-
-
-/*
- *
- * Green theme
- *
- *
- **/
-/* @define-color background         #002a0e;    /\* Deep green background *\/ */
-/* @define-color background-alt     #00401a;    /\* Darker forest green for secondary background *\/ */
-/* @define-color foreground         #e6ffea;    /\* Light mint green for text *\/ */
-/* @define-color selected           #67ffa0;    /\* Bright neon green highlight *\/ */
-/* @define-color active             #00ff66;    /\* Vivid lime green for active elements *\/ */
-/* @define-color urgent             #1aff3d;    /\* Intense vibrant green for urgency *\/ */
-/* @define-color focus              #19ffb3;    /\* Bright aqua green for focused elements *\/ */
-/* @define-color muted              #84a690;    /\* Muted sage-green *\/ */
-/* @define-color highlight          #7effd8;    /\* Soft aqua green for subtle highlights *\/ */
-/* @define-color accent             #8ed4a3;    /\* Light pastel green for accents *\/ */
-
-
+@define-color background         #2a003e; /* Deep purple background */
+@define-color background-alt     #3a0053; /* Darker violet for secondary background */
+@define-color foreground         #ffeefb; /* Light pink for text */
+@define-color selected           #ff67f5; /* Neon pink highlight */
+@define-color active             #ff00a0; /* Vivid magenta for active elements */
+@define-color urgent             #ff1a75; /* Intense pinkish-red for urgency */
+@define-color focus              #19d3ff; /* Bright cyan for focused elements */
+@define-color muted              #8c84a6; /* Muted lavender-gray */
+@define-color highlight          #d87eff; /* Soft purple for subtle highlights */
+@define-color accent             #ff8ed4; /* Light magenta for accents */
 
 * {
-    border: none;
-    border-radius: 3px;
-    font-family: Iosevka, FontAwesome, Noto Sans CJK;
-    font-size: 14px;
-    font-style: normal;
-    min-height: 0px;
+  border: none;
+  border-radius: 3px;
+  font-family:
+    Iosevka,
+    FontAwesome,
+    Noto Sans CJK;
+  font-size: 14px;
+  font-style: normal;
+  min-height: 0px;
 }
 
 /* Main window settings */
 window#waybar {
-    background: rgba(30, 30, 46, 0.5);
-    border-bottom: 1px solid @background-alt;
-    color: @foreground;
-    margin: 5px;
-    padding: 5px;
+  background: rgba(30, 30, 46, 0.5);
+  border-bottom: 1px solid @background-alt;
+  color: @foreground;
+  margin: 5px;
+  padding: 5px;
 }
 
 window#waybar > * {
-    margin: 10px;
-    background: @background;
+  margin: 5px;
+  background: @background;
 }
-
-
 
 .modules-right {
-    background-color: @background-alt; /* Similar to workspaces */
-    border-radius: 5px; /* Rounded edges for a cleaner look */
-    color: @foreground; /* Text color */
-    font-weight: normal; /* Adjust font weight if needed */
-    padding: 0px 10px;
+  background-color: @background-alt; /* Similar to workspaces */
+  border-radius: 5px; /* Rounded edges for a cleaner look */
+  color: @foreground; /* Text color */
+  font-weight: normal; /* Adjust font weight if needed */
+  padding: 0px 5px;
 }
 /* Modules-right styling */
-.modules-right  *.module {
-    margin: 0 10px; /* Horizontal spacing between widgets */
-    padding: 0px 5px; /* Padding inside each widget */
+.modules-right *.module {
+  margin: 0 5px; /* Horizontal spacing between widgets */
+  padding: 0px 3px; /* Padding inside each widget */
 }
 
-.modules-right *.module:hover {
-    background-color: @selected; /* Highlight effect on hover */
-    color: black; /* Change text color on hover */
+.modules-right *.module:hover:not(#tray) {
+  background-color: @selected; /* Highlight effect on hover */
+  color: black; /* Change text color on hover */
 }
-
-
 
 /* Workspaces styling */
 #workspaces {
-    background: @background-alt;
-    font-weight: normal;
-    font-style: normal;
+  background: @background-alt;
+  font-weight: normal;
+  font-style: normal;
 }
 
 #workspaces button {
-    /* padding: 0px 10px; */
-    color: @muted;
-    margin: 0px 2px;
-    padding: 5px;
+  /* padding: 0px 10px; */
+  color: @muted;
+  margin: 0px 2px;
+  padding: 5px;
 }
 
 #workspaces button.active {
-    color: @foreground;
-    background-color: @active;
+  color: @foreground;
+  background-color: @active;
 }
 
 #workspaces button:hover {
-    background-color: @selected;
-    color: black;
+  background-color: @selected;
+  color: black;
 }
-
-
 
 /* Battery styling */
 #battery {
-    color: @focus;
+  color: #ffffff; /* Default white for >70% */
 }
 
 #battery.charging {
-    color: @focus;
+  color: #00ff66; /* Green when charging */
+}
+
+#battery.good:not(.charging) {
+  color: #ffffff; /* White for >70% */
 }
 
 #battery.warning:not(.charging) {
-    background-color: @active;
-    color: @background;
+  color: #ffff00; /* Yellow for 50-70% */
 }
 
-/* Custom Powermenu and Menu styling */
-#custom-powermenu, #custom-menu {
-    color: @focus;
-    padding: 0px 10px 0px 5px;
-    margin: 0 10px;
-    font-size: 25px;
+#battery.low:not(.charging) {
+  color: #ff8800; /* Orange for 35-50% */
 }
-#custom-powermenu:hover, #custom-menu:hover {
-    background-color: @background-alt; /* Similar to workspaces */
+
+#battery.critical:not(.charging) {
+  color: #ff0000; /* Red for <35% */
+  animation: blink 0.5s linear infinite alternate;
+}
+
+@keyframes blink {
+  to {
+    background-color: @background;
     color: @urgent;
+  }
+}
+
+/* Temperature styling */
+#temperature {
+  color: #00bfff; /* Default cool blue */
+}
+
+#temperature.good {
+  color: #00bfff; /* Cool blue <50°C */
+}
+
+#temperature.warning {
+  color: #ffff00; /* Yellow 50-65°C */
+}
+
+#temperature.hot {
+  color: #ff8800; /* Orange 65-75°C */
+}
+
+#temperature.critical {
+  color: #ff0000; /* Red >75°C */
+  animation: blink 0.5s linear infinite alternate;
+}
+
+/* Memory styling */
+#memory {
+  color: #ffffff; /* Default white */
+}
+
+#memory.good {
+  color: #00ff80; /* Light green <50% */
+}
+
+#memory.warning {
+  color: #ffff00; /* Yellow 50-70% */
+}
+
+#memory.high {
+  color: #ff8800; /* Orange 70-85% */
+}
+
+#memory.critical {
+  color: #ff0000; /* Red >85% */
+  animation: blink 0.5s linear infinite alternate;
+}
+
+/* Network styling */
+#network {
+  color: #ffffff; /* Default white */
+}
+
+#network.wifi {
+  color: #00ff80; /* Light green for WiFi */
+}
+
+#network.ethernet {
+  color: #00bfff; /* Blue for ethernet */
+}
+
+#network.disconnected {
+  color: #ff0000; /* Red for disconnected */
+  animation: blink 0.5s linear infinite alternate;
+}
+
+/* CPU styling */
+#cpu {
+  color: #ffffff; /* Default white */
+}
+
+#cpu.warning {
+  color: #ffff00; /* Yellow for high CPU */
+}
+
+#cpu.critical {
+  color: #ff0000; /* Red for critical CPU */
+  animation: blink 0.5s linear infinite alternate;
+}
+
+/* Tray styling */
+#tray {
+  padding: 0px 5px;
+  margin: 0px 5px;
+}
+
+#tray:hover {
+  background-color: @selected;
+}
+
+#tray > .passive {
+  padding: 2px;
+}
+
+#tray > .needs-attention {
+  padding: 2px;
+  background-color: @urgent;
+}
+
+/* Custom Menu styling */
+#custom-menu {
+  color: @focus;
+  padding: 0px 10px 0px 5px;
+  margin: 0 10px;
+  font-size: 25px;
+}
+#custom-menu:hover {
+  background-color: @background-alt;
+  color: @urgent;
 }
