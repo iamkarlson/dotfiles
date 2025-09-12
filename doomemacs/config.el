@@ -227,7 +227,16 @@
 (defun my/disable-mouse-hook()
   (setq track-mouse nil))
 
+(defun my/refresh-visual-line-mode ()
+  "Refresh visual-line-mode in all buffers where it's enabled to recalculate line breaks"
+  (dolist (buffer (buffer-list))
+    (with-current-buffer buffer
+      (when visual-line-mode
+        (visual-line-mode -1)
+        (visual-line-mode 1)))))
+
 (add-hook! 'window-configuration-change-hook #'my/disable-mouse-hook)
+(add-hook! 'window-configuration-change-hook #'my/refresh-visual-line-mode)
 (add-hook! 'prog-mode-hook #'my/disable-mouse-hook)
 (add-hook! 'lsp-mode-hook #'my/disable-mouse-hook)
 (add-hook! 'python-mode-hook #'my/disable-mouse-hook)
