@@ -123,7 +123,8 @@
 ;; Replace the shortmenu function in the dashboard functions list
 (setq +doom-dashboard-functions
       (append '(doom-dashboard-widget-banner)
-              '(my-custom-dashboard-widget-shortmenu)
+              ;;'(my-custom-dashboard-widget-shortmenu)
+              '(doom-dashboard-widget-shortmenu)
               '(doom-dashboard-widget-loaded)
               '(doom-dashboard-widget-footer)
               )
