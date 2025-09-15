@@ -128,6 +128,7 @@
 (setq-default treemacs-follow-after-init t)
 (setq-default treemacs-project-follow-cleanup t)
 
+(setq projectile-switch-project-action 'projectile-dired)
 
 
 (defun my-evil-disable-remove-spaces ()

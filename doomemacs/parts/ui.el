@@ -53,78 +53,78 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 
-(after! doom-dashboard
-  (defun +doom-dashboard-widget-shortmenu ()
-    "Show only three dashboard buttons:
-1) Braindb Today’s Note
+
+
+
+;; Define our custom shortmenu function
+(defun my-custom-dashboard-widget-shortmenu ()
+  "Custom dashboard shortmenu with three buttons:
+1) Braindb Today's Note
 2) Braindb Weekly Note
 3) Open Dotfiles (Dired)."
-    (let ((width +doom-dashboard--width))
-      ;; Add a blank line for spacing
-      (insert "\n")
-      ;; 1. Braindb Today’s Note
-      (widget-create
-       'item
-       ;; Display text
-       :tag   (format "  %-32s" "Braindb Today’s Note")
-       ;; Icon (optional; you can drop :icon entirely if you don't want an icon)
-       :button-face 'doom-dashboard-menu-title
-       :help-echo  "Switch to project 'braindb' and open today's Org-roam daily note"
-       :action
-       (lambda (&rest _)
-         ;; 1a. Switch Treemacs to braindb
-         (treemacs-add-and-display-current-project-exclusively "braindb")
-         ;; 1b. Open today's Org-roam daily note
-         (org-roam-dailies-find-today)))
-      (insert (propertize (format " %s\n"
-                                  ;; Show the keybinding help hint (e.g. [ d t ])
-                                  (substitute-command-keys "\\[org-roam-dailies-find-today]"))
-                          'face 'doom-dashboard-menu-desc))
-      ;; 2. Braindb Weekly Note
-      (widget-create
-       'item
-       :tag   (format "  %-32s" "Braindb Weekly Note")
-       :button-face 'doom-dashboard-menu-title
-       :help-echo  "Switch to project 'braindb' and open this week's Org-roam weekly note"
-       :action
-       (lambda (&rest _)
-         ;; 2a. Switch Treemacs to braindb
-         (treemacs-add-and-display-current-project-exclusively "braindb")
-         ;; 2b. Compute year-month and week number
-         (let* ((ym     (format-time-string "%Y-%m"))
-                (wk     (format-time-string "%U"))
-                (fname  (expand-file-name
-                         (format "%s/agenda-week-%s.org" ym wk)
-                         org-roam-dailies-directory)))
-           ;; If the weekly file doesn't exist, create it via `org-roam-capture-`
-           (unless (file-exists-p fname)
-             (org-roam-capture- :node      (org-roam-node-create)
-                                :templates org-roam-dailies-capture-templates
-                                :info      (list :file fname)))
-           ;; Finally, visit it
-           (find-file fname))))
-      (insert (propertize (format " %s\n"
-                                  (substitute-command-keys "\\[org-roam-capture-]"))
-                          'face 'doom-dashboard-menu-desc))
-      ;; 3. Open Dotfiles (Dired)
-      (widget-create
-       'item
-       :tag   (format "  %-32s" "Open Dotfiles (Dired)")
-       :button-face 'doom-dashboard-menu-title
-       :help-echo  "Switch to project 'dotfiles' and open Dired at its root"
-       :action
-       (lambda (&rest _)
-         ;; 3a. Switch Treemacs to dotfiles
-         (treemacs-add-and-display-current-project-exclusively "dotfiles")
-         ;; 3b. Open Dired at that project's root
-         (let ((root (projectile-project-root)))
-           (when root
-             (dired root)))))
-      (insert (propertize (format " %s\n"
-                                  (substitute-command-keys "\\[dired]"))
-                          'face 'doom-dashboard-menu-desc))
-      ;; Add a final newline for padding
-      (insert "\n")))
-  ;; Replace the default shortmenu hook with our custom one
-  (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
-  (add-hook    '+doom-dashboard-functions #'+doom-dashboard-widget-shortmenu))
+  (insert "\n")
+  ;; 1. Braindb Today's Note
+  (insert-text-button
+   "  Braindb Today's Note"
+   'action (lambda (_)
+             (projectile-switch-project-by-name "~/braindb/")
+             (treemacs-add-and-display-current-project-exclusively)
+             (org-roam-dailies-find-today))
+   'face 'doom-dashboard-menu-title
+   'follow-link t
+   'help-echo "Switch to project 'braindb' and open today's Org-roam daily note")
+  (insert "\n")
+
+  ;; 2. Braindb Weekly Note
+  (insert-text-button
+   "  Braindb Weekly Note"
+   'action (lambda (_)
+             (projectile-switch-project-by-name "~/braindb/")
+             (treemacs-add-and-display-current-project-exclusively)
+             (let* ((ym     (format-time-string "%Y-%m"))
+                    (wk     (format-time-string "%U"))
+                    (fname  (expand-file-name
+                             (format "%s/agenda-week-%s.org" ym wk)
+                             org-roam-dailies-directory)))
+               (unless (file-exists-p fname)
+                 (org-roam-capture- :node      (org-roam-node-create)
+                                    :templates org-roam-dailies-capture-templates
+                                    :info      (list :file fname)))
+               (find-file fname)))
+   'face 'doom-dashboard-menu-title
+   'follow-link t
+   'help-echo "Switch to project 'braindb' and open this week's Org-roam weekly note")
+  (insert "\n")
+
+  ;; 3. Open Dotfiles (Dired)
+  (insert-text-button
+   "  Open Dotfiles (Dired)"
+   'action (lambda (_)
+             (projectile-switch-project-by-name "~/src/dotfiles/")
+             (treemacs-add-and-display-current-project-exclusively )
+             (let ((root (projectile-project-root)))
+               (when root
+                 (dired root))))
+   'face 'doom-dashboard-menu-title
+   'follow-link t
+   'help-echo "Switch to project 'dotfiles' and open Dired at its root")
+
+  ;; 4. Open agenda
+  (insert-text-button
+   "  Open Agenda"
+   'action (lambda (_)
+             (org-agenda-list))
+   'face 'doom-dashboard-menu-title
+   'follow-link t
+   'help-echo "Open Org Agenda")
+  (insert "\n\n")
+  )
+
+;; Replace the shortmenu function in the dashboard functions list
+(setq +doom-dashboard-functions
+      (append '(doom-dashboard-widget-banner)
+              '(my-custom-dashboard-widget-shortmenu)
+              '(doom-dashboard-widget-loaded)
+              '(doom-dashboard-widget-footer)
+              )
+      )
