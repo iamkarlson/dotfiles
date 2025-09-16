@@ -56,102 +56,67 @@
 
 
 
-;; Define our custom shortmenu function
-(defun my-custom-dashboard-widget-shortmenu ()
-  "Custom dashboard shortmenu with three buttons:
-1) Braindb Today's Note
-2) Braindb Weekly Note
-3) Open Dotfiles (Dired)."
-  (insert "\n")
-  ;; 1. Braindb Today's Note
-  (insert-text-button
-   "  Braindb Today's Note"
-   'action (lambda (_)
-             (projectile-switch-project-by-name "~/braindb/")
-             (treemacs-add-and-display-current-project-exclusively)
-             (org-roam-dailies-find-today))
-   'face 'doom-dashboard-menu-title
-   'follow-link t
-   'help-echo "Switch to project 'braindb' and open today's Org-roam daily note")
-  (insert "\n")
 
-  ;; 2. Braindb Weekly Note
-  (insert-text-button
-   "  Braindb Weekly Note"
-   'action (lambda (_)
-             (projectile-switch-project-by-name "~/braindb/")
-             (treemacs-add-and-display-current-project-exclusively)
-             (let* ((ym     (format-time-string "%Y-%m"))
-                    (wk     (format-time-string "%U"))
-                    (fname  (expand-file-name
-                             (format "%s/agenda-week-%s.org" ym wk)
-                             org-roam-dailies-directory)))
-               (unless (file-exists-p fname)
-                 (org-roam-capture- :node      (org-roam-node-create)
-                                    :templates org-roam-dailies-capture-templates
-                                    :info      (list :file fname)))
-               (find-file fname)))
-   'face 'doom-dashboard-menu-title
-   'follow-link t
-   'help-echo "Switch to project 'braindb' and open this week's Org-roam weekly note")
-  (insert "\n")
-
-  ;; 3. Open Dotfiles (Dired)
-  (insert-text-button
-   "  Open Dotfiles (Dired)"
-   'action (lambda (_)
-             (projectile-switch-project-by-name "~/src/dotfiles/")
-             (treemacs-add-and-display-current-project-exclusively )
-             (let ((root (projectile-project-root)))
-               (when root
-                 (dired root))))
-   'face 'doom-dashboard-menu-title
-   'follow-link t
-   'help-echo "Switch to project 'dotfiles' and open Dired at its root")
-
-  ;; 4. Open agenda
-  (insert-text-button
-   "  Open Agenda"
-   'action (lambda (_)
-             (org-agenda-list))
-   'face 'doom-dashboard-menu-title
-   'follow-link t
-   'help-echo "Open Org Agenda")
-  (insert "\n\n")
-  )
-
-
-(setq-default +doom-dashboard-menu-sections
-              '(
-                ("Recently opened files"
-                 :icon (nerd-icons-faicon "nf-fa-file_text" :face 'doom-dashboard-menu-title)
-                 :action recentf-open-files)
-                ("Reload last session"
-                 :icon (nerd-icons-octicon "nf-oct-history" :face 'doom-dashboard-menu-title)
-                 :when (cond ((modulep! :ui workspaces)
-                              (file-exists-p (expand-file-name persp-auto-save-fname persp-save-dir)))
-                             ((require 'desktop nil t)
-                              (file-exists-p (desktop-full-file-name))))
-                 :action doom/quickload-session)
-                ("Open org-agenda"
-                 :icon (nerd-icons-octicon "nf-oct-calendar" :face 'doom-dashboard-menu-title)
-                 :when (fboundp 'org-agenda)
-                 :action org-agenda)
-                ("Open project"
-                 :icon (nerd-icons-octicon "nf-oct-briefcase" :face 'doom-dashboard-menu-title)
-                 :action projectile-switch-project)
-                ("Jump to bookmark"
-                 :icon (nerd-icons-octicon "nf-oct-bookmark" :face 'doom-dashboard-menu-title)
-                 :action bookmark-jump)
-                ("Open private configuration"
-                 :icon (nerd-icons-octicon "nf-oct-tools" :face 'doom-dashboard-menu-title)
-                 :when (file-directory-p doom-user-dir)
-                 :action doom/open-private-config)
-                ("[Open documentation]"
-                 :icon (nerd-icons-octicon "nf-oct-book" :face 'doom-dashboard-menu-title)
-                 :action doom/help)
-                )
-              )
+(setq +doom-dashboard-menu-sections
+      '(("[Recently opened files]"
+         :icon (nerd-icons-faicon "nf-fa-file_text" :face 'doom-dashboard-menu-title)
+         :action recentf-open-files)
+        ("[Reload last session]"
+         :icon (nerd-icons-octicon "nf-oct-history" :face 'doom-dashboard-menu-title)
+         :when (cond ((modulep! :ui workspaces)
+                      (file-exists-p (expand-file-name persp-auto-save-fname persp-save-dir)))
+                     ((require 'desktop nil t)
+                      (file-exists-p (desktop-full-file-name))))
+         :action doom/quickload-session)
+        ("[Open org-agenda]"
+         :icon (nerd-icons-octicon "nf-oct-calendar" :face 'doom-dashboard-menu-title)
+         :when (fboundp 'org-agenda)
+         :action org-agenda)
+        ("[Open project]"
+         :icon (nerd-icons-octicon "nf-oct-briefcase" :face 'doom-dashboard-menu-title)
+         :action projectile-switch-project)
+        ("[Jump to bookmark]"
+         :icon (nerd-icons-octicon "nf-oct-bookmark" :face 'doom-dashboard-menu-title)
+         :action bookmark-jump)
+        ("[Open private configuration]"
+         :icon (nerd-icons-octicon "nf-oct-tools" :face 'doom-dashboard-menu-title)
+         :when (file-directory-p doom-user-dir)
+         :action doom/open-private-config)
+        ("[Open documentation]"
+         :icon (nerd-icons-octicon "nf-oct-book" :face 'doom-dashboard-menu-title)
+         :action doom/help)
+        ("[Braindb Today's Note]"
+         :icon (nerd-icons-octicon "nf-oct-calendar" :face 'doom-dashboard-menu-title)
+         :action '(lambda ()
+                    (projectile-switch-project-by-name "~/braindb/")
+                    (treemacs-add-and-display-current-project-exclusively)
+                    (org-roam-dailies-find-today)))
+        ("[Braindb Weekly Note]"
+         :icon (nerd-icons-octicon "nf-oct-calendar" :face 'doom-dashboard-menu-title)
+         :action '(lambda ()
+                    (projectile-switch-project-by-name "~/braindb/")
+                    (treemacs-add-and-display-current-project-exclusively)
+                    (let* ((ym     (format-time-string "%Y-%m"))
+                           (wk     (format-time-string "%U"))
+                           (fname  (expand-file-name
+                                    (format "%s/agenda-week-%s.org" ym wk)
+                                    org-roam-dailies-directory)))
+                      (unless (file-exists-p fname)
+                        (org-roam-capture- :node      (org-roam-node-create)
+                                           :templates org-roam-dailies-capture-templates
+                                           :info      (list :file fname)))
+                      (find-file fname))))
+        ("[Open Dotfiles (Dired)]"
+         :icon (nerd-icons-octicon "nf-oct-tools" :face 'doom-dashboard-menu-title)
+         :action '(lambda ()
+                    (projectile-switch-project-by-name "~/src/dotfiles/")
+                    (treemacs-add-and-display-current-project-exclusively)
+                    (let ((root (projectile-project-root)))
+                      (when root
+                        (dired root)))))
+        ("[Open Agenda]"
+         :icon (nerd-icons-octicon "nf-oct-calendar" :face 'doom-dashboard-menu-title)
+         :action org-agenda-list)))
 
 
 
