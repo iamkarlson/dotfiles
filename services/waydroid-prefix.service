@@ -1,0 +1,12 @@
+[Unit]
+Description=Waydroid App Name Prefixer
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/src/dotfiles/hyprland/scripts/rename-waydroid-apps-with-prefix.sh --watch
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
