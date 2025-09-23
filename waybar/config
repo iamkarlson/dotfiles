@@ -3,8 +3,8 @@
 {
   "position": "top",
   "layer": "bottom",
-  "modules-left": ["hyprland/workspaces", "hyprland/window"],
-  "modules-center": [],
+  "modules-left": ["hyprland/window"],
+  "modules-center": ["hyprland/workspaces"],
   "modules-right": [
     "network",
     "cpu",
