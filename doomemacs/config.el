@@ -295,25 +295,28 @@
 
 
 (map! :after evil
-      :desc "Toggle visual line mode"
       :leader
+
+      :desc "Toggle visual fill column mode"
       :n "t z" #'visual-fill-column-mode
+
       :desc "Toggle visual line mode"
-      :leader
       :n "t x" #'visual-line-mode
+
       :desc "Toggle evil mode"
-      :leader
       :n "t e" #'evil-mode
-      :leader
+
+      :desc "Show project in treemacs"
       :n "p l" #'treemacs-add-and-display-current-project-exclusively
-      :n "&" #'evil-ex-repeat-substitute
+
       :desc "Repeat last substitute"
+      :n "&" #'evil-ex-repeat-substitute
+
       :desc "Copy buffer name"
-      :leader
-      :n "b y" (lambda () (interactive) (kill-new (buffer-name)))
+      :n "b Y" (lambda () (interactive) (kill-new (buffer-name)))
+
       :desc "Copy project-relative file path"
-      :leader
-      :n "b Y" (lambda () (interactive) (kill-new (file-relative-name (buffer-file-name) (projectile-project-root))))
+      :n "b y" (lambda () (interactive) (kill-new (file-relative-name (buffer-file-name) (projectile-project-root))))
       )
 
 
