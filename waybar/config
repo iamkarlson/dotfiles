@@ -12,6 +12,7 @@
     "memory",
     "battery",
     "tray",
+    "custom/phone-battery",
     "pulseaudio",
     "hyprland/language",
     "clock",
@@ -35,7 +36,7 @@
   },
 
   "cpu": {
-    "interval": 5,
+    "interval": 1,
     "tooltip": false,
     "format": " {usage}%",
     "format-alt": " {load}",
@@ -52,7 +53,7 @@
   },
 
   "memory": {
-    "interval": 5,
+    "interval": 1,
     "format": " {used:0.1f}G/{total:0.1f}G",
     "states": {
       "good": 50,
@@ -64,7 +65,7 @@
   },
 
   "network": {
-    "interval": 5,
+    "interval": 1,
     "format": "{ifname}",
     "format-wifi": "󰘊 {signalStrength}%  {bandwidthDownBytes}  {bandwidthUpBytes}",
     "format-ethernet": "  {bandwidthDownBytes}  {bandwidthUpBytes}",
@@ -97,7 +98,7 @@
 
   "temperature": {
     "critical-threshold": 90,
-    "interval": 5,
+    "interval": 1,
     "format": "{icon} {temperatureC}°",
     "format-icons": ["", "", "", "", ""],
     "tooltip": false,
@@ -117,7 +118,7 @@
     "format-plugged": "{capacity}% ",
     "format-icons": ["", "", "", "", ""],
     "on-click": "hyprctl dispatch exec battop",
-    "interval": 2,
+    "interval": 5,
     "states": {
       "good": 70,
       "warning": 50,
@@ -135,5 +136,11 @@
     "format": "",
     "interval": "once",
     "on-click": "~/src/dotfiles/rofi/powermenu.sh"
+  },
+  "custom/phone-battery": {
+    "format": "{}",
+    "exec": "~/.config/hypr/scripts/ui/waybar_phone_battery.sh",
+    "interval": 5,
+    "tooltip": false
   }
 }
