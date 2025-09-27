@@ -47,6 +47,10 @@ window#waybar > * {
   background: @background;
 }
 
+#window {
+  padding-left: 10px;
+}
+
 .modules-right {
   background-color: @background-alt; /* Similar to workspaces */
   border-radius: 5px; /* Rounded edges for a cleaner look */
