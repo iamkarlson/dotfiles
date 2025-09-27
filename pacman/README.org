@@ -1,0 +1,3 @@
+
+
+[[elisp:(find-file-other-window "/sudo::/etc/pacman.conf")][pacman.conf (sudo)]]

@@ -7,4 +7,4 @@ grim -o $(hyprctl -j monitors | jq -r '.[] | select(.focused == true) | .name') 
 $(wl-copy < $IMG_FILE);
 
 
-notify-send.sh "Screenshot is made!" "$FILE_NAME copied to clipboard!" -i "$IMG_FILE" -d "xdg-open $IMG_FILE";
+notify-send.sh "Screenshot is made!" "$FILE_NAME copied to clipboard!" -i "$IMG_FILE" -d "notify-send.sh 'Default Action $IMG_FILE'; xdg-open $IMG_FILE";
