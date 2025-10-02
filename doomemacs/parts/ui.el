@@ -39,7 +39,7 @@
 ;;(setq doom-theme 'doom-feather-light)
 ;; (setq doom-theme 'ef-autumn)
 ;; (setq doom-theme 'iamkarlson-fallout)
-(setq doom-theme 'doom-badger)
+(setq doom-theme 'doom-one-light)
 
 (after! doom-themes
   (setq doom-themes-enable-bold t)
