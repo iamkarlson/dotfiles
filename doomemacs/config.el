@@ -321,6 +321,10 @@
 
 
 
+;; Add local snippets directory
+(after! yasnippet
+  (add-to-list 'yas-snippet-dirs "~/.local/share/doom-snippets"))
+
 (server-start)
 
 ;; (use-package! gptel
