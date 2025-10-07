@@ -39,7 +39,8 @@
 ;;(setq doom-theme 'doom-feather-light)
 ;; (setq doom-theme 'ef-autumn)
 ;; (setq doom-theme 'iamkarlson-fallout)
-(setq doom-theme 'doom-one-light)
+;; (setq doom-theme 'doom-one-light)
+(setq doom-theme 'modus-operandi-tinted)
 
 (after! doom-themes
   (setq doom-themes-enable-bold t)
@@ -49,9 +50,19 @@
 
 (setq sml/no-confirm-load-theme t)
 
-(custom-set-faces!
-  '(font-lock-comment-face :slant italic)
-  '(font-lock-keyword-face :slant italic))
+;; (custom-set-faces!
+;;   '(font-lock-comment-face :slant italic)
+;;   '(font-lock-keyword-face :slant italic))
+
+;; Custom theme adjustments for modus-operandi-tinted
+(after! modus-themes
+  (custom-set-faces!
+    ;;     ;; Add vertical padding to line numbers
+    ;;     '(line-number :inherit default :width 1.0 :box (:line-width 2 :color nil))
+    ;;     '(line-number-current-line :inherit line-number :box (:line-width 2 :color nil))
+    '(custom-comment :foreground "dark gray")
+    )
+  )
 
 
 
