@@ -303,6 +303,9 @@
       :desc "Toggle visual line mode"
       :n "t x" #'visual-line-mode
 
+      :desc "Toggle links display"
+      :n "t h" #'org-toggle-link-display
+
       :desc "Toggle evil mode"
       :n "t e" #'evil-mode
 

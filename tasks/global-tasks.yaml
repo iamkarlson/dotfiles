@@ -3,7 +3,8 @@
 
 version: "3"
 
-dotenv: ["{{.DOTFILES}}/tasks/taskfile.env"]
+#dotenv: ["{{.DOTFILES}}/tasks/taskfile.env"]
+dotenv: ["/home/{{.USERNAME}}/src/dotfiles/tasks/taskfile.env"]
 
 vars:
   VSCODE_CONFIG_DIR: "{{.HOME}}/.config/vscode_project_configs"
@@ -92,7 +93,6 @@ tasks:
     cmds:
       - echo "Ensuring config directory exists at {{.CONFIG_DIR}}"
       - mkdir -p {{.CONFIG_DIR}}
-
 
   _sync-logic:
     internal: true

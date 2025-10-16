@@ -3,6 +3,8 @@
 
 version: '3'
 
+dotenv: ["tasks/taskfile.env"]
+
 vars:
   GREETING: Hello, World!
 
@@ -18,3 +20,8 @@ tasks:
     cmds:
       - sudo ./create_links.sh /home/iamkarlson
     interactive: true
+
+  take-photo-telegram:
+    desc: "Take photos with all webcams and send to Telegram"
+    cmds:
+      - ~/src/dotfiles/hyprland/scripts/apps/take_photo_and_send_to_telegram.sh
