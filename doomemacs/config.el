@@ -199,7 +199,13 @@
 ;; This little piece of shit was producing a lot of ~SPC <mouse-movement> is undefined~
 ;; Well, not anymore
 (defun my/disable-mouse-hook()
-  (setq track-mouse nil))
+  ;; Don't interfere with mouse operations on window borders
+  (unless (or (minibufferp)
+              (eq last-command 'mouse-drag-mode-line)
+              (eq last-command 'mouse-drag-vertical-line)
+              (eq this-command 'mouse-drag-mode-line)
+              (eq this-command 'mouse-drag-vertical-line))
+    (setq track-mouse nil)))
 
 (defun my/refresh-visual-line-mode ()
   "Refresh visual-line-mode in all buffers where it's enabled to recalculate line breaks"
@@ -209,12 +215,30 @@
         (visual-line-mode -1)
         (visual-line-mode 1)))))
 
-(add-hook! 'window-configuration-change-hook #'my/disable-mouse-hook)
+;; Don't disable mouse during window configuration changes (resizing)
+;; (add-hook! 'window-configuration-change-hook #'my/disable-mouse-hook)
 (add-hook! 'window-configuration-change-hook #'my/refresh-visual-line-mode)
 (add-hook! 'prog-mode-hook #'my/disable-mouse-hook)
 (add-hook! 'lsp-mode-hook #'my/disable-mouse-hook)
 (add-hook! 'python-mode-hook #'my/disable-mouse-hook)
 (add-hook! 'magit-mode-hook #'my/disable-mouse-hook)
+
+;; Enable proper mouse support for window operations
+(setq mouse-autoselect-window nil)
+(setq mouse-drag-copy-region nil)
+(setq mouse-drag-and-drop-region nil)
+
+;; Enable mouse tracking for drag operations
+(setq track-mouse t)
+
+;; Ensure window divider mouse operations work properly
+(setq window-divider-default-right-width 2)
+(setq window-divider-default-bottom-width 2)
+(window-divider-mode 1)
+
+;; Enable mouse resize for splits
+(global-set-key [mode-line mouse-1] 'mouse-drag-mode-line)
+(global-set-key [vertical-line mouse-1] 'mouse-drag-vertical-line)
 
 (after! apheleia
   ;; Enable debug logging to see what's happening
