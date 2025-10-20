@@ -330,6 +330,9 @@
       :desc "Toggle links display"
       :n "t h" #'org-toggle-link-display
 
+      :desc "Toggle images display"
+      :n "t p" #'org-toggle-inline-images
+
       :desc "Toggle evil mode"
       :n "t e" #'evil-mode
 
