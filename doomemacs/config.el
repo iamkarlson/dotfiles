@@ -67,8 +67,9 @@
 
 
 (+global-word-wrap-mode +1)
-(setq-default visual-fill-column-width 200)
-(setq-default visual-fill-column-center-text t)
+(after! visual-fill-column
+  (setq-default visual-fill-column-width 200)
+  (setq-default visual-fill-column-center-text t))
 (setq-default doom-modeline-vcs-max-length 60)
 
 (add-hook! 'magit-mode-hook
@@ -344,9 +345,6 @@
 
       :desc "Copy buffer name"
       :n "b Y" (lambda () (interactive) (kill-new (buffer-name)))
-
-      :desc "Copy project-relative file path"
-      :n "b y" (lambda () (interactive) (kill-new (file-relative-name (buffer-file-name) (projectile-project-root))))
       )
 
 
@@ -365,4 +363,3 @@
 ;; ;; Old key for testing
 ;;:key "AIzaSyC2mRdll5WWftIWEq2o_EmlURRq5fWfDxA"
 ;;:stream t)))
-
