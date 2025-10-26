@@ -6,3 +6,9 @@
 /home/iamkarlson/.config/hypr/scripts/monitors/switch-to-desktop.sh
 
 /home/iamkarlson/.config/hypr/scripts/apps/openfocus.sh steam
+
+swaync-client --close-all
+swaync-client --dnd-on
+swaync-client --close-panel
+
+notify-send.sh -u critical "Gaming Mode Enabled" "Switched to TV and launched Steam."
