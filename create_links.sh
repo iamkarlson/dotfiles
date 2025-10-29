@@ -191,6 +191,12 @@ ln_directory $dotfiles/workstyle $config/workstyle
 
 ln_directory $dotfiles/hyprland $config/hypr
 
+# VSCode settings
+
+ln_file $dotfiles/vscode/settings.json $config/Code/User/settings.json
+ln_file $dotfiles/vscode/keybindings.json $config/Code/User/keybindings.json
+ln_file $dotfiles/vscode/mcp.json $config/Code/User/mcp.json
+
 
 #
 # Hyprland config

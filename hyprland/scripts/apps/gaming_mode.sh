@@ -8,7 +8,7 @@
 /home/iamkarlson/.config/hypr/scripts/apps/openfocus.sh steam
 
 swaync-client --close-all
-swaync-client --dnd-on
 swaync-client --close-panel
 
-notify-send.sh -u critical "Gaming Mode Enabled" "Switched to TV and launched Steam."
+notify-send.sh "Enabling gaming mode!!" "Switched to TV and launched Steam."
+swaync-client --dnd-on
