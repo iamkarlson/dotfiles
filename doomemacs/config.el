@@ -323,6 +323,17 @@
                                         ;(global-copilot-mode 1)
 
 
+;; Custom function to find file in dotfiles project
+(defun my/find-file-in-dotfiles ()
+  "Find file in dotfiles project and switch to that project workspace."
+  (interactive)
+  (let* ((dotfiles-dir "~/src/dotfiles/")
+         (expanded-dir (expand-file-name dotfiles-dir)))
+    ;; Switch to the dotfiles project
+    (projectile-switch-project-by-name expanded-dir)
+    ;; Then find file in that project
+    (projectile-find-file)))
+
 (map! :after evil
       :leader
 
@@ -349,6 +360,13 @@
 
       :desc "Copy buffer name"
       :n "b Y" (lambda () (interactive) (kill-new (buffer-name)))
+
+      ;; Project file navigation overrides
+      :desc "Find file in current project"
+      :n "f p" #'projectile-find-file
+
+      :desc "Find file in dotfiles project"
+      :n "p f" #'my/find-file-in-dotfiles
       )
 
 
