@@ -1,0 +1,94 @@
+{
+  "workbench.colorTheme": "Default Light Modern",
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "redhat.telemetry.enabled": true,
+  "tabnine.experimentalAutoImports": true,
+  "explorer.confirmDragAndDrop": false,
+  "dbcode.connections": [],
+  "dbcode.history.enabled": true,
+  "dbcode.resultLocation": "below",
+  "workbench.editorAssociations": {
+    "*.copilotmd": "vscode.markdown.preview.editor",
+    "*.pq": "default"
+  },
+  "git.blame.editorDecoration.enabled": true,
+  "notebook.output.textLineLimit": 400,
+  "git.autofetch": true,
+  "vim.handleKeys": {
+    "<C-k>": false,
+    "<C-f>": false,
+    "<C-h>": false
+  },
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:claude-sonnet-4",
+  "python.analysis.typeCheckingMode": "standard",
+  "python-envs.defaultPackageManager": "ms-python.python:uv",
+  "python.useEnvironmentsExtension": true,
+  "gitlens.views.commitDetails.files.layout": "tree",
+  "jupyter.askForKernelRestart": false,
+  "python.defaultInterpreterPath": "/bin/python",
+  "vs-kubernetes": {
+    "vs-kubernetes.crd-code-completion": "enabled"
+  },
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "projectManager.git.maxDepthRecursion": 2,
+  "projectManager.git.baseFolders": [
+    "/home/iamkarlson/src/work/",
+    "/home/iamkarlson/src/prj/",
+    "/home/iamkarlson/src/dotfiles/"
+  ],
+  "files.autoSave": "afterDelay",
+  "editor.codeActionsOnSave": {},
+  "workbench.iconTheme": "file-icons",
+  "folder-color.pathColors": [
+    {
+      "folderPath": "tests/",
+      "color": "foldercolorizer.color_0066cc"
+    },
+    {
+      "folderPath": "src/",
+      "color": "foldercolorizer.color_336600"
+    }
+  ],
+  "search.useGlobalIgnoreFiles": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "chat.tools.terminal.autoApprove": {
+    "pytest": true,
+    "rm": false,
+    "rmdir": false,
+    "del": false,
+    "kill": false,
+    "curl": false,
+    "wget": false,
+    "eval": false,
+    "chmod": false,
+    "chown": false,
+    "/^Remove-Item\\b/i": false
+  },
+  "diffEditor.ignoreTrimWhitespace": false,
+  "search.useParentIgnoreFiles": true,
+  "chat.agent.maxRequests": 50,
+  "settingsSync.ignoredSettings": ["-dotfiles.targetPath"],
+  "window.title": "${appName} ${profileName} [${rootPath}]${separator}${activeEditorShort}${dirty}",
+  "workbench.settings.applyToAllProfiles": ["window.title"],
+  "remote.autoForwardPortsSource": "hybrid",
+  "vim.useSystemClipboard": true,
+  "workbench.colorCustomizations": {},
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    },
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "workbench.editor.enablePreview": false
+}

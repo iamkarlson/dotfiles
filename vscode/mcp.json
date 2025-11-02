@@ -1,0 +1,24 @@
+{
+  "servers": {
+    "GitLab-MCP": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@zereight/mcp-gitlab"],
+      "env": {
+        "GITLAB_PERSONAL_ACCESS_TOKEN": "${input:gitlab-token}",
+        "GITLAB_READ_ONLY_MODE": "true"
+      }
+    },
+    "github": {
+      "url": "https://api.githubcopilot.com/mcp/"
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "gitlab-token",
+      "description": "Gitlab Token to read API",
+      "password": true
+    }
+  ]
+}
