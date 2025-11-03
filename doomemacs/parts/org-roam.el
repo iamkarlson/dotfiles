@@ -332,8 +332,11 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
   ;; Only enable git-auto-commit-mode if we're in the braindb project
   (when (and (buffer-file-name)
              (string-match-p (expand-file-name org-roam-directory) 
-                           (expand-file-name (buffer-file-name))))
-    (git-auto-commit-mode 1))
+                             (expand-file-name (buffer-file-name))))
+    ;; Before here was auto-commit for notes for faster syncing with braindb
+    ;; but it is soooo bad.
+    ;; (git-auto-commit-mode 1))
+    (git-auto-commit-mode 0))
   (visual-fill-column-mode 1)
   (visual-line-mode 1)
   ;;(print "hook added")
@@ -352,9 +355,9 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
 
 
 (defun my-auto-commit-message (filename)
-    "Specify that my commit is a work in progress"
-    (concat "braindb connect from " (system-name) ". file: " (gac-relative-file-name filename))
-    )
+  "Specify that my commit is a work in progress"
+  (concat "braindb connect from " (system-name) ". file: " (gac-relative-file-name filename))
+  )
 
 (with-eval-after-load 'git-auto-commit-mode
   (setq gac-default-message #'my-auto-commit-message
