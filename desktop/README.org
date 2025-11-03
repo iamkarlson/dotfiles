@@ -1,0 +1,290 @@
+#+TITLE: Desktop Environment Settings Cheatsheet
+#+AUTHOR: iamkarlson
+#+DATE: 2025-11-03
+
+`nwg-look` - should do the trick
+
+* Theme Settings
+
+** GTK Theme
+*** GTK_THEME
+- Sets GTK theme (GTK3/GTK4)
+- Used by: GNOME apps, GTK-based apps (Firefox, Chrome, VSCode with GTK backend)
+- Format: =GTK_THEME=Adwaita:dark= or theme name from =~/.themes= or =/usr/share/themes=
+- Config: =~/.config/gtk-3.0/settings.ini= and =~/.config/gtk-4.0/settings.ini=
+
+*** gtk-application-prefer-dark-theme
+- Enable dark theme preference
+- Set in =settings.ini=: =gtk-application-prefer-dark-theme=1=
+- Used by: All GTK3/GTK4 apps that support dark mode
+
+*** Icon Theme
+- =gtk-icon-theme-name= in =settings.ini=
+- Located in =~/.icons= or =/usr/share/icons=
+
+** QT Theme
+*** QT_QPA_PLATFORMTHEME
+- Sets Qt platform theme integration
+- Common values: =qt5ct=, =qt6ct=, =kde=, =gnome=
+- Used by: Qt5/Qt6 applications (Telegram, qBittorrent, Nextcloud client)
+- Requires: corresponding tool installed (qt5ct/qt6ct)
+
+*** QT_STYLE_OVERRIDE
+- Override Qt widget style
+- Common values: =Adwaita-Dark=, =Breeze=, =Fusion=
+- Used by: All Qt applications
+
+*** QT_QPA_PLATFORM
+- Platform plugin to use
+- Common values: =wayland=, =xcb=, =wayland;xcb= (fallback)
+- When: Running on Wayland (Hyprland) vs X11
+
+** Dark Mode / Color Scheme
+*** color-scheme (CSS/Web)
+- =prefers-color-scheme= media query detection
+- Set via =org.freedesktop.appearance color-scheme= (portal)
+- Used by: Web browsers, Electron apps
+- Values: 0=no preference, 1=dark, 2=light
+
+*** XCURSOR_THEME
+- Cursor theme name
+- Used by: X11 and Wayland applications
+- Located in =~/.icons= or =/usr/share/icons=
+
+*** XCURSOR_SIZE
+- Cursor size in pixels
+- Common values: 16, 24, 32, 48
+- When: High DPI displays need larger cursors
+
+* XDG Base Directories
+
+** XDG_CONFIG_HOME
+- User configuration files
+- Default: =~/.config=
+- Used by: Almost all modern Linux applications
+
+** XDG_DATA_HOME
+- User data files
+- Default: =~/.local/share=
+- Used by: Application data, fonts, icons
+
+** XDG_STATE_HOME
+- User state data (logs, history, recent files)
+- Default: =~/.local/state=
+- Used by: Modern apps following XDG spec
+
+** XDG_CACHE_HOME
+- User cache files
+- Default: =~/.cache=
+- Used by: Temporary app data, thumbnails
+
+* XDG User Directories
+
+** XDG_DOWNLOAD_DIR
+- Downloads directory
+- Default: =~/Downloads=
+- Config: =~/.config/user-dirs.dirs=
+- Used by: Browsers, download managers
+
+** XDG_PICTURES_DIR
+- Pictures/screenshots directory
+- Default: =~/Pictures=
+- Used by: Screenshot tools, image viewers, cameras
+
+** XDG_DOCUMENTS_DIR
+- Documents directory
+- Default: =~/Documents=
+- Used by: Office apps, document viewers
+
+** XDG_MUSIC_DIR
+- Music directory
+- Default: =~/Music=
+- Used by: Music players
+
+** XDG_VIDEOS_DIR
+- Videos directory
+- Default: =~/Videos=
+- Used by: Video players, screen recorders
+
+** XDG_DESKTOP_DIR
+- Desktop directory
+- Default: =~/Desktop=
+- Used by: Desktop environments (less relevant on tiling WMs)
+
+** XDG_TEMPLATES_DIR
+- Template files directory
+- Default: =~/Templates=
+
+** XDG_PUBLICSHARE_DIR
+- Public share directory
+- Default: =~/Public=
+
+* Runtime & Session
+
+** XDG_RUNTIME_DIR
+- Runtime files (sockets, named pipes)
+- Default: =/run/user/$UID=
+- When: Current session only, cleared on logout
+- Used by: Wayland compositors, PipeWire, systemd user services
+
+** XDG_SESSION_TYPE
+- Session type
+- Values: =wayland=, =x11=, =tty=
+- Auto-set by: Display manager or compositor
+- Used by: Apps to detect display protocol
+
+** XDG_CURRENT_DESKTOP
+- Current desktop environment
+- Examples: =Hyprland=, =GNOME=, =KDE=
+- Used by: Apps for DE-specific integration
+
+* Display & Graphics
+
+** DISPLAY
+- X11 display server
+- Format: =:0=, =:1=
+- When: Running X11 applications
+
+** WAYLAND_DISPLAY
+- Wayland compositor socket
+- Format: =wayland-0=, =wayland-1=
+- When: Running on Wayland (Hyprland)
+
+** GDK_BACKEND
+- GTK backend preference
+- Values: =wayland=, =x11=, =wayland,x11=
+- When: Force GTK apps to use specific backend
+
+** SDL_VIDEODRIVER
+- SDL video backend
+- Values: =wayland=, =x11=
+- Used by: Games and SDL applications
+
+* Font Configuration
+
+** Fontconfig
+- System: =/etc/fonts/=
+- User: =~/.config/fontconfig/fonts.conf=
+- Cache: =~/.cache/fontconfig/=
+- Used by: Almost all GUI applications
+
+** Font DPI
+- =Xft.dpi= in =~/.Xresources= (X11)
+- Or via compositor settings
+- When: High DPI displays
+
+* Application-Specific
+
+** Firefox
+- Theme: Follows GTK theme if configured
+- Settings: =about:config= → =widget.content.gtk-theme-override=
+
+** Chromium/Chrome
+- Flags: =--enable-features=WebUIDarkMode= or =--force-dark-mode=
+- Follows: GTK theme via =--gtk-version=
+
+** Electron Apps (VSCode, Discord, etc.)
+- Usually follow: GTK theme and color-scheme portal
+- Flags: =--enable-features=WebRTCPipeWireCapturer= for Wayland screenshare
+
+** Java Applications
+- =_JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=on -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel=
+- Theme: Can follow GTK via LAF setting
+
+** Steam
+- Native: May need =--force-x11= or Qt theme config
+- Proton games: Check =DXVK_HUD=, =MANGOHUD=
+
+* Desktop Files
+
+** Location
+- System: =/usr/share/applications/=
+- User: =~/.local/share/applications/=
+- This repo: =~/src/dotfiles/desktop/=
+
+** Override System .desktop Files
+- Copy to =~/.local/share/applications/= and modify
+- Takes precedence over system files
+
+** Important Fields
+- =Exec=: Command to run
+- =Icon=: Icon name or path
+- =Categories=: Menu categories
+- =Terminal=: true/false
+- =StartupWMClass=: Window class for grouping
+
+* Portal & Integration
+
+** xdg-desktop-portal
+- Service: Provides desktop integration APIs
+- Backends: =xdg-desktop-portal-gtk=, =-kde=, =-hyprland=, =-wlr=
+- Used for: File pickers, screenshare, notifications
+- Config: =~/.config/xdg-desktop-portal/=
+
+** D-Bus Settings
+- =org.freedesktop.appearance=: Color scheme preference
+- =org.gnome.desktop.interface=: GTK theme settings
+- Query: =busctl --user get-property org.freedesktop.portal.Desktop ...=
+
+* Quick Reference Commands
+
+** Check Current Settings
+#+BEGIN_SRC bash
+# XDG user directories
+xdg-user-dir DOWNLOAD
+xdg-user-dir PICTURES
+
+# GTK theme
+gsettings get org.gnome.desktop.interface gtk-theme
+gsettings get org.gnome.desktop.interface color-scheme
+
+# Current environment
+env | grep -E '(XDG_|QT_|GTK_|WAYLAND_|DISPLAY)'
+#+END_SRC
+
+** Set GTK Theme (via gsettings)
+#+BEGIN_SRC bash
+gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+#+END_SRC
+
+** Reload Desktop Files Database
+#+BEGIN_SRC bash
+update-desktop-database ~/.local/share/applications/
+#+END_SRC
+
+* Priority Order for Theming
+
+1. App-specific config (e.g., Firefox about:config)
+2. Environment variables (=GTK_THEME=, =QT_STYLE_OVERRIDE=)
+3. Config files (=~/.config/gtk-*/settings.ini=, qt5ct/qt6ct)
+4. gsettings/dconf (GNOME settings)
+5. Portal settings (=org.freedesktop.appearance=)
+6. System defaults
+
+* Tips for Hyprland
+
+- Set =XDG_CURRENT_DESKTOP=Hyprland= in Hyprland config
+- Use =xdg-desktop-portal-hyprland= for screenshare
+- Set =QT_QPA_PLATFORM=wayland;xcb= for Qt app compatibility
+- Use =GDK_BACKEND=wayland,x11= for GTK apps
+- Configure =~/.config/xdg-desktop-portal/hyprland-portals.conf=
+
+* Common Issues
+
+** Apps not respecting dark theme
+- Check: Portal color-scheme setting
+- Check: GTK settings.ini has =gtk-application-prefer-dark-theme=1=
+- Check: Qt apps need qt5ct/qt6ct configured
+
+** Wrong file picker
+- Issue: App using wrong desktop portal backend
+- Fix: Configure =~/.config/xdg-desktop-portal/portals.conf=
+
+** Icons not showing
+- Check: Icon theme installed in =~/.icons= or =/usr/share/icons=
+- Run: =gtk-update-icon-cache ~/.icons/THEME_NAME/=
+
+** Cursor theme inconsistent
+- Set both =XCURSOR_THEME= env var AND GTK/Qt settings
+- Hyprland: Set =env = XCURSOR_THEME,theme_name= in config
