@@ -129,7 +129,9 @@
 (setq-default treemacs-follow-after-init t)
 (setq-default treemacs-project-follow-cleanup t)
 
-(setq-default projectile-switch-project-action 'projectile-dired)
+;; Open dired when switching projects
+;; But it seems to be broken in Doom Emacs currently
+;;(setq-default projectile-switch-project-action 'projectile-dired)
 
 
 (defun my-evil-disable-remove-spaces ()
@@ -367,6 +369,12 @@
 
       :desc "Find file in dotfiles project"
       :n "p f" #'my/find-file-in-dotfiles
+
+      :desc "Copy project name"
+      :n "p y" (lambda () (interactive) (kill-new (projectile-project-name)))
+
+      :desc "Copy project path"
+      :n "p Y" (lambda () (interactive) (kill-new (projectile-project-root)))
       )
 
 
