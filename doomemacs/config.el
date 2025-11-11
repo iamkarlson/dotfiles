@@ -225,6 +225,9 @@
 (add-hook! 'lsp-mode-hook #'my/disable-mouse-hook)
 (add-hook! 'python-mode-hook #'my/disable-mouse-hook)
 (add-hook! 'magit-mode-hook #'my/disable-mouse-hook)
+(add-hook! 'python-ts-mode-hook #'my/disable-mouse-hook)
+
+(setq-default track-mouse nil)
 
 ;; Enable proper mouse support for window operations
 (setq mouse-autoselect-window nil)
@@ -232,7 +235,7 @@
 (setq mouse-drag-and-drop-region nil)
 
 ;; Enable mouse tracking for drag operations
-(setq track-mouse t)
+;;(setq track-mouse t)
 
 ;; Ensure window divider mouse operations work properly
 (setq window-divider-default-right-width 2)
