@@ -318,6 +318,11 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
                               :tag "Emacs"
                               :order 51)
 
+                             ;; Catch-all for untagged TODOs
+                             (:name "Other TODOs"
+                              :anything t
+                              :order 100)
+
                              ;; Discard
                              (:discard (:tag ("Chore" "Routine" "Daily")))))
                           )
