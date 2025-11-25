@@ -54,20 +54,20 @@ NAME is compared with the last directory of each project path."
 
 ;; ---- dashboard override --------------------------------------------------
 
-(after! doom-dashboard
-  ;; *Replace* the menu, don’t append
-  (setq! +doom-dashboard-menu-sections
-         '(("Braindb → Today"
-            :action (lambda! (+my/goto-project! "braindb")
-                      (org-roam-dailies-find-today)))
-           ("Braindb → Weekly"
-            :action (lambda! (+my/goto-project! "braindb")
-                      (+my/org-roam-weekly)))
-           ("Dotfiles (Dired)"
-            :action (lambda! (+my/goto-project! "dotfiles")
-                      (dired (projectile-project-root))))))
+;; (after! doom-dashboard
+;;   ;; *Replace* the menu, don’t append
+;;   (setq! +doom-dashboard-menu-sections
+;;          '(("Braindb → Today"
+;;             :action (lambda! (+my/goto-project! "braindb")
+;;                       (org-roam-dailies-find-today)))
+;;            ("Braindb → Weekly"
+;;             :action (lambda! (+my/goto-project! "braindb")
+;;                       (+my/org-roam-weekly)))
+;;            ("Dotfiles (Dired)"
+;;             :action (lambda! (+my/goto-project! "dotfiles")
+;;                       (dired (projectile-project-root))))))
 
-  ;; Don’t rely on Doom’s default widget (we nuke & re-add)
-  (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
-  (add-hook    '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
-  )
+;;   ;; Don’t rely on Doom’s default widget (we nuke & re-add)
+;;   (remove-hook '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+;;   (add-hook    '+doom-dashboard-functions #'doom-dashboard-widget-shortmenu)
+;;   )

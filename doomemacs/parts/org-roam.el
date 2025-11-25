@@ -18,6 +18,139 @@
   (setq org-agenda-inhibit-startup t)
   (setq org-agenda-files (directory-files-recursively (file-truename org-directory) "\\.org$"))
   (setq warning-suppress-types (append warning-suppress-types '((org-element-cache))))
+
+  ;; Customize agenda format to remove category from prefix
+  (setq org-agenda-prefix-format
+        '((agenda . " %i %?-12t% s")
+          (todo . " ")
+          (tags . " %i ")
+          (search . " %i ")))
+
+  ;; Helper function to calculate display length (strips org-mode link syntax)
+  (defun my/org-display-length (text)
+    "Calculate the display length of TEXT, removing org-mode link syntax."
+    (length (replace-regexp-in-string
+             "\\[\\[\\([^]]+\\)\\]\\[\\([^]]+\\)\\]\\]" "\\2"
+             (replace-regexp-in-string
+              "\\[\\[\\([^]]+\\)\\]\\]" "\\1"
+              text))))
+
+  ;; Add category at the end in brackets with dynamic column layout and soft-wrapping
+  (defun my/org-agenda-add-category-suffix ()
+    "Format agenda lines with 3 columns: TODO text | tags | [category].
+Dynamic width allocation with proportions (variable, 1, 2) and minimum 30 chars each.
+Wraps TODO text that exceeds text-width to continuation lines with indentation."
+    (save-excursion
+      (goto-char (point-min))
+      (let* ((window-width (window-width))
+             ;; Calculate column widths: text (variable), tags (1 part), category (2 parts)
+             (min-col-width 30)
+             (tags-width (max min-col-width (/ window-width 8)))     ; ~1 part
+             (category-width (max min-col-width (/ window-width 4))) ; ~2 parts
+             (text-width (max min-col-width
+                              (- window-width tags-width category-width 10)))) ; variable part, 10 for padding
+
+        (while (not (eobp))
+          (when (org-get-at-bol 'org-marker)
+            (let* ((marker (org-get-at-bol 'org-marker))
+                   (category (with-current-buffer (marker-buffer marker)
+                               (save-excursion
+                                 (goto-char marker)
+                                 (org-get-category))))
+                   (tags (org-get-at-bol 'tags))
+                   (line-start (line-beginning-position))
+                   (line-end (line-end-position))
+                   (line-text (buffer-substring line-start line-end))
+                   (tags-str (if tags (mapconcat 'identity tags ":") ""))
+                   (category-str (if category (format "[%s]" category) "")))
+
+              ;; Remove existing content and rebuild with column layout
+              (delete-region line-start line-end)
+              (goto-char line-start)
+
+              ;; Extract TODO state and text (remove tags if present in original line)
+              (let* ((clean-text (replace-regexp-in-string " +:[[:alnum:]_@#%:]+: *$" "" line-text))
+                     (text-len (my/org-display-length clean-text)))
+
+                ;; Check if text needs wrapping
+                (if (> text-len text-width)
+                    ;; Text is too long - wrap it with indentation
+                    (let* (;; Split by words but keep org-mode links as atomic units
+                           (words (split-string
+                                   ;; Replace links with placeholders, split, then restore
+                                   ;; This prevents splitting links across lines
+                                   (replace-regexp-in-string
+                                    "\\[\\[[^]]+\\]\\(?:\\[[^]]+\\]\\)?\\]"
+                                    (lambda (match)
+                                      ;; Replace spaces in links with non-breaking spaces temporarily
+                                      (replace-regexp-in-string " " "\u00a0" match))
+                                    clean-text)))
+                           (current-line "")
+                           (lines-list nil)
+                           (indent-str "  ")) ; 2-space indent for continuation lines
+
+                      ;; Break text into lines respecting word boundaries
+                      (dolist (word words)
+                        (let* (;; Restore regular spaces in links
+                               (word-fixed (replace-regexp-in-string "\u00a0" " " word))
+                               (test-line (if (string-empty-p current-line)
+                                              word-fixed
+                                            (concat current-line " " word-fixed))))
+                          (if (> (my/org-display-length test-line) text-width)
+                              ;; Start new line
+                              (progn
+                                (push current-line lines-list)
+                                (setq current-line word-fixed))
+                            ;; Add to current line
+                            (setq current-line test-line))))
+                      ;; Don't forget the last line
+                      (when (not (string-empty-p current-line))
+                        (push current-line lines-list))
+
+                      ;; Insert first line with columns
+                      (let* ((first-line (car (reverse lines-list)))
+                             ;; Calculate display length for padding
+                             (first-line-display-len (my/org-display-length first-line)))
+                        (insert first-line)
+                        ;; Pad to align tags column based on display length
+                        (when (< first-line-display-len text-width)
+                          (insert (make-string (- text-width first-line-display-len) ?\s)))
+                        ;; Insert tags column
+                        (insert " ")
+                        (insert (propertize
+                                 (truncate-string-to-width tags-str tags-width nil ?\s)
+                                 'face 'org-tag))
+                        ;; Insert category column
+                        (insert " ")
+                        (insert (propertize
+                                 (truncate-string-to-width category-str category-width nil ?\s)
+                                 'face 'org-agenda-structure)))
+
+                      ;; Insert continuation lines with indentation (no columns)
+                      (dolist (line (cdr (reverse lines-list)))
+                        (insert "\n" indent-str line)))
+
+                  ;; Text fits - use original logic
+                  (progn
+                    (insert clean-text)
+                    ;; Pad to align tags column based on display length
+                    (when (< text-len text-width)
+                      (insert (make-string (- text-width text-len) ?\s)))
+                    ;; Insert tags column
+                    (insert " ")
+                    (insert (propertize
+                             (truncate-string-to-width tags-str tags-width nil ?\s)
+                             'face 'org-tag))
+                    ;; Insert category column
+                    (insert " ")
+                    (insert (propertize
+                             (truncate-string-to-width category-str category-width nil ?\s)
+                             'face 'org-agenda-structure)))))))
+
+          (forward-line 1)))))
+
+  (add-hook 'org-agenda-finalize-hook 'my/org-agenda-add-category-suffix)
+
   (setq org-todo-keywords
         '((sequence
            "TODO(t)"  ; A task that needs doing & is ready to do
@@ -108,6 +241,20 @@
 
   ;; Optional: stop Org from nagging about vanished agenda files
   (setq org-agenda-skip-unavailable-files t)
+
+  ;; Use file title as category in agenda (without modifying files)
+  (defun my/org-agenda-get-category ()
+    "Get category from #+TITLE or #+CATEGORY, falling back to filename."
+    (or (cadar (org-collect-keywords '("CATEGORY")))
+        (cadar (org-collect-keywords '("TITLE")))
+        (file-name-sans-extension (file-name-nondirectory (buffer-file-name)))))
+
+  ;; Override the default category function
+  (advice-add 'org-get-category :around
+              (lambda (orig-fun &rest args)
+                (if (derived-mode-p 'org-mode)
+                    (my/org-agenda-get-category)
+                  (apply orig-fun args))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -318,8 +465,20 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
                               :tag "Emacs"
                               :order 51)
 
+                             ;; Daily notes
+                             (:name "Daily Notes"
+                              :file-path "daily/"
+                              :order 60)
+
+                             ;; Catch-all for untagged TODOs
+                             (:name "Other TODOs"
+                              :anything t
+                              :order 100)
+
                              ;; Discard
-                             (:discard (:tag ("Chore" "Routine" "Daily")))))
+                             ;;(:discard (:tag ("Chore" "Routine" "Daily")))
+                             )
+                           )
                           )
                          )
                      )
@@ -331,7 +490,7 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
 (defun +my-org-mode-settings ()
   ;; Only enable git-auto-commit-mode if we're in the braindb project
   (when (and (buffer-file-name)
-             (string-match-p (expand-file-name org-roam-directory) 
+             (string-match-p (expand-file-name org-roam-directory)
                              (expand-file-name (buffer-file-name))))
     ;; Before here was auto-commit for notes for faster syncing with braindb
     ;; but it is soooo bad.
@@ -348,7 +507,8 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
 (add-hook! 'org-agenda-mode-hook
   (defun +my-org-agenda-settings ()
     ;;(setq visual-fill-column-width 200) ;; Turn off visual-fill-column-mode
-    (visual-line-mode -1)        ;; Turn off visual-line-mode (word-wrap)
+    (visual-line-mode 1)         ;; Enable visual-line-mode for soft wrapping
+    (setq truncate-lines nil)    ;; Allow lines to wrap instead of truncating
     (evil-local-mode -1)         ;; Turn off evil-mode locally in the buffer
     )
   )
