@@ -84,8 +84,8 @@ ln_file "$dotfiles/git/global.gitignore" "$target/.gitignore"
 
 mkdir -p $config/onedrive
 
-ln_file $dotfiles/onedrive.config $config/onedrive/config
-ln_file $dotfiles/sync_list.config $config/onedrive/sync_list
+ln_file $dotfiles/onedrive/onedrive.config $config/onedrive/config
+ln_file $dotfiles/onedrive/sync_list.config $config/onedrive/sync_list
 
 
 # Zsh settings
