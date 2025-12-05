@@ -4,3 +4,6 @@ eval "$(pyenv init -)"
 
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# Ruby gems
+export PATH="$(ruby -e 'puts Gem.user_dir')/bin:$PATH"
