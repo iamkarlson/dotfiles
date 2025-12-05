@@ -191,6 +191,17 @@ ln_directory $dotfiles/workstyle $config/workstyle
 
 ln_directory $dotfiles/hyprland $config/hypr
 
+# Thunar file manager configuration
+
+mkdir -p $config/xfce4/xfconf/xfce-perchannel-xml
+mkdir -p $config/Thunar
+mkdir -p $config/gtk-3.0
+
+ln_file $dotfiles/thunar/thunar.xml $config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml
+ln_file $dotfiles/thunar/bookmarks $config/gtk-3.0/bookmarks
+ln_file $dotfiles/thunar/uca.xml $config/Thunar/uca.xml
+ln_file $dotfiles/thunar/accels.scm $config/Thunar/accels.scm
+
 # VSCode settings
 
 ln_file $dotfiles/vscode/settings.json $config/Code/User/settings.json
