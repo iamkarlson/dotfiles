@@ -1,5 +1,4 @@
 {
-  "workbench.colorTheme": "Default Light Modern",
   "[jsonc]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
@@ -90,5 +89,6 @@
   "[github-actions-workflow]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
-  "workbench.editor.enablePreview": false
+  "workbench.editor.enablePreview": false,
+  "editor.lineNumbers": "relative"
 }
