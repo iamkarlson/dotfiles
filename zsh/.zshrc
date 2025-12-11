@@ -158,6 +158,14 @@ autoload -Uz promptinit && promptinit && prompt powerlevel10k
 # set emacs key bindings
 bindkey -e
 
+# Widget to copy current command line to clipboard
+copy-command-line() {
+    echo -n "$BUFFER" | wl-copy
+    zle -M "Command copied to clipboard"
+}
+zle -N copy-command-line
+bindkey '^[x' copy-command-line
+
 source ~/.zsh/aliases.zshrc
 
 
