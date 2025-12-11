@@ -90,5 +90,6 @@
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
   "workbench.editor.enablePreview": false,
-  "editor.lineNumbers": "relative"
+  "editor.lineNumbers": "relative",
+  "markdown-pdf.displayHeaderFooter": false
 }
