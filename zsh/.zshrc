@@ -1,6 +1,18 @@
 # first of all, let's roll
 neofetch | lolcat -v 1 -
 
+# Auto-start tmux for new shells
+# Skip if: already in tmux, running in non-interactive mode, or in an embedded terminal
+if [[ -z "$TMUX" ]] && [[ -o interactive ]]; then
+    # Generate unique session name based on current directory
+    local session_base=$(basename "$PWD" | sed 's/[^a-zA-Z0-9_-]/_/g')
+    local session_suffix=$(LC_ALL=C tr -dc 'a-z0-9' < /dev/urandom | head -c 4)
+    local session_name="${session_base}_${session_suffix}"
+
+    # Start new tmux session
+    exec tmux new-session -s "$session_name"
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
