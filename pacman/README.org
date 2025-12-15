@@ -1,3 +1,13 @@
 
 
 [[elisp:(find-file-other-window "/sudo::/etc/pacman.conf")][pacman.conf (sudo)]]
+
+
+For Steam libraries from Damglador's repository, add the following lines to your `/etc/pacman.conf` file to download prebuilt libraries:
+
+#+begin_src ini
+[steam-libs]
+SigLevel = Optional DatabaseOptional
+Server = https://damglador.github.io/$repo/$arch/
+
+#+end_src
