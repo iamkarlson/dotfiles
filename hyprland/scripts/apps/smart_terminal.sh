@@ -31,10 +31,9 @@ launch_from_process_cwd() {
         local process_name=$(ps -p "$child_pid" -o comm= 2>/dev/null)
         if [[ "$process_name" == "tmux"* ]]; then
             echo "$(date): Detected tmux, using tmux to get current directory" >> "$LOGFILE"
-            # Use tmux to get the current pane's working directory and running command
+            # Use tmux to get the current pane's working directory
             app_cwd=$(tmux display-message -p '#{pane_current_path}' 2>/dev/null)
-            local current_cmd=$(tmux display-message -p '#{pane_current_command}' 2>/dev/null)
-            echo "$(date): Tmux pane CWD: '$app_cwd', running: '$current_cmd'" >> "$LOGFILE"
+            echo "$(date): Tmux pane CWD: '$app_cwd'" >> "$LOGFILE"
         else
             # Direct shell, use its CWD
             target_pid="$child_pid"
