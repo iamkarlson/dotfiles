@@ -20,13 +20,32 @@ launch_from_process_cwd() {
     
     # For Alacritty, get shell child process CWD; for others, use app's own CWD
     local target_pid="$app_pid"
+    local app_cwd=""
+
     if [[ "$app_name" == "alacritty" ]]; then
-        target_pid=$(pgrep -P "$app_pid" | head -1)
-        echo "$(date): Shell PID: '$target_pid'" >> "$LOGFILE"
+        # Get first child (might be tmux or shell directly)
+        local child_pid=$(pgrep -P "$app_pid" | head -1)
+        echo "$(date): First child PID: '$child_pid'" >> "$LOGFILE"
+
+        # Check if the child is tmux
+        local process_name=$(ps -p "$child_pid" -o comm= 2>/dev/null)
+        if [[ "$process_name" == "tmux"* ]]; then
+            echo "$(date): Detected tmux, using tmux to get current directory" >> "$LOGFILE"
+            # Use tmux to get the current pane's working directory and running command
+            app_cwd=$(tmux display-message -p '#{pane_current_path}' 2>/dev/null)
+            local current_cmd=$(tmux display-message -p '#{pane_current_command}' 2>/dev/null)
+            echo "$(date): Tmux pane CWD: '$app_cwd', running: '$current_cmd'" >> "$LOGFILE"
+        else
+            # Direct shell, use its CWD
+            target_pid="$child_pid"
+            app_cwd=$(readlink -f "/proc/$target_pid/cwd" 2>/dev/null)
+            echo "$(date): Shell PID: '$target_pid'" >> "$LOGFILE"
+            echo "$(date): Shell CWD: '$app_cwd'" >> "$LOGFILE"
+        fi
+    else
+        app_cwd=$(readlink -f "/proc/$target_pid/cwd" 2>/dev/null)
+        echo "$(date): $app_name CWD: '$app_cwd'" >> "$LOGFILE"
     fi
-    
-    local app_cwd=$(readlink -f "/proc/$target_pid/cwd" 2>/dev/null)
-    echo "$(date): $app_name CWD: '$app_cwd'" >> "$LOGFILE"
     
     if [[ -n "$app_cwd" && -d "$app_cwd" ]]; then
         alacritty --working-directory "$app_cwd" &
