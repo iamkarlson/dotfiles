@@ -579,28 +579,20 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
            :target (file "thought/%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
           ;; Technology or tool
-          ("t" "technology" plain "* %?"
-           :if-new (file+head
-                    "%<%Y%m%d%H%M%S>-${slug}.org"
-                    ,(my/read-file (concat org-roam-directory "templates/technology.org"))
-                    )
+          ("t" "technology" plain
+           ,(my/read-file (concat org-roam-directory "templates/technology.org"))
            :target (file "%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
           ;; Area
-          ("a" "area" plain "* %?"
-           :if-new (file+head
-                    "area/%<%Y%m%d%H%M%S>-${slug}.org"
-                    ,(my/read-file (concat org-roam-directory "templates/area.org")))
+          ("a" "area" plain
+           ,(my/read-file (concat org-roam-directory "templates/area.org"))
            :target (file "area/%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
 
           ;; Project
-          ("p" "project" plain "* %?"
-           :if-new (file+head
-                    "projects/%<%Y%m%d%H%M%S>-${slug}.org"
-                    ,(my/read-file (concat org-roam-directory "templates/project.org"))
-                    )
-           :target (file "%<%Y%m%d%H%M%S>-${slug}.org")
+          ("p" "project" plain
+           ,(my/read-file (concat org-roam-directory "templates/project.org"))
+           :target (file "projects/%<%Y%m%d%H%M%S>-${slug}.org")
            :unnarrowed t)
           )
         ;; This is daily template
