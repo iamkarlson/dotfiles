@@ -7,7 +7,14 @@ if [[ -z "$TMUX" ]] && [[ -o interactive ]]; then
     # Generate unique session name based on current directory
     local session_base=$(basename "$PWD" | sed 's/[^a-zA-Z0-9_-]/_/g')
     local session_suffix=$(LC_ALL=C tr -dc 'a-z0-9' < /dev/urandom | head -c 4)
-    local session_name="${session_base}_${session_suffix}"
+
+    # If SSH session, prefix with hostname
+    if [[ -n "$SSH_CONNECTION" ]]; then
+        local remote_host=$(hostname -s | sed 's/[^a-zA-Z0-9_-]/_/g')
+        local session_name="${remote_host}_${session_base}_${session_suffix}"
+    else
+        local session_name="${session_base}_${session_suffix}"
+    fi
 
     # Start new tmux session
     exec tmux new-session -s "$session_name"
