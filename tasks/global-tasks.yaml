@@ -36,7 +36,7 @@ tasks:
   select-and-run:
     desc: "Interactively select and run a global task"
     dir: "{{.USER_WORKING_DIR}}"
-    silent: false
+    silent: true
     cmds:
       - |
         # Get all tasks and filter for global ones
@@ -424,3 +424,9 @@ tasks:
     preconditions:
       - sh: 'ssh beryl "echo \$HOST"'
         msg: "Target host is not reachable, halting sync"
+
+  docker:compose:stop-all:
+    desc: "Stops all docker compose projects"
+    silent: false
+    cmds:
+      - docker compose ls -q | xargs -r -I {} docker compose -p {} down
