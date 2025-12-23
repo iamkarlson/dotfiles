@@ -105,7 +105,7 @@ if [[ "$CURRENT_WINDOW" == "emacs" ]]; then
     echo "$(date): Launching alacritty with --working-directory '$EMACS_DIR'" >> "$LOGFILE"
     alacritty --working-directory "$EMACS_DIR" &
 
-elif [[ "$CURRENT_WINDOW" == "Code" ]]; then
+elif [[ "$CURRENT_WINDOW" == "Code" ]] || [[ "$CURRENT_WINDOW" == "code" ]]; then
     echo "$(date): Launching terminal from vscode" >> "$LOGFILE"
     
     # Get VSCode workspace from window title [~/path/to/workspace]
