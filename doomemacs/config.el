@@ -139,31 +139,6 @@
   (setq-local evil-maybe-remove-spaces nil))
 
 
-(after! evil
-  ;;
-  ;; kill two birds with one stone using remap: arrow keys and h,j,k,l
-  (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-  (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-  (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-  (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-  (define-key evil-normal-state-map (kbd "<remap> <evil-backward-char>") 'left-char)
-  (define-key evil-motion-state-map (kbd "<remap> <evil-forward-char>") 'right-char)
-  (define-key evil-normal-state-map (kbd "<remap> <evil-backward-char>") 'left-char)
-  (define-key evil-motion-state-map (kbd "<remap> <evil-forward-char>") 'right-char)
-
-  ;; Make movement keys work like they should
-  (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-  (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-  (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-  (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-  ;; Make horizontal movement cross lines
-  (setq-default evil-cross-lines t)
-  (setq-default evil-move-cursor-back nil)
-  (setq-default evil-ex-search-vim-style-regexp nil)
-  (setq-default evil-move-beyond-eol t)
-  (setq-default evil-shift-width 2)
-  (add-hook 'evil-insert-state-entry-hook #'my-evil-disable-remove-spaces)
-  )
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -325,7 +300,6 @@
 
 
 
-                                        ;(global-copilot-mode 1)
 
 
 ;; Custom function to find file in dotfiles project
@@ -339,46 +313,6 @@
     ;; Then find file in that project
     (projectile-find-file)))
 
-(map! :after evil
-      :leader
-
-      :desc "Toggle visual fill column mode"
-      :n "t z" #'visual-fill-column-mode
-
-      :desc "Toggle visual line mode"
-      :n "t x" #'visual-line-mode
-
-      :desc "Toggle links display"
-      :n "t h" #'org-toggle-link-display
-
-      :desc "Toggle images display"
-      :n "t p" #'org-toggle-inline-images
-
-      :desc "Toggle evil mode"
-      :n "t e" #'evil-mode
-
-      :desc "Show project in treemacs"
-      :n "p l" #'treemacs-add-and-display-current-project-exclusively
-
-      :desc "Repeat last substitute"
-      :n "&" #'evil-ex-repeat-substitute
-
-      :desc "Copy buffer name"
-      :n "b Y" (lambda () (interactive) (kill-new (buffer-name)))
-
-      ;; Project file navigation overrides
-      :desc "Find file in current project"
-      :n "f p" #'projectile-find-file
-
-      :desc "Find file in dotfiles project"
-      :n "p f" #'my/find-file-in-dotfiles
-
-      :desc "Copy project name"
-      :n "p y" (lambda () (interactive) (kill-new (projectile-project-name)))
-
-      :desc "Copy project path"
-      :n "p Y" (lambda () (interactive) (kill-new (projectile-project-root)))
-      )
 
 
 

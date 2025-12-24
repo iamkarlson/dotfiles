@@ -53,7 +53,11 @@
 
 (package! i3wm-config-mode)
 (package! gcode-mode)
+
+
 (package! rainbow-mode)
+(package! org-modern)
+(package! rainbow-delimiters)
 
 ;;(package! org-roam)
 ;;(unpin! org-roam)
