@@ -114,7 +114,7 @@
 
 ;;(remove-hook 'doom-first-input-hook #'evil-snipe-mode)
 (setq-default evil-kill-on-visual-paste nil)
-(setq-default evil-respect-visual-line-mode t)
+;; (setq-default evil-respect-visual-line-mode t) ;; Disabled - use actual lines for j/k
 
 
 (menu-bar-mode +1)
