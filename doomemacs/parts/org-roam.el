@@ -38,8 +38,8 @@
   ;; Add category at the end in brackets with dynamic column layout and soft-wrapping
   (defun my/org-agenda-add-category-suffix ()
     "Format agenda lines with 3 columns: TODO text | tags | [category].
-Dynamic width allocation with proportions (variable, 1, 2) and minimum 30 chars each.
-Wraps TODO text that exceeds text-width to continuation lines with indentation."
+        Dynamic width allocation with proportions (variable, 1, 2) and minimum 30 chars each.
+        Wraps TODO text that exceeds text-width to continuation lines with indentation."
     (save-excursion
       (goto-char (point-min))
       (let* ((window-width (window-width))

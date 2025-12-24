@@ -4,22 +4,37 @@
 (map! :map dired-mode-map
       :n "c" #'dired-create-empty-file)
 
-(after! evil
-  ;;
-  ;; kill two birds with one stone using remap: arrow keys and h,j,k,l
+(defun my/evil-use-visual-line-movement ()
+  "Make j/k move by visual lines (wrapped lines) instead of actual lines.
+This is useful for prose editing where long lines wrap."
+  (interactive)
+  (setq evil-respect-visual-line-mode t)
   (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
   (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
   (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
+  (message "Evil movement: using visual lines (j/k move by wrapped lines)"))
+
+(defun my/evil-use-actual-line-movement ()
+  "Make j/k move by actual lines (standard Vim behavior).
+gj/gk will move by visual lines instead."
+  (interactive)
+  (setq evil-respect-visual-line-mode nil)
+  (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") nil)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") nil)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") nil)
+  (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") nil)
+  (message "Evil movement: using actual lines (j/k move by real lines, gj/gk by wrapped)"))
+
+(after! evil
+  ;; Horizontal movement (unchanged)
   (define-key evil-normal-state-map (kbd "<remap> <evil-backward-char>") 'left-char)
   (define-key evil-motion-state-map (kbd "<remap> <evil-forward-char>") 'right-char)
   (define-key evil-normal-state-map (kbd "<remap> <evil-backward-char>") 'left-char)
   (define-key evil-motion-state-map (kbd "<remap> <evil-forward-char>") 'right-char)
-  ;; Make movement keys work like they should
-  (define-key evil-normal-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-  (define-key evil-normal-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line)
-  (define-key evil-motion-state-map (kbd "<remap> <evil-next-line>") 'evil-next-visual-line)
-  (define-key evil-motion-state-map (kbd "<remap> <evil-previous-line>") 'evil-previous-visual-line))
+
+  ;; Use standard Vim behavior by default (j/k = actual lines, gj/gk = visual lines)
+  (my/evil-use-actual-line-movement))
 
 
 (map! :after evil
@@ -30,6 +45,12 @@
 
       :desc "Toggle visual line mode"
       :n "t x" #'visual-line-mode
+
+      :desc "Use visual line movement (j/k for wrapped lines)"
+      :n "t v" #'my/evil-use-visual-line-movement
+
+      :desc "Use actual line movement (j/k for real lines)"
+      :n "t V" #'my/evil-use-actual-line-movement
 
       :desc "Toggle links display"
       :n "t h" #'org-toggle-link-display
