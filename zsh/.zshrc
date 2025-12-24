@@ -2,7 +2,9 @@ echo "[$(date +%T)] Loading zshrc ......"
 
 # Auto-start tmux for new shells
 # Skip if: already in tmux, running in non-interactive mode, or in an embedded terminal
-if [[ -z "$TMUX" ]] && [[ -o interactive ]]; then
+# 
+function do-tmux-magic(){
+
     # Generate unique session name based on current directory
     local session_base=$(basename "$PWD" | sed 's/[^a-zA-Z0-9_-]/_/g')
     local session_suffix=$(LC_ALL=C tr -dc 'a-z0-9' < /dev/urandom | head -c 4)
@@ -17,6 +19,10 @@ if [[ -z "$TMUX" ]] && [[ -o interactive ]]; then
 
     # Start new tmux session
     exec tmux new-session -s "$session_name"
+}
+if [[ -z "$TMUX" ]] && [[ -z "$NO_TMUX" ]] && [[ -o interactive ]]; then
+    do-tmux-magic
+
 fi
 
 
@@ -195,6 +201,7 @@ zle -N copy-command-line
 bindkey '^[x' copy-command-line
 
 source ~/.zsh/aliases.zshrc
+source ~/.zsh/functions.zshrc
 
 
 # # Restore FZF Key bindings
