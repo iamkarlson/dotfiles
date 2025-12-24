@@ -672,33 +672,6 @@ If the file has no #+PROPERTY: ORDERING <n> line, return DEFAULT
 (add-hook 'org-capture-after-finalize-hook 'my/delete-frame-if-no-other)
 
 
-(map! :after evil
-      :desc "Roam Capture"
-      :leader
-      :n "X" #'org-roam-dailies-capture-today
-      :desc "Roam Today"
-      :leader
-      :n "d" #'org-roam-dailies-goto-today
-
-
-      :desc "Open Journal Node"
-      :leader
-      :n "j" (lambda ()
-               (interactive)
-               (let (
-                     (node (org-roam-node-from-title-or-alias "Log journal"))
-                     )
-                 (if node
-                     (org-roam-node-visit node)
-                   (message "journal.org node not found."))))
-
-      )
-
-(map! :after org
-      :map org-mode-map
-      :desc "Insert inactive timestamp"
-      "C-c ." #'org-timestamp-inactive)
-
 
 
 ;; Pomodoro
