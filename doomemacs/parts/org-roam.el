@@ -307,7 +307,12 @@ Wraps TODO text that exceeds text-width to continuation lines with indentation."
                '(eval . (visual-fill-column-mode -1)))
 
 
-  )
+  
+  ;; Add vivaldi to the list of URL schemes org-mode recognizes
+  (add-to-list 'org-link-parameters
+               '("vivaldi"
+                 :follow (lambda (path) (browse-url (concat "vivaldi:" path))))))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
