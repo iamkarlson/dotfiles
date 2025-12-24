@@ -32,6 +32,21 @@ alias task='go-task'
 
 alias poetry_activate='source "$( poetry env info --path )/bin/activate"'
 
+# Smart SSH that replaces current shell with remote tmux
+# Use built-in tmux session switcher (ctrl+b s) once connected
+ssh-join-tmux() {
+  if [[ -z $1 ]]; then
+    echo "Usage: ssh-join-tmux <host> [ssh options]"
+    return 1
+  fi
+
+  # First test without exec to see any errors
+  ssh -t "$@" "tmux attach || tmux new"
+
+  # If ssh succeeded and you want to close the local shell after, uncomment:
+  # exec ssh -t "$@" "tmux attach || tmux new"
+}
+
 # Function to create a notification with the notify-send command
 # parameter $TIME is the time to wait before sending the notification
 ring_the_bell(){
