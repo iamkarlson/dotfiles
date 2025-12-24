@@ -1,9 +1,10 @@
-# first of all, let's roll
-neofetch | lolcat -v 1 -
+echo "[$(date +%T)] Loading zshrc ......"
 
 # Auto-start tmux for new shells
 # Skip if: already in tmux, running in non-interactive mode, or in an embedded terminal
-if [[ -z "$TMUX" ]] && [[ -o interactive ]]; then
+# 
+function do-tmux-magic(){
+
     # Generate unique session name based on current directory
     local session_base=$(basename "$PWD" | sed 's/[^a-zA-Z0-9_-]/_/g')
     local session_suffix=$(LC_ALL=C tr -dc 'a-z0-9' < /dev/urandom | head -c 4)
@@ -18,14 +19,12 @@ if [[ -z "$TMUX" ]] && [[ -o interactive ]]; then
 
     # Start new tmux session
     exec tmux new-session -s "$session_name"
+}
+if [[ -z "$TMUX" ]] && [[ -z "$NO_TMUX" ]] && [[ -o interactive ]]; then
+    do-tmux-magic
+
 fi
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
 export TERM="xterm-256color"
 unsetopt beep
@@ -101,6 +100,22 @@ INFOPATH=$HOME/.local/share/info:$INFOPATH
 
 
 ZSH_DISABLE_COMPFIX=true
+
+################################################################################
+# powerline10k settings
+################################################################################
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
 ################################################################################
 # Binaries, program settings, and other stuff that really goes unsorted
@@ -186,6 +201,7 @@ zle -N copy-command-line
 bindkey '^[x' copy-command-line
 
 source ~/.zsh/aliases.zshrc
+source ~/.zsh/functions.zshrc
 
 
 # # Restore FZF Key bindings
@@ -201,10 +217,15 @@ source ~/.zsh/aliases.zshrc
 # autoenv settings
 # needs to go after plugins, because it overrides `cd`
 #export AUTOENV_ENV_FILENAME=.autoenv
-#export AUTOENV_FILE_ENTER=.autoenv.zsh
+#export AUTOENV_FILE_ENTER=.autoenv.zsh"
+
+
+# Enable
 #export AUTOENV_AUTH_FILE=.autoenv
 
 source /usr/share/nvm/init-nvm.sh
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+echo "[$(date +%T)] Current .zshrc fully loaded!!!"
+
+clear
