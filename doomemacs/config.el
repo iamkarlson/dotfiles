@@ -75,9 +75,7 @@
 (add-hook! 'magit-mode-hook
   (defun +my-markdown-mode-settings ()
     (evil-mode nil)
-    (visual-line-mode 1)
-    )
-  )
+    (visual-line-mode 1)))
 
 
 ;;(setq-default visual-line-mode t)
@@ -268,10 +266,8 @@
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (dolist (f
-         (file-expand-wildcards (expand-file-name "parts/*.el" doom-user-dir))
-         )
-  (load! f)
-  )
+         (file-expand-wildcards (expand-file-name "parts/*.el" doom-user-dir)))
+  (load! f))
 
 
 
@@ -293,7 +289,7 @@
 
   :config
   (add-to-list 'copilot-indentation-alist '(prog-mode 2))
-  (add-to-list 'copilot-indentation-alist '(org-mode 2))
+  ;;(add-to-list 'copilot-indentation-alist '(org-mode 2))
   (add-to-list 'copilot-indentation-alist '(text-mode 2))
   (add-to-list 'copilot-indentation-alist '(yaml-mode 2))
   (add-to-list 'copilot-indentation-alist '(emacs-lisp-mode 2)))
