@@ -27,14 +27,30 @@ gj/gk will move by visual lines instead."
   (message "Evil movement: using actual lines (j/k move by real lines, gj/gk by wrapped)"))
 
 (after! evil
-  ;; Horizontal movement (unchanged)
+  ;; Horizontal movement - use visual character movement for both states
   (define-key evil-normal-state-map (kbd "<remap> <evil-backward-char>") 'left-char)
-  (define-key evil-motion-state-map (kbd "<remap> <evil-forward-char>") 'right-char)
-  (define-key evil-normal-state-map (kbd "<remap> <evil-backward-char>") 'left-char)
+  (define-key evil-normal-state-map (kbd "<remap> <evil-forward-char>") 'right-char)
+  (define-key evil-motion-state-map (kbd "<remap> <evil-backward-char>") 'left-char)
   (define-key evil-motion-state-map (kbd "<remap> <evil-forward-char>") 'right-char)
 
   ;; Use standard Vim behavior by default (j/k = actual lines, gj/gk = visual lines)
   (my/evil-use-actual-line-movement))
+;; Context-aware org-mode navigation using cmds!
+(map! :after evil-org
+      :map evil-org-mode-map
+      ;; Smart navigation: on heading start navigate elements, otherwise visual lines
+      :n "gk" (cmds! (org-at-heading-p)
+                     #'org-backward-element
+                     #'evil-previous-visual-line)
+      :n "gj" (cmds! (org-at-heading-p)
+                     #'org-forward-element
+                     #'evil-next-visual-line)
+      ;; Smart RET: on headings cycle, on links follow, otherwise insert newline
+      :n "RET" (cmds! (org-at-heading-p)
+                      #'org-cycle
+                      (org-in-regexp org-link-any-re)
+                      #'org-open-at-point
+                      #'+org/dwim-at-point))
 
 
 (map! :after evil
