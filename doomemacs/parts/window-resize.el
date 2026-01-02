@@ -22,7 +22,7 @@ Recommended values: 2-10")
 ║  _j_ ↓  enlarge height            ║
 ║  _k_ ↑  shrink height             ║
 ║  _=_    balance windows           ║
-║  _q_    quit (or any other key)   ║
+║  _q_/_<escape>_  quit             ║
 ╚═══════════════════════════════════╝
 "
   ("h" (shrink-window-horizontally my/window-resize-increment))
@@ -30,7 +30,8 @@ Recommended values: 2-10")
   ("j" (enlarge-window my/window-resize-increment))
   ("k" (shrink-window my/window-resize-increment))
   ("=" balance-windows)
-  ("q" nil :exit t))
+  ("q" nil :exit t)
+  ("<escape>" nil :exit t))
 
 (defun my/window-resize-mode ()
   "Enter window resize mode using vim-style hjkl navigation.
@@ -41,7 +42,7 @@ This creates a modal interface for resizing windows:
   j - enlarge height (move bottom divider down)
   k - shrink height (move bottom divider up)
   = - balance windows to equal sizes
-  q - quit explicitly (any other key also exits)
+  q/ESC - quit explicitly (any other key also exits)
 
 The resize increment is controlled by `my/window-resize-increment'.
 This mode automatically exits when any non-resize key is pressed."

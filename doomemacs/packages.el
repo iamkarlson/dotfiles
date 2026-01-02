@@ -105,6 +105,8 @@
 
 (package! gnuplot)
 
+;; (package! code-review
+;;   :recipe (:host github :repo "doomelpa/code-review" :files ("*")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; LLM and other shit
@@ -116,3 +118,4 @@
 
 (package! claude-code-ide
   :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
+

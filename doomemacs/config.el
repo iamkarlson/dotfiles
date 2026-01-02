@@ -301,6 +301,17 @@
   (claude-code-ide-emacs-tools-setup)) ; Optionally enable Emacs MCP tools
 
 
+(use-package! code-review
+  :defer t
+  :config
+  (add-hook 'code-review-mode-hook #'emojify-mode)
+  (setq code-review-fill-column 96)
+  (setq code-review-gitlab-host "gitlab.com/api/v4")
+  ;; (setq code-review-auth-login-marker 'forge)
+  (define-key forge-topic-mode-map (kbd "C-c v \"") 'code-review-forge-pr-at-point)
+  (define-key code-review-mode-map (kbd "C-c C-n") 'code-review-comment-jump-next)
+  (define-key code-review-mode-map (kbd "C-c C-p") 'code-review-comment-jump-previous))
+
 
 
 ;; Custom function to find file in dotfiles project
