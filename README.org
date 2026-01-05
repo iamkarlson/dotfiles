@@ -1,3 +1,13 @@
 * iamkarlson dotfiles 😄
 
 Collection of my own settings and preferences
+* Migrations
+** taskfile rename
+#+begin_src shell
+cd ~
+rm taskfile.yaml
+rm private-tasks.taml
+z dotfiles
+mv tasks/private-tasks.yaml tasks/private-tasks.yml
+task create-links
+#+end_src
