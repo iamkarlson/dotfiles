@@ -17,7 +17,7 @@ vars:
 
 includes:
   private:
-    taskfile: ./private-tasks.yaml
+    taskfile: ./private-tasks.yml
     flatten: true
 
 tasks:
