@@ -1,3 +1,12 @@
+# Detect TRAMP (Emacs remote editing) and skip interactive setup
+if [[ "$TERM" == "dumb" ]]; then
+    unsetopt zle
+    unsetopt prompt_cr
+    unsetopt prompt_subst
+    PS1='$ '
+    return
+fi
+
 echo "[$(date +%T)] Loading zshrc ......"
 
 # Auto-start tmux for new shells

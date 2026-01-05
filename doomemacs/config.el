@@ -161,6 +161,14 @@
 
 (setq password-cache-expiry nil)
 
+;; TRAMP configuration for remote file editing
+(after! tramp
+  (setq tramp-default-method "scp")
+  (setq tramp-verbose 1) ; Set to 6 for debugging if issues occur
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+  ;; Prevent TRAMP from hanging on shell output
+  (setq tramp-shell-prompt-pattern "^[^$>\n]*[#$%>] *\\(\[[0-9;]*[a-zA-Z] *\\)*"))
+
 
 (add-hook! 'gcode-mode-hook 'eldoc-mode)
 
