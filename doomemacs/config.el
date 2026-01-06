@@ -131,6 +131,11 @@
 ;; But it seems to be broken in Doom Emacs currently
 ;;(setq-default projectile-switch-project-action 'projectile-dired)
 
+;; Configure dired for case-insensitive sorting
+(after! dired
+  (setq ls-lisp-use-insert-directory-program nil)  ; Use Emacs' ls-lisp instead of system ls
+  (require 'ls-lisp)
+  (setq ls-lisp-ignore-case t))  ; Case-insensitive sorting
 
 (defun my-evil-disable-remove-spaces ()
   "Disable automatic removal of trailing spaces in `evil-mode'."
