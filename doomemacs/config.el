@@ -291,7 +291,7 @@
 (use-package! copilot
   :hook
   (prog-mode . copilot-mode)
-  (org-mode . copilot-mode)
+  ;;(org-mode . copilot-mode)
   :bind (:map copilot-completion-map
               ("<tab>" . 'copilot-accept-completion)
               ("TAB" . 'copilot-accept-completion)

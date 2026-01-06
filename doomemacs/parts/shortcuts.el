@@ -45,8 +45,8 @@ gj/gk will move by visual lines instead."
       :n "gj" (cmds! (org-at-heading-p)
                      #'org-forward-element
                      #'evil-next-visual-line)
-      ;; Smart RET: on headings cycle, on links follow, otherwise insert newline
-      :n "RET" (cmds! (org-at-heading-p)
+      ;; Smart RET: on headings cycle (only at line start), on links follow, otherwise insert newline
+      :n "RET" (cmds! (and (org-at-heading-p) (bolp))
                       #'org-cycle
                       (org-in-regexp org-link-any-re)
                       #'org-open-at-point
