@@ -195,6 +195,9 @@ ln_file $dotfiles/hyprland/hyprland.sh /usr/bin/hyprland_launcher
 sudo chmod +x /usr/bin/hyprland_launcher
 sudo cp $dotfiles/hyprland/hyprland.desktop /usr/share/wayland-sessions
 
+# Vivaldi configuration
+ln_file $dotfiles/vivaldi/vivaldi-stable.conf $config/vivaldi-stable.conf
+
 # link desktop files
 
 # To override default desktop files you can create a .desktop file with the same name in ~/.local/share/applications
