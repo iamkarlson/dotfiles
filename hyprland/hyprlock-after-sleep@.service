@@ -1,0 +1,13 @@
+[Unit]
+Description=Launch Hyprlock before the system sleeps for %i
+#After=sleep.target
+After=systemd-suspend.service systemd-hybrid-sleep.service systemd-hibernate.service
+
+[Service]
+Type=oneshot
+User=%i
+RemainAfterExit=no
+ExecStart=/home/%i/.config/hypr/scripts/lock-resume-on-sleep.sh resume
+
+[Install]
+WantedBy=sleep.target

@@ -4,6 +4,8 @@
 # Because directory links have to be created with root privileges,
 # this file has to be run with root or sudo
 
+set -e
+
 target="$1"
 HOME=$target
 src="$target/src"
@@ -60,6 +62,54 @@ function ln_directory() {
 }
 function delete_link() {
 	[-h $1] && rm -i $1
+}
+
+function copy_user_config() {
+	local source="$1"
+	local destination="$2"
+	local dest_dir
+	dest_dir=$(dirname "$destination")
+
+	echo "copying user config from $source to $destination"
+	mkdir -p "$dest_dir"
+
+	if [ -e "$destination" ]; then
+		log_warning "Destination $destination exists, overwriting"
+	fi
+
+	if [ -d "$source" ]; then
+		cp -r "$source" "$destination" && log_info "Directory $destination copied!"
+	else
+		cp "$source" "$destination" && log_info "File $destination copied!"
+	fi
+
+	echo "# Removing copied user config >>> $destination" >>remove_links.sh
+	echo "[ -d \"$destination\" ] && rm -ri \"$destination\"" >>remove_links.sh
+	echo "[ -f \"$destination\" ] && rm -i \"$destination\"" >>remove_links.sh
+}
+
+function copy_system_config() {
+	local source="$1"
+	local destination="$2"
+	local dest_dir
+	dest_dir=$(dirname "$destination")
+
+	echo "copying system config from $source to $destination"
+	sudo mkdir -p "$dest_dir"
+
+	if sudo test -e "$destination"; then
+		log_warning "Destination $destination exists, overwriting"
+	fi
+
+	if [ -d "$source" ]; then
+		sudo cp -r "$source" "$destination" && log_info "Directory $destination copied!"
+	else
+		sudo cp "$source" "$destination" && log_info "File $destination copied!"
+	fi
+
+	echo "# Removing copied system config >>> $destination" >>remove_links.sh
+	echo "sudo [ -d \"$destination\" ] && sudo rm -ri \"$destination\"" >>remove_links.sh
+	echo "sudo [ -f \"$destination\" ] && sudo rm -i \"$destination\"" >>remove_links.sh
 }
 
 # Create user home .config
@@ -191,9 +241,11 @@ ln_file $dotfiles/vscode/mcp.json $config/Code/User/mcp.json
 # Hyprland config
 #
 
-ln_file $dotfiles/hyprland/hyprland.sh /usr/bin/hyprland_launcher
-sudo chmod +x /usr/bin/hyprland_launcher
-sudo cp $dotfiles/hyprland/hyprland.desktop /usr/share/wayland-sessions
+#copy_system_config "$dotfiles/hyprland/hyprland.sh" "/usr/bin/hyprland_launcher"
+copy_system_config "$dotfiles/hyprland/hyprland.desktop" "/usr/share/wayland-sessions/hyprland.desktop"
+copy_system_config "$dotfiles/hyprland/hyprlock-before-sleep@.service" "/etc/systemd/system/hyprlock-before-sleep@.service"
+copy_system_config "$dotfiles/hyprland/hyprlock-after-sleep@.service" "/etc/systemd/system/hyprlock-after-sleep@.service"
+copy_system_config "$dotfiles/hyprland/scripts/lock-resume-on-sleep.sh" "/root/scripts/lock-resume-on-sleep.sh"
 
 # Vivaldi configuration
 ln_file $dotfiles/vivaldi/vivaldi-stable.conf $config/vivaldi-stable.conf
@@ -207,8 +259,9 @@ for file in $dotfiles/desktop/*; do
 	ln_file $file $target/.local/share/applications/$(basename $file)
 done
 
+mkdir -p $target/.config/systemd/user
 for file in $dotfiles/services/*; do
-	cp $file $target/.config/systemd/user
+	copy_user_config "$file" "$target/.config/systemd/user/$(basename "$file")"
 done
 
 # Thunderbird and Firefox are bastards. There's no way to customize their look without hacking the css files
