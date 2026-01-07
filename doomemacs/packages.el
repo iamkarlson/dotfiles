@@ -115,6 +115,9 @@
 (package! copilot
   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist")))
 
+;; https://github.com/chep/copilot-chat.el
+(package! copilot-chat)
+
 
 (package! claude-code-ide
   :recipe (:host github :repo "manzaltu/claude-code-ide.el"))

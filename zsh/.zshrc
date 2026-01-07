@@ -235,6 +235,7 @@ source ~/.zsh/functions.zshrc
 source /usr/share/nvm/init-nvm.sh
 
 
-echo "[$(date +%T)] Current .zshrc fully loaded!!!"
 
 clear
+
+echo "[$(date +%T)] Wake up, Neo..."

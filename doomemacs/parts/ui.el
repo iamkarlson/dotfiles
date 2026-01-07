@@ -23,9 +23,16 @@
 ;;       doom-variable-pitch-font (font-spec :family "IntelOne Mono" :size 16))
 (setq doom-font (font-spec :family "Hack Nerd Font" :size 15 :weight 'semi-light)
       doom-variable-pitch-font (font-spec :family "Hack Nerd Font" :size 16))
+;; (setq doom-font (font-spec :family "ProFont IIx Nerd Font" :size 15 :weight 'semi-light)
+;;       doom-variable-pitch-font (font-spec :family "ProFont IIx Nerd Font" :size 16))
+;; (setq doom-font (font-spec :family "FiraCode Nerd Font" :size 15 :weight 'normal)
+;;       doom-variable-pitch-font (font-spec :family "Fira Sans" :size 17))
 
-;;(setq doom-symbol-font doom-font)
-;; TEST: 0000000      e5ca 
+
+;;(Setq doom-symbol-font doom-font)
+;; TEST symbols: 0000000      e5ca 
+;; Test ligatures: => === ==== ====> =======> <== <= <=== <==== <=====> != !== !===> <!= <!== <!=== <!==== <!=====> ++ +++ ++++ -- --- ---- ----- ~~~~~~ *** **** ***** /// //// ///// === ====
+;; 
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
