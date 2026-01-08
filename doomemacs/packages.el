@@ -87,6 +87,8 @@
 (package! ob-mermaid)
 (package! journalctl-mode)
 
+(package! editorconfig :recipe (:nonrecursive t))
+
 
 (package! prometheus-mode)
 
