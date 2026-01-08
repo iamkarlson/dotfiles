@@ -18,6 +18,9 @@ tasks/taskfile.env
 remove_links.sh
 
 hyprland/host-specific.conf
-hyprland/hosts/
+hyprland/hypridle.conf
+hyprland/hosts/*.conf
+!hyprland/hosts/*-hypridle.conf
+!hyprland/hosts/setup-hypridle.sh
 
 CLAUDE.md
