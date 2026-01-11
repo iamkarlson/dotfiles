@@ -1,7 +1,7 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=Doom Emacs Client
+Name=Emacs
 Exec=emacsclient -c -a "" -n %F
 Icon=emacs
 Categories=Development;TextEditor;

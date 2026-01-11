@@ -9,7 +9,14 @@ HOME=$target
 src="$target/src"
 dotfiles="$src/dotfiles"
 config="$target/.config"
-clear
+
+read -p "Clear screen? [c] to clean, any other key to continue" -n 1 -r
+echo # (optional) move to a new line
+if [[ $REPLY =~ ^[c]$ ]]; then
+    echo "Clearing screen..."
+    clear
+fi
+
 echo "setting up links from $dotfiles"
 echo "targeting into $target"
 read -p "Are you sure? " -n 1 -r
@@ -17,6 +24,7 @@ echo # (optional) move to a new line
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
 	exit 1
 fi
+
 # 0. links creation functions
 echo "#!/usr/bin/env bash" >remove_links.sh
 echo "#" >>remove_links.sh
@@ -164,7 +172,7 @@ function autocomplete() {
 
 #(ls ~/.autoenv >> /dev/null 2>&1 && echo "autoenv already installed") || git clone git@github.com:hyperupcall/autoenv.git ~/.autoenv
 
-ln_file $dotfiles/user-dirs.dirs $config/user-dirs.dirs
+ln_file $dotfiles/xdg/user-dirs.dirs $config/user-dirs.dirs
 
 ln_directory $dotfiles/paru $config/paru
 
