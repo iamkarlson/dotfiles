@@ -19,6 +19,28 @@
   (setq org-agenda-files (directory-files-recursively (file-truename org-directory) "\\.org$"))
   (setq warning-suppress-types (append warning-suppress-types '((org-element-cache))))
 
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Org-mode header font sizes and weights for visual hierarchy
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  (custom-set-faces!
+    ;; Org header levels with progressive sizing
+    '(org-level-1 :height 1.5 :weight bold)
+    '(org-level-2 :height 1.3 :weight bold)
+    '(org-level-3 :height 1.2 :weight semi-bold)
+    '(org-level-4 :height 1.1 :weight semi-bold)
+    '(org-level-5 :height 1.0)
+    '(org-level-6 :height 1.0)
+    '(org-level-7 :height 1.0)
+    '(org-level-8 :height 1.0)
+    '(org-document-title :height 1.5 :weight bold)
+
+    ;; Keep code blocks and tables monospace (bonus feature)
+    '(org-block :inherit fixed-pitch)
+    '(org-table :inherit fixed-pitch)
+    '(org-code :inherit (shadow fixed-pitch))
+    '(org-verbatim :inherit (shadow fixed-pitch)))
+
   ;; Customize agenda format to remove category from prefix
   (setq org-agenda-prefix-format
         '((agenda . " %i %?-12t% s")

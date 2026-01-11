@@ -1,0 +1,2 @@
+
+[[elisp:(dired "/sudo::/etc/pam.d")][/etc/pam.d (sudo)]]

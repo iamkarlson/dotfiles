@@ -1,4 +1,52 @@
 #!/usr/bin/env bash
+set -e;
+
+log() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - $*"
+}
+
+ensure_runtime_environment() {
+    if [ -z "${XDG_RUNTIME_DIR:-}" ]; then
+        export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+        log "XDG_RUNTIME_DIR not set, defaulting to ${XDG_RUNTIME_DIR}"
+    fi
+
+    if [ -z "${HYPRLAND_INSTANCE_SIGNATURE:-}" ]; then
+        local hypr_dir="${XDG_RUNTIME_DIR}/hypr"
+        local signature=""
+
+        if [ -d "${hypr_dir}" ]; then
+            while IFS= read -r candidate; do
+                [ -d "${candidate}" ] || continue
+                if [ -S "${candidate}/.socket.sock" ]; then
+                    signature=$(basename "${candidate}")
+                    break
+                fi
+            done < <(find "${hypr_dir}" -mindepth 1 -maxdepth 1 -type d -print 2>/dev/null)
+        fi
+
+        if [ -n "${signature}" ]; then
+            export HYPRLAND_INSTANCE_SIGNATURE="${signature}"
+            log "HYPRLAND_INSTANCE_SIGNATURE inferred as ${HYPRLAND_INSTANCE_SIGNATURE}"
+        else
+            log "no Hyprland instance signature found in ${hypr_dir}"
+            exit 0
+        fi
+    fi
+
+    if [ -z "${WAYLAND_DISPLAY:-}" ]; then
+        local wayland_socket
+        wayland_socket=$(find "${XDG_RUNTIME_DIR}" -maxdepth 1 -type s -name 'wayland-*' -print -quit 2>/dev/null || true)
+        if [ -n "${wayland_socket}" ]; then
+            export WAYLAND_DISPLAY="$(basename "${wayland_socket}")"
+            log "WAYLAND_DISPLAY inferred as ${WAYLAND_DISPLAY}"
+        else
+            log "WAYLAND_DISPLAY not set and no wayland sockets found"
+        fi
+    fi
+}
+
+ensure_runtime_environment
 
 # Determining a directory with wallpapers
 CONFIG_DIR="$HOME/.config/wallpaper_cycle"

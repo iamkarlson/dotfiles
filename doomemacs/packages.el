@@ -87,6 +87,8 @@
 (package! ob-mermaid)
 (package! journalctl-mode)
 
+(package! editorconfig :recipe (:nonrecursive t))
+
 
 (package! prometheus-mode)
 
@@ -114,6 +116,9 @@
 
 (package! copilot
   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el" "dist")))
+
+;; https://github.com/chep/copilot-chat.el
+(package! copilot-chat)
 
 
 (package! claude-code-ide
