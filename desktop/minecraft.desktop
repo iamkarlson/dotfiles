@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Categories=Game;ActionGame;AdventureGame;Simulation
+#Exec="/usr/bin/prismlauncher" '--launch' 'hermitcraft-11-world'
+Exec=systemd-run --user --scope -p MemorySwapMax=0 /usr/bin/prismlauncher --launch hermitcraft-11-world
+Name=Minecraft hermitcraft-11
+Icon=/home/iamkarlson/.local/share/PrismLauncher/instances/hermitcraft-11-world/icon.png
