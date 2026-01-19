@@ -222,7 +222,9 @@ function autocomplete() {
 
 #(ls ~/.autoenv >> /dev/null 2>&1 && echo "autoenv already installed") || git clone git@github.com:hyperupcall/autoenv.git ~/.autoenv
 
-ln_file $dotfiles/user-dirs.dirs $config/user-dirs.dirs
+# XDG configuration
+ln_file $dotfiles/xdg/user-dirs.dirs $config/user-dirs.dirs
+ln_file $dotfiles/xdg/mimeapps.list $config/mimeapps.list
 
 ln_directory $dotfiles/paru $config/paru
 

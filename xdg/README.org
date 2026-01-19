@@ -1,0 +1,237 @@
+#+TITLE: XDG Configuration
+#+AUTHOR: iamkarlson
+#+DATE: 2026-01-11
+
+* Overview
+
+This directory contains XDG (X Desktop Group) configuration for managing how applications interact with the system, including:
+- User directories (Desktop, Documents, Downloads, etc.)
+- MIME type associations (which apps open which file types)
+- Default applications for various file types and protocols
+
+* User Directories
+
+Configured in =user-dirs.dirs=:
+
+| XDG Variable          | Path           |
+|-----------------------+----------------|
+| XDG_DESKTOP_DIR       | ~/desktop      |
+| XDG_DOCUMENTS_DIR     | ~/documents    |
+| XDG_DOWNLOAD_DIR      | ~/downloads    |
+| XDG_MUSIC_DIR         | ~/music        |
+| XDG_PICTURES_DIR      | ~/pictures     |
+| XDG_PUBLICSHARE_DIR   | ~/public       |
+| XDG_TEMPLATES_DIR     | ~/templates    |
+| XDG_VIDEOS_DIR        | ~/videos       |
+
+* MIME Type Associations
+
+** Web Browsers & Protocols
+
+| MIME Type / Scheme        | Default App     | Available Apps              | Notes                    |
+|---------------------------+-----------------+-----------------------------+--------------------------|
+| text/html                 | vivaldi-stable  | vivaldi, firefox (removed)  | Web pages                |
+| application/xhtml+xml     | firefox (old)   | vivaldi, firefox (removed)  | XHTML pages              |
+| x-scheme-handler/http     | vivaldi-stable  | vivaldi, firefox (removed)  | HTTP links               |
+| x-scheme-handler/https    | vivaldi-stable  | vivaldi, firefox (removed)  | HTTPS links              |
+| x-scheme-handler/ftp      | -               | vivaldi                     | FTP links (unconfigured) |
+| x-scheme-handler/about    | vivaldi-stable  | vivaldi                     | About pages              |
+| x-scheme-handler/unknown  | vivaldi-stable  | vivaldi                     | Unknown protocols        |
+
+** Documents
+
+| MIME Type                | Default App              | Available Apps                                        | Notes                          |
+|--------------------------+--------------------------+-------------------------------------------------------+--------------------------------|
+| application/pdf          | okularApplication_pdf    | okular, vivaldi, doomemacs, foxitreader               | PDF documents                  |
+| application/ppdf         | FoxitReader              | foxitreader                                           | Protected PDF                  |
+| application/postscript   | okular (ghostview)       | okular, gimp                                          | PostScript files               |
+| application/epub+zip     | -                        | okular                                                | EPUB ebooks (unconfigured)     |
+| application/x-mobipocket | -                        | okular                                                | MOBI ebooks (unconfigured)     |
+| application/x-fictionbook| -                        | okular                                                | FictionBook (unconfigured)     |
+| text/markdown            | doomemacs                | doomemacs, okular                                     | Markdown files                 |
+| text/plain               | emacsclient-2            | doomemacs, emacsclient, thunderbird, okular           | Plain text files               |
+
+** Images
+
+| MIME Type           | Default App       | Available Apps                      | Notes                     |
+|---------------------+-------------------+-------------------------------------+---------------------------|
+| image/png           | gwenview          | gwenview, gimp, swappy              | PNG images                |
+| image/jpeg          | gwenview          | gwenview, gimp, swappy              | JPEG images               |
+| image/gif           | -                 | gwenview, gimp, vivaldi             | GIF images (unconfigured) |
+| image/bmp           | gwenview          | gwenview, gimp, okular              | Bitmap images             |
+| image/webp          | -                 | gwenview, gimp, vivaldi             | WebP images (unconfigured)|
+| image/svg+xml       | -                 | gwenview, gimp                      | SVG images (unconfigured) |
+| image/tiff          | -                 | gwenview, gimp, okular              | TIFF images (unconfigured)|
+| image/avif          | -                 | gwenview, gimp, okular              | AVIF images (unconfigured)|
+| image/heif          | -                 | gwenview, gimp, okular              | HEIF images (unconfigured)|
+| image/jxl           | -                 | gwenview, gimp, okular              | JPEG XL (unconfigured)    |
+| image/x-xcf         | -                 | gwenview, gimp                      | GIMP files (unconfigured) |
+| image/openraster    | -                 | gwenview, gimp                      | OpenRaster (unconfigured) |
+| image/x-psd         | -                 | gwenview, gimp, okular              | Photoshop (unconfigured)  |
+| image/vnd.djvu      | -                 | okular                              | DjVu images (unconfigured)|
+
+** Video
+
+| MIME Type            | Default App | Available Apps | Notes                      |
+|----------------------+-------------+----------------+----------------------------|
+| video/mp4            | vlc         | vlc, mpv       | MP4 videos                 |
+| video/x-matroska     | -           | vlc, mpv       | MKV videos (unconfigured)  |
+| video/webm           | -           | vlc, mpv       | WebM videos (unconfigured) |
+| video/quicktime      | -           | vlc, mpv       | MOV videos (unconfigured)  |
+| video/mpeg           | -           | vlc, mpv       | MPEG videos (unconfigured) |
+| video/x-msvideo      | -           | vlc, mpv       | AVI videos (unconfigured)  |
+| video/ogg            | -           | vlc, mpv       | Ogg videos (unconfigured)  |
+| video/3gp            | -           | vlc, mpv       | 3GP videos (unconfigured)  |
+| video/flv            | -           | vlc, mpv       | Flash videos (unconfigured)|
+
+** Audio
+
+| MIME Type       | Default App | Available Apps | Notes                     |
+|-----------------+-------------+----------------+---------------------------|
+| audio/mpeg      | -           | vlc, mpv       | MP3 files (unconfigured)  |
+| audio/mp4       | -           | vlc, mpv       | M4A files (unconfigured)  |
+| audio/ogg       | -           | vlc, mpv       | Ogg audio (unconfigured)  |
+| audio/flac      | -           | vlc, mpv       | FLAC files (unconfigured) |
+| audio/wav       | -           | vlc, mpv       | WAV files (unconfigured)  |
+| audio/opus      | -           | vlc, mpv       | Opus files (unconfigured) |
+| audio/aac       | -           | vlc, mpv       | AAC files (unconfigured)  |
+| audio/webm      | -           | vlc, mpv       | WebM audio (unconfigured) |
+
+** Archives
+
+| MIME Type                       | Default App | Available Apps | Notes                        |
+|---------------------------------+-------------+----------------+------------------------------|
+| application/zip                 | ark         | ark            | ZIP archives                 |
+| application/x-tar               | -           | ark            | TAR archives (unconfigured)  |
+| application/x-7z-compressed     | -           | ark            | 7z archives (unconfigured)   |
+| application/vnd.rar             | -           | ark            | RAR archives (unconfigured)  |
+| application/gzip                | -           | ark            | GZIP files (unconfigured)    |
+| application/x-bzip              | -           | ark            | BZIP files (unconfigured)    |
+| application/x-bzip2             | -           | ark            | BZIP2 files (unconfigured)   |
+| application/x-xz                | -           | ark            | XZ files (unconfigured)      |
+| application/zstd                | -           | ark            | ZSTD files (unconfigured)    |
+| application/x-lz4               | -           | ark            | LZ4 files (unconfigured)     |
+| application/x-compressed-tar    | -           | ark            | Compressed TAR (unconfigured)|
+| application/x-deb               | -           | ark            | DEB packages (unconfigured)  |
+| application/x-rpm               | -           | ark            | RPM packages (unconfigured)  |
+| application/x-iso9660-appimage  | -           | ark            | AppImage (unconfigured)      |
+
+** Text & Code
+
+| MIME Type                 | Default App    | Available Apps          | Notes                       |
+|---------------------------+----------------+-------------------------+-----------------------------|
+| text/plain                | emacsclient-2  | doomemacs, emacsclient  | Plain text                  |
+| text/markdown             | doomemacs      | doomemacs, okular       | Markdown files              |
+| text/csv                  | -              | doomemacs, emacsclient  | CSV files (unconfigured)    |
+| text/x-c                  | -              | doomemacs, emacs        | C source (unconfigured)     |
+| text/x-c++                | -              | doomemacs, emacs        | C++ source (unconfigured)   |
+| text/x-java               | -              | doomemacs, emacs        | Java source (unconfigured)  |
+| text/x-python             | -              | doomemacs, emacs        | Python source (unconfigured)|
+| text/x-go                 | doomemacs      | doomemacs               | Go source                   |
+| text/x-makefile           | -              | doomemacs, emacs        | Makefiles (unconfigured)    |
+| text/x-shellscript        | -              | doomemacs, emacs        | Shell scripts (unconfigured)|
+| application/json          | emacs-2        | doomemacs, emacsclient  | JSON files                  |
+| application/x-shellscript | -              | doomemacs, emacs        | Shell scripts (unconfigured)|
+| application/octet-stream  | doomemacs      | doomemacs               | Binary/unknown files        |
+
+** Email & Calendar
+
+| MIME Type                | Default App               | Available Apps | Notes                         |
+|--------------------------+---------------------------+----------------+-------------------------------|
+| message/rfc822           | thunderbird (userapp)     | thunderbird    | Email messages                |
+| text/calendar            | thunderbird (userapp)     | thunderbird    | Calendar files                |
+| text/vcard               | -                         | thunderbird    | vCard contacts (unconfigured) |
+| x-scheme-handler/mailto  | vivaldi-stable            | vivaldi, tb    | Email links (conflict!)       |
+| x-scheme-handler/mid     | thunderbird (userapp)     | thunderbird    | Message ID links              |
+| x-scheme-handler/webcal  | thunderbird (userapp)     | thunderbird    | Web calendar links            |
+| x-scheme-handler/webcals | thunderbird (userapp)     | thunderbird    | Secure webcal links           |
+
+** System & Special
+
+| MIME Type                    | Default App | Available Apps | Notes                             |
+|------------------------------+-------------+----------------+-----------------------------------|
+| inode/directory              | thunar      | thunar, gwen   | File manager for directories      |
+| x-scheme-handler/tg          | -           | telegram       | Telegram links (unconfigured)     |
+| x-scheme-handler/tonsite     | telegram    | telegram       | Telegram TON links                |
+| application/x-keepass2       | -           | keepassxc      | KeePass databases (unconfigured)  |
+| x-scheme-handler/lens        | OpenLens    | OpenLens       | Kubernetes Lens links             |
+| x-scheme-handler/postman     | Postman     | Postman        | Postman API links                 |
+| x-scheme-handler/adskidmgr   | adskidmgr   | autodesk       | Autodesk links                    |
+
+* Issues & Recommendations
+
+** Conflicts
+- =x-scheme-handler/mailto=: Set to vivaldi-stable but should probably be thunderbird
+- Multiple =userapp-Firefox= references exist but Firefox is not installed
+
+** Unconfigured Defaults
+Many file types have available applications but no default set:
+- Image formats: GIF, WebP, SVG, TIFF, AVIF, HEIF, JPEG XL
+- Video formats: Most video formats except MP4
+- Audio formats: All audio formats
+- Archive formats: Most archive formats except ZIP
+- Code files: Most programming language source files
+- E-books: EPUB, MOBI, FictionBook
+
+** Cleanup Needed
+- Remove Firefox references from mimeapps.list (Firefox not installed)
+- Replace =userapp-*= entries with proper application references
+- Set Thunderbird as mailto handler instead of Vivaldi
+
+** Missing from Repo
+- =~/.config/mimeapps.list= is not tracked in dotfiles repo
+- Should be added to =create_links.sh= for version control
+
+* Installed Applications Summary
+
+** Browsers
+- ✓ Vivaldi (vivaldi-stable) - Primary browser
+- ✗ Firefox - Not installed (but referenced in mimeapps.list)
+
+** Text Editors
+- ✓ Doomemacs (doomemacs.desktop)
+- ✓ Emacs (emacs, emacsclient)
+
+** Document Viewers
+- ✓ Okular (okularApplication_*) - PDF, EPUB, DjVu, etc.
+- ✓ FoxitReader - PDF viewer
+
+** Image Viewers/Editors
+- ✓ Gwenview (org.kde.gwenview) - Image viewer
+- ✓ GIMP (gimp) - Image editor
+- ✓ Swappy (swappy) - Screenshot annotation
+
+** Video Players
+- ✓ VLC (vlc) - Full-featured media player
+- ✓ MPV (mpv) - Lightweight media player
+
+** Archive Managers
+- ✓ Ark (org.kde.ark) - KDE archive manager
+
+** Email & Calendar
+- ✓ Thunderbird (org.mozilla.Thunderbird)
+
+** File Managers
+- ✓ Thunar (thunar)
+
+** Communication
+- ✓ Telegram (org.telegram.desktop)
+- ✓ Discord (discord)
+- ✓ Skype (skypeforlinux)
+
+** Password Manager
+- ✓ KeePassXC (org.keepassxc.KeePassXC)
+
+** Development Tools
+- ✓ VS Code (code)
+- ✓ OpenLens (OpenLens)
+- ✓ Postman (Postman)
+
+* Next Steps
+
+1. [ ] Add mimeapps.list to dotfiles repo and create_links.sh
+2. [ ] Clean up Firefox references (app not installed)
+3. [ ] Fix mailto handler (use Thunderbird instead of Vivaldi)
+4. [ ] Set default applications for unconfigured MIME types
+5. [ ] Replace userapp-* entries with proper application names
+6. [ ] Test all associations to ensure they work correctly
