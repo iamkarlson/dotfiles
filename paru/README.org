@@ -1,0 +1,5 @@
+* Upgrade
+to rebuild paru itself:
+#+begin_src shell
+paru paru --rebuild
+#+end_src
