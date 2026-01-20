@@ -1,11 +1,11 @@
 [Desktop Entry]
+NoDisplay=true
+Name=Emacs (Mail, Client) HIDDEN
 Categories=Network;Email;
 Comment=GNU Emacs is an extensible, customizable text editor - and more
 Exec=sh -c "exec emacsclient --alternate-editor= --display=\\"\\$DISPLAY\\" --eval \\\\(message-mailto\\\\ \\\\\\"%u\\\\\\"\\\\)"
 Icon=emacs
-Name=Emacs (Mail, Client)
 MimeType=x-scheme-handler/mailto;
-NoDisplay=true
 Terminal=false
 Type=Application
 Keywords=emacsclient;

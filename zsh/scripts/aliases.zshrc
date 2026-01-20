@@ -6,9 +6,18 @@
 #
 # Example aliases
 
+
+# sort by edit desc
+# Last 5 files:
+# ❯ z downloads && lt | head -n 5
+alias lt="ls -lA -t"
+
 alias vim=nvim
 
-alias e="~/.config/hypr/scripts/apps/emacs.sh"
+
+alias e='echo "Patience you must have, my young Padawan. Use \`emacsit\` for GUI and \`ematty\` to open TUI"'
+alias emacsit="~/.config/hypr/scripts/apps/emacs.sh"
+alias ematty="emacsclient -nw -c"
 
 alias k="kubectl"
 alias g="git"

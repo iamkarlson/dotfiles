@@ -33,6 +33,28 @@ tasks:
       - rm Taskfile.yml
     silent: false
 
+  change-theme:
+    cmds:
+      - |
+        ls /usr/share/alacritty/themes/*.toml |\
+          xargs -n1 basename |\
+          sed 's/.toml$//' |\
+          fzf --preview 'theme={}; sed -i "s|alacritty/themes/.*\.toml|alacritty/themes/$theme.toml|" /home/iamkarlson/src/dotfiles/alacritty/alacritty.toml; echo $theme'
+  gcloud:configuration:
+    cmds:
+      - gcloud config configurations create {{.GCLOUD_CONFIGURATION}}
+      - gcloud config configurations activate {{.GCLOUD_CONFIGURATION}}
+
+  gcloud:account:
+    cmds:
+      - gcloud config set account {{.GCLOUD_ACCOUNT}}
+
+  gcloud:project:
+    cmds:
+      - gcloud config set project {{.GCLOUD_PROJECT}}
+      - gcloud auth application-default login
+      - gcloud auth application-default set-quota-project {{.GCLOUD_PROJECT}}
+
   select-and-run:
     desc: "Interactively select and run a global task"
     dir: "{{.USER_WORKING_DIR}}"
@@ -75,16 +97,6 @@ tasks:
     cmds:
       - ls -la
     silent: false
-  gcloud-account:
-    cmds:
-      - gcloud config set account {{.GCLOUD_ACCOUNT}}
-
-  gcloud-project:
-    cmds:
-      - gcloud config set project {{.GCLOUD_PROJECT}}
-      - gcloud auth application-default login
-      - gcloud auth application-default set-quota-project {{.GCLOUD_PROJECT}}
-
   _ensure-config-dir:
     internal: true
     dir: "{{.USER_WORKING_DIR}}"

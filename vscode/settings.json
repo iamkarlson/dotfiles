@@ -94,5 +94,10 @@
   "markdown-pdf.displayHeaderFooter": false,
   "task": {
     "path": "go-task"
-  }
+  },
+  "chat.instructionsFilesLocations": {
+    ".github/instructions": true
+  },
+  "terminal.integrated.shellIntegration.environmentReporting": true,
+  "envSelector.regex": "*.env"
 }
