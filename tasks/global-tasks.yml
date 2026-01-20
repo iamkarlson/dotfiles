@@ -430,3 +430,101 @@ tasks:
     silent: false
     cmds:
       - docker compose ls -q | xargs -r -I {} docker compose -p {} down
+
+  branch:list:
+    desc: "List all branches with upstream tracking info"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    cmds:
+      - "{{.DOTFILES}}/tasks/scripts/branches-list.sh"
+
+  branch:switch:
+    desc: "Interactive branch switching with fzf"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    cmds:
+      - |
+        set -euo pipefail
+
+        # Get branch list and let user select
+        selected=$({{.DOTFILES}}/tasks/scripts/branches-list.sh | \
+          fzf \
+            --delimiter=$'\t' \
+            --with-nth=1 \
+            --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" {2}')
+
+        # Extract checkout ref (second column)
+        checkout_ref=$(echo "$selected" | cut -f2)
+
+        # Checkout the branch
+        git checkout "$checkout_ref"
+
+  git:worktree:
+    desc: "Create and switch to a git worktree for a branch (interactive)"
+    dir: "{{.USER_WORKING_DIR}}"
+    silent: true
+    cmds:
+      - |
+        # Get repo name
+        REPO_NAME="${PWD##*/}"
+        WORKTREE_BASE="../${REPO_NAME}-worktrees"
+
+        # Use the same branch listing as branch:switch, with --print-query to allow typing new branch names
+        SELECTION=$({{.DOTFILES}}/tasks/scripts/branches-list.sh | fzf \
+          --delimiter='\t' \
+          --with-nth=1 \
+          --print-query \
+          --prompt="Select or type branch name: " \
+          --preview 'git log --oneline --graph --date=short --color=always --pretty="format:%C(auto)%cd %h%d %s" {2} 2>/dev/null')
+
+        if [ -z "$SELECTION" ]; then
+          echo "❌ No branch selected"
+          exit 1
+        fi
+
+        # Get the last line (the actual selection or typed value)
+        LAST_LINE=$(echo "$SELECTION" | tail -1)
+
+        if [ -z "$LAST_LINE" ]; then
+          echo "❌ No branch selected"
+          exit 1
+        fi
+
+        # If user selected from list, extract the checkout ref (column 2)
+        # If user typed a new name, LAST_LINE won't have a tab
+        if echo "$LAST_LINE" | grep -q $'\t'; then
+          # Selected from list - extract checkout ref
+          CHECKOUT_REF=$(echo "$LAST_LINE" | cut -f2)
+          # Get branch name without origin/ prefix for worktree directory
+          BRANCH_NAME="${CHECKOUT_REF#origin/}"
+        else
+          # Typed new branch name
+          BRANCH_NAME="$LAST_LINE"
+          CHECKOUT_REF="$LAST_LINE"
+        fi
+
+        # Check if worktree already exists
+        if [ -d "$WORKTREE_BASE/$BRANCH_NAME" ]; then
+          echo "⚠️  Worktree already exists at: $WORKTREE_BASE/$BRANCH_NAME"
+          echo "📁 To switch to it, run: cd $WORKTREE_BASE/$BRANCH_NAME"
+          exit 0
+        fi
+
+        # Create worktree base directory if it doesn't exist
+        mkdir -p "$WORKTREE_BASE"
+
+        # Check if branch exists (local or remote)
+        if git rev-parse --verify "$CHECKOUT_REF" >/dev/null 2>&1; then
+          # Branch exists
+          echo "📂 Creating worktree for existing branch: $BRANCH_NAME"
+          git worktree add "$WORKTREE_BASE/$BRANCH_NAME" "$CHECKOUT_REF"
+        else
+          # Branch doesn't exist - create it
+          echo "🆕 Creating new branch and worktree: $BRANCH_NAME"
+          git worktree add -b "$BRANCH_NAME" "$WORKTREE_BASE/$BRANCH_NAME"
+        fi
+
+        WORKTREE_PATH="$WORKTREE_BASE/$BRANCH_NAME"
+        echo ""
+        echo "✅ Worktree created at: $WORKTREE_PATH"
+        echo "📁 To switch to it, run: cd $WORKTREE_PATH"
