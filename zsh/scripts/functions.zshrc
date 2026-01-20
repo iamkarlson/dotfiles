@@ -164,3 +164,8 @@ WHERE h.id BETWEEN (target.id - ${context}) AND (target.id + ${context})
 ORDER BY h.start_time;
 EOF
 }
+
+fzf-hyprctl-clients () {
+  hyprctl clients -j  | jq -r '.[].title' |fzf | xargs -I {} sh -c "hyprctl clients -j  | jq -r '.[] | select(.title | test(\"{}\"))|.'"
+
+}
