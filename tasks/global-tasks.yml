@@ -40,9 +40,10 @@ tasks:
           xargs -n1 basename |\
           sed 's/.toml$//' |\
           fzf --preview 'theme={}; sed -i "s|alacritty/themes/.*\.toml|alacritty/themes/$theme.toml|" /home/iamkarlson/src/dotfiles/alacritty/alacritty.toml; echo $theme'
+
   gcloud:configuration:
     cmds:
-      - gcloud config configurations create {{.GCLOUD_CONFIGURATION}}
+      - gcloud config configurations create {{.GCLOUD_CONFIGURATION}} || true
       - gcloud config configurations activate {{.GCLOUD_CONFIGURATION}}
 
   gcloud:account:
@@ -55,6 +56,9 @@ tasks:
       - gcloud auth application-default login
       - gcloud auth application-default set-quota-project {{.GCLOUD_PROJECT}}
 
+  gcloud:default_region:
+    cmds:
+      - gcloud config set compute/region {{.GCLOUD_REGION}}
   select-and-run:
     desc: "Interactively select and run a global task"
     dir: "{{.USER_WORKING_DIR}}"
