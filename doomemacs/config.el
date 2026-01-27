@@ -345,6 +345,8 @@
 (after! yasnippet
   (add-to-list 'yas-snippet-dirs "~/.local/share/doom-snippets"))
 
+;;(projectile-invalidate-cache)
+
 (server-start)
 
 ;; (use-package! gptel
