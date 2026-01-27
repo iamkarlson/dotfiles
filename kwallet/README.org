@@ -1,0 +1,9 @@
+* KWallet autologin
+
+[[elisp:(find-file-other-window "/sudo::/etc/pam.d/login")][/etc/pam.d/login (sudo)]]
+
+#+begin_src conf
+# /etc/pam.d/login
+auth            optional        pam_kwallet5.so
+session         optional        pam_kwallet5.so auto_start force_run
+#+end_src

@@ -1,0 +1,9 @@
+#+title: Readme
+
+#+begin_src shell
+pushd ~/.local/share/applications/
+cp bla-bla.desktop ~/src/dotfiles/desktop/bla-bla.desktop
+popd
+
+emacsit bla-bla.desktop
+#+end_src
