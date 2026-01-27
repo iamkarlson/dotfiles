@@ -165,7 +165,11 @@ ORDER BY h.start_time;
 EOF
 }
 
-fzf-hyprctl-clients () {
-  hyprctl clients -j  | jq -r '.[].title' |fzf | xargs -I {} sh -c "hyprctl clients -j  | jq -r '.[] | select(.title | test(\"{}\"))|.'"
+show_json_for_hyprland_client () {
+   hyprctl clients -j  | jq -r ".[] | select(.initialClass | test(\"$1\"))|."
 
+}
+
+fzf-hyprctl-clients () {
+  hyprctl clients -j | jq -r '.[].initialClass' | sort -u | fzf --preview "source ~/src/dotfiles/zsh/scripts/functions.zshrc && show_json_for_hyprland_client {}" | xargs -I {} sh -c "source ~/src/dotfiles/zsh/scripts/functions.zshrc && show_json_for_hyprland_client {}"
 }

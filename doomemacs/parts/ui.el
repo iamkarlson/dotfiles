@@ -42,6 +42,7 @@
 ;;
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
+(setq doom-theme 'doom-dark+)
 ;;(setq doom-theme 'doom-tomorrow-night)
 ;;(setq doom-theme 'doom-manegarm)
 ;;(setq doom-theme 'iamkarlson-fallout)
@@ -52,7 +53,7 @@
 ;; (setq doom-theme 'ef-autumn)
 ;; (setq doom-theme 'iamkarlson-fallout)
 ;; (setq doom-theme 'doom-one-light)
-(setq doom-theme 'modus-operandi-tinted)
+;;(setq doom-theme 'modus-operandi-tinted)
 
 (after! doom-themes
   (setq doom-themes-enable-bold t)

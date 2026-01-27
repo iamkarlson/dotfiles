@@ -1,6 +1,23 @@
 * iamkarlson dotfiles 😄
 
 Collection of my own settings and preferences
+
+* Hyprland
+** hyprwhenthen
+Event-driven window automation for Hyprland. Automatically moves windows to their assigned workspaces when they open.
+
+** Installation
+#+begin_src shell
+paru -S hyprwhenthen-bin
+#+end_src
+
+** Usage
+The daemon starts automatically with Hyprland (see =80-autorun.conf=).
+
+To reapply workspace rules to all existing windows:
+#+begin_src shell
+~/.config/hypr/scripts/reapply_window_rules.sh
+#+end_src
 * Migrations
 ** taskfile rename
 #+begin_src shell
