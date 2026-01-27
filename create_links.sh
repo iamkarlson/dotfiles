@@ -241,6 +241,10 @@ ln_directory $dotfiles/workstyle $config/workstyle
 
 ln_directory $dotfiles/hyprland $config/hypr
 
+# hyprwhenthen - event-driven window automation
+# Install: paru -S hyprwhenthen-bin
+ln_directory $dotfiles/hyprwhenthen $config/hyprwhenthen
+
 # VSCode settings
 
 ln_file $dotfiles/vscode/settings.json $config/Code/User/settings.json

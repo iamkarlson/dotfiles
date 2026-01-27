@@ -26,6 +26,3 @@
     last-tag-diff = !git diff $(git last-tag)..HEAD
 
     squash = "!f() { git tag backup-before-squash-$(date +%Y%m%d-%H%M%S) && git reset --soft HEAD~$1 && git commit -C HEAD@{1}; }; f"
-    
-    # Interactive branch switching with fzf
-    cb = "!git branch --all | grep -v HEAD | fzf --preview 'git log --oneline --graph --date=short --color=always --pretty=\"format:%C(auto)%cd %h%d %s\" $(sed \"s/.* //\" <<< {})' | sed \"s/.* //\" | sed \"s#remotes/[^/]*/##\" | xargs git checkout"

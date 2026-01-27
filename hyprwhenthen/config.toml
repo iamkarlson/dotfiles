@@ -1,0 +1,49 @@
+timeout = "5s"
+
+# Vivaldi -> workspace 1
+[[handler]]
+on = "openwindow"
+when = ".*,.*,vivaldi-stable.*,.*"
+then = "hyprctl dispatch movetoworkspacesilent 1"
+
+# Slack -> workspace 11
+[[handler]]
+on = "openwindow"
+when = ".*,.*,Slack.*,.*"
+then = "hyprctl dispatch movetoworkspacesilent 11"
+
+# Thunderbird -> workspace 12
+[[handler]]
+on = "openwindow"
+when = ".*,.*,org\\.mozilla\\.Thunderbird.*,.*"
+then = "hyprctl dispatch movetoworkspacesilent 12"
+
+# Telegram -> workspace 14
+[[handler]]
+on = "openwindow"
+when = ".*,.*,org\\.telegram\\.desktop.*,.*"
+then = "hyprctl dispatch movetoworkspacesilent 14"
+
+# Spotify -> workspace 15
+[[handler]]
+on = "openwindow"
+when = ".*,.*,[Ss]potify.*,.*"
+then = "hyprctl dispatch movetoworkspacesilent 15"
+
+# KDE Connect -> workspace 18
+[[handler]]
+on = "openwindow"
+when = ".*,.*,org\\.kde\\.kdeconnect.*,.*"
+then = "hyprctl dispatch movetoworkspacesilent 18"
+
+# WhatsApp (Vivaldi PWA) -> workspace 13
+[[handler]]
+on = "openwindow"
+when = ".*,.*,vivaldi-hnpfjngllnobngcgfapefoaidbinmjnm.*,.*"
+then = "hyprctl dispatch movetoworkspacesilent 13"
+
+# KeePass -> special:keepass
+[[handler]]
+on = "openwindow"
+when = ".*,.*,org\\.keepassxc\\.KeePassXC.*,.*"
+then = "hyprctl dispatch movetoworkspacesilent special:keepass"
