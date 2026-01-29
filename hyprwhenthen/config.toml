@@ -1,4 +1,6 @@
-timeout = "5s"
+[general]
+timeout = "5s"                      # Global timeout for all handlers
+hot_reload_debounce_timer = "100ms"  # Debounce time for config reloading, defaults to 1s
 
 # Vivaldi -> workspace 1
 [[handler]]
@@ -13,10 +15,10 @@ when = ".*,.*,Slack.*,.*"
 then = "hyprctl dispatch movetoworkspacesilent 11"
 
 # Thunderbird -> workspace 12
-[[handler]]
-on = "openwindow"
-when = ".*,.*,org\\.mozilla\\.Thunderbird.*,.*"
-then = "hyprctl dispatch movetoworkspacesilent 12"
+# [[handler]]
+# on = "openwindow"
+# when = ".*,.*,org\\.mozilla\\.Thunderbird.*,.*"
+# then = "hyprctl dispatch movetoworkspacesilent 12"
 
 # Telegram -> workspace 14
 [[handler]]
@@ -43,7 +45,7 @@ when = ".*,.*,vivaldi-hnpfjngllnobngcgfapefoaidbinmjnm.*,.*"
 then = "hyprctl dispatch movetoworkspacesilent 13"
 
 # KeePass -> special:keepass
-[[handler]]
-on = "openwindow"
-when = ".*,.*,org\\.keepassxc\\.KeePassXC.*,.*"
-then = "hyprctl dispatch movetoworkspacesilent special:keepass"
+# [[handler]]
+# on = "openwindow"
+# when = ".*,.*,org\\.keepassxc\\.KeePassXC.*,.*"
+# then = "hyprctl dispatch movetoworkspacesilent special:keepass"

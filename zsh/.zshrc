@@ -212,6 +212,9 @@ bindkey '^[x' copy-command-line
 source ~/.zsh/aliases.zshrc
 source ~/.zsh/functions.zshrc
 
+export TASK_EXE='go-task'
+eval "$(task --completion zsh)"
+
 
 # # Restore FZF Key bindings
 # zvm_after_init() {
