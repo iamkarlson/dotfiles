@@ -166,6 +166,10 @@ zstyle :compinstall filename '/home/iamkarlson/.zshrc'
 zstyle ':completion:*:*:docker:*' option-stacking yes
 zstyle ':completion:*:*:docker-*:*' option-stacking yes
 
+# https://taskfile.dev/docs/installation
+zstyle ':completion:*:*:task:*' verbose false
+zstyle ':completion:*:*:go-task:*' verbose false
+
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
