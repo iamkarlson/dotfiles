@@ -174,7 +174,6 @@ ln_file $dotfiles/.tmux.conf $target/.tmux.conf
 ln_directory "$dotfiles/espanso" "$config/espanso"
 ln_directory "$dotfiles/thefuck" "$config/thefuck"
 
-ln_directory "$dotfiles/doomemacs" "$target/.doom.d"
 
 mkdir -p $config/kitty
 ln_file $dotfiles/kitty/kitty.conf $config/kitty/kitty.conf
