@@ -268,7 +268,7 @@ ln_file $dotfiles/vivaldi/vivaldi-stable.conf $config/vivaldi-stable.conf
 # To override default desktop files you can create a .desktop file with the same name in ~/.local/share/applications
 # Arch by default uses /usr/share/applications
 
-for file in $dotfiles/desktop/*; do
+for file in $dotfiles/desktop/*.desktop; do
 	ln_file $file $target/.local/share/applications/$(basename $file)
 done
 

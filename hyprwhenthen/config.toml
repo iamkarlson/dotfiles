@@ -45,7 +45,23 @@ when = ".*,.*,vivaldi-hnpfjngllnobngcgfapefoaidbinmjnm.*,.*"
 then = "hyprctl dispatch movetoworkspacesilent 13"
 
 # KeePass -> special:keepass
+[[handler]]
+on = "openwindow"
+when = ".*,.*,org\\.keepassxc\\.KeePassXC.*,.*"
+then = "hyprctl dispatch movetoworkspacesilent special:keepass"
+
+[[handler]]
+on = "openwindow"
+when = ".*,.*,slimbookbatterypreferences\\.py,.*"
+then = "hyprctl dispatch movetoworkspacesilent 19; "
+
+# # Enforce special:keepass is KeePass-only
+# # When switching to special:keepass, move any non-KeePass windows to workspace 1
 # [[handler]]
-# on = "openwindow"
-# when = ".*,.*,org\\.keepassxc\\.KeePassXC.*,.*"
-# then = "hyprctl dispatch movetoworkspacesilent special:keepass"
+# on = "workspace"
+# when = "special:keepass"
+# then = "hyprctl clients -j | jq -r '.[] | select(.workspace.name == \"special:keepass\") | select(.class != \"org.keepassxc.KeePassXC\") | .address' | xargs -I{} hyprctl dispatch movetoworkspacesilent 1,address:{}"
+[[handler]]
+on = "monitoradded"
+when = "(.*)"
+then = "notify-send \"Monitor connected: $REGEX_GROUP_1\""

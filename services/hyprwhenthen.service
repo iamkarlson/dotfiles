@@ -1,0 +1,13 @@
+[Unit]
+Description=HyprWhenThen - React to hypr events
+After=default.target
+
+[Service]
+Type=exec
+#ExecStart=/usr/bin/hyprwhenthen run --debug
+ExecStart=/usr/bin/hyprwhenthen run
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
