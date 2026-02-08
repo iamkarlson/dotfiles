@@ -40,3 +40,5 @@
 [difftool "emacs"]
   cmd = emacsclient -t --eval \"(ediff \\\"$LOCAL\\\" \\\"$REMOTE\\\")\"
   prompt = false
+[github]
+	user = iamkarlson

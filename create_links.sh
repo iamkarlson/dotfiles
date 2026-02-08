@@ -244,6 +244,11 @@ ln_directory $dotfiles/hyprland $config/hypr
 # Install: paru -S hyprwhenthen-bin
 ln_directory $dotfiles/hyprwhenthen $config/hyprwhenthen
 
+# uv - Python package manager
+# Credentials are set via UV_INDEX_GITLAB_USERNAME / UV_INDEX_GITLAB_PASSWORD in private.zshrc
+mkdir -p $config/uv
+ln_file $dotfiles/uv/uv.toml $config/uv/uv.toml
+
 # VSCode settings
 
 ln_file $dotfiles/vscode/settings.json $config/Code/User/settings.json

@@ -1,0 +1,75 @@
+{
+  "address": "0x560c63785fb0",
+  "mapped": true,
+  "hidden": false,
+  "at": [
+    13,
+    80
+  ],
+  "size": [
+    1129,
+    1107
+  ],
+  "workspace": {
+    "id": 12,
+    "name": "12"
+  },
+  "floating": false,
+  "pseudo": false,
+  "monitor": 0,
+  "class": "org.mozilla.Thunderbird",
+  "title": "Inbox - iamkarlson@gmail.com - Mozilla Thunderbird",
+  "initialClass": "org.mozilla.Thunderbird",
+  "initialTitle": "Mozilla Thunderbird",
+  "pid": 2485,
+  "xwayland": false,
+  "pinned": false,
+  "fullscreen": 0,
+  "fullscreenClient": 0,
+  "grouped": [],
+  "tags": [],
+  "swallowing": "0x0",
+  "focusHistoryID": 1,
+  "inhibitingIdle": false,
+  "xdgTag": "",
+  "xdgDescription": "",
+  "contentType": "none"
+}
+{
+  "address": "0x560c637ebea0",
+  "mapped": true,
+  "hidden": false,
+  "at": [
+    1516,
+    0
+  ],
+  "size": [
+    384,
+    240
+  ],
+  "workspace": {
+    "id": 12,
+    "name": "12"
+  },
+  "floating": true,
+  "pseudo": false,
+  "monitor": 0,
+  "class": "org.mozilla.Thunderbird",
+  "title": "2 Reminders",
+  "initialClass": "org.mozilla.Thunderbird",
+  "initialTitle": "Calendar Reminders",
+  "pid": 2485,
+  "xwayland": false,
+  "pinned": false,
+  "fullscreen": 0,
+  "fullscreenClient": 0,
+  "grouped": [],
+  "tags": [],
+  "swallowing": "0x0",
+  "focusHistoryID": 3,
+  "inhibitingIdle": false,
+  "xdgTag": "",
+  "xdgDescription": "",
+  "contentType": "none"
+}
+

@@ -1,0 +1,12 @@
+# PyPI is checked first (non-default = higher priority)
+[[index]]
+name = "pypi"
+url = "https://pypi.org/simple"
+
+# GitLab private registry is the fallback (default = lowest priority)
+# Credentials via UV_INDEX_GITLAB_USERNAME / UV_INDEX_GITLAB_PASSWORD env vars
+[[index]]
+name = "gitlab"
+url = "https://gitlab.com/api/v4/projects/24061829/packages/pypi/simple"
+default = true
+#authenticate = "always"
