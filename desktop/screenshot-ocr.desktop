@@ -2,7 +2,7 @@
 Name=Screenshot OCR
 GenericName=Screenshot to Text
 Comment=Take screenshot and extract text with OCR tool `tesseract`
-Exec=/home/iamkarlson/src/dotfiles/hyprland/scripts/apps/screenshot_and_copy_recognized_text.sh
+Exec=/home/iamkarlson/src/dotfiles/hyprland/scripts/apps/screenshot.sh area --ocr
 Icon=image-x-generic
 Type=Application
 Terminal=false

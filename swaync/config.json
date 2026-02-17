@@ -112,7 +112,7 @@
         },
         {
           "label": "",
-          "command": "swaync-client -t -sw && ~/.config/sway/scripts/screenshot_selected.sh"
+          "command": "swaync-client -t -sw && ~/.config/hypr/scripts/apps/screenshot.sh area"
         }
       ]
     }
