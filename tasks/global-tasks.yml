@@ -472,6 +472,10 @@ tasks:
         # Extract checkout ref (second column)
         checkout_ref=$(echo "$selected" | cut -f2)
 
+        # remove origin if present
+
+        checkout_ref="${checkout_ref#origin/}"
+
         # Checkout the branch
         git checkout "$checkout_ref"
 
