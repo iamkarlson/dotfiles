@@ -24,3 +24,6 @@ hyprland/hosts/*.conf
 !hyprland/hosts/setup-hypridle.sh
 
 CLAUDE.md
+
+network/*
+!network/README.org

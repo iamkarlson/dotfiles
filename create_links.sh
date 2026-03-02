@@ -265,6 +265,18 @@ copy_system_config "$dotfiles/hyprland/hyprlock-before-sleep@.service" "/etc/sys
 copy_system_config "$dotfiles/hyprland/hyprlock-after-sleep@.service" "/etc/systemd/system/hyprlock-after-sleep@.service"
 copy_system_config "$dotfiles/hyprland/scripts/lock-resume-on-sleep.sh" "/root/scripts/lock-resume-on-sleep.sh"
 
+#
+# Network configuration (systemd-networkd, systemd-resolved, wireguard)
+#
+
+copy_system_config "$dotfiles/network/resolved.conf" "/etc/systemd/resolved.conf"
+copy_system_config "$dotfiles/network/20-ethernet.network" "/etc/systemd/network/20-ethernet.network"
+copy_system_config "$dotfiles/network/20-wlan.network" "/etc/systemd/network/20-wlan.network"
+copy_system_config "$dotfiles/network/20-wwan.network" "/etc/systemd/network/20-wwan.network"
+sudo mkdir -p /etc/wireguard
+copy_system_config "$dotfiles/network/home.conf" "/etc/wireguard/home.conf"
+sudo chmod 600 /etc/wireguard/home.conf
+
 # Vivaldi configuration
 ln_file $dotfiles/vivaldi/vivaldi-stable.conf $config/vivaldi-stable.conf
 
