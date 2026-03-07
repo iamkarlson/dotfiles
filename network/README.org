@@ -1,0 +1,156 @@
+#+TITLE: Network Configuration
+#+AUTHOR: iamkarlson
+#+DATE: 2026-02-24
+
+* Overview
+
+Network stack: =iwd= (WiFi management) + =systemd-networkd= (interface config) + =systemd-resolved= (DNS).
+
+By default the system uses DHCP-provided DNS. When WireGuard is active, DNS routes through a home AdGuard server. Cloudflare/Quad9 are fallback only.
+
+* Configuration Files
+
+| Dotfiles Source             | System Destination                      | Purpose                    |
+|-----------------------------+-----------------------------------------+----------------------------|
+| =network/resolved.conf=    | =/etc/systemd/resolved.conf=            | DNS resolver configuration |
+| =network/20-ethernet.network= | =/etc/systemd/network/20-ethernet.network= | Ethernet DHCP + metrics |
+| =network/20-wlan.network=  | =/etc/systemd/network/20-wlan.network=  | WiFi DHCP + metrics        |
+| =network/20-wwan.network=  | =/etc/systemd/network/20-wwan.network=  | Mobile broadband DHCP      |
+| =network/home.conf=        | =/etc/wireguard/home.conf=              | WireGuard tunnel to home   |
+
+All files are deployed via =create_links.sh= using =copy_system_config= (requires sudo).
+
+Note: Files in this directory (except this README) are gitignored because they contain secrets.
+
+* DNS Behavior
+
+| State                | DNS Server              | Source                    |
+|----------------------+-------------------------+---------------------------|
+| Normal (boot)        | Whatever DHCP provides  | Per-link via systemd-resolved |
+| Captive portal       | Portal's DHCP DNS       | Allows redirect to login page |
+| No DHCP DNS          | 1.1.1.1, 9.9.9.9       | FallbackDNS in resolved.conf |
+| WireGuard active     | 192.168.100.10 (AdGuard)| wg-quick sets via resolvectl |
+
+* Route Metrics
+
+Lower metric = higher priority. Ensures wired connections are preferred.
+
+| Interface   | Metric |
+|-------------+--------|
+| Ethernet    |    100 |
+| WiFi        |    600 |
+| Mobile (wwan) |  700 |
+
+* Config File Contents (Secrets Redacted)
+
+** resolved.conf
+
+#+begin_src ini
+[Resolve]
+FallbackDNS=1.1.1.1 9.9.9.9
+#+end_src
+
+** 20-ethernet.network
+
+#+begin_src ini
+[Match]
+Name=en*
+Name=eth*
+
+[Network]
+DHCP=yes
+IPv6PrivacyExtensions=yes
+
+[DHCPv4]
+RouteMetric=100
+
+[IPv6AcceptRA]
+RouteMetric=100
+#+end_src
+
+** 20-wlan.network
+
+#+begin_src ini
+[Match]
+Name=wl*
+
+[Network]
+DHCP=yes
+IPv6PrivacyExtensions=yes
+
+[DHCPv4]
+RouteMetric=600
+
+[IPv6AcceptRA]
+RouteMetric=600
+#+end_src
+
+** 20-wwan.network
+
+#+begin_src ini
+[Match]
+Name=ww*
+
+[Network]
+DHCP=yes
+IPv6PrivacyExtensions=yes
+
+[DHCPv4]
+RouteMetric=700
+
+[IPv6AcceptRA]
+RouteMetric=700
+#+end_src
+
+** home.conf (WireGuard)
+
+#+begin_src ini
+[Interface]
+Address = 192.168.200.3/32
+DNS = 192.168.100.10
+PrivateKey = <PRIVATE_KEY>
+MTU = 1200
+PostDown = resolvectl revert %i
+
+[Peer]
+AllowedIPs = 0.0.0.0/0
+Endpoint = <ENDPOINT_IP>:<ENDPOINT_PORT>
+PublicKey = <PEER_PUBLIC_KEY>
+#+end_src
+
+* WireGuard Usage
+
+#+begin_src shell
+# Connect to home network
+sudo wg-quick up home
+
+# Disconnect
+sudo wg-quick down home
+
+# Check status
+sudo wg show
+resolvectl status
+#+end_src
+
+* Troubleshooting
+
+** Captive portal not showing login page
+The portal hijacks DNS to redirect you. If DNS goes directly to an external server (e.g. 1.1.1.1), the redirect can't happen. Verify =resolved.conf= has no =DNS== line set (only =FallbackDNS=). Then:
+#+begin_src shell
+resolvectl status  # should show DHCP-provided DNS on your wifi interface
+xdg-open http://detectportal.firefox.com/canonical.html
+#+end_src
+
+** DNS broken after WireGuard disconnect
+The =PostDown = resolvectl revert %i= in =home.conf= should handle this. If DNS is still stuck:
+#+begin_src shell
+resolvectl revert home
+# or restart resolved entirely
+sudo systemctl restart systemd-resolved
+#+end_src
+
+** Check current DNS state
+#+begin_src shell
+resolvectl status
+resolvectl query example.com  # test resolution
+#+end_src
