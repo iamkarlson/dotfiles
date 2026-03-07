@@ -10,15 +10,27 @@ fi
 echo "[$(date +%T)] Loading zshrc ......"
 
 # Auto-start tmux for new shells
-# Skip if: already in tmux, running in non-interactive mode, or in an embedded terminal
-# 
-function do-tmux-magic(){
+# Skip if: already in tmux, non-interactive, NO_TMUX set, or embedded terminal
+function _should-skip-tmux(){
+    case 1 in
+        ${TMUX:+1})           return 0 ;; # already inside tmux
+        ${NO_TMUX:+1})        return 0 ;; # explicitly disabled
+    esac
 
-    # Generate unique session name based on current directory
+    [[ ! -o interactive ]] && return 0
+
+    case "$TERM_PROGRAM" in
+        vscode)               return 0 ;; # VS Code integrated terminal
+        JetBrains-JediTerm)   return 0 ;; # JetBrains IDE terminal
+    esac
+
+    return 1
+}
+
+function do-tmux-magic(){
     local session_base=$(basename "$PWD" | sed 's/[^a-zA-Z0-9_-]/_/g')
     local session_suffix=$(LC_ALL=C tr -dc 'a-z0-9' < /dev/urandom | head -c 4)
 
-    # If SSH session, prefix with hostname
     if [[ -n "$SSH_CONNECTION" ]]; then
         local remote_host=$(hostname -s | sed 's/[^a-zA-Z0-9_-]/_/g')
         local session_name="${remote_host}_${session_base}_${session_suffix}"
@@ -26,13 +38,10 @@ function do-tmux-magic(){
         local session_name="${session_base}_${session_suffix}"
     fi
 
-    # Start new tmux session
     exec tmux new-session -s "$session_name"
 }
-if [[ -z "$TMUX" ]] && [[ -z "$NO_TMUX" ]] && [[ -o interactive ]]; then
-    do-tmux-magic
 
-fi
+_should-skip-tmux || do-tmux-magic
 
 
 export TERM="xterm-256color"
