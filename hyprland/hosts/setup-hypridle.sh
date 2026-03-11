@@ -11,7 +11,7 @@ case "$HOSTNAME" in
     garnet)
         SOURCE_CONFIG="$HOSTS_DIR/garnet-hypridle.conf"
         ;;
-    thinkpad|*)  # Default to thinkpad config for unknown hosts
+    *)  # Default: laptop/mobile config (beryl, thinkpad, etc.)
         SOURCE_CONFIG="$HOSTS_DIR/thinkpad-hypridle.conf"
         ;;
 esac

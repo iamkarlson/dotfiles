@@ -4,7 +4,7 @@ Description=Rearrange workspaces to their place
 
 [Service]
 Type=oneshot
-ExecStart=/home/iamkarlson/.config/hypr/scripts/move_workspaces_to_monitors.sh
+ExecStart=/home/iamkarlson/.config/hypr/scripts/arrange-workspaces.sh
 
 [Install]
 WantedBy=default.target

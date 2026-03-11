@@ -68,7 +68,7 @@ case "${ACTION}" in
 
         sleep 0.5
 
-        if hyprctl dispatch dpms off eDP-1; then
+        if hyprctl dispatch dpms off; then
             log "DPMS off dispatched"
             sleep 1
             echo "Display status from hyprctl:"
@@ -82,11 +82,14 @@ case "${ACTION}" in
         echo "hyprctl monitors:"
         hyprctl monitors
 
-        if hyprctl dispatch dpms on eDP-1; then
+        if hyprctl dispatch dpms on; then
             log "DPMS on dispatched"
         else
             log "failed to enable DPMS"
         fi
+
+        # Re-arrange workspaces after resume (monitor config may have changed)
+        ~/.config/hypr/scripts/arrange-workspaces.sh &
         ;;
     *)
         log "unknown action '${ACTION}'"
