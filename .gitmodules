@@ -1,3 +1,6 @@
 [submodule "alacritty/themes"]
 	path = alacritty/themes
 	url = https://github.com/alacritty/alacritty-theme
+[submodule "dotprivate"]
+	path = dotprivate
+	url = git@github.com:iamkarlson/dotprivate.git
