@@ -18,7 +18,13 @@ tasks:
   create-links:
     desc: "Create symbolic links to my config files"
     cmds:
-      - sudo ./create_links.sh /home/iamkarlson
+      - ./create_links.sh /home/iamkarlson
+    interactive: true
+
+  create-links-private:
+    desc: "Create symbolic links to my config files"
+    cmds:
+      - sudo ./dotprivate/create_links.sh /home/iamkarlson
     interactive: true
 
   take-photo-telegram:

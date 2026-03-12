@@ -1,0 +1,260 @@
+#+TITLE: Swap/ZRAM Configuration for beryl (ThinkPad)
+#+DATE: 2026-03-11
+
+* Context
+
+beryl has zswap enabled alongside a disabled zram, default swappiness, no oomd.
+The 34 GB swapfile was never used for hibernation (no resume hook/kernel param),
+but hibernation support is desired, so we keep it and properly configure resume.
+
+*Key difference from garnet:* ext4 (not btrfs), hibernation support needed, swapfile stays large.
+
+* Current vs Target State
+
+| Parameter              | Current                   | Target                                         |
+|------------------------+---------------------------+------------------------------------------------|
+| zswap                  | Enabled (Y)               | Disabled (~zswap.enabled=0~ in GRUB)           |
+| zram                   | Installed, disabled       | Enabled, 15 GiB, zstd, priority 100           |
+| ~/swapfile~            | 34 GB, priority -2        | 34 GB, priority 10 (keep for hibernation)      |
+| ~vm.swappiness~        | 60                        | 180                                            |
+| ~vm.watermark_scale_factor~ | 10                   | 125                                            |
+| ~vm.watermark_boost_factor~ | 0 (already correct)  | 0 (persist explicitly)                         |
+| ~vm.page-cluster~      | 0 (already correct)       | 0 (persist explicitly)                         |
+| systemd-oomd           | Inactive                  | Enabled                                        |
+| Hibernation            | Not configured             | resume hook + kernel params                    |
+
+* Files to Modify
+
+| File                              | Action                                     |
+|-----------------------------------+--------------------------------------------|
+| ~/etc/default/grub~               | Add ~zswap.enabled=0~ + hibernation params |
+| ~/etc/systemd/zram-generator.conf~ | Uncomment and configure ~[zram0]~         |
+| ~/etc/sysctl.d/99-zram.conf~      | New file — VM tuning                       |
+| ~/etc/fstab~                       | Add ~pri=10~ to swapfile entry             |
+| ~/etc/mkinitcpio.conf~             | Add ~resume~ hook                          |
+| systemd-oomd                      | Enable service                             |
+
+* Procedure
+
+** Pre-flight: Verify Starting State
+
+#+begin_src sh
+cat /sys/module/zswap/parameters/enabled
+# Expected: Y
+
+zramctl
+# Expected: (no output)
+
+swapon --show
+# Expected: /swapfile, 34G, priority -2
+
+sysctl vm.swappiness vm.watermark_boost_factor vm.watermark_scale_factor vm.page-cluster
+# Expected: 60, 0, 10, 0
+#+end_src
+
+** Step 1: Get swapfile offset (needed for Step 3)
+
+#+begin_src sh
+sudo filefrag -v /swapfile | head -5
+#+end_src
+
+Note the first ~physical_offset~ value from the output (first number in the
+~physical~ column on the ~ext:0~ row). This is ~<OFFSET>~ for Step 3.
+
+** Step 2: Configure ZRAM
+
+Edit ~/etc/systemd/zram-generator.conf~. Replace the entire contents with:
+
+#+begin_src ini
+[zram0]
+zram-size = ram / 2
+compression-algorithm = zstd
+swap-priority = 100
+fs-type = swap
+#+end_src
+
+~ram/2~ gives ~15 GiB virtual swap. With zstd ~60-70% compression, actual RAM
+used when full is ~4.5-5 GiB. Priority 100 makes it the preferred swap device.
+
+** Step 3: Update GRUB (disable zswap + hibernation)
+
+Edit ~/etc/default/grub~.
+
+*From:*
+#+begin_src conf
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet amdgpu.runpm=0"
+GRUB_CMDLINE_LINUX="cryptdevice=UUID=a2b1a2da-10f9-4620-8602-8f6d2565ec3f:cryptlvm rootfstype=ext4"
+#+end_src
+
+*To:*
+#+begin_src conf
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet amdgpu.runpm=0 zswap.enabled=0"
+GRUB_CMDLINE_LINUX="cryptdevice=UUID=a2b1a2da-10f9-4620-8602-8f6d2565ec3f:cryptlvm rootfstype=ext4 resume=/dev/mapper/cryptlvm resume_offset=<OFFSET>"
+#+end_src
+
+Replace ~<OFFSET>~ with the number from Step 1.
+
+*Why ~zswap.enabled=0~:* zswap intercepts swap writes and compresses them in a
+RAM pool. When ZRAM is the swap device, this causes double compression — zswap
+compresses, then when its pool fills it writes to ZRAM which compresses again.
+Wasted CPU and RAM.
+
+*Why ~resume=~ params:* Points the kernel to the swapfile location for
+hibernation resume. ~resume=~ is the block device, ~resume_offset=~ is the
+physical offset of the swapfile on that device.
+
+Then regenerate GRUB config:
+
+#+begin_src sh
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+#+end_src
+
+** Step 4: Add resume hook to mkinitcpio
+
+Edit ~/etc/mkinitcpio.conf~. Change the HOOKS line:
+
+*From:*
+#+begin_src conf
+HOOKS=(base udev autodetect keyboard keymap modconf block encrypt filesystems fsck)
+#+end_src
+
+*To:*
+#+begin_src conf
+HOOKS=(base udev autodetect keyboard keymap modconf block encrypt filesystems resume fsck)
+#+end_src
+
+The ~resume~ hook must come after ~filesystems~ (and after ~encrypt~ since the
+swap is on an encrypted volume).
+
+Then regenerate initramfs:
+
+#+begin_src sh
+sudo mkinitcpio -P
+#+end_src
+
+** Step 5: Create sysctl tuning
+
+Create ~/etc/sysctl.d/99-zram.conf~:
+
+#+begin_src ini
+# ZRAM-optimized VM parameters
+vm.swappiness = 180
+vm.watermark_boost_factor = 0
+vm.watermark_scale_factor = 125
+vm.page-cluster = 0
+#+end_src
+
+- ~swappiness=180~ — ZRAM is in-RAM, so swapping has no disk I/O penalty.
+  Values >100 tell kernel to strongly prefer swapping over dropping file cache.
+  Standard for ZRAM setups (Fedora, Pop!_OS).
+- ~watermark_boost_factor=0~ — Disables fragmentation-driven reclaim. Already 0
+  on linux-zen, persisted explicitly.
+- ~watermark_scale_factor=125~ — Starts kswapd earlier. Default 10 is too late,
+  can cause direct reclaim stalls. *Most impactful sysctl fix alongside swappiness.*
+- ~page-cluster=0~ — No swap readahead. ZRAM is random-access in RAM. Already 0
+  on linux-zen, persisted explicitly.
+
+Apply immediately:
+
+#+begin_src sh
+sudo sysctl --system
+#+end_src
+
+** Step 6: Update fstab
+
+Edit ~/etc/fstab~. Change the swap line:
+
+*From:*
+#+begin_src conf
+/swapfile none swap sw 0 0
+#+end_src
+
+*To:*
+#+begin_src conf
+/swapfile none swap defaults,pri=10 0 0
+#+end_src
+
+Priority 10 is much lower than ZRAM's 100, so kernel fills ZRAM first and only
+overflows to disk. The 34 GB swapfile remains available for hibernation.
+
+Reload systemd:
+
+#+begin_src sh
+sudo systemctl daemon-reload
+#+end_src
+
+** Step 7: Enable systemd-oomd
+
+#+begin_src sh
+sudo systemctl enable --now systemd-oomd
+#+end_src
+
+Graceful OOM prevention — kills heaviest memory consumer before the crude kernel
+OOM killer. Default thresholds are sensible (SwapUsedLimit=90%,
+MemoryPressureLimit=60%).
+
+** Step 8: Reboot and Verify
+
+#+begin_src sh
+sudo reboot
+#+end_src
+
+After reboot:
+
+#+begin_src sh
+# 1. zswap disabled?
+cat /sys/module/zswap/parameters/enabled
+# Expected: N
+
+# 2. ZRAM active with correct size/algo?
+zramctl
+# Expected: /dev/zram0, zstd, ~15G
+
+# 3. Both swap devices with correct priorities?
+swapon --show
+# Expected:
+#   /dev/zram0  partition  ~15G  ...  100
+#   /swapfile   file        34G  ...   10
+
+# 4. Sysctl values?
+sysctl vm.swappiness vm.watermark_boost_factor vm.watermark_scale_factor vm.page-cluster
+# Expected: 180, 0, 125, 0
+
+# 5. systemd-oomd running?
+systemctl status systemd-oomd
+# Expected: active (running)
+
+# 6. No failed swap units?
+systemctl list-units --type=swap --all
+# Expected: dev-zram0.swap (active), swapfile.swap (active)
+
+# 7. Memory overview
+free -h
+# Expected: Swap ~49G total (15G zram + 34G file)
+
+# 8. Hibernation kernel params present?
+cat /proc/cmdline | grep resume
+# Expected: resume=/dev/mapper/cryptlvm resume_offset=<OFFSET>
+#+end_src
+
+** Step 9: Test Hibernation
+
+#+begin_src sh
+sudo systemctl hibernate
+#+end_src
+
+The laptop should power off. On next power-on, it should resume to the exact
+state. If it boots fresh instead of resuming, check that ~resume=~ and
+~resume_offset=~ are correct and the ~resume~ hook is in mkinitcpio.
+
+* Rollback
+
+If something goes wrong after reboot:
+
+1. At GRUB menu, press ~e~, remove ~zswap.enabled=0~ and ~resume=...~ from
+   cmdline, add ~single~ to boot single-user
+2. Revert ~/etc/default/grub~ — remove added params, run ~grub-mkconfig -o /boot/grub/grub.cfg~
+3. Disable ZRAM — change ~[zram0]~ back to ~#[zram0]~ in ~/etc/systemd/zram-generator.conf~
+4. Revert fstab — change back to ~/swapfile none swap sw 0 0~
+5. Revert mkinitcpio — remove ~resume~ from HOOKS, run ~mkinitcpio -P~
+6. Remove sysctl — ~rm /etc/sysctl.d/99-zram.conf && sysctl --system~

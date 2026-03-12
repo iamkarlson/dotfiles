@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 #
 # Purpose of this file is to create symlinks to configuration files I have in my repo.
-# Because directory links have to be created with root privileges,
-# this file has to be run with root or sudo
+# No sudo required. System-level configs are handled by dotprivate/create_links.sh.
 
 set -e
 
@@ -94,30 +93,6 @@ function copy_user_config() {
 	echo "# Removing copied user config >>> $destination" >>remove_links.sh
 	echo "[ -d \"$destination\" ] && rm -ri \"$destination\"" >>remove_links.sh
 	echo "[ -f \"$destination\" ] && rm -i \"$destination\"" >>remove_links.sh
-}
-
-function copy_system_config() {
-	local source="$1"
-	local destination="$2"
-	local dest_dir
-	dest_dir=$(dirname "$destination")
-
-	echo "copying system config from $source to $destination"
-	sudo mkdir -p "$dest_dir"
-
-	if sudo test -e "$destination"; then
-		log_warning "Destination $destination exists, overwriting"
-	fi
-
-	if [ -d "$source" ]; then
-		sudo cp -r "$source" "$destination" && log_info "Directory $destination copied!"
-	else
-		sudo cp "$source" "$destination" && log_info "File $destination copied!"
-	fi
-
-	echo "# Removing copied system config >>> $destination" >>remove_links.sh
-	echo "sudo [ -d \"$destination\" ] && sudo rm -ri \"$destination\"" >>remove_links.sh
-	echo "sudo [ -f \"$destination\" ] && sudo rm -i \"$destination\"" >>remove_links.sh
 }
 
 # Create user home .config
@@ -254,28 +229,6 @@ ln_file $dotfiles/uv/uv.toml $config/uv/uv.toml
 ln_file $dotfiles/vscode/settings.json $config/Code/User/settings.json
 ln_file $dotfiles/vscode/keybindings.json $config/Code/User/keybindings.json
 ln_file $dotfiles/vscode/mcp.json $config/Code/User/mcp.json
-
-#
-# Hyprland config
-#
-
-#copy_system_config "$dotfiles/hyprland/hyprland.sh" "/usr/bin/hyprland_launcher"
-copy_system_config "$dotfiles/hyprland/hyprland.desktop" "/usr/share/wayland-sessions/hyprland.desktop"
-copy_system_config "$dotfiles/hyprland/hyprlock-before-sleep@.service" "/etc/systemd/system/hyprlock-before-sleep@.service"
-copy_system_config "$dotfiles/hyprland/hyprlock-after-sleep@.service" "/etc/systemd/system/hyprlock-after-sleep@.service"
-copy_system_config "$dotfiles/hyprland/scripts/lock-resume-on-sleep.sh" "/root/scripts/lock-resume-on-sleep.sh"
-
-#
-# Network configuration (systemd-networkd, systemd-resolved, wireguard)
-#
-
-copy_system_config "$dotfiles/network/resolved.conf" "/etc/systemd/resolved.conf"
-copy_system_config "$dotfiles/network/20-ethernet.network" "/etc/systemd/network/20-ethernet.network"
-copy_system_config "$dotfiles/network/20-wlan.network" "/etc/systemd/network/20-wlan.network"
-copy_system_config "$dotfiles/network/20-wwan.network" "/etc/systemd/network/20-wwan.network"
-sudo mkdir -p /etc/wireguard
-copy_system_config "$dotfiles/network/home.conf" "/etc/wireguard/home.conf"
-sudo chmod 600 /etc/wireguard/home.conf
 
 # Vivaldi configuration
 ln_file $dotfiles/vivaldi/vivaldi-stable.conf $config/vivaldi-stable.conf
