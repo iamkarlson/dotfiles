@@ -1,8 +1,8 @@
 keyring-provider = "subprocess"
 
-[[index]]
-name = "dexter-gar"
-url = "https://oauth2accesstoken@europe-west1-python.pkg.dev/prj-dex-prd-artifacts-hub/dexter-python-main/simple/"
+# [[index]]
+# name = "dexter-gar"
+# url = "https://oauth2accesstoken@europe-west1-python.pkg.dev/prj-dex-prd-artifacts-hub/dexter-python-main/simple/"
 
 # PyPI is checked first (non-default = higher priority)
 [[index]]
