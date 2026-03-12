@@ -132,8 +132,6 @@ ln_file "$dotfiles/zsh/plugins.txt" "$target/.zsh_plugins.txt"
 ln_file "$dotfiles/zsh/plugins.zsh" "$target/.zsh_plugins.zsh"
 
 ln_file "$dotfiles/tasks/global-tasks.yml" "$target/taskfile.yml"
-ln_file "$dotfiles/tasks/taskfile.env" "$target/taskfile.env"
-ln_file "$dotfiles/tasks/private-tasks.yml" "$target/private-tasks.yml"
 
 #
 # Tmux

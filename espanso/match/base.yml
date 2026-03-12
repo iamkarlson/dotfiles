@@ -41,18 +41,8 @@ matches:
     replace: m²
   - trigger: ":yes"
     replace: ✓
-  - trigger: georgy@dexter
-    replace: georgy@dexterenergy.ai
-  - trigger: ":lbl"
-    replace: /label ~
-  - trigger: ":apiurl"
-    replace: "https://api.dexterenergyservices.com"
-  - trigger: /assign
-    replace: /assign_reviewer @joao117 @nikita.dexter @patrick_star_21
   - trigger: m2m
     replace: many-to-many
-  - trigger: /gihpy
-    replace: /giphy
   - trigger: ":password"
     replace: "{{output}}"
     vars:
