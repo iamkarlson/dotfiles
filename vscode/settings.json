@@ -27,7 +27,7 @@
   "python.useEnvironmentsExtension": true,
   "gitlens.views.commitDetails.files.layout": "tree",
   "jupyter.askForKernelRestart": false,
-  "python.defaultInterpreterPath": "/bin/python",
+  "python.defaultInterpreterPath": "/sbin/python3.14",
   "vs-kubernetes": {
     "vs-kubernetes.crd-code-completion": "enabled"
   },
@@ -96,7 +96,14 @@
     "path": "go-task"
   },
   "chat.instructionsFilesLocations": {
-    ".github/instructions": true
+    ".github/instructions": true,
+    ".claude/rules": true
+  },
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "terminal.integrated.profiles.linux": {
+    "zsh": {
+      "path": "/bin/zsh"
+    }
   },
   "terminal.integrated.shellIntegration.environmentReporting": true,
   "envSelector.regex": "*.env"
