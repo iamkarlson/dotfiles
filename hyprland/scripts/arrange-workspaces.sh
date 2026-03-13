@@ -110,7 +110,10 @@ elif [ "$lid_state" = "open" ] && [ -z "$external" ]; then
     notify-send -a "Display" "Laptop only" "All workspaces on $LAPTOP_MONITOR"
 
 else
-    # LID CLOSED + NO EXTERNAL: logind handles suspend
-    log "Lid closed, no external monitor — deferring to logind"
-    exit 0
+    # LID CLOSED + NO EXTERNAL: lock and suspend
+    # This handles the undocking case (cable disconnected while lid was closed)
+    log "Lid closed, no external monitor — locking and suspending"
+    hyprlock --immediate &
+    sleep 1
+    systemctl suspend
 fi
