@@ -95,6 +95,23 @@ function copy_user_config() {
 	echo "[ -f \"$destination\" ] && rm -i \"$destination\"" >>remove_links.sh
 }
 
+# Apply host-specific override from dotprivate if it exists, otherwise keep the default.
+# Usage: apply_host_override <relative_path>
+#   e.g. apply_host_override "hyprland/hypridle.conf"
+# Checks dotprivate/hosts/<hostname>/<relative_path> and symlinks it over the default.
+function apply_host_override() {
+	local rel_path="$1"
+	local override="$dotprivate/hosts/$_hostname/$rel_path"
+	local target_file="$dotfiles/$rel_path"
+
+	if [ -e "$override" ]; then
+		ln -sf "$override" "$target_file"
+		log_info "Host override: $rel_path -> $override"
+	fi
+}
+
+_hostname=$(hostname)
+
 # Create user home .config
 
 mkdir -p $config
@@ -212,6 +229,7 @@ ln_directory $dotfiles/swappy $config/swappy
 ln_directory $dotfiles/workstyle $config/workstyle
 
 ln_directory $dotfiles/hyprland $config/hypr
+apply_host_override "hyprland/hypridle.conf"
 
 # hyprwhenthen - event-driven window automation
 # Install: paru -S hyprwhenthen-bin
