@@ -1,4 +1,1 @@
-[user]
-    name = Georgy Grigoryev
-    email = iamkarlson@gmail.com
-#    puttykeyfile = C:\\Users\\grigoryev.NT\\.ssh\\no-passphrase.ppk
+# Machine-local git overrides (user/email moved to dotprivate/git/private.gitconfig)

@@ -1,6 +1,6 @@
 [include]
-  path=~/git/local.gitconfig
   path=~/git/aliases.gitconfig
+  path=~/git/private.gitconfig
 [push]
   followTags = true
 	default = simple
@@ -13,9 +13,6 @@
 	excludesfile = /home/iamkarlson/src/dotfiles/git/git/global.gitignore
   editor = emacsclient -nw
   autocrlf = input
-[user]
-	email = iamkarlson@gmail.com
-	name = George Green
 [init]
 	defaultBranch = main
 [pull]
@@ -40,5 +37,3 @@
 [difftool "emacs"]
   cmd = emacsclient -t --eval \"(ediff \\\"$LOCAL\\\" \\\"$REMOTE\\\")\"
   prompt = false
-[github]
-	user = iamkarlson

@@ -235,10 +235,8 @@ apply_host_override "hyprland/hypridle.conf"
 # Install: paru -S hyprwhenthen-bin
 ln_directory $dotfiles/hyprwhenthen $config/hyprwhenthen
 
-# uv - Python package manager
-# Credentials are set via UV_INDEX_GITLAB_USERNAME / UV_INDEX_GITLAB_PASSWORD in private.zshrc
+# uv - Python package manager (config in dotprivate due to private registry URLs)
 mkdir -p $config/uv
-ln_file $dotfiles/uv/uv.toml $config/uv/uv.toml
 
 # VSCode settings
 
